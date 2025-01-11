@@ -26,7 +26,7 @@
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="font-light text-white rounded-3xl px-7 py-3" style="background-color: #3D0A05">Login</a>
+                <a href="#" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
             </div>
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
@@ -53,3 +53,11 @@
         mobileMenu.classList.toggle('hidden');
     });
 </script>
+
+<style>
+    .login-btn:hover {
+        background-color: white !important;
+        color: black;
+        transition: 0.3s;
+    }
+</style>

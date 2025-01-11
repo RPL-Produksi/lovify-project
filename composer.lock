@@ -8514,12 +8514,20 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
+<<<<<<< HEAD
     "stability-flags": {},
+=======
+    "stability-flags": [],
+>>>>>>> 47969a8e42fe5ea2edec948a1caaaf7585cca771
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
+<<<<<<< HEAD
     "platform-dev": {},
+=======
+    "platform-dev": [],
+>>>>>>> 47969a8e42fe5ea2edec948a1caaaf7585cca771
     "plugin-api-version": "2.6.0"
 }

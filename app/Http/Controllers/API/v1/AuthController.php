@@ -18,7 +18,8 @@ class AuthController extends Controller
             'username' => 'required|min:3|unique:users,username',
             'password' => 'required|confirmed|min:6',
             'email' => 'required|email|unique:users,email',
-            'number_phone' => 'required|unique:users,phone',
+            'number_phone' => 'required|unique:users,number_phone',
+            'role' => 'required|in:client,mitra',
         ]);
 
         if ($validator->fails()) {
@@ -42,11 +43,23 @@ class AuthController extends Controller
         $user->save();
 
         if ($this->isJson($request)) {
-            return response()->json([
+            $response = [
                 'status' => 'success',
                 'message' => 'User registered successfully',
-                'data' => $user,
-            ], 201);
+                'data' => [
+                    'token' => $user->createToken('auth_token')->plainTextToken,
+                    'user' => [
+                        'id' => $user->id,
+                        'fullname' => $user->fullname,
+                        'username' => $user->username,
+                        'email' => $user->email,
+                        'number_phone' => $user->number_phone,
+                        'role' => $user->role,
+                    ],
+                ],
+            ];
+
+            return response()->json($response, 201);
         }
 
         return redirect()->route('login')->with('success', 'User registered successfully');
@@ -76,16 +89,26 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($request->isJson($request)) {
-                return response()->json([
+                $response = [
                     'status' => 'success',
-                    'message' => 'Login successful',
+                    'message' => 'User login successfully',
                     'data' => [
-                        'user' => $user,
-                        'token' => $user->id->createToken('auth_token')->plainTextToken,
+                        'token' => $request->user()->createToken('auth_token')->plainTextToken,
+                        'user' => [
+                            'id' => $user->id,
+                            'fullname' => $user->fullname,
+                            'username' => $user->username,
+                            'email' => $user->email,
+                            'number_phone' => $user->number_phone,
+                            'role' => $user->role,
+                        ],
                     ],
-                ], 200);
+                ];
+
+                return response()->json($response, 200);
             }
 
+            // frontend return
             return $user->role == 'client' ? 'client' : 'mitra';
         }
 
@@ -99,5 +122,19 @@ class AuthController extends Controller
         return redirect()->back()->withInput($request->all())->withErrors([
             'login' => 'Username/Email or password is incorrect',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        if ($this->isJson($request)) {
+            $request->user()->Tokens()->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Logout successful',
+            ], 200);
+        }
+
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Logout successful');
     }
 }

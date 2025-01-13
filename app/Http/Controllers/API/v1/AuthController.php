@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($this->isJson($request)) {
+            if ($request->isJson($request)) {
                 return response()->json([
                     'status' => 'error',
                     'message' => $validator->errors(),
@@ -42,7 +42,7 @@ class AuthController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        if ($this->isJson($request)) {
+        if ($request->isJson($request)) {
             $response = [
                 'status' => 'success',
                 'message' => 'User registered successfully',
@@ -126,7 +126,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if ($this->isJson($request)) {
+        if ($request->isJson($request)) {
             $request->user()->Tokens()->delete();
             return response()->json([
                 'status' => 'success',

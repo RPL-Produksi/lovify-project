@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\Admin\CategoryController;
 use App\Http\Controllers\API\v1\AuthController;
 use App\Http\Controllers\API\v1\Mitra\MitraProductController;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::group(['prefix' => 'mitra', 'controller' => MitraProductController::class], function () {
-        Route::post('/product/store/{id?}', 'store');
+    Route::prefix('admin')->group(function () {
+        Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
+            Route::post('/{uuid?}', 'storeCategory');
+        });
     });
 });

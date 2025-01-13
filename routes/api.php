@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\V1\Admin\CategoryController;
+use App\Http\Controllers\API\V1\Admin\AdminCategoryController;
 use App\Http\Controllers\API\v1\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +19,7 @@ Route::prefix('v1')->group(function () {
         });
     });
     Route::prefix('admin')->group(function () {
-        Route::group(['prefix' => 'category', 'controller' => CategoryController::class], function () {
+        Route::group(['prefix' => 'category', 'controller' => AdminCategoryController::class], function () {
             Route::post('/{uuid?}', 'storeCategory');
         });
     });

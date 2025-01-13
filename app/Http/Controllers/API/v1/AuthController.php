@@ -137,4 +137,57 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success', 'Logout successful');
     }
+
+    public function makeAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'fullname' => ['required', 'string'],
+            'username' => ['required', 'string', 'min:2', 'unique:users,username'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'number_phone' => ['nullable', 'string', 'unique:users,number_phone'],
+            'role' => ['required', 'string', 'in:admin,superadmin'],
+        ]);
+
+        if ($validator->fails()) {
+            if ($request->isJson($request)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors(),
+                ], 400);
+            }
+
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+
+        $user = new User();
+        $user->fullname = $request->fullname;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        $user->number_phone = $request->number_phone;
+        $user->role = $request->role;
+        $user->save();
+
+        if ($request->isJson($request)) {
+            $response = [
+                'status' => 'success',
+                'message' => 'User registered successfully',
+                'data' => [
+                    'user' => [
+                        'id' => $user->id,
+                        'fullname' => $user->fullname,
+                        'username' => $user->username,
+                        'email' => $user->email,
+                        'number_phone' => $user->number_phone,
+                        'role' => $user->role,
+                    ],
+                ],
+            ];
+
+            return response()->json($response, 201);
+        }
+
+        return True;
+    }
 }

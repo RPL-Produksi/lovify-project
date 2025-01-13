@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_attachments', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
-            $table->string('image_path');
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('slug')->after('name');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_attachments');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
     }
 };

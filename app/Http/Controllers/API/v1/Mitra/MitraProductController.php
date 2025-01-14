@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MitraProductController extends Controller
 {
-    public function store(Request $request, $id = null)
+    public function storeProduct(Request $request, $id = null)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -69,6 +69,14 @@ class MitraProductController extends Controller
             $response = [
                 'status' => 'success',
                 'message' => 'Product saved successfully',
+                'data' => [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'description' => $product->description,
+                    'status' => $product->status,
+                    'attachments' => $product->attachments()
+                ],
             ];
 
             return response()->json($response, 201);

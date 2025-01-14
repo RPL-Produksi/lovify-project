@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasUuids;
+
+    protected $fillable = [
+        'id',
+        'name',
+    ];
+
+    public $timestamps = false;
 }

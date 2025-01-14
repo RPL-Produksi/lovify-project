@@ -22,7 +22,16 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::group(['prefix' => 'category', 'controller' => AdminCategoryController::class], function () {
-            Route::post('/{uuid?}', 'storeCategory');
+            Route::get('/', 'getCategory');
+            Route::get('/{id}', 'getCategoryById');
+            Route::post('/store/{id?}', 'storeCategory');
+            Route::delete('/delete/{id}', 'deleteCategory');
+        });
+    });
+
+    Route::prefix('mitra')->group(function () {
+        Route::group(['prefix' => 'product', 'controller' => MitraProductController::class], function () {
+            Route::post('/store/{id?}', 'storeProduct');
         });
     });
 });

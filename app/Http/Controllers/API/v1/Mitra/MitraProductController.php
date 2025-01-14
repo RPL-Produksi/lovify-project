@@ -158,7 +158,7 @@ class MitraProductController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Get product by id',
+            'message' => 'Get product by slug',
             'data' => $product
         ], 200);
     }

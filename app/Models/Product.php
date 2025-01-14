@@ -18,4 +18,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductAttachment::class);
     }
+
+    public function packets()
+    {
+        return $this->belongsToMany(Packet::class, 'product_packet', 'product_id', 'packet_id');
+    }
 }

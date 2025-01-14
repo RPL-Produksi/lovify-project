@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Packet extends Model
 {
     use HasUuids;
+    private $with = ['products'];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_packet', 'packet_id', 'product_id');
+    }
 }

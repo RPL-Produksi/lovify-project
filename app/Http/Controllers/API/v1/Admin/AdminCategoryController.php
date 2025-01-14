@@ -30,7 +30,7 @@ class AdminCategoryController extends Controller
             'name' => $request->name,
         ]);
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             $response = [
                 'status' => 'success',
                 'message' => 'Category has been saved',
@@ -51,7 +51,7 @@ class AdminCategoryController extends Controller
         $Category = Category::find($id);
 
         if (!$Category) {
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Category not found',
@@ -63,7 +63,7 @@ class AdminCategoryController extends Controller
 
         $Category->delete();
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'success',
                 'message' => 'Category has been deleted',

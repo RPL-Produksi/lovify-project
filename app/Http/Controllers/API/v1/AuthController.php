@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => $validator->errors(),
@@ -42,7 +42,7 @@ class AuthController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             $response = [
                 'status' => 'success',
                 'message' => 'User registered successfully',
@@ -73,7 +73,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => $validator->errors(),
@@ -88,7 +88,7 @@ class AuthController extends Controller
         if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
             $user = Auth::user();
 
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 $response = [
                     'status' => 'success',
                     'message' => 'User login successfully',
@@ -112,7 +112,7 @@ class AuthController extends Controller
             return $user->role == 'client' ? 'client' : 'mitra';
         }
 
-        if ($request->isJson($request)) {
+        if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Username/Email or password is incorrect',
@@ -126,7 +126,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             $request->user()->Tokens()->delete();
             return response()->json([
                 'status' => 'success',
@@ -150,7 +150,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => $validator->errors(),
@@ -169,7 +169,7 @@ class AuthController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             $response = [
                 'status' => 'success',
                 'message' => 'User registered successfully',

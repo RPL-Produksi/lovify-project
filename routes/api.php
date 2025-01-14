@@ -21,7 +21,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
-        Route::group(['prefix' => 'category', 'controller' => AdminCategoryController::class], function () {
+        Route::group(['middleware' => ['auth:sanctum', 'can:admin'], 'prefix' => 'category', 'controller' => AdminCategoryController::class], function () {
             Route::get('/', 'getCategory');
             Route::get('/{id}', 'getCategoryById');
             Route::post('/store/{id?}', 'storeCategory');
@@ -30,8 +30,11 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('mitra')->group(function () {
-        Route::group(['prefix' => 'product', 'controller' => MitraProductController::class], function () {
+        Route::group(['middleware' => ['auth:sanctum', 'can:mitra'], 'prefix' => 'product', 'controller' => MitraProductController::class], function () {
+            Route::get('/', 'getProducts');
+            Route::get('/{slug}', 'getProductsBySlug');
             Route::post('/store/{id?}', 'storeProduct');
+            Route::delete('/delete/{slug}', 'deleteProduct');
         });
     });
 });

@@ -26,7 +26,7 @@ class MitraProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($request->isJson()) {
+            if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => $validator->errors(),
@@ -38,11 +38,11 @@ class MitraProductController extends Controller
 
         $input = $request->all();
         $input['slug'] = $this->makeSlug($request->name);
-        $input['mitra_id'] = Auth::id();
+        $input['mitra_id'] = Auth::user()->id;
 
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
-            $storedFile = $file->storeAs($input['slug'] . '/' . Auth::user()->username . '/' . 'cover', $file->hashName());
+            $storedFile = $file->storeAs('product' . '/' . $input['slug'] . '/' . Auth::user()->username . '/' . 'cover', $file->hashName());
             $filePath = Storage::url($storedFile);
             $input['cover'] = $filePath;
         }
@@ -52,7 +52,7 @@ class MitraProductController extends Controller
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $attachment) {
                 $storedFile = $attachment->storeAs(
-                    $product->slug . '/' . Auth::user()->username . '/' . 'attachments',
+                    'product' . '/' . $product->slug . '/' . Auth::user()->username . '/' . 'attachments',
                     $attachment->hashName()
                 );
 
@@ -60,12 +60,12 @@ class MitraProductController extends Controller
 
                 $productAttachment = new ProductAttachment();
                 $productAttachment->product_id = $product->id;
-                $productAttachment->path = $filePath;
+                $productAttachment->image_path = $filePath;
                 $productAttachment->save();
             }
         }
 
-        if ($request->isJson()) {
+        if ($request->wantsJson()) {
             $response = [
                 'status' => 'success',
                 'message' => 'Product saved successfully',
@@ -75,13 +75,91 @@ class MitraProductController extends Controller
                     'price' => $product->price,
                     'description' => $product->description,
                     'status' => $product->status,
-                    'attachments' => $product->attachments()
                 ],
             ];
 
             return response()->json($response, 201);
         }
 
-        return true;
+        return redirect()->route('products.index')->with('success', 'Product saved successfully');
+    }
+
+    public function deleteProduct(Request $request, $slug)
+    {
+        $product = Product::where('slug', $slug)->where('mitra_id', Auth::user()->id)->first();
+
+        if (!$product) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Product not found',
+                ], 404);
+            }
+
+            return redirect()->back()->withInput($request->all())->withErrors('Product not found');
+        }
+
+        $product->delete();
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Product has been deleted',
+            ], 200);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Product has been deleted');
+    }
+
+    public function getProducts(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'page' => ['integer', 'min:1'],
+            'size' => ['integer', 'min:1', 'max:100'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors(),
+            ], 400);
+        }
+
+        $page = $request->input('page', 1);
+        $size = $request->input('size', 10);
+
+        $products = Product::orderBy('name', 'ASC')->with(['user', 'attachments'])->paginate($size, ['*'], 'page', $page);
+
+        $response = [
+            'status' => 'success',
+            'message' => 'Get products with pagination',
+            'data' => $products->items(),
+            'pagination' => [
+                'current_page' => $products->currentPage(),
+                'total_pages' => $products->lastPage(),
+                'total_items' => $products->total(),
+                'items_per_page' => $products->perPage(),
+            ],
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function getProductsBySlug($slug)
+    {
+        $product = Product::where('slug', $slug)->with(['user', 'attachments'])->first();
+
+        if (!$product) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Product not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Get product by id',
+            'data' => $product
+        ], 200);
     }
 }

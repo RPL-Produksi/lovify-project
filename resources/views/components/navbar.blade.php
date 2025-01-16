@@ -32,7 +32,7 @@
             </div>
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
-                <button class="text-gray-300 hover:text-white focus:outline-none" id="menu-button">
+                <button class="text-gray-300 hover:text-white focus:outline-none " id="menu-button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -71,7 +71,7 @@
     .login-btn:hover {
         background-color: white !important;
         color: black;
-        transition: 0.3s;
+        transition: 0.2s;
     }
 
     .navbar {

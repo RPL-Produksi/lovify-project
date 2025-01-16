@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://naramizaru.github.io/awesome-2.0/css/all.css">
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <title>Lovify | @yield('title')</title>
 </head>
 <body class=" bg-black">

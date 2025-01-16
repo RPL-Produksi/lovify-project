@@ -71,7 +71,12 @@
                             Unforgettable.</span></p>
                 </div>
                 <div class="grid grid-cols-2 justify-items-center b gap-5">
-                    <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="about-image" alt=""
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                          <!-- Slides -->
+                          <div class="swiper-slide"><img src="{{ asset() }}" alt=""></div>
+                    {{-- <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="about-image" alt=""
                         data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000">
                     <img src="{{ asset('asset/image/venue_placeholder1.jpg') }}" class="about-image" alt=""
                         data-aos="fade-up" data-aos="fade-up" data-aos-duration="1500">
@@ -82,7 +87,7 @@
                     <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="about-image" alt=""
                         data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000">
                     <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="about-image" alt=""
-                        data-aos="fade-up" data-aos="fade-up" data-aos-duration="1500">
+                        data-aos="fade-up" data-aos="fade-up" data-aos-duration="1500"> --}}
                 </div>
             </div>
         </div>

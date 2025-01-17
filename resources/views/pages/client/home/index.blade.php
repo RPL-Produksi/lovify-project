@@ -4,7 +4,7 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <section class="cover-section relative">
+    <section class="hero-section relative">
         <div class="flex justify-center items-center" style="height: 100vh">
             <div>
                 <h1 class="text-center text-white text-6xl font-semibold">Plan Your Perfect Day With Ease!</h1>
@@ -24,17 +24,41 @@
         </div>
     </section>
 
+    <section class="service-section" style="background-color: #f7f0f0">
+        <div class=" px-64 container mt-20">
+            <h1 class="text-5xl font-semibold text-redlue">Our Services</h1>
+            <div class="grid grid-cols-4">
+                <div class=" shadow-lg mt-20 border-redlue">
+                    <h1 class="text-redlue text-4xl font-semibold">Plannings</h1>
+                    <p class="text-redlue text-1xl">With careful planning, your wedding is set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
+                </div>
+                <div class=" shadow-lg mt-20 border-redlue">
+                    <h1 class="text-redlue text-4xl font-semibold">Plannings</h1>
+                    <p class="text-redlue text-1xl">With careful planning, your wedding is set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
+                </div>
+                <div class=" shadow-lg mt-20 border-redlue">
+                    <h1 class="text-redlue text-4xl font-semibold">Plannings</h1>
+                    <p class="text-redlue text-1xl">With careful planning, your wedding is set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
+                </div>
+                <div class=" shadow-lg mt-20 border-redlue">
+                    <h1 class="text-redlue text-4xl font-semibold">Plannings</h1>
+                    <p class="text-redlue text-1xl">With careful planning, your wedding is set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
 
 <style>
-    .cover-section {
+    .hero-section {
         position: relative;
         width: 100%;
         height: 100vh;
         overflow: hidden;
     }
 
-    .cover-section::before {
+    .hero-section::before {
         content: "";
         position: absolute;
         top: 0;
@@ -49,7 +73,7 @@
         z-index: -1;
     }
 
-    h1,h3, a {
+    h1,h3, a, p {
         font-family: 'IBM Plex Serif', serif;
     }
 
@@ -57,5 +81,20 @@
         background-color: white !important;
         color: black;
         transition: 0.3s;
+    }
+
+    .service-section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .text-redlue {
+        color: #3D0A05;
+    }
+
+    .border-redlue {
+        border: solid #3D0A05 2px ;
     }
 </style>

@@ -10,6 +10,15 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'error',
+        'status' => 'no path found',
+    ], 404);
+});
+
+
 Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         Route::post('/register', 'register');

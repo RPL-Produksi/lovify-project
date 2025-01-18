@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Admin;
+namespace App\Http\Controllers\API\v1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;

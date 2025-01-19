@@ -210,7 +210,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url(asset/image/wedding_placeholder2_bg.jpg);
+        background-image: url({{ asset('/asset/image/wedding_placeholder2_bg.jpg') }});
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -268,7 +268,7 @@
         position: relative;
         height: 360px;
         width: 500px;
-        background-image: url('asset/image/catering_placeholder.jpg');
+        background-image: url({{ asset('asset/image/catering_placeholder.jpg') }});
         background-size: cover;
         background-position: center;
         -webkit-box-shadow: 0px 0px 10px 0px rgba(61, 10, 5, 1);

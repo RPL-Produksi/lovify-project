@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Packet extends Model
 {
     use HasUuids;
-    private $with = ['products'];
+    protected $with = ['products'];
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'status'
+    ];
+
 
     public function products()
     {

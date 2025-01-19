@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\API\V1\Admin\AdminCategoryController;
-use App\Http\Controllers\API\v1\AuthController;
-use App\Http\Controllers\API\v1\Mitra\MitraProductController;
+use App\Http\Controllers\BackEnd\v1\Admin\AdminCategoryController;
+use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
+use App\Http\Controllers\BackEnd\v1\AuthController;
+use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,22 +29,20 @@ Route::prefix('v1')->group(function () {
             Route::post('/admin', 'makeAdmin')->can('superadmin');
         });
     });
-
     Route::prefix('admin')->group(function () {
-        Route::group(['middleware' => ['auth:sanctum', 'can:admin'], 'prefix' => 'category', 'controller' => AdminCategoryController::class], function () {
-            Route::get('/', 'getCategory');
-            Route::get('/{id}', 'getCategoryById');
-            Route::post('/store/{id?}', 'storeCategory');
-            Route::delete('/delete/{id}', 'deleteCategory');
+        Route::group(['middleware' => ['auth:sanctum', 'can:admin'], 'prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
+            Route::post('/{id?}', 'storeCategory');
+            Route::delete('/{id}', 'deleteCategory');
+        });
+        Route::group(['middleware' => ['auth:sanctum', 'can:admin'], 'prefix' => 'packets', 'controller' => AdminPacketController::class], function () {
+            Route::post('/{id?}', 'storePacket');
+            Route::delete('/{id}', 'deletePacket');
         });
     });
-
     Route::prefix('mitra')->group(function () {
-        Route::group(['middleware' => ['auth:sanctum', 'can:mitra'], 'prefix' => 'product', 'controller' => MitraProductController::class], function () {
-            Route::get('/', 'getProducts');
-            Route::get('/{slug}', 'getProductsBySlug');
-            Route::post('/store/{id?}', 'storeProduct');
-            Route::delete('/delete/{slug}', 'deleteProduct');
+        Route::group(['middleware' => ['auth:sanctum', 'can:mitra'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
+            Route::post('/{id?}', 'storeProduct');
+            Route::delete('/{slug}', 'deleteProduct');
         });
     });
 });

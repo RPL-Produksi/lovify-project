@@ -22,6 +22,11 @@ class Product extends Model
         'status',
     ];
 
+    protected $with = [
+        'attachments',
+        'user',
+    ];
+
     protected $hidden = [
         'created_at',
         'updated_at'

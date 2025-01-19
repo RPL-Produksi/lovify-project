@@ -5,10 +5,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    @include('pages.client.landing-page.hero')
-    @include('pages.client.landing-page.service')
-    @include('pages.client.landing-page.about')
-    @include('pages.client.landing-page.planning')
+    @include('pages.client.landing_page.hero')
+    @include('pages.client.landing_page.service')
+    @include('pages.client.landing_page.about')
+    @include('pages.client.landing_page.planning')
 
 @endsection
 

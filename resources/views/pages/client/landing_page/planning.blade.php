@@ -1,7 +1,7 @@
 <section class="plannings-section pt-10 pb-20" id="plannings-section" style="background-color: #f7f0f0">
     <div class="px-40">
         <h1 class="text-5xl font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
-        <div class=" grid grid-cols-3 mt-8 gap-10">
+        <div class=" grid grid-cols-1 md:grid-cols-3 mt-8 gap-10">
             <div class="planning-card flex justify-between py-6 px-4" data-aos="fade-up" data-aos-duration="1500">
                 <div class="">
                     <h4 class=" text-white text-4xl">Catering</h4>

@@ -29,7 +29,7 @@ class AuthController extends Controller
                 ], 400);
             }
             
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
         }
         
         $user = new User();
@@ -60,8 +60,9 @@ class AuthController extends Controller
 
             return response()->json($response, 201);
         }
-
-        return True;
+        
+        Auth::login($user);
+        return redirect()->route('home');
     }
 
     public function login(Request $request)
@@ -79,7 +80,7 @@ class AuthController extends Controller
                 ], 400);
             }
 
-            return redirect()->back()->withInput($request->only('login'))->withErrors($validator);
+            return redirect()->back()->withInput($request->only('login'))->withErrors($validator->errors()->first());
         }
 
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -121,7 +122,7 @@ class AuthController extends Controller
                 return response()->json($response, 200);
             }
 
-            return True;
+            return redirect()->route('home');
         }
 
         if ($request->wantsJson()) {
@@ -147,7 +148,7 @@ class AuthController extends Controller
         }
 
         Auth::logout();
-        return True;
+        return redirect()->route('landing');
     }
 
     public function makeAdmin(Request $request)
@@ -169,7 +170,7 @@ class AuthController extends Controller
                 ], 400);
             }
 
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
         }
 
         $user = new User();

@@ -2,17 +2,25 @@
 
 use App\Http\Controllers\BackEnd\v1\Admin\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
-use App\Http\Controllers\BackEnd\v1\AuthController;
+use App\Http\Controllers\BackEnd\v1\AuthController as APIAuthController;
 use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
-use App\Http\Controllers\View\Home\HomeController;
+use App\Http\Controllers\View\AuthController as ViewAuthController;
+use App\Http\Controllers\View\Client\HomeController;
+use App\Http\Controllers\View\Client\LandingController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
-    Route::post('/register', 'register')->name('register');
-    Route::post('/login', 'login')->name('login');
-    Route::middleware('auth')->group(function () {
-        Route::post('/logout', 'logout')->name('logout');
-        Route::post('/admin', 'makeAdmin')->name('makeAdmin')->can('superadmin');
+Route::prefix('auth')->group(function () {
+    Route::group(['controller' => ViewAuthController::class], function () {
+        Route::get('/login', 'login')->name('login');
+        Route::get('/register', 'register')->name('register');
+    });
+    Route::group(['controller' => APIAuthController::class], function () {
+        Route::post('/register', 'register')->name('post.register');
+        Route::post('/login', 'login')->name('post.login');
+        Route::middleware('auth')->group(function () {
+            Route::post('/logout', 'logout')->name('logout');
+            Route::post('/admin', 'makeAdmin')->name('makeAdmin')->can('superadmin');
+        });
     });
 });
 Route::prefix('admins')->group(function () {
@@ -31,4 +39,7 @@ Route::prefix('mitras')->group(function () {
         Route::delete('/{slug}', 'deleteProduct')->name('deleteProduct');
     });
 });
-Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/', [LandingController::class, 'landing'])->name('landing');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [HomeController::class, 'home'])->name('home');
+});

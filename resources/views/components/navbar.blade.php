@@ -26,10 +26,11 @@
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full" style="height: 1px;"></span>
                 </a>
             </div>
-
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
-            </div>
+            @guest
+                <div class="hidden md:flex space-x-6">
+                    <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
+                </div>
+            @endguest
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
                 <button class="text-gray-300 hover:text-white focus:outline-none " id="menu-button">

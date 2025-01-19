@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" scro>
+<html lang="en" style="scroll-behavior: smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,4 @@
 <body class=" bg-black">
     @yield('content')
 </body>
-<style>
-    html {
-        scroll-behavior: smooth;
-    }
-</style>
-
 </html>

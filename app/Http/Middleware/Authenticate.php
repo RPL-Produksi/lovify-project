@@ -14,6 +14,6 @@ class Authenticate extends MiddlewareAuthenticate
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->isJson() ? abort(response()->json(['message' => 'Unauthenticated'], 401)) : route('view.login');
+        return $request->isJson() ? abort(response()->json(['message' => 'Unauthenticated'], 401)) : route('login');
     }
 }

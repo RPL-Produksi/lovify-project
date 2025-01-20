@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\API\v1;
+namespace App\Http\Controllers\BackEnd\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fullname' => 'required',
-            'username' => 'required|min:3|unique:users,username',
-            'password' => 'required|confirmed|min:6',
-            'email' => 'required|email|unique:users,email',
-            'number_phone' => 'required|unique:users,number_phone',
-            'role' => 'required|in:client,mitra',
+            'fullname' => ['required'],
+            'username' => ['required', 'min:3', 'unique:users,username'],
+            'password' => ['required', 'confirmed', 'min:6'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'number_phone' => ['required', 'unique:users,number_phone'],
+            'role' => ['required', 'in:client,mitra'],
         ]);
-
+        
         if ($validator->fails()) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -29,10 +28,10 @@ class AuthController extends Controller
                     'message' => $validator->errors(),
                 ], 400);
             }
-
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+            
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
         }
-
+        
         $user = new User();
         $user->fullname = $request->fullname;
         $user->username = $request->username;
@@ -61,15 +60,16 @@ class AuthController extends Controller
 
             return response()->json($response, 201);
         }
-
-        return redirect()->route('login')->with('success', 'User registered successfully');
+        
+        Auth::login($user);
+        return redirect()->route('home');
     }
 
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => 'required',
-            'password' => 'required',
+            'login' => ['required'],
+            'password' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -80,13 +80,27 @@ class AuthController extends Controller
                 ], 400);
             }
 
-            return redirect()->back()->withInput($request->only('login'))->withErrors($validator);
+            return redirect()->back()->withInput($request->only('login'))->withErrors($validator->errors()->first());
         }
 
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
             $user = Auth::user();
+
+            if (($user->role == 'admin' || $user->role == 'superadmin') && !$request->has('admin')) {
+                Auth::logout();
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'You are not authorized to access this route',
+                    ], 403);
+                }
+
+                return redirect()->back()->withInput($request->only('login'))->withErrors([
+                    'login' => 'You are not authorized to access this route',
+                ]);
+            }
 
             if ($request->wantsJson()) {
                 $response = [
@@ -108,8 +122,7 @@ class AuthController extends Controller
                 return response()->json($response, 200);
             }
 
-            // frontend return
-            return $user->role == 'client' ? 'client' : 'mitra';
+            return redirect()->route('home');
         }
 
         if ($request->wantsJson()) {
@@ -135,7 +148,7 @@ class AuthController extends Controller
         }
 
         Auth::logout();
-        return redirect()->route('login')->with('success', 'Logout successful');
+        return redirect()->route('landing');
     }
 
     public function makeAdmin(Request $request)
@@ -157,7 +170,7 @@ class AuthController extends Controller
                 ], 400);
             }
 
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
         }
 
         $user = new User();

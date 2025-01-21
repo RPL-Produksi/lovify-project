@@ -21,6 +21,15 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
+            'fullname' => env('SUPERADMIN_FULLNAME'),
+            'username' => env('SUPERADMIN_USERNAME'),
+            'password' => bcrypt(env('SUPERADMIN_PASSWORD')),
+            'email' => env('SUPERADMIN_EMAIL'),
+            'number_phone' => env('SUPERADMIN_NUMBER_PHONE'),
+            'role' => env('SUPERADMIN_ROLE') 
+        ]);
+
+        User::create([
             'fullname' => env('ADMIN_FULLNAME'),
             'username' => env('ADMIN_USERNAME'),
             'password' => bcrypt(env('ADMIN_PASSWORD')),

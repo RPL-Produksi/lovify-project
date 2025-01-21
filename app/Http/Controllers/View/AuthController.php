@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login(Request $request)
     {
-        return view('pages.auth.login');
+        // dd($request->all());
+        $isAdmin = False;
+        if ($request->has('admin')) {
+            $isAdmin = True;
+        }
+        return view('pages.auth.login', compact('isAdmin'));
     }
 
     public function register()

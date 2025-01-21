@@ -9,6 +9,6 @@ class LandingController extends Controller
 {
     public function landing()
     {
-        return view('pages.client.landing_page.index');
+        return view('pages.landing_page.index');
     }
 }

@@ -67,6 +67,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'login' => ['required'],
             'password' => ['required'],
@@ -88,7 +89,7 @@ class AuthController extends Controller
         if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
             $user = Auth::user();
 
-            if (($user->role == 'admin' || $user->role == 'superadmin') && !$request->has('admin')) {
+            if (($user->role == 'admin' || $user->role == 'superadmin') && !$request->input('admin')) {
                 Auth::logout();
                 if ($request->wantsJson()) {
                     return response()->json([

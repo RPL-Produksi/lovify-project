@@ -7,8 +7,11 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="{{ route('login') }}" method="post">
+    <form action="{{ route('login')}}" method="post">
         @csrf
+        @if ($isAdmin)
+            <input type="hidden" name="admin" value="true">
+        @endif
         <input type="text" name="login" placeholder="Username or Email" value="{{ old('login') }}">
         <input type="password" name="password" placeholder="Password">
         <button type="submit">Login</button>

@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt(env('SUPERADMIN_PASSWORD')),
             'email' => env('SUPERADMIN_EMAIL'),
             'number_phone' => env('SUPERADMIN_NUMBER_PHONE'),
-            'role' => env('SUPERADMIN_ROLE') 
+            'role' => env('SUPERADMIN_ROLE'),
+            'is_verified' => true
         ]);
 
         User::create([
@@ -35,7 +36,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt(env('ADMIN_PASSWORD')),
             'email' => env('ADMIN_EMAIL'),
             'number_phone' => env('ADMIN_NUMBER_PHONE'),
-            'role' => env('ADMIN_ROLE')
+            'role' => env('ADMIN_ROLE'),
+            'is_verified' => true
         ]);
     }
 }

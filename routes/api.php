@@ -40,7 +40,7 @@ Route::prefix('v1')->group(function () {
         });
     });
     Route::prefix('mitra')->group(function () {
-        Route::group(['middleware' => ['auth:sanctum', 'can:mitra'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
+        Route::group(['middleware' => ['auth:sanctum', 'can:mitra', 'can:verified'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
             Route::post('/{id?}', 'storeProduct');
             Route::delete('/{slug}', 'deleteProduct');
         });

@@ -11,6 +11,6 @@
         @csrf
         <button type="submit">Logout</button>
     </form>
-    <h1 align="center">Ini Home Client</h1>
+    <h1 align="center">Ini Home Superadmin</h1>
 </body>
 </html>

@@ -35,5 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('mitra', function ($user) {
             return $user->role == 'mitra';
         });
+
+        Gate::define('verified', function ($user) {
+            return $user->is_verified == 1;
+        });
     }
 }

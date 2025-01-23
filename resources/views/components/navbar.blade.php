@@ -28,7 +28,7 @@
             </div>
 
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
+                <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
             </div>
             <!-- Mobile Menu Button -->
             <div class="md:hidden">

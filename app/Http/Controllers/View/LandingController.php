@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\View\Client;
+namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,6 @@ class LandingController extends Controller
 {
     public function landing()
     {
-        return view('pages.client.landing_page.index');
+        return view('pages.landing_page.index');
     }
 }

@@ -1,9 +1,9 @@
 <section class="hero-section relative">
     <div class="flex justify-center items-center" style="height: 100vh">
         <div>
-            <h1 class="text-center text-white text-6xl font-semibold" data-aos="fade-up" data-aos-duration="1000">Plan Your
+            <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up" data-aos-duration="1000">Plan Your
                 Perfect Day With Ease!</h1>
-            <h3 class="text-center text-white text-2xl mt-6" data-aos="fade-up" data-aos-duration="1500"
+            <h3 class="text-center text-white template-h3 mt-6" data-aos="fade-up" data-aos-duration="1500"
                 style="font-weight: 400">Your Dream Wedding, Tailored to You
             </h3>
             <div class="flex justify-center mt-7">

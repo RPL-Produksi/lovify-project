@@ -1,7 +1,4 @@
-.swiper {
-    width: 300px;
-    height: 600px;
-  }
+
   .hero-section {
     position: relative;
     width: 100%;
@@ -113,4 +110,7 @@ h4 {
     -webkit-box-shadow: 0px 0px 10px 0px rgba(61, 10, 5, 1);
     -moz-box-shadow: 0px 0px 10px 0px rgba(61, 10, 5, 1);
     box-shadow: 0px 0px 10px 0px rgba(61, 10, 5, 1);
+}
+.box-plannings{
+    border: 1px solid #3D0A05;
 }

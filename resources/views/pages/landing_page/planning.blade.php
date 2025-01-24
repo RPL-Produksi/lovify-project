@@ -2,7 +2,7 @@
     <div class="Prem10rl">
         <h1 class="template-h1 font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
         <di class="box-grid-plannings mt-5">
-            <div class="box-plannings">
+            <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
 
             </div>
     </div>

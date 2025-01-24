@@ -12,6 +12,7 @@
     @include('pages.landing_page.service')
     @include('pages.landing_page.about')
     @include('pages.landing_page.planning')
+    @include('pages.landing_page.packets')
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>

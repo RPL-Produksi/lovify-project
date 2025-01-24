@@ -23,6 +23,7 @@ Route::prefix('auth')->group(function () {
         });
     });
 });
+
 Route::prefix('admins')->group(function () {
     Route::group(['middleware' => ['auth', 'can:admin'], 'prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/{id?}', 'storeCategory')->name('storeCategory');
@@ -33,12 +34,14 @@ Route::prefix('admins')->group(function () {
         Route::delete('/{id}', 'deletePacket')->name('deletePacket');
     });
 });
+
 Route::prefix('mitras')->group(function () {
     Route::group(['middleware' => ['auth', 'can:mitra', 'can:verified'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
         Route::post('/{id?}', 'storeProduct')->name('storeProduct');
         Route::delete('/{slug}', 'deleteProduct')->name('deleteProduct');
     });
 });
+
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [ClientHomeController::class, 'home'])->name('home');

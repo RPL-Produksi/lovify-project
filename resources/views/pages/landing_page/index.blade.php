@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
     @include('pages.landing_page.hero')
     @include('pages.landing_page.service')
     @include('pages.landing_page.about')
     @include('pages.landing_page.planning')
     @include('pages.landing_page.packets')
+
+    @include('components.footer')
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>

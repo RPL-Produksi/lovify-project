@@ -1,4 +1,4 @@
-<section class="planning-section px-40 pt-10 pb-20" style="background-color: #f7f0f0">
+<section class="planning-section px-40 pt-10 pb-40" style="background-color: #f7f0f0">
     <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Packets</h1>
     <div class="grid grid-cols-3 mt-7 gap-7">
         <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
@@ -43,5 +43,8 @@
                 <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
             </div>
         </div>
+    </div>
+    <div class="flex justify-center items-center mt-7">
+        <a href="" class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl" data-aos="fade-up" data-aos-duration="1000">See More</a>
     </div>
 </section>

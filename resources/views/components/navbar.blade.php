@@ -30,7 +30,7 @@
             <div class="hidden md:flex space-x-6">
                 <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">Login</a>
             </div>
-            <!-- Mobile Menu Button -->
+
             <div class="md:hidden">
                 <button class="text-gray-300 hover:text-white focus:outline-none" id="menu-button">
                     <i class="fa-solid fa-bars"></i>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <!-- Mobile Menu -->
+
     <div class="md:hidden hidden" id="mobile-menu">
         <a href="#" class="block px-4 py-2 hover:bg-gray-700">Home</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700">About</a>

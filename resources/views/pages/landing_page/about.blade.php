@@ -16,15 +16,15 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}"
                                     alt=""></div>
                         </div>
                         <!-- If we need pagination -->
@@ -33,20 +33,19 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}"
                                     alt=""></div>
-                            <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}"
+                            <div class="swiper-slide mt-2"><img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}"
                                     alt=""></div>
                         </div>
                         <!-- If we need pagination -->
                     </div>
-
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@
     z-index: -1;
 }
 
-h1, h3, a, p, h4 {
+h1, h3, a, p, h4, h6, label, small, input {
     font-family: 'IBM Plex Serif', serif;
 }
 

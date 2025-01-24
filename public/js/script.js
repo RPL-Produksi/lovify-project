@@ -68,3 +68,9 @@ const swipertwo = new Swiper('.swipertwo', {
       el: '.swiper-scrollbar',
     },
   });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  });

@@ -9,6 +9,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/master.css')}}">
     <title>Lovify | @yield('title')</title>
     @yield('css')
 </head>

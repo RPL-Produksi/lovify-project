@@ -1,94 +1,105 @@
-    .box-our-services{
-        display:grid;
-    }
-    .box-plannings{
-        display:grid;
-    }
-    .box-grid-plannings{
-        display:grid;
-    }
-    .right{
-        display:flex;
-    }
+.box-our-services {
+    display: grid;
+}
+.box-plannings {
+    display: grid;
+}
+.box-grid-plannings {
+    display: grid;
+}
+.right {
+    display: flex;
+}
 
-@media screen and (min-width:1024px)
-{
-    .template-h1{
+@media screen and (min-width: 1024px) {
+    .template-h1 {
         font-size: 48px;
     }
 
-    .box-our-services{
-        grid-template-columns: repeat(4,1fr);
+    .box-our-services {
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         margin-top: 20px;
     }
-    .template-h3{
+    .template-h3 {
         font-size: 24px;
-        margin-top: 12px
+        margin-top: 12px;
     }
     /* .box-plannings{
         margin-top:20px;
     } */
-    .Prem10rl{
+    .Prem10rl {
         padding-left: 10rem;
         padding-right: 10rem;
     }
-    .gridtemcol{
-        display:grid;
+    .gridtemcol {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
-    .right{
+    .right {
         justify-content: end;
     }
     .swiper {
         width: 300px;
         height: 600px;
-      }
-    .p-48-res{
-        font-size:48px;
     }
-    .swiper{
+    .p-48-res {
+        font-size: 48px;
+    }
+    .swiper {
         cursor: grabbing;
     }
-    .box-grid-plannings{
+    .box-grid-plannings {
         grid-template-columns: repeat(3, 1fr);
         gap: 50px;
     }
 }
-@media screen and (max-width:468px)
-{
-    .box-our-services{
-        grid-template-columns: repeat(1,1fr);
+@media screen and (max-width: 468px) {
+    .navbar.scrolled {
+        color: black;
+        transition: 0.5s ease-in-out;
+    }
+    .menu-button.scrolled{
+        color:black;
+        transition: 0.5s ease-in-out;
+    }
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .box-our-services {
+        grid-template-columns: repeat(1, 1fr);
         gap: 20px;
     }
-    .template-h1{
+    .template-h1 {
         font-size: 38px;
         padding-bottom: 20px;
     }
-    .template-h3{
+    .template-h3 {
         font-size: 14px;
         margin-top: 0px;
     }
-    .Prem10rl{
+    .Prem10rl {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-    .gridtemcol{
-        display:grid;
-        grid-template-columns: repeat(1,1fr);
+    .gridtemcol {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
     }
-    .right{
-        justify-content:center;
+    .right {
+        justify-content: center;
         margin-top: 30px;
     }
     .swiper {
         width: 150px;
         height: 300px;
-      }
-    .p-48-re{
-        font-size:24px;
     }
-    .box-grid-plannings{
+    .p-48-re {
+        font-size: 24px;
+    }
+    .box-grid-plannings {
         grid-template-columns: repeat(1, 1fr);
         gap: 50px;
     }

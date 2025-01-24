@@ -1,8 +1,8 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 <nav class="navbar bg-transparent text-white fixed top-0 left-0 w-full z-10 py-3 text-nowrap text-center">
-    <div class="mx-auto" style="padding:0px 20px 0px 20px">
-        <div class="flex lg:justify-around items-center h-16 lg:p-0 p-2 justify-between">
+    <div class="md:px-40 px-2">
+        <div class="flex items-center h-16 lg:p-0 p-2 justify-between">
             <!-- Logo -->
             <div class="flex-shrink-0">
                 <a href="#" class="text-2xl font-light">Lovify</a>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="md:hidden">
-                <button class="text-gray-300 hover:text-white focus:outline-none" id="menu-button">
+                <button class="text-gray-300 hover:text-white focus:outline-none menu-button" id="menu-button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -57,12 +57,15 @@
     });
 
     const navbar = document.querySelector('.navbar');
+    const menuButtonn = document.querySelector('.menu-button');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
+            menuButtonn.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
+            menuButtonn.classList.remove('scrolled');
         }
     });
 </script>

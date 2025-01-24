@@ -1,7 +1,7 @@
 <footer class="footer">
-    <div class="py-16 px-40">
-        <div class="grid grid-cols-4">
-            <div class="py-7 px-6 rounded-2xl" style="background-color: #f7f0f0;" data-aos="fade-up" data-aos-duration="1000">
+    <div class="py-16 md:px-40">
+        <div class="grid md:grid-cols-4 px-4 md:px-0">
+            <div class="py-7 px-6 rounded-2xl col-span-3 md:col-span-1" style="background-color: #f7f0f0;" data-aos="fade-up" data-aos-duration="1000">
                 <div class="pt-1">
                     <h6 class="text-redlue font-bold">FEEDBACK</h6>
                 </div>
@@ -25,15 +25,15 @@
                         </div>
                         <div class="mt-9">
                             <a href=""
-                                class="py-3 px-9 text-sm text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">Send
+                                class="py-3 px-9 block md:inline-block text-sm text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">Send
                                 a request</a>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-span-3 py-10">
-                <div class="grid grid-cols-3">
-                    <div class="flex justify-center ml-2" data-aos="fade-up" data-aos-duration="1000">
+                <div class="grid md:grid-cols-3">
+                    <div class="flex md:justify-center md:ml-2 mt-20 md:mt-0" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">NAVIGATIONS</h6>
                             <ul class="mt-5">
@@ -44,7 +44,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="flex justify-center pl-6" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="flex md:justify-center md:pl-6 mt-20 md:mt-0" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">ABOUT US</h6>
                             <ul class="mt-5">
@@ -53,12 +53,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="flex justify-center" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="pl-6">
-                            <h1 class="text-white text-2xl">Logo</h1>
+                    <div class="md:flex md:justify-end hidden" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="md:pl-6">
+                            <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
                         </div>
                     </div>
-                    <div class="mt-20 pl-36" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 md:pl-36" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="pl-36 pr-40 mt-20" data-aos="fade-up" data-aos-duration="1000">
+                <div class="md:pl-36 md:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
                     <h6 class="text-white font-bold">SUBSCRIPTION</h6>
                     <form action="">
                         @csrf
@@ -78,8 +78,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="mt-32 pl-36 pr-40 flex justify-between" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="flex">
+                <div class="md:mt-32 mt-10 md:pl-36 md:flex justify-between" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="flex md:justify-end justify-center">
                         <a href="" class="text-white border border-white rounded-full p-4 text-2xl w-16 h-16 flex items-center justify-center">
                             <i class="fa-brands fa-square-facebook"></i>
                           </a>
@@ -93,7 +93,7 @@
                             <i class="fa-brands fa-twitter"></i>
                           </a>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center md:mt-0 mt-10 justify-center md:justify-end">
                         <small class="text-gray-400">@2024 - Copyright</small>
                     </div>
                 </div>

@@ -1,6 +1,12 @@
 @extends('template.master')
 @section('title', 'Home')
 @section('content')
+    <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @include('components.navbar')
 
     <section class="hero-section relative">
         <div class="flex justify-center items-center" style="height: 100vh">
@@ -24,6 +30,7 @@
             </a>
         </div>
     </section>
+
     <section class="service-section py-20" id="service-section" style="background-color: #f7f0f0">
         <div class="px-4 sm:px-8 lg:px-40">
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-redlue" data-aos="fade-up"
@@ -58,34 +65,33 @@
         </div>
     </section>
 
-
     <section class="about-section pt-10 pb-20" id="about-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <div class="gridtemcol" style="width: 100%">
                 <div class="text-a" style="width:100%;">
-                    <h3 class=" text-3xl text-redlue" data-aos="fade-up" data-aos-duration="1000">ABOUT US</h3>
+                    <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">ABOUT US</h3>
                     <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
                         Realized Preparing Your <br>Big Day Isn’t Always
                         Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
                             <br>Making Your Big Day
                             Unforgettable.</span></p>
                 </div>
-                <div class="right">
+                <div class="right" data-aos="fade-up" data-aos-duration="2000">
                     <div class="grid grid-cols-2 b gap-5 " style="width:fit-content;">
                         <!-- Slider main container -->
                         <div class="swiper swiperone">
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
+                                <div class="swiper-slide mt-3"><img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}"
                                         alt=""></div>
-                                <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
+                                <div class="swiper-slide mt-3"><img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}"
                                         alt=""></div>
-                                <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
+                                <div class="swiper-slide mt-3"><img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}"
                                         alt=""></div>
-                                <div class="swiper-slide"><img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}"
-                                        alt=""></div>
-                                <div class="swiper-slide"><img
+                                <div class="swiper-slide mt-3"><img
+                                        src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt=""></div>
+                                <div class="swiper-slide mt-3"><img
                                         src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt=""></div>
                             </div>
                             <!-- If we need pagination -->
@@ -94,16 +100,19 @@
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                <div class="swiper-slide"><img
-                                        src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt=""></div>
-                                <div class="swiper-slide"><img
-                                        src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt=""></div>
-                                <div class="swiper-slide"><img
-                                        src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""></div>
-                                <div class="swiper-slide"><img
+                                <div class="swiper-slide mt-3"><img
+                                        src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="">
+                                </div>
+                                <div class="swiper-slide mt-3"><img
+                                        src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
+                                </div>
+                                <div class="swiper-slide mt-3"><img
+                                        src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="">
+                                </div>
+                                <div class="swiper-slide mt-3"><img
                                         src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt="">
                                 </div>
-                                <div class="swiper-slide"><img
+                                <div class="swiper-slide mt-3"><img
                                         src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
                                 </div>
                             </div>
@@ -119,86 +128,138 @@
     <section class="plannings-section pt-10 pb-20" id="plannings-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <h1 class="template-h1 font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
-            <di class="box-grid-plannings mt-5">
-                <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+            <div class="box-grid-plannings mt-5">
+                <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
+                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="" style="height: 250px; object-fit: cover;" class="w-full">
                     <div class="text-box-plannings mt-3">
                         <h2>Catring</h2>
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
                         <div class="box-overflow" id="box-overflow">
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Suka</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Benci</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Ayam Bang Daffa</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Lorem Ipsum Dolor</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+                <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
+                    <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt="" style="height: 250px; object-fit: cover;" class="w-full">
                     <div class="text-box-plannings mt-3">
-                        <h2>Catring</h2>
+                        <h2>Decorations</h2>
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
                         <div class="box-overflow" id="box-overflow">
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Suka</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Benci</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Ayam Bang Daffa</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Lorem Ipsum Dolor</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+                <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
+                    <img src="{{ asset('asset/image/venue_placeholder1.jpg') }}" alt="" style="height: 250px; object-fit: cover;" class="w-full">
                     <div class="text-box-plannings mt-3">
-                        <h2>Catring</h2>
+                        <h2>Photographer</h2>
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
                         <div class="box-overflow" id="box-overflow">
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Suka</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Catering Mama Benci</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Ayam Bang Daffa</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
+                                <P class="text-redlue">Lorem Ipsum Dolor</P>
                                 <input type="checkbox" id="check1" name="check1">
                             </div>
                         </div>
                     </div>
                 </div>
-
-        </div>
+            </div>
         </div>
     </section>
+
+    <section class="planning-section md:px-40 px-4 pt-10 pb-40" style="background-color: #f7f0f0">
+        <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Packets</h1>
+        <div class="grid md:grid-cols-3 mt-7 gap-7">
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Basic</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Platinum</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Luxury</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+                <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="w-full" style="height: 230px" alt="">
+                <div class="mt-6 flex justify-between mb-3 items-center">
+                    <h3 class=" text-rose-950 text-2xl font-bold">Venue</h3>
+                    <a href="" class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See More</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center mt-7">
+            <a href="" class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl" data-aos="fade-up" data-aos-duration="1000">See More</a>
+        </div>
+    </section>
+    
+    @include('components.footer')
 @endsection
 @section('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

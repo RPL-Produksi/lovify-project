@@ -54,6 +54,9 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 50px;
     }
+    .input-check{
+        margin-right: 25px;
+    }
 }
 @media screen and (max-width:468px)
 {
@@ -92,4 +95,7 @@
         grid-template-columns: repeat(1, 1fr);
         gap: 50px;
     }
+    /* .box-check > input[type="checkbox"]{
+        margin-right: 3px;
+    } */
 }

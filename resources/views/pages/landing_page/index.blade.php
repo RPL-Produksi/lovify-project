@@ -133,73 +133,46 @@
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
                         <div class="box-overflow" id="box-overflow">
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                <input type="radio" name="group1" onclick="hideshow()" class="input-check" value="1">
+                                <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="box-input-pax" id="InNum1" style="display: none;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric" style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;" class="input-check">
+                                </div>
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                <input type="radio" name="group1" onclick="hideshow()" class="input-check" value="2">
+                                <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="box-input-pax" id="InNum2" style="display: none;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric" style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;" class="input-check">
+                                </div>
                             </div>
                             <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                <input type="radio" name="group1" onclick="hideshow()" class="input-check" value="3">
+                                <span class="checkmark"></span>
                             </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
+                            <div class="box-input-pax" id="InNum3" style="display: none;">
+                            </label>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric" style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;" class="input-check">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
-                    <div class="text-box-plannings mt-3">
-                        <h2>Catring</h2>
-                        <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
-                        <div class="box-overflow" id="box-overflow">
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-plannings" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
-                    <div class="text-box-plannings mt-3">
-                        <h2>Catring</h2>
-                        <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
-                        <div class="box-overflow" id="box-overflow">
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                            <div class="box-check">
-                                <P>INI ADALAH CHECK BOX SANGAT BAGUS</P>
-                                <input type="checkbox" id="check1" name="check1">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
         </div>

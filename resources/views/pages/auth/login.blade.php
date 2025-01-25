@@ -4,7 +4,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
-    <div class="login-section min-h-screen flex-col flex justify-center items-center">
+    <div class="login-section min-h-screen flex-col flex justify-center items-center md:px-0 px-7">
         <div class="bg-transparent p-8 rounded-xl shadow-xl w-full max-w-md backdrop-blur-xl">
             <div class="w-full flex justify-center mb-5">
                 <img src="{{ asset('asset/image/name_icon1.png') }}" class="mb-5" alt="">

@@ -44,4 +44,7 @@
             </div>
         </div>
     </div>
+    <div class="flex justify-center items-center mt-7">
+        <a href="" class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl">See More</a>
+    </div>
 </section>

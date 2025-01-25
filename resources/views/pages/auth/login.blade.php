@@ -11,9 +11,12 @@
             </div>
             <form action="{{ route('post.login') }}" method="POST">
                 @csrf
+                @if ($isAdmin)
+                    <input type="hidden" name="admin" value="true">
+                @endif
                 <div class="mb-4">
                     <label for="username" class="block text-sm font-medium text-white">Username</label>
-                    <input type="text" id="username" name="username"
+                    <input type="text" id="username" name="login"
                         class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required>
                 </div>

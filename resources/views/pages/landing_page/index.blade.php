@@ -14,6 +14,8 @@
     @include('pages.landing_page.planning')
     @include('pages.landing_page.packets')
 
+    @include('components.footer')
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

@@ -39,5 +39,7 @@ class DatabaseSeeder extends Seeder
             'role' => env('ADMIN_ROLE'),
             'is_verified' => true
         ]);
+
+        
     }
 }

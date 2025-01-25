@@ -74,3 +74,30 @@ const swipertwo = new Swiper('.swipertwo', {
       e.preventDefault();
     });
   });
+
+//   var div = document.getElementById('InNum');
+//   var display = 1;
+//   function hideshow()
+//   {
+//         if(display == 1)
+//         {
+//             div.style.display = 'block';
+//             display = 0;
+//         }
+//         else
+//         {
+//             div.style.display = 'none';
+//             display = 1;
+//         }
+//   }
+function hideshow() {
+    // Sembunyikan semua elemen input tambahan
+    document.querySelectorAll('.box-input-pax').forEach(el => el.style.display = 'none');
+
+    // Tampilkan elemen yang sesuai dengan radio button yang dipilih
+    const selected = document.querySelector('input[name="group1"]:checked');
+    if (selected) {
+        const inputBox = document.getElementById(`InNum${selected.value}`);
+        if (inputBox) inputBox.style.display = 'block';
+    }
+}

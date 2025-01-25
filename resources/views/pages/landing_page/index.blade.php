@@ -258,7 +258,7 @@
             <a href="" class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl" data-aos="fade-up" data-aos-duration="1000">See More</a>
         </div>
     </section>
-    
+
     @include('components.footer')
 @endsection
 @section('js')

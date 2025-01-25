@@ -111,15 +111,59 @@ h1, h3, a, p, h4, h6, label, small, input {
     justify-content: space-between;
     align-items: center;
 }
-.box-check > input{
-    margin-right: 25px;
-}
-.box-check > input[type="checkbox"] {
+/* .box-check > input[type="checkbox"] {
     transform: scale(1.5);
     margin-right: 30px;
+} */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-right: 15px;
 }
 
-footer {
-    position : relative;
-    overflow : hidden;
+.custom-checkbox input[type="radio"] {
+    display: none; /* Sembunyikan radio button bawaan */
+}
+
+.custom-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: #f4f4f4;
+    border: 2px solid #333;
+    border-radius: 4px; /* Gunakan 50% untuk lingkaran */
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.custom-checkbox input[type="radio"]:checked + .checkmark {
+   /* merubah warna saat radio button di pilih */
+}
+
+.custom-checkbox input[type="radio"]:checked + .checkmark::after {
+    content: '';
+    width: 6px;
+    height: 12px;
+    border: solid #3D0A05;
+    border-width: 0 2px 2px 0;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox:hover .checkmark {
+    border-color: #666;
+}
+footer{
+    position:relative;
+    overflow: hidden;
 }

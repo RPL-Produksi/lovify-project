@@ -32,11 +32,11 @@
     </section>
 
     <section class="service-section py-20" id="service-section" style="background-color: #f7f0f0">
-        <div class="px-4 sm:px-8 lg:px-40">
+        <div class="px-4 sm:px-8 xl:px-40 lg:px-10">
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-redlue" data-aos="fade-up"
                 data-aos-duration="1000">Our Services</h1>
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-14 gap-5 justify-center items-center">
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-14 gap-5 justify-center items-center">
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1000">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Plannings</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">With careful planning, your wedding is
@@ -47,7 +47,7 @@
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1500">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Packets</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Wedding packages are the perfect
-                        solution for couples who want to celebrate their love without the stress of managing every detail...
+                        solution for couples who want to celebrate their love without the stress of managing...
                     </p>
                     <a href="#packets-section" class="text-redlue">See Packets <i
                             class="fa-sharp fa-light fa-arrow-right"></i></a>
@@ -55,7 +55,7 @@
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2000">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Calculator</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Easily calculate your wedding costs by
-                        selecting your preferred vendors and packages. Plan with confidence and stay on budget.</p>
+                        selecting your preferred vendors and packages. Plan with confidence and...</p>
                     <a href="#plannings-section" class="text-redlue">Calculator <i
                             class="fa-sharp fa-light fa-arrow-right"></i></a>
                 </div>
@@ -69,7 +69,7 @@
         </div>
     </section>
 
-    <section class="about-section pt-10 pb-20" id="about-section" style="background-color: #f7f0f0">
+    <section class="about-section pt-10 pb-20 md:px-10 xl:px-0" id="about-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <div class="gridtemcol" style="width: 100%">
                 <div class="text-a" style="width:100%;">
@@ -81,7 +81,7 @@
                             <br>Making Your Big Day
                             Unforgettable.</span></p>
                 </div>
-                <div class="right" data-aos="fade-up" data-aos-duration="2000">
+                <div class="right md:mt-7 xl:mt-0" data-aos="fade-up" data-aos-duration="2000">
                     <div class="grid grid-cols-2 b gap-5 " style="width:fit-content;">
                         <!-- Slider main container -->
                         <div class="swiper swiperone">
@@ -131,7 +131,7 @@
     </section>
 
 
-    <section class="plannings-section pt-10 pb-20" id="plannings-section" style="background-color: #f7f0f0">
+    <section class="plannings-section pt-10 pb-20 md:px-10 xl:px-0" id="plannings-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <h1 class="template-h1 font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
             <div class="box-grid-plannings mt-5">
@@ -309,10 +309,10 @@
             </div>
     </section>
 
-    <section class="planning-section md:px-40 px-4 pt-10 pb-40" id="packets-section" style="background-color: #f7f0f0">
+    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-40" id="packets-section" style="background-color: #f7f0f0">
         <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Packets
         </h1>
-        <div class="grid md:grid-cols-3 mt-7 gap-7">
+        <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
                 <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full" style="height: 230px"

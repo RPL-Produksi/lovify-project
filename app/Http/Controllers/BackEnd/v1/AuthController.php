@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -19,6 +21,7 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'number_phone' => ['required', 'unique:users,number_phone'],
             'role' => ['required', 'in:client,mitra'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
         
         if ($validator->fails()) {
@@ -31,6 +34,8 @@ class AuthController extends Controller
             
             return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
         }
+
+        $defaultAvatar = env('PROFILE_DEFAULT_IMAGE');
         
         $user = new User();
         $user->fullname = $request->fullname;
@@ -39,6 +44,16 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->number_phone = $request->number_phone;
         $user->role = $request->role;
+        
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarName = Str::uuid() . '.' . $avatar->getClientOriginalExtension();
+            $path = $avatar->storeAs('avatars/' . $user->username, $avatarName, 'public');
+            $user->avatar = $path;
+        } else {
+            $user->avatar = null;
+        }
+
         $user->save();
 
         if ($request->wantsJson()) {
@@ -48,12 +63,12 @@ class AuthController extends Controller
                 'data' => [
                     'token' => $user->createToken('auth_token')->plainTextToken,
                     'user' => [
-                        'id' => $user->id,
                         'fullname' => $user->fullname,
                         'username' => $user->username,
                         'email' => $user->email,
                         'number_phone' => $user->number_phone,
                         'role' => $user->role,
+                        'avatar' => $user->avatar != null ? asset(Storage::url($user->avatar)) : asset(Storage::url($defaultAvatar)),
                     ],
                 ],
             ];
@@ -84,6 +99,8 @@ class AuthController extends Controller
             return redirect()->back()->withInput($request->only('login'))->withErrors($validator->errors()->first());
         }
 
+        $defaultAvatar = env('PROFILE_DEFAULT_IMAGE');
+
         $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
@@ -110,12 +127,12 @@ class AuthController extends Controller
                     'data' => [
                         'token' => $request->user()->createToken('auth_token')->plainTextToken,
                         'user' => [
-                            'id' => $user->id,
                             'fullname' => $user->fullname,
                             'username' => $user->username,
                             'email' => $user->email,
                             'number_phone' => $user->number_phone,
                             'role' => $user->role,
+                            'avatar' => $user->avatar != null ? asset(Storage::url($user->avatar)) : asset(Storage::url($defaultAvatar)),
                         ],
                     ],
                 ];

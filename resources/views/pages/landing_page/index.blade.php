@@ -190,7 +190,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
                     <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">

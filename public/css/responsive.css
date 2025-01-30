@@ -98,11 +98,11 @@
 }
 @media screen and (max-width: 1023px) {
     .navbar.scrolled {
-        color: black;
+        color: #3D0A05;
         transition: 0.5s ease-in-out;
     }
     .menu-button.scrolled{
-        color:black;
+        color:#3D0A05;
         transition: 0.5s ease-in-out;
     }
     .navbar {

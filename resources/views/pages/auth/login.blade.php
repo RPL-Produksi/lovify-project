@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
     <div class="login-section min-h-screen flex-col flex justify-center items-center md:px-0 px-7">
-        <div class="bg-transparent p-8 rounded-xl shadow-xl w-full max-w-md backdrop-blur-xl">
+        <div class="bg-transparent p-8 rounded-xl shadow-xl w-full max-w-md backdrop-blur-lg">
             <div class="w-full flex justify-center mb-5">
                 <img src="{{ asset('asset/image/name_icon1.png') }}" class="mb-5" alt="">
             </div>
@@ -33,8 +33,7 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <button type="submit"
-                        class="w-full py-2 px-4 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        style="background-color: #3D0A05">
+                        class="w-full btn py-2 px-4 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 hover:text-black hover:bg-white bg-rose2">
                         Login
                     </button>
                 </div>
@@ -66,6 +65,10 @@
             background-repeat: no-repeat;
             opacity: 0.4;
             z-index: -1;
+        }
+
+        .bg-rose2 {
+            background-color: #3D0A05;
         }
     </style>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -82,7 +82,7 @@
                             Unforgettable.</span></p>
                 </div>
                 <div class="right md:mt-7 xl:mt-0" data-aos="fade-up" data-aos-duration="2000">
-                    <div class="grid grid-cols-2 b gap-5 " style="width:fit-content;">
+                    <div class="grid grid-cols-2 b gap-5 md:w-full " style="width:fit-content;">
                         <!-- Slider main container -->
                         <div class="swiper swiperone">
                             <!-- Additional required wrapper -->
@@ -258,7 +258,7 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
                                         value="1">
                                     <span class="checkmark"></span>
                                 </label>
@@ -274,7 +274,7 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
                                         value="2">
                                     <span class="checkmark"></span>
                                 </label>
@@ -290,7 +290,7 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
                                         value="3">
                                     <span class="checkmark"></span>
                             </div>

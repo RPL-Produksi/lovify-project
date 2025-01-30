@@ -63,7 +63,7 @@
                     <div class="mt-7">
                         <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up" data-aos-duration="1000">The Packet is <br>Equipped with</h2>
                     </div>
-                    <div class="max-w-4xl mx-auto mt-8">
+                    <div class="max-w-4xl mt-8">
                         <div class="grid grid-cols-3 border-b border-rose-950 pb-2" data-aos="fade-up" data-aos-duration="1000">
                           <h3 class="font-semibold text-xl text-redlue">Bonus</h3>
                           <h3 class="font-semibold text-xl text-redlue">Decorations</h3>

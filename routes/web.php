@@ -5,6 +5,7 @@ use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
 use App\Http\Controllers\BackEnd\v1\AuthController as APIAuthController;
 use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
 use App\Http\Controllers\View\AuthController as ViewAuthController;
+use App\Http\Controllers\View\Client\ClientDetailPacketController;
 use App\Http\Controllers\View\Client\ClientHomeController;
 use App\Http\Controllers\View\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::prefix('mitras')->group(function () {
 });
 
 Route::get('/', [LandingController::class, 'landing'])->name('landing');
+Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [ClientHomeController::class, 'home'])->name('home');
 });

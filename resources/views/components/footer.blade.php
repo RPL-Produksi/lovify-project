@@ -58,7 +58,7 @@
                             <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
                         </div>
                     </div>
-                    <div class="mt-20 xl:mt-20 md:mt-10 xl:pl-36 md:pl-16 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-32 md:pl-16 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-20 xl:mt-20 md:mt-10 xl:pl-36 md:pl-16 hidden md:flex xl:hidden" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 md:pl-16 hidden md:flex xl:hidden" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="xl:pl-36 md:pl-16 xl:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
+                <div class="xl:pl-32 md:pl-16 xl:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
                     <h6 class="text-white font-bold">SUBSCRIPTION</h6>
                     <form action="">
                         @csrf

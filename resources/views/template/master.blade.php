@@ -13,7 +13,7 @@
     <title>Lovify | @yield('title')</title>
     @yield('css')
 </head>
-<body class=" bg-black">
+<body>
     @yield('content')
 </body>
 @yield('js')

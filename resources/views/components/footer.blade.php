@@ -1,7 +1,7 @@
 <footer class="footer">
-    <div class="py-16 md:px-40">
-        <div class="grid md:grid-cols-4 px-4 md:px-0">
-            <div class="py-7 px-6 rounded-2xl col-span-3 md:col-span-1" style="background-color: #f7f0f0;" data-aos="fade-up" data-aos-duration="1000">
+    <div class="py-16 xl:px-40 md:px-10">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 px-4 md:px-0">
+            <div class="py-7 px-6 rounded-2xl col-span-3 md:col-span-1 xl:col-span-1" style="background-color: #f7f0f0;" data-aos="fade-up" data-aos-duration="1000">
                 <div class="pt-1">
                     <h6 class="text-redlue font-bold">FEEDBACK</h6>
                 </div>
@@ -31,8 +31,8 @@
                     </form>
                 </div>
             </div>
-            <div class="col-span-3 py-10">
-                <div class="grid md:grid-cols-3">
+            <div class="xl:col-span-3 md:col-span-1 col-span-3 py-10">
+                <div class="grid grid-cols-2 xl:grid-cols-3">
                     <div class="flex md:justify-center md:ml-2 mt-20 md:mt-0" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">NAVIGATIONS</h6>
@@ -53,12 +53,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="md:flex md:justify-end hidden" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="md:pl-6">
+                    <div class="xl:flex md:justify-end hidden" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="xl:pl-6 md:pl-16 xl:mt-0 md:mt-10">
                             <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
                         </div>
                     </div>
-                    <div class="mt-20 md:pl-36" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 md:pl-16 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -68,8 +68,24 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 md:pl-16 hidden md:flex xl:hidden" data-aos="fade-up" data-aos-duration="1000">
+                        <div>
+                            <h6 class="text-white font-bold">CONTACT US</h6>
+                            <ul class="mt-5">
+                                <li><a href="" class="text-white font-thin">0832-2311-2312</a></li>
+                                <li class="mt-1"><a href="" class="text-white font-thin">lovifysupport@gmail.com</a></li>
+                                <li class="mt-1"><a href="" class="text-white font-thin">Sukabumi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:flex md:justify-end hidden xl:hidden" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="xl:pl-6 md:pl-16 xl:mt-0 md:mt-10">
+                            <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
+                        </div>
+                    </div>
                 </div>
-                <div class="md:pl-36 md:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
+                <div class="xl:pl-36 md:pl-16 xl:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
                     <h6 class="text-white font-bold">SUBSCRIPTION</h6>
                     <form action="">
                         @csrf
@@ -78,8 +94,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="md:mt-32 mt-10 md:pl-36 md:flex justify-between" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="flex md:justify-end justify-center">
+                <div class="xl:mt-32 mt-10 xl:pl-36 md:pl-16 xl:flex justify-between" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="flex xl:justify-end justify-center">
                         <a href="" class="text-white border border-white rounded-full p-4 text-2xl w-16 h-16 flex items-center justify-center">
                             <i class="fa-brands fa-square-facebook"></i>
                           </a>
@@ -93,7 +109,7 @@
                             <i class="fa-brands fa-twitter"></i>
                           </a>
                     </div>
-                    <div class="flex items-center md:mt-0 mt-10 justify-center md:justify-end">
+                    <div class="flex items-center xl:mt-0 mt-10 justify-center xl:justify-end">
                         <small class="text-gray-400">@2024 - Copyright</small>
                     </div>
                 </div>

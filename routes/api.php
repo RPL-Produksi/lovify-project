@@ -3,14 +3,20 @@
 use App\Http\Controllers\BackEnd\v1\Admin\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
 use App\Http\Controllers\BackEnd\v1\AuthController;
+use App\Http\Controllers\Backend\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
+use App\Http\Controllers\Backend\v1\PacketController;
+use App\Http\Controllers\Backend\v1\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
+    Route::get('/', function (Request $request) {
+        return $request->user();
+    });
+    Route::post('/profile', [ProfileController::class, 'updateProfile']);
+});
 
 Route::fallback(function () {
     return response()->json([
@@ -29,6 +35,10 @@ Route::prefix('v1')->group(function () {
             Route::post('/admin', 'makeAdmin')->can('superadmin');
         });
     });
+    // Umum
+    Route::get('/categories', [CategoryController::class, 'getCategory']);
+    Route::get('/packets', [PacketController::class, 'getPackets']);
+    // Admin
     Route::prefix('admin')->group(function () {
         Route::group(['middleware' => ['auth:sanctum', 'can:admin'], 'prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
             Route::post('/{id?}', 'storeCategory');
@@ -39,6 +49,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'deletePacket');
         });
     });
+    // Mitra
     Route::prefix('mitra')->group(function () {
         Route::group(['middleware' => ['auth:sanctum', 'can:mitra', 'can:verified'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
             Route::post('/{id?}', 'storeProduct');

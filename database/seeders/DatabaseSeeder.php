@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Packet;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,6 +39,10 @@ class DatabaseSeeder extends Seeder
             'number_phone' => env('ADMIN_NUMBER_PHONE'),
             'role' => env('ADMIN_ROLE'),
             'is_verified' => true
+        ]);
+
+        Packet::create([
+            
         ]);
     }
 }

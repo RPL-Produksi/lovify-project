@@ -132,7 +132,8 @@
     </section>
 
 
-    <section class="plannings-section pt-10 pb-20 md:px-10 xl:px-0" id="plannings-section" style="background-color: #f7f0f0">
+    <section class="plannings-section pt-10 pb-20 md:px-10 xl:px-0" id="plannings-section"
+        style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <h1 class="template-h1 font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
             <div class="box-grid-plannings mt-5">
@@ -310,7 +311,8 @@
             </div>
     </section>
 
-    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-40" id="packets-section" style="background-color: #f7f0f0">
+    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="packets-section"
+        style="background-color: #f7f0f0">
         <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Packets
         </h1>
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
@@ -388,10 +390,92 @@
         </div>
     </section>
 
+    <section class="article-section xl:px-40 md:px-10 px-4 pt-10 pb-40" id="article-section"
+        style="background-color: #f7f0f0">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
+                Articles
+            </h1>
+            <div class="grid grid-cols-3 gap-7 mt-7">
+                <div class="card-article shadow-xl">
+                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
+                </div>
+                <div class="card-article shadow-xl">
+                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="">
+                </div>
+                <div class="card-article shadow-xl">
+                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-7 -translate-y-32">
+                <div class="px-6">
+                    <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
+                        <div class="flex justify-between">
+                            <div>
+                                <small class="text-redlue font-semibold">News</small>
+                            </div>
+                            <div>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
+                        </div>
+                        <div class="mt-9">
+                            <a href="" class=" text-redlue font-semibold">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6">
+                    <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
+                        <div class="flex justify-between">
+                            <div>
+                                <small class="text-redlue font-semibold">News</small>
+                            </div>
+                            <div>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
+                        </div>
+                        <div class="mt-9">
+                            <a href="" class=" text-redlue font-semibold">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6">
+                    <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
+                        <div class="flex justify-between">
+                            <div>
+                                <small class="text-redlue font-semibold">News</small>
+                            </div>
+                            <div>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
+                        </div>
+                        <div class="mt-9">
+                            <a href="" class=" text-redlue font-semibold">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     @include('components.footer')
 @endsection
-@section('js')
+@push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset(path: 'js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-@endsection
+@endpush

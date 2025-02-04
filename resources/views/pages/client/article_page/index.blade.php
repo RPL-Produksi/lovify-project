@@ -16,21 +16,25 @@
                     data-aos-duration="1500" class="w-full object-cover" style="height: 630px" alt="">
             </div>
             <div class="mt-7">
-                <h1 class="text-redlue font-bold text-5xl">New Wedding Trend : Intimate Outdoor Wedding <br>Theme</h1>
+                <h1 class="text-redlue font-bold text-5xl" data-aos="fade-up"
+                data-aos-duration="1500">New Wedding Trend : Intimate Outdoor Wedding <br>Theme</h1>
             </div>
 
             <div class="flex gap-36 mt-8">
                 <div>
-                    <h6 class="text-redlue font-semibold text-xl"><i class="fa-solid fa-user"></i> Admin</h6>
+                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
+                    data-aos-duration="1500"><i class="fa-solid fa-user"></i> Admin</h6>
                 </div>
                 <div>
-                    <h6 class="text-redlue font-semibold text-xl"><i class="fa-solid fa-calendar-days"></i> Mon, January 20,
+                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
+                    data-aos-duration="1500"><i class="fa-solid fa-calendar-days"></i> Mon, January 20,
                         2025</h6>
                 </div>
             </div>
 
             <div class="grid grid-cols-3 mt-10 gap-16">
-                <div class="col-span-2">
+                <div class="col-span-2" data-aos="fade-up"
+                data-aos-duration="1500">
                     <p class="text-redlue font-normal text-xl text-justify">Lorem ipsum dolor, sit amet consectetur
                         adipisicing elit. Eaque ex iusto optio quis, eligendi accusantium voluptas, iure sint consequatur
                         nihil harum sed nobis? Nam dolorum hic eum blanditiis minus, a asperiores, numquam deserunt
@@ -69,14 +73,32 @@
                         asperiores beatae deserunt consequatur molestiae aspernatur at quod blanditiis! Consectetur id
                         laudantium nulla voluptates nesciunt quo aliquid? Labore, tenetur nulla eligendi inventore eveniet
                         eos eum, ullam hic vitae temporibus voluptates ut? Delectus commodi recusandae velit sint? Illo?</p>
+                    <p class="text-redlue font-normal text-xl text-justify mt-3">Lorem ipsum dolor sit, amet consectetur
+                        adipisicing elit. Ut neque architecto voluptates mollitia? Quam animi temporibus repellat cupiditate
+                        dicta reiciendis, eum error sapiente, a eos quos soluta, qui neque fugit pariatur illum iusto veniam
+                        voluptatum unde? Unde aperiam amet reiciendis incidunt sit, officia ipsam est atque! Dignissimos
+                        nostrum est illum ducimus accusantium, reprehenderit, quo culpa architecto, officiis quos hic.
+                        Perferendis alias optio enim debitis vel esse temporibus voluptatibus. Quidem excepturi assumenda
+                        aliquid tempore debitis recusandae nulla magnam odio dolore iusto perspiciatis velit in, accusantium
+                        ipsum iure nemo adipisci maiores esse eaque, beatae harum! Debitis id facere illo modi accusamus
+                        minima deserunt? Quae odio quam magnam exercitationem est ipsa pariatur assumenda? Amet nobis iure
+                        in distinctio? Et, ratione esse quis nulla sit tempore veniam magnam accusamus ex a eveniet
+                        molestiae reiciendis recusandae quisquam dicta quia culpa numquam, porro cupiditate beatae rerum
+                        dignissimos voluptates mollitia. Excepturi alias consequuntur adipisci est cumque ullam temporibus
+                        corrupti quam accusamus aut consectetur suscipit quisquam, fugit voluptate doloremque ipsam qui
+                        asperiores beatae deserunt consequatur molestiae aspernatur at quod blanditiis! Consectetur id
+                        laudantium nulla voluptates nesciunt quo aliquid? Labore, tenetur nulla eligendi inventore eveniet
+                        eos eum, ullam hic vitae temporibus voluptates ut? Delectus commodi recusandae velit sint? Illo?</p>
                 </div>
                 <div>
                     <div>
-                        <h2 class="text-redlue text-4xl font-bold">Top Articles</h2>
+                        <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up"
+                        data-aos-duration="1500">Top Articles</h2>
                     </div>
 
                     <div class="mt-4">
-                        <div class="shadow-xl px-2 py-3 border-redlue bg-transparent">
+                        <div class="shadow-xl px-2 py-3 border-redlue bg-transparent" data-aos="fade-up"
+                        data-aos-duration="1500">
                             <div>
                                 <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
                             </div>
@@ -97,7 +119,8 @@
                     </div>
 
                     <div class="mt-4">
-                        <div class="shadow-xl px-2 py-3 border-redlue bg-transparent">
+                        <div class="shadow-xl px-2 py-3 border-redlue bg-transparent" data-aos="fade-up"
+                        data-aos-duration="1500">
                             <div>
                                 <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
                             </div>

@@ -20,6 +20,11 @@
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
                         style="height: 1px;"></span>
                 </a>
+                <a href="{{ route('article') }}" class="font-light relative overflow-hidden group">
+                    Article
+                    <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
+                        style="height: 1px;"></span>
+                </a>
                 <a href="#" class="font-light relative overflow-hidden group">
                     Vendors
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"

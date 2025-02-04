@@ -18,3 +18,7 @@
     opacity: 0.4;
     z-index: -1;
 }
+
+.border-redlue {
+    border: solid #3D0A05 2px;
+}

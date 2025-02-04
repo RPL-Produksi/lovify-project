@@ -16,7 +16,7 @@
     @stack('css')
 </head>
 
-<body>
+<body style="background-color: black">
     @yield('content')
 
     @stack('js')

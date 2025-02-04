@@ -20,8 +20,6 @@
                 </div>
             </div>
             
-            
-
              <!-- Logo -->
              <div class="flex-shrink-0">
                 <a href="#" class="text-3xl font-bold">Lovify</a>

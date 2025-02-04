@@ -1,47 +1,24 @@
 @extends('template.master')
-@section('title', 'Home')
-@section('content')
+@section('title', 'Login')
+@push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
-    <div class="login-section min-h-screen flex-col flex justify-center items-center md:px-0 px-7">
-        <div class="grid grid-cols-3">
-            <div class="column-a">
-
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endpush
+@section('content')
+    <div class="container-login">
+        <div class="box-image">
+            <img src="{{ asset('asset/image/bg-login.png') }}" alt="    ">
+        </div>
+        <div class="box-input-reg">
+            <div class="img-logo">
+                <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
             </div>
-            <div class="col-span-2">
-
-            </div>
+            <div class="box-form"></div>
         </div>
     </div>
-
-    <style>
-        .login-section {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .bg-rose2 {
-            background-color: #3D0A05;
-        }
-
-        .columm-a {
-            background-image: url('../asset/image/decoration_placeholder4.jpg');
-        }
-    </style>
+@endsection
+@push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-@endsection
-
-
-{{-- @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
+@endpush

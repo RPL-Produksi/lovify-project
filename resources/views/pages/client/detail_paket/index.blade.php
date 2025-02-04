@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Home')
+@section('title', 'Detail Paket')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/detail-packet.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">

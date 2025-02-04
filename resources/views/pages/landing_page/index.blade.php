@@ -191,6 +191,7 @@
                             </div>
                         </div>
                 </div>
+                </div>
                 <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
                     <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
                     <div class="text-box-plannings mt-3">
@@ -457,6 +458,11 @@
                         </div>
                     </div>
                 </div> 
+            </div>
+            <div class="flex justify-center items-center mt-7 -translate-y-32">
+                <a href=""
+                    class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
+                    data-aos="fade-up" data-aos-duration="1000">See More</a>
             </div>
         </div>
     </section>

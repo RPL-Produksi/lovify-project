@@ -8,10 +8,11 @@
                 <img id="navbar-logo" src="{{ asset('asset/image/LovifyWhite-NoBg.png') }}" alt="">
             </div>
             <!-- Menu Items -->
-            <div class="hidden md:flex space-x-12 md:pr-32">
+            <div class="hidden md:flex space-x-12">
                 <a href="{{ route('landing') }}" class="font-light relative overflow-hidden group">
                     Home
-                    <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
+                    <span class="absolute left-0 bottom-0 bg-white transition-all duration-300 group-hover:w-full
+                        {{ request()->routeIs('landing') ? 'w-full' : 'w-0' }}"
                         style="height: 1px;"></span>
                 </a>
                 <a href="#" class="font-light relative overflow-hidden group">
@@ -64,6 +65,7 @@
     const navbar = document.querySelector('.navbar');
     const menuButtonn = document.querySelector('.menu-button');
     const navbarLogo = document.getElementById('navbar-logo'); // Add this line
+    const spans = document.querySelectorAll('.group span'); // Ambil semua span garis bawah
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -71,11 +73,22 @@
             menuButtonn.classList.add('scrolled');
             // Change image source when scrolling down
             navbarLogo.src = "{{ asset('asset/image/Lovify-NoBg.png') }}"; // Update the image source
+
+            // Ubah warna span menjadi hitam saat scroll
+            spans.forEach(span => {
+                span.style.backgroundColor = '#3D0A05';
+            });
+
         } else {
             navbar.classList.remove('scrolled');
             menuButtonn.classList.remove('scrolled');
             // Revert back to the original image when scrolling back up
             navbarLogo.src = "{{ asset('asset/image/LovifyWhite-NoBg.png') }}"; // Revert the image source
+
+            // Ubah warna span kembali menjadi putih saat kembali ke atas
+            spans.forEach(span => {
+                span.style.backgroundColor = 'white';
+            });
         }
     });
 </script>

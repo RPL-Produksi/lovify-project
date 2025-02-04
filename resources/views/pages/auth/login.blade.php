@@ -15,7 +15,7 @@
                 <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
             </div>
             <div class="box-form">
-                <h1>Welcome Back!</h1>
+                <h1 class="font-bold">Welcome Back!</h1>
                 <form action="" method="POST">
                 <div class="box-input-lg">
                     <p>Email</p>

@@ -19,34 +19,6 @@ Route::prefix('auth')->group(function () {
         Route::get('/login', 'login')->name('login');
         Route::get('/register', 'register')->name('register');
     });
-    Route::group(['controller' => APIAuthController::class], function () {
-        Route::post('/register', 'register')->name('post.register');
-        Route::post('/login', 'login')->name('post.login');
-        Route::middleware('auth')->group(function () {
-            Route::post('/logout', 'logout')->name('logout');
-            Route::post('/admin', 'makeAdmin')->name('makeAdmin')->can('superadmin');
-        });
-    });
-});
-
-// admin route
-Route::prefix('admins')->group(function () {
-    Route::group(['middleware' => ['auth', 'can:admin'], 'prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
-        Route::post('/{id?}', 'storeCategory')->name('storeCategory');
-        Route::delete('/{id}', 'deleteCategory')->name('deleteCategory');
-    });
-    Route::group(['middleware' => ['auth', 'can:admin'], 'prefix' => 'packets', 'controller' => AdminPacketController::class], function () {
-        Route::post('/{id?}', 'storePacket')->name('storePacket');
-        Route::delete('/{id}', 'deletePacket')->name('deletePacket');
-    });
-});
-
-// mitra route
-Route::prefix('mitras')->group(function () {
-    Route::group(['middleware' => ['auth', 'can:mitra', 'can:verified'], 'prefix' => 'products', 'controller' => MitraProductController::class], function () {
-        Route::post('/{id?}', 'storeProduct')->name('storeProduct');
-        Route::delete('/{slug}', 'deleteProduct')->name('deleteProduct');
-    });
 });
 
 // client route

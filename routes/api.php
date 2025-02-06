@@ -24,6 +24,12 @@ Route::prefix('v1')->group(function () {
         Route::post('/login', 'login');
         Route::post('/logout', 'logout')->middleware('auth:sanctum');
     });
+    // Admin
+    Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+        Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
+            Route::post('/{id?}', 'storeCategory');
+        });
+    });
 });
 
 Route::fallback(function () {

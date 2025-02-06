@@ -7,13 +7,13 @@
 @endpush
 @section('content')
    <section class="login-section">
-        <div class="grid grid-cols-5">
-            <div class="col-span-2 col-a">
+        <div class="grid xl:grid-cols-5">
+            <div class="xl:col-span-2 col-a hidden md:block">
                 
             </div>
-            <div class="col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
-                <div class="px-48">
-                    <div class="flex justify-end">
+            <div class="xl:col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
+                <div class="xl:px-48 px-7">
+                    <div class="flex xl:justify-end">
                         <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
                     </div>
                     <div>

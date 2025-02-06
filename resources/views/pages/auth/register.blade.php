@@ -3,13 +3,13 @@
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 @endpush
 @section('content')
-   <section class="login-section">
-        <div class="grid grid-cols-5">
-            <div class="col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
-                <div class="px-48">
+   <section class="register-section">
+        <div class="grid xl:grid-cols-5">
+            <div class="xl:col-span-3 col-b shadow-2xl" style="background-color: #f7f0f0;">
+                <div class="xl:px-48 px-7 pb-16 xl:pb-0">
                     <div class="">
                         <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
                     </div>
@@ -19,16 +19,16 @@
                     <div class="mt-7">
                         <form action="" method="" enctype="multipart/form-data">
                             <div>
+                                <label for="" class="text-redlue text-xl font-medium">Full Name</label>
+                                <input type="text" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
+                            </div>    
+                            <div class="mt-5">
+                                <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
+                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
+                            </div>    
+                            <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Email</label>
-                                <input type="text" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
-                            </div>    
-                            <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
-                            </div>    
-                            <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password</label>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="col-span-2 col-a">
+            <div class="xl:col-span-2 col-a hidden xl:block">
                 
             </div>
         </div>

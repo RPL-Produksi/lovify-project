@@ -10,30 +10,30 @@
     @include('components.navbar_rose')
 
     <section class="about-us-section relative" style="background-color: #f7f0f0">
-        <div class="px-40 pt-24 pb-40">
+        <div class="xl:px-40 px-4 pt-24 pb-40">
             <div>
                 <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" data-aos="fade-up"
                     data-aos-duration="1500" class="w-full object-cover" style="height: 630px" alt="">
             </div>
             <div class="mt-7">
-                <h1 class="text-redlue font-bold text-5xl" data-aos="fade-up"
+                <h1 class="text-redlue font-bold xl:text-5xl text-2xl" data-aos="fade-up"
                 data-aos-duration="1500">New Wedding Trend : Intimate Outdoor Wedding <br>Theme</h1>
             </div>
 
-            <div class="flex gap-36 mt-8">
+            <div class="xl:flex xl:gap-36 mt-8">
                 <div>
                     <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
                     data-aos-duration="1500"><i class="fa-solid fa-user"></i> Admin</h6>
                 </div>
-                <div>
+                <div class="xl:mt-0 mt-3">
                     <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
                     data-aos-duration="1500"><i class="fa-solid fa-calendar-days"></i> Mon, January 20,
                         2025</h6>
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 mt-10 gap-16">
-                <div class="col-span-2" data-aos="fade-up"
+            <div class="grid md:grid-cols-3 mt-10 gap-16">
+                <div class="xl:col-span-2" data-aos="fade-up"
                 data-aos-duration="1500">
                     <p class="text-redlue font-normal text-xl text-justify">Lorem ipsum dolor, sit amet consectetur
                         adipisicing elit. Eaque ex iusto optio quis, eligendi accusantium voluptas, iure sint consequatur

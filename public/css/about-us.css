@@ -4,6 +4,12 @@
     overflow: hidden;
 }
 
+@media screen and (min-width: 1280px) {
+    .hero-image {
+        height: 630px !important;
+    }
+}
+
 .hero-bottom-about-us::before {
     content: "";
     position: absolute;

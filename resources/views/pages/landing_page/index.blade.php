@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     @include('components.navbar')
 
+
     <section class="hero-section relative">
         <div class="flex justify-center items-center" style="height: 100vh">
             <div>
@@ -72,14 +73,23 @@
     <section class="about-section pt-10 pb-20 md:px-10 xl:px-0" id="about-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <div class="gridtemcol" style="width: 100%">
-                <div class="text-a" style="width:100%;">
-                    <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">
-                        ABOUT US</h3>
-                    <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
-                        Realized Preparing Your <br>Big Day Isn’t Always
-                        Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
-                            <br>Making Your Big Day
-                            Unforgettable.</span></p>
+                <div class="text-a flex flex-col justify-between" style="width:100%;">
+                    <div>
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">
+                            ABOUT US</h3>
+                        <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
+                            Realized Preparing Your <br>Big Day Isn’t Always
+                            Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
+                                <br>Making Your Big Day
+                                Unforgettable.</span></p>
+                    </div>
+                    <div data-aos="fade-up"
+                    data-aos-duration="1500">
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal">
+                            <span class="font-bold">200+</span> Trusted Vendors</h3>
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal mt-2">
+                            <span class="font-bold">10+</span> Years Of Experience</h3>
+                    </div>
                 </div>
                 <div class="right md:mt-7 xl:mt-0" data-aos="fade-up" data-aos-duration="2000">
                     <div class="grid grid-cols-2 b gap-5 md:w-full " style="width:fit-content;">
@@ -130,6 +140,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
 
     <section class="plannings-section pt-10 pb-20 md:px-10 xl:px-0" id="plannings-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
@@ -200,7 +211,7 @@
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Basic</h3>
@@ -211,7 +222,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
@@ -222,7 +233,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
@@ -233,7 +244,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Platinum</h3>
@@ -244,7 +255,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Luxury</h3>
@@ -255,7 +266,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Venue</h3>
@@ -272,23 +283,24 @@
         </div>
     </section>
 
-    <section class="article-section xl:px-40 md:px-10 px-4 pt-10 pb-40" id="article-section" style="background-color: #f7f0f0">
-        <div data-aos="fade-up"
-        data-aos-duration="1000">
-            <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Articles
+    <section class="article-section xl:px-40 md:px-10 px-4 pt-10 pb-40" id="article-section"
+        style="background-color: #f7f0f0">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
+                Articles
             </h1>
-            <div class="grid grid-cols-3 gap-7 mt-7">
+            <div class="md:grid md:grid-cols-3 gap-7 mt-7 hidden">
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
             </div>
-            <div class="grid grid-cols-3 gap-7 -translate-y-32">
+            <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-7 md:-translate-y-32">
                 <div class="px-6">
                     <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
                         <div class="flex justify-between">
@@ -296,17 +308,19 @@
                                 <small class="text-redlue font-semibold">News</small>
                             </div>
                             <div>
-                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31 Desember 2024</small>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
                             </div>
                         </div>
                         <div>
-                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding Theme</h3>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
                         </div>
                         <div class="mt-9">
                             <a href="" class=" text-redlue font-semibold">READ MORE</a>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="px-6">
                     <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
                         <div class="flex justify-between">
@@ -314,17 +328,19 @@
                                 <small class="text-redlue font-semibold">News</small>
                             </div>
                             <div>
-                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31 Desember 2024</small>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
                             </div>
                         </div>
                         <div>
-                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding Theme</h3>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
                         </div>
                         <div class="mt-9">
                             <a href="" class=" text-redlue font-semibold">READ MORE</a>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="px-6">
                     <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
                         <div class="flex justify-between">
@@ -332,25 +348,32 @@
                                 <small class="text-redlue font-semibold">News</small>
                             </div>
                             <div>
-                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31 Desember 2024</small>
+                                <small class=" text-redlue font-semibold"><i class="fa-regular fa-calendar me-1"></i>31
+                                    Desember 2024</small>
                             </div>
                         </div>
                         <div>
-                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding Theme</h3>
+                            <h3 class=" text-redlue font-bold text-2xl mt-2">New Wedding Trend : Intimate Outdoor Wedding
+                                Theme</h3>
                         </div>
                         <div class="mt-9">
                             <a href="" class=" text-redlue font-semibold">READ MORE</a>
                         </div>
                     </div>
-                </div> 
+                </div>
+            </div>
+            <div class="flex justify-center items-center mt-7 md:-translate-y-32">
+                <a href=""
+                    class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
+                    data-aos="fade-up" data-aos-duration="1000">See More</a>
             </div>
         </div>
     </section>
 
     @include('components.footer')
 @endsection
-@section('js')
+@push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset(path: 'js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-@endsection
+@endpush

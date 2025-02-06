@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_packet', function (Blueprint $table) {
+        Schema::create('order_progress', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->enum('status', ['pending', 'in_progress', 'completed']);
             $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
-            $table->foreignUuid('packet_id')->constrained('packets')->cascadeOnDelete();
+            $table->foreignUuid('order_id')->constrained('orders')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_packet');
+        Schema::dropIfExists('order_progress');
     }
 };

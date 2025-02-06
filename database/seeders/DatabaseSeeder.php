@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Packet;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -41,8 +42,11 @@ class DatabaseSeeder extends Seeder
             'is_verified' => true
         ]);
 
-        Packet::create([
-            
-        ]);
+        $categories = ['venue', 'mua', 'catering'];
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category
+            ]);
+        }
     }
 }

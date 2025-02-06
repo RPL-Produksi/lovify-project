@@ -1,35 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-</head>
-<body>
-    <form action="{{ route('register') }}" method="post">
-        @csrf
-        <input type="text" name="fullname" placeholder="Fullname" value="{{ old('fullname') }}">
-        <input type="text" name="username" placeholder="Username" value="{{ old('username') }}">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="password_confirmation" placeholder="Confirm Password">
-        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
-        <input type="text" name="number_phone" placeholder="Number Phone" value="{{ old('number_phone') }}">
-        <select name="role">
-            <option value="client">Client</option>
-            <option value="mitra">Mitra</option>
-        </select>
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an Account? <a href="{{ route('login') }}">Login</a></p>
-    @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+@extends('template.master')
+@section('title', 'Login')
+@push('css')
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endpush
+@section('content')
+   <section class="register-section">
+        <div class="grid xl:grid-cols-5">
+            <div class="xl:col-span-3 col-b shadow-2xl" style="background-color: #f7f0f0;">
+                <div class="xl:px-48 px-7 pb-16 xl:pb-0">
+                    <div class="">
+                        <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                    </div>
+                    <div>
+                        <h1 class="text-redlue text-6xl font-bold">Welcome</h1>
+                    </div>
+                    <div class="mt-7">
+                        <form action="" method="" enctype="multipart/form-data">
+                            <div>
+                                <label for="" class="text-redlue text-xl font-medium">Full Name</label>
+                                <input type="text" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
+                            </div>    
+                            <div class="mt-5">
+                                <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
+                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
+                            </div>    
+                            <div class="mt-5">
+                                <label for="" class="text-redlue text-xl font-medium">Email</label>
+                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                            </div>    
+                            <div class="mt-5">
+                                <label for="" class="text-redlue text-xl font-medium">Password</label>
+                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                            </div>    
+                            <div class="mt-3 flex justify-between">
+                                <div>
+                                    <input type="checkbox">
+                                    <label for="" class="text-redlue font-medium">Remember me</label>
+                                </div>
+                                <div>
+                                    <a href="" class="text-redlue font-medium">Forgot Password</a>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full">
+                                <a href="" class="bg-rose block text-white text-center py-3 rounded-md">Sign In</a>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <p class="text-center text-redlue">Already Have an Account? <a href="{{ route('login') }}" class="font-bold underline">Sign In</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="xl:col-span-2 col-a hidden xl:block">
+                
+            </div>
         </div>
-    @endif
-</body>
-</html>
+   </section>
+@endsection
+@push('js')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+@endpush

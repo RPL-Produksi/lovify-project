@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd\v1;
+namespace App\Http\Controllers\Backend\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fullname' => ['required'],
-            'username' => ['required', 'min:3', 'unique:users,username'],
-            'password' => ['required', 'confirmed', 'min:6'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'number_phone' => ['required', 'unique:users,number_phone'],
-            'role' => ['required', 'in:client,mitra'],
+            'fullname' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
+            'password' => ['required', 'confirmed', 'string', 'min:8', 'regex:/^[a-zA-Z0-9\-_]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'number_phone' => ['nullable', 'string', 'max:15', 'unique:users,number_phone'],
+            'role' => ['nullable', 'string', 'in:client,mitra'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
-        
+
         if ($validator->fails()) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -31,61 +31,45 @@ class AuthController extends Controller
                     'message' => $validator->errors(),
                 ], 400);
             }
-            
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
+
+            return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $defaultAvatar = env('PROFILE_DEFAULT_IMAGE');
-        
-        $user = new User();
-        $user->fullname = $request->fullname;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->email = $request->email;
-        $user->number_phone = $request->number_phone;
-        $user->role = $request->role;
-        
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
         if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $avatarName = Str::uuid() . '.' . $avatar->getClientOriginalExtension();
-            $path = $avatar->storeAs('avatars/' . $user->username, $avatarName, 'public');
-            $user->avatar = $path;
+            $file = $request->file('avatar');
+            $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
+            $filePath = Storage::url($storedFile);
+            $data['avatar'] = $filePath;
         } else {
-            $user->avatar = null;
+            $data['avatar'] = null;
         }
 
-        $user->save();
+        $user = User::create($data);
 
         if ($request->wantsJson()) {
-            $response = [
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
                 'status' => 'success',
-                'message' => 'User registered successfully',
+                'message' => 'User Created Successfully',
                 'data' => [
-                    'token' => $user->createToken('auth_token')->plainTextToken,
-                    'user' => [
-                        'fullname' => $user->fullname,
-                        'username' => $user->username,
-                        'email' => $user->email,
-                        'number_phone' => $user->number_phone,
-                        'role' => $user->role,
-                        'avatar' => $user->avatar != null ? asset(Storage::url($user->avatar)) : asset(Storage::url($defaultAvatar)),
-                    ],
-                ],
-            ];
-
-            return response()->json($response, 201);
+                    'token' => $token,
+                    $user,
+                ]
+            ], 200);
         }
-        
+
         Auth::login($user);
-        return redirect()->route('home');
+        // return redirect()->route($user->role, '.home');
+        return true;
     }
 
     public function login(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'login' => ['required'],
-            'password' => ['required'],
+            'login' => 'required',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -95,130 +79,62 @@ class AuthController extends Controller
                     'message' => $validator->errors(),
                 ], 400);
             }
-
-            return redirect()->back()->withInput($request->only('login'))->withErrors($validator->errors()->first());
         }
 
-        $defaultAvatar = env('PROFILE_DEFAULT_IMAGE');
+        $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $admin = $request->has('admin') ? true : false;
 
-        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-        if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
+        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
             $user = Auth::user();
 
-            if (($user->role == 'admin' || $user->role == 'superadmin') && !$request->input('admin')) {
+            if ($user->role == 'admin' && !$admin) {
                 Auth::logout();
                 if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 'error',
-                        'message' => 'You are not authorized to access this route',
-                    ], 403);
+                        'message' => 'Unauthorized',
+                    ], 401);
                 }
-
-                return redirect()->back()->withInput($request->only('login'))->withErrors([
-                    'login' => 'You are not authorized to access this route',
-                ]);
             }
 
             if ($request->wantsJson()) {
-                $response = [
+                $token = $request->user()->createToken('auth_token')->plainTextToken;
+                return response()->json([
                     'status' => 'success',
-                    'message' => 'User login successfully',
+                    'message' => 'Logged In Successfully',
                     'data' => [
-                        'token' => $request->user()->createToken('auth_token')->plainTextToken,
-                        'user' => [
-                            'fullname' => $user->fullname,
-                            'username' => $user->username,
-                            'email' => $user->email,
-                            'number_phone' => $user->number_phone,
-                            'role' => $user->role,
-                            'avatar' => $user->avatar != null ? asset(Storage::url($user->avatar)) : asset(Storage::url($defaultAvatar)),
-                        ],
-                    ],
-                ];
-
-                return response()->json($response, 200);
+                        'token' => $token,
+                        $user,
+                    ]
+                ]);
             }
 
-            return redirect()->route('home');
+            // return redirect()->route($user->role, '.home');
+            return true;
         }
 
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Username/Email or password is incorrect',
-            ], 401);
+                'message' => 'Username or Password is incorrect'
+            ], 400);
         }
 
-        return redirect()->back()->withInput($request->all())->withErrors([
-            'login' => 'Username/Email or password is incorrect',
-        ]);
+        return redirect()->back()->withErrors(['error' => 'Username or Password is incorrect'])->withInput(['username']);
     }
 
     public function logout(Request $request)
     {
+        $request->user()->currentAccessToken()->delete();
+
         if ($request->wantsJson()) {
-            $request->user()->Tokens()->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Logout successful',
-            ], 200);
+                'message' => 'Logged Out Successfully',
+            ]);
         }
 
-        Auth::logout();
-        return redirect()->route('landing');
-    }
-
-    public function makeAdmin(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'fullname' => ['required', 'string'],
-            'username' => ['required', 'string', 'min:2', 'unique:users,username'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'number_phone' => ['nullable', 'string', 'unique:users,number_phone'],
-            'role' => ['required', 'string', 'in:admin,superadmin'],
-        ]);
-
-        if ($validator->fails()) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $validator->errors(),
-                ], 400);
-            }
-
-            return redirect()->back()->withInput($request->all())->withErrors($validator->errors()->first());
-        }
-
-        $user = new User();
-        $user->fullname = $request->fullname;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->email = $request->email;
-        $user->number_phone = $request->number_phone;
-        $user->role = $request->role;
-        $user->save();
-
-        if ($request->wantsJson()) {
-            $response = [
-                'status' => 'success',
-                'message' => 'User registered successfully',
-                'data' => [
-                    'user' => [
-                        'id' => $user->id,
-                        'fullname' => $user->fullname,
-                        'username' => $user->username,
-                        'email' => $user->email,
-                        'number_phone' => $user->number_phone,
-                        'role' => $user->role,
-                    ],
-                ],
-            ];
-
-            return response()->json($response, 201);
-        }
-
-        return True;
+        // return redirect()->route('login');
+        return true;
     }
 }

@@ -9,7 +9,6 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        // dd($request->all());
         $isAdmin = False;
         if ($request->has('admin')) {
             $isAdmin = True;

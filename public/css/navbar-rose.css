@@ -5,20 +5,21 @@
 }
 
 .navbar {
+    color: #3D0A05 !important;
     transition: 0.5s;
 }
 
+.text-redlue {
+    color: #3D0A05;
+}
+
 .navbar.scrolled {
-    background-color: white;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: #3D0A05;
     transition: 0.5s ease-in-out;
 }
 
-@media screen and (max-width: 765px) {
-    .navbar {
-        background-color: #fff !important;
-        color: #3D0A05;
-    }
+.bg-redlue {
+    background-color: #3D0A05;
 }

@@ -1,13 +1,9 @@
 <?php
 
-use App\Http\Controllers\BackEnd\v1\Admin\AdminCategoryController;
-use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
-use App\Http\Controllers\BackEnd\v1\AuthController as APIAuthController;
-use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
+use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\View\AuthController as ViewAuthController;
 use App\Http\Controllers\view\client\ClientAboutUsController;
 use App\Http\Controllers\View\Client\ClientArticleController;
-use App\Http\Controllers\View\Client\ClientDetailArticleController;
 use App\Http\Controllers\View\Client\ClientDetailPacketController;
 use App\Http\Controllers\View\Client\ClientHomeController;
 use App\Http\Controllers\View\LandingController;
@@ -18,6 +14,11 @@ Route::prefix('auth')->group(function () {
     Route::group(['controller' => ViewAuthController::class], function () {
         Route::get('/login', 'login')->name('login');
         Route::get('/register', 'register')->name('register');
+    });
+    Route::group(['controller' => BackendAuthController::class], function () {
+        Route::post('/register', 'register')->name('be.register');
+        Route::post('/login', 'login')->name('be.login');
+        Route::post('/logout', 'logout')->name('be.logout')->middleware('auth');
     });
 });
 

@@ -18,7 +18,7 @@ Route::prefix('auth')->group(function () {
     Route::group(['controller' => BackendAuthController::class], function () {
         Route::post('/register', 'register')->name('be.register');
         Route::post('/login', 'login')->name('be.login');
-        Route::post('/logout', 'logout')->name('be.logout');
+        Route::post('/logout', 'logout')->name('be.logout')->middleware('auth');
     });
 });
 

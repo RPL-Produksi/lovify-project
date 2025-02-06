@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         Route::post('/register', 'register');
         Route::post('/login', 'login');
-        Route::post('/logout', 'logout');
+        Route::post('/logout', 'logout')->middleware('auth:sanctum');
     });
 });
 

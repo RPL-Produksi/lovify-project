@@ -19,8 +19,6 @@
                     <a href="#" class="block px-4 py-2 hover:bg-gray-200">Package 3</a>
                 </div>
             </div>
-            
-            
 
              <!-- Logo -->
              <div class="flex-shrink-0">

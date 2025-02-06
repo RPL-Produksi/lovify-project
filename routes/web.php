@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\View\AuthController as ViewAuthController;
 use App\Http\Controllers\view\client\ClientAboutUsController;
@@ -19,6 +20,14 @@ Route::prefix('auth')->group(function () {
         Route::post('/register', 'register')->name('be.register');
         Route::post('/login', 'login')->name('be.login');
         Route::post('/logout', 'logout')->name('be.logout')->middleware('auth');
+    });
+});
+
+// Admin
+Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+    Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
+        Route::post('/{id?}', 'storeCategory')->name('be.category.store');
+        Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
     });
 });
 

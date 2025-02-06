@@ -16,4 +16,12 @@ class Authenticate extends MiddlewareAuthenticate
     {
         return $request->isJson() ? abort(response()->json(['message' => 'Unauthenticated'], 401)) : route('login');
     }
+
+    /**
+     * Handle an unauthenticated user.
+     */
+    protected function unauthenticated($request, array $guards)
+    {
+        abort(response()->json(['message' => 'Unauthenticated'], 401));
+    }
 }

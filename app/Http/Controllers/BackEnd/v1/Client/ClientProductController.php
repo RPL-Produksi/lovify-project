@@ -54,7 +54,7 @@ class ClientProductController extends Controller
 
     public function getProductByCategory(Category $category)
     {
-        dd($category);
+        // dd($category);
         $category = Category::find($category->id);
 
         if (!$category) {

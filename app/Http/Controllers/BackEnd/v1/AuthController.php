@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -38,9 +39,9 @@ class AuthController extends Controller
         $data['password'] = bcrypt($data['password']);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('avatars/' . $request->username, $fileName, 'public');
-            $data['avatar'] = $path;
+            $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
+            $filePath = Storage::url($storedFile);
+            $data['avatar'] = $filePath;
         } else {
             $data['avatar'] = null;
         }
@@ -53,7 +54,7 @@ class AuthController extends Controller
                 'status' => 'success',
                 'message' => 'User Created Successfully',
                 'data' => [
-                    'token' => $token, 
+                    'token' => $token,
                     $user,
                 ]
             ], 200);

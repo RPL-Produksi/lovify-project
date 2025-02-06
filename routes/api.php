@@ -37,7 +37,14 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'deleteCategory');
         });
     });
-    
+
+    Route::group(['prefix' => 'mitra', 'middleware' => 'auth:sanctum'], function () {
+        Route::group(['prefix' => 'product', 'controller' => MitraProductController::class], function () {
+            Route::post('/store/{id?}', 'store');
+            Route::delete('/{id}', 'delete');
+        });
+    });
+
     Route::prefix('client')->group(function () {
         Route::group(['prefix' => 'category', 'controller' => ClientCategoryController::class], function () {
             Route::get('/', 'getCategory');

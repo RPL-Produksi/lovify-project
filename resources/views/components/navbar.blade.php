@@ -54,10 +54,11 @@
     </div>
 
     <div class="md:hidden hidden" id="mobile-menu">
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Home</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700">About</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Services</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
+        <a href="{{ route('landing') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
+        <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
+        <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Vendors</a>
+        <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Packets</a>
+        <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
     </div>
 </nav>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

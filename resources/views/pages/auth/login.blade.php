@@ -14,7 +14,20 @@
             <div class="img-logo">
                 <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
             </div>
-            <div class="box-form"></div>
+            <div class="box-form">
+                <h1 class="font-bold">Welcome Back!</h1>
+                <form action="" method="POST">
+                <div class="box-input-lg">
+                    <p>Email</p>
+                    <input type="email" placeholder="Enter Your Email">
+                </div>
+                <div class="box-input-lg">
+                    <p>Password</p>
+                    <input type="password" placeholder="Enter Your Password">
+                </div>
+                @csrf
+                </form>
+            </div>
         </div>
     </div>
 @endsection

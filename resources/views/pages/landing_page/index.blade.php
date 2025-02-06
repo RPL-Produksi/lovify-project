@@ -73,14 +73,23 @@
     <section class="about-section pt-10 pb-20 md:px-10 xl:px-0" id="about-section" style="background-color: #f7f0f0">
         <div class="Prem10rl">
             <div class="gridtemcol" style="width: 100%">
-                <div class="text-a" style="width:100%;">
-                    <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">
-                        ABOUT US</h3>
-                    <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
-                        Realized Preparing Your <br>Big Day Isn’t Always
-                        Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
-                            <br>Making Your Big Day
-                            Unforgettable.</span></p>
+                <div class="text-a flex flex-col justify-between" style="width:100%;">
+                    <div>
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">
+                            ABOUT US</h3>
+                        <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
+                            Realized Preparing Your <br>Big Day Isn’t Always
+                            Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
+                                <br>Making Your Big Day
+                                Unforgettable.</span></p>
+                    </div>
+                    <div data-aos="fade-up"
+                    data-aos-duration="1500">
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal">
+                            <span class="font-bold">200+</span> Trusted Vendors</h3>
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal mt-2">
+                            <span class="font-bold">10+</span> Years Of Experience</h3>
+                    </div>
                 </div>
                 <div class="right md:mt-7 xl:mt-0" data-aos="fade-up" data-aos-duration="2000">
                     <div class="grid grid-cols-2 b gap-5 md:w-full " style="width:fit-content;">
@@ -138,65 +147,7 @@
             <h1 class="template-h1 font-semibold text-redlue" data-aos="fade-up" data-aos-duration="1000">Plannings</h1>
             <div class="box-grid-plannings mt-5">
                 <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
-                    <div class="text-box-plannings mt-3">
-                        <h2>Catring</h2>
-                        <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
-                        <div class="box-overflow" id="box-overflow">
-                            <div class="box-check">
-                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
-                                <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
-                                        value="1">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="box-input-pax" id="InNum1" style="display: none;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="padding-left: 10px">Jumlah/Pax</span>
-                                    <input type="number" inputmode="numeric"
-                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
-                                        class="input-check">
-                                </div>
-                            </div>
-                            <div class="box-check">
-                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
-                                <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
-                                        value="2">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="box-input-pax" id="InNum2" style="display: none;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="padding-left: 10px">Jumlah/Pax</span>
-                                    <input type="number" inputmode="numeric"
-                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
-                                        class="input-check">
-                                </div>
-                            </div>
-                            <div class="box-check">
-                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
-                                <label class="custom-checkbox">
-                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
-                                        value="3">
-                                    <span class="checkmark"></span>
-                            </div>
-                            <div class="box-input-pax" id="InNum3" style="display: none;">
-                                </label>
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="padding-left: 10px">Jumlah/Pax</span>
-                                    <input type="number" inputmode="numeric"
-                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
-                                        class="input-check">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="">
                     <div class="text-box-plannings mt-3">
                         <h2>Catring</h2>
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
@@ -253,7 +204,7 @@
                     </div>
                 </div>
                 <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt="">
                     <div class="text-box-plannings mt-3">
                         <h2>Catring</h2>
                         <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
@@ -261,7 +212,7 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
                                         value="1">
                                     <span class="checkmark"></span>
                                 </label>
@@ -277,7 +228,7 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
                                         value="2">
                                     <span class="checkmark"></span>
                                 </label>
@@ -293,7 +244,64 @@
                             <div class="box-check">
                                 <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
                                 <label class="custom-checkbox">
-                                    <input type="radio" name="group2" onclick="hideshow()" class="input-check"
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                        value="3">
+                                    <span class="checkmark"></span>
+                            </div>
+                            <div class="box-input-pax" id="InNum3" style="display: none;">
+                                </label>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric"
+                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
+                                        class="input-check">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-plannings shadow-2xl" data-aos="fade-up" data-aos-duration="1000">
+                    <img src="{{ asset('asset/image/catering_placeholder.jpg') }}" alt="">
+                    <div class="text-box-plannings mt-3">
+                        <h2>Catring</h2>
+                        <hr class="my-3" style="background-color:#3d0a0550; height: 4px;">
+                        <div class="box-overflow" id="box-overflow">
+                            <div class="box-check">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                        value="1">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="box-input-pax" id="InNum1" style="display: none;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric"
+                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
+                                        class="input-check">
+                                </div>
+                            </div>
+                            <div class="box-check">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
+                                        value="2">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="box-input-pax" id="InNum2" style="display: none;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="padding-left: 10px">Jumlah/Pax</span>
+                                    <input type="number" inputmode="numeric"
+                                        style="width: 50%; background-color:transparent; border: #3D0A05 2px solid; padding-left: 5px;"
+                                        class="input-check">
+                                </div>
+                            </div>
+                            <div class="box-check">
+                                <p>INI ADALAH CHECK BOX SANGAT BAGUS</p>
+                                <label class="custom-checkbox">
+                                    <input type="radio" name="group1" onclick="hideshow()" class="input-check"
                                         value="3">
                                     <span class="checkmark"></span>
                             </div>
@@ -310,6 +318,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="packets-section"
@@ -319,7 +328,7 @@
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Basic</h3>
@@ -330,7 +339,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
@@ -341,7 +350,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Silver</h3>
@@ -352,7 +361,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Platinum</h3>
@@ -363,7 +372,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Luxury</h3>
@@ -374,7 +383,7 @@
             </div>
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                 data-aos-duration="1000">
-                <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="w-full" style="height: 230px"
+                <img src="{{ asset('asset/image/wedding_placeholder2_bg.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
                     alt="">
                 <div class="mt-6 flex justify-between mb-3 items-center">
                     <h3 class=" text-rose-950 text-2xl font-bold">Venue</h3>
@@ -399,13 +408,13 @@
             </h1>
             <div class="md:grid md:grid-cols-3 gap-7 mt-7 hidden">
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
+                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="hover:opacity-50">
                 </div>
             </div>
             <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-7 md:-translate-y-32">

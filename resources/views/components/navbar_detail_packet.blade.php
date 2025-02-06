@@ -11,7 +11,7 @@
                     Other Package
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full" style="height: 1px;"></span>
                 </a>
-            
+
                 <!-- Dropdown Menu -->
                 <div class="absolute left-0 top-full mt-1 w-48 bg-white text-black rounded-md shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible">
                     <a href="#" class="block px-4 py-2 hover:bg-gray-200">Package 1</a>
@@ -19,10 +19,10 @@
                     <a href="#" class="block px-4 py-2 hover:bg-gray-200">Package 3</a>
                 </div>
             </div>
-            
+
              <!-- Logo -->
-             <div class="flex-shrink-0">
-                <a href="#" class="text-3xl font-bold">Lovify</a>
+             <div class="flex-shrink-0 md:pl-6">
+                <img src="{{ asset('asset/image/LovifyWhite-NoBg.png') }}" alt="" id="navbar-logo">
             </div>
 
             <div class="hidden md:flex space-x-6">
@@ -56,14 +56,31 @@
 
     const navbar = document.querySelector('.navbar');
     const menuButtonn = document.querySelector('.menu-button');
+    const navbarLogo = document.getElementById('navbar-logo'); // Add this line
+    const spans = document.querySelectorAll('.group span'); // Ambil semua span garis bawah
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
             menuButtonn.classList.add('scrolled');
+            // Change image source when scrolling down
+            navbarLogo.src = "{{ asset('asset/image/Lovify-NoBg.png') }}"; // Update the image source
+
+            // Ubah warna span menjadi hitam saat scroll
+            spans.forEach(span => {
+                span.style.backgroundColor = '#3D0A05';
+            });
+
         } else {
             navbar.classList.remove('scrolled');
             menuButtonn.classList.remove('scrolled');
+            // Revert back to the original image when scrolling back up
+            navbarLogo.src = "{{ asset('asset/image/LovifyWhite-NoBg.png') }}"; // Revert the image source
+
+            // Ubah warna span kembali menjadi putih saat kembali ke atas
+            spans.forEach(span => {
+                span.style.backgroundColor = 'white';
+            });
         }
     });
 </script>

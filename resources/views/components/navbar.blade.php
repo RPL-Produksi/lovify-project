@@ -1,11 +1,14 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-<nav class="navbar bg-transparent text-white fixed top-0 left-0 w-full z-10 md:py-3 text-nowrap text-center">
+<nav class="navbar bg-white md:bg-transparent text-white fixed top-0 left-0 w-full z-10 md:py-3 text-nowrap text-center">
     <div class="xl:px-40 px-2 md:px-10">
         <div class="flex items-center h-16 lg:p-0 p-2 justify-between">
             <!-- Logo -->
-            <div class="flex-shrink-0">
+            <div class="flex-shrink-0 md:grid" hidden>
                 <img id="navbar-logo" src="{{ asset('asset/image/LovifyWhite-NoBg.png') }}" alt="">
+            </div>
+            <div class="flex-shrink-0 md:hidden">
+                <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" id="navbar-logo" alt="">
             </div>
             <!-- Menu Items -->
             <div class="hidden md:flex space-x-12 md:pr-32">
@@ -37,7 +40,7 @@
             </div>
 
             <div class="md:hidden">
-                <button class="text-gray-300 hover:text-white focus:outline-none menu-button" id="menu-button">
+                <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>

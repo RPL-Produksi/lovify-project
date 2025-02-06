@@ -32,7 +32,7 @@
             </div>
 
             <div class="md:hidden">
-                <button class="text-gray-300 hover:text-white focus:outline-none menu-button" id="menu-button">
+                <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>

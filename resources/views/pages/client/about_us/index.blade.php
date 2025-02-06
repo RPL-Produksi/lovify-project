@@ -12,7 +12,7 @@
     <section class="about-us-section relative" style="background-color: #f7f0f0">
         <div class="px-40 py-24">
             <div>
-                <img src="{{ asset('asset/image/wedding_placeholder1.jpg') }}" class="w-full object-cover" style="height: 630px" alt="">
+                <img src="{{ asset('asset/image/wedding_placeholder1.jpg') }}" class="w-full object-cover hero-image" style="width: 100%" alt="">
             </div>
             <div class="px-80 mt-10">
                 <p class="text-redlue font-semibold text-xl text-center">“At Lovify, we believe every love story deserves to be celebrated in a way that is as unique and beautiful as the couple at its heart. What started as a passion for curating unforgettable moments has blossomed into a full-fledged wedding planning service, trusted by couples to bring their dream weddings to life.”</p>
@@ -30,8 +30,6 @@
         </div>
 
     </section>
-
-    @include('components.footer')
 @endsection
 @push('js')
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -397,7 +397,7 @@
             <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
                 Articles
             </h1>
-            <div class="grid grid-cols-3 gap-7 mt-7">
+            <div class="md:grid md:grid-cols-3 gap-7 mt-7 hidden">
                 <div class="card-article shadow-xl">
                     <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
                 </div>
@@ -408,7 +408,7 @@
                     <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
                 </div>
             </div>
-            <div class="grid grid-cols-3 gap-7 -translate-y-32">
+            <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-7 md:-translate-y-32">
                 <div class="px-6">
                     <div class="card-article-content px-6 py-9 shadow-xl" style="background-color: white">
                         <div class="flex justify-between">
@@ -470,7 +470,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center items-center mt-7 -translate-y-32">
+            <div class="flex justify-center items-center mt-7 md:-translate-y-32">
                 <a href=""
                     class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
                     data-aos="fade-up" data-aos-duration="1000">See More</a>

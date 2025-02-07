@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     @include('components.navbar')
 
-
     <section class="hero-section relative">
         <div class="flex justify-center items-center" style="height: 100vh">
             <div>

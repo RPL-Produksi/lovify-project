@@ -7,6 +7,7 @@ use App\Http\Controllers\view\client\ClientAboutUsController;
 use App\Http\Controllers\View\Client\ClientArticleController;
 use App\Http\Controllers\View\Client\ClientDetailPacketController;
 use App\Http\Controllers\View\Client\ClientHomeController;
+use App\Http\Controllers\View\Client\ClientProfileController;
 use App\Http\Controllers\View\LandingController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,9 @@ Route::get('/', [LandingController::class, 'landing'])->name('landing');
 Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');
 Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs');
+
+// middleware auth
+Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [ClientHomeController::class, 'home'])->name('home');
 });

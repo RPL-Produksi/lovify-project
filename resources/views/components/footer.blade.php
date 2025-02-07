@@ -58,7 +58,7 @@
                             <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
                         </div>
                     </div>
-                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 md:pl-16 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 xl:mt-20 md:mt-10 md:pl-16 2xl:pl-36 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 md:pl-16 hidden md:flex xl:hidden" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="mt-20 xl:mt-20 md:mt-10 2xl:pl-36 lg:pl-16 md:pl-9 hidden md:flex xl:hidden" data-aos="fade-up" data-aos-duration="1000">
                         <div>
                             <h6 class="text-white font-bold">CONTACT US</h6>
                             <ul class="mt-5">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="xl:pl-36 md:pl-16 xl:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
+                <div class="2xl:pl-36 md:pl-9 lg:pl-16 xl:pl-16 xl:pr-2 mt-20" data-aos="fade-up" data-aos-duration="1000">
                     <h6 class="text-white font-bold">SUBSCRIPTION</h6>
                     <form action="">
                         @csrf
@@ -94,7 +94,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="xl:mt-32 mt-10 xl:pl-36 md:pl-16 xl:flex justify-between" data-aos="fade-up" data-aos-duration="1000">
+                <div class="xl:mt-32 mt-10 2xl:pl-36 xl:pl-16 lg:pl-16 md:pl-9 xl:flex justify-between" data-aos="fade-up" data-aos-duration="1000">
                     <div class="flex xl:justify-end justify-center">
                         <a href="" class="text-white border border-white rounded-full p-4 text-2xl w-16 h-16 flex items-center justify-center">
                             <i class="fa-brands fa-square-facebook"></i>

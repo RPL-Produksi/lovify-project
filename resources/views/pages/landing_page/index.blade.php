@@ -145,9 +145,8 @@
         </div>
     </section>
 
-    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="packets-section"
-        style="background-color: #f7f0f0">
-        <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Plannings
+    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="packets-section" style="background-color: #f7f0f0">
+        <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Packets
         </h1>
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"

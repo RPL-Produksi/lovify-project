@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\View\AuthController as ViewAuthController;
 use App\Http\Controllers\view\client\ClientAboutUsController;
 use App\Http\Controllers\View\Client\ClientArticleController;
+use App\Http\Controllers\View\Client\ClientCartController;
 use App\Http\Controllers\View\Client\ClientDetailPacketController;
 use App\Http\Controllers\View\Client\ClientHomeController;
 use App\Http\Controllers\View\Client\ClientProfileController;
@@ -40,6 +41,7 @@ Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs
 
 // middleware auth
 Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
+Route::get('/cart', [ClientCartController::class, 'cart'])->name('cart');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [ClientHomeController::class, 'home'])->name('home');
 });

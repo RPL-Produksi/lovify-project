@@ -23,6 +23,7 @@ class AuthController extends Controller
             'role' => ['nullable', 'string', 'in:client,mitra'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
+        
 
         if ($validator->fails()) {
             if ($request->wantsJson()) {
@@ -61,8 +62,7 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
-        // return redirect()->route($user->role, '.home');
-        return true;
+        return redirect()->route($user->role, '.home');
     }
 
     public function login(Request $request)
@@ -109,8 +109,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            // return redirect()->route($user->role, '.home');
-            return true;
+            return redirect()->route($user->role, '.home');
         }
 
         if ($request->wantsJson()) {

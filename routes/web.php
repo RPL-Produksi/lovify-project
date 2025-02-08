@@ -43,5 +43,5 @@ Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs
 Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
 Route::get('/cart', [ClientCartController::class, 'cart'])->name('cart');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [ClientHomeController::class, 'home'])->name('home');
+    Route::get('/home', [ClientHomeController::class, 'home'])->name('client.home');
 });

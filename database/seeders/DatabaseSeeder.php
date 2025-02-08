@@ -7,6 +7,7 @@ use App\Models\Packet;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,11 +43,15 @@ class DatabaseSeeder extends Seeder
             'is_verified' => null
         ]);
 
-        $categories = ['venue', 'mua', 'catering'];
+        $categories = ['venue', 'mua', 'catering', 'photographer', 'organize', 'decoration'];
         foreach ($categories as $category) {
+            $path = 'categories/' . $category . '.jpg';
             Category::create([
-                'name' => $category
+                'name' => $category,
+                'image' => Storage::url($path),
             ]);
         }
+
+        
     }
 }

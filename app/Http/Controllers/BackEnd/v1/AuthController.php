@@ -81,10 +81,11 @@ class AuthController extends Controller
             }
         }
 
+        $remember = $request->has('remember') ? true : false;
         $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $admin = $request->has('admin') ? true : false;
 
-        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
+        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password], $remember)) {
             $user = Auth::user();
 
             if ($user->role == 'admin' && !$admin) {

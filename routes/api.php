@@ -8,7 +8,7 @@ use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientCategoryController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientProductController;
-
+use App\Http\Controllers\Backend\v1\ProductController;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/', function (Request $request) {
@@ -25,6 +25,7 @@ Route::prefix('v1')->group(function () {
     // Umum
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/categories/{id?}', [CategoryController::class, 'getCategory']);
+        Route::get('/products/{id?}', [ProductController::class, 'getProducts']);
     });
     // Admin
     Route::group(['prefix' => 'admins', 'middleware' => ['auth:sanctum', 'can:admin']], function () {
@@ -42,15 +43,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('client')->group(function () {
-        Route::group(['prefix' => 'category', 'controller' => ClientCategoryController::class], function () {
-            Route::get('/', 'getCategory');
-            Route::get('/{id}/products', 'getProductByCategory');
-        });
-
-        Route::group(['prefix' => 'product', 'controller' => ClientProductController::class], function () {
-            Route::get('/', 'getProduct');
-            Route::get('/{id}', 'getProduct');
-        });
     });
 });
 

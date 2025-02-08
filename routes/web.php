@@ -40,5 +40,5 @@ Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs
 
 // middleware auth
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
 });

@@ -2,13 +2,13 @@
 @section('title', 'Home')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
-<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-<link rel="stylesheet" href="{{ asset('css/master.css') }}">
-<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-<link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 @endpush
 
 @section('content')
@@ -24,8 +24,14 @@
                     style="font-weight: 400">Your Dream Wedding, Tailored to You
                 </h3>
                 <div class="flex justify-center mt-7">
-                    <a href="" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
-                        data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</a>
+                    @guest
+                    <a href="{{ route('login') }}" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
+                    data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</a>
+                    @endguest
+                    @auth
+                        <a href="#plannings-section" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
+                            data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</a>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -80,20 +86,23 @@
             <div class="gridtemcol" style="width: 100%">
                 <div class="text-a flex flex-col justify-between" style="width:100%;">
                     <div>
-                        <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up" data-aos-duration="1000">
+                        <h3 class=" text-3xl text-redlue font-bold md:font-normal " data-aos="fade-up"
+                            data-aos-duration="1000">
                             ABOUT US</h3>
                         <p class=" p-48-res text-redlue mt-5 leading-tight" data-aos="fade-up" data-aos-duration="1500">We
                             Realized Preparing Your <br>Big Day Isn’t Always
-                            Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized In
+                            Easy. At <span class="font-semibold">Lovify</span>, <span style="color: #9A7D7A;">We Specialized
+                                In
                                 <br>Making Your Big Day
                                 Unforgettable.</span></p>
                     </div>
-                    <div data-aos="fade-up"
-                    data-aos-duration="1500">
+                    <div data-aos="fade-up" data-aos-duration="1500">
                         <h3 class=" text-3xl text-redlue font-bold md:font-normal">
-                            <span class="font-bold">200+</span> Trusted Vendors</h3>
+                            <span class="font-bold">200+</span> Trusted Vendors
+                        </h3>
                         <h3 class=" text-3xl text-redlue font-bold md:font-normal mt-2">
-                            <span class="font-bold">10+</span> Years Of Experience</h3>
+                            <span class="font-bold">10+</span> Years Of Experience
+                        </h3>
                     </div>
                 </div>
                 <div class="right md:mt-7 xl:mt-0" data-aos="fade-up" data-aos-duration="2000">
@@ -110,9 +119,11 @@
                                 <div class="swiper-slide mt-3"><img
                                         src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""></div>
                                 <div class="swiper-slide mt-3"><img
-                                        src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt=""></div>
+                                        src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" alt="">
+                                </div>
                                 <div class="swiper-slide mt-3"><img
-                                        src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt=""></div>
+                                        src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
+                                </div>
                             </div>
                             <!-- If we need pagination -->
                         </div>
@@ -145,22 +156,24 @@
         </div>
     </section>
 
-    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="packets-section" style="background-color: #f7f0f0">
-        <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">Plannings
+    <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="plannings-section"
+        style="background-color: #f7f0f0">
+        <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
+            Plannings
         </h1>
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             @foreach ($category as $item)
-            <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
-                data-aos-duration="1000">
-                <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" class="w-full hover:opacity-50" style="height: 230px"
-                    alt="">
-                <div class="mt-6 flex justify-between mb-3 items-center">
-                    <h3 class=" text-rose-950 text-2xl font-bold">{{ $item->name }}</h3>
-                    <a href=""
-                        class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See
-                        More</a>
+                <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
+                    data-aos-duration="1000">
+                    <img src="{{ asset($item->image) }}" class="w-full hover:opacity-50"
+                        style="height: 230px; object-fit: cover;" alt="">
+                    <div class="mt-6 flex justify-between mb-3 items-center">
+                        <h3 class=" text-rose-950 text-2xl font-bold">{{ $item->name }}</h3>
+                        <a href=""
+                            class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See
+                            More</a>
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
         <div class="flex justify-center items-center mt-7">
@@ -178,13 +191,16 @@
             </h1>
             <div class="md:grid md:grid-cols-3 gap-7 mt-7 hidden">
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="" class="hover:opacity-50">
+                    <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt=""
+                        class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="hover:opacity-50">
+                    <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt=""
+                        class="hover:opacity-50">
                 </div>
                 <div class="card-article shadow-xl">
-                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="hover:opacity-50">
+                    <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt=""
+                        class="hover:opacity-50">
                 </div>
             </div>
             <div class="md:grid md:grid-cols-3 grid grid-cols-1 gap-7 md:-translate-y-32">

@@ -40,8 +40,8 @@
             </div>
 
             <div class="md:hidden">
-                <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
-                    <i class="fa-solid fa-bars"></i>
+                <button class="text-rose-950 focus:outline-none menu-button" id="menu-button">
+                    <i class="fa-solid fa-bars text-rose-950"></i>
                 </button>
             </div>
         </div>
@@ -54,8 +54,8 @@
         <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
     </div>
     @endguest
-    @auth
-        
+
+    @auth    
     @if ($user->role == 'client')
     <div class="xl:px-40 px-2 md:px-10">
         <div class="flex items-center h-16 lg:p-0 p-2 justify-between">
@@ -102,7 +102,7 @@
                     </a>
                 </div>
                 <div class="absolute left-16 top-full mt-6 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible transform -translate-x-1/2">
-                    <a href="#" class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i class="fa-solid fa-user mr-2"></i>Profile</a>
+                    <a href="{{ route('profile') }}" class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i class="fa-solid fa-user mr-2"></i>Profile</a>
                     <hr>
                     <form action="{{ route('be.logout') }}" method="POST">
                         @csrf
@@ -114,7 +114,7 @@
             
             <div class="md:hidden">
                 <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-bars" style="color: #3D0A05"></i>
                 </button>
             </div>
         </div>

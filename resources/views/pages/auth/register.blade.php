@@ -22,31 +22,31 @@
                             @csrf
                             <div>
                                 <label for="" class="text-redlue text-xl font-medium">Full Name</label>
-                                <input type="text" name="fullname" value="{{ old('fullname') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
+                                <input required type="text" name="fullname" value="{{ old('fullname') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
-                                <input type="number" name="phone_number" value="{{ old('phone_number') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
+                                <input required type="number" name="phone_number" value="{{ old('phone_number') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Email</label>
-                                <input type="email" name="email" value="{{ old('email') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                <input required type="email" name="email" value="{{ old('email') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Username</label>
-                                <input type="text" name="username" value="{{ old('username') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                <input required type="text" name="username" value="{{ old('username') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input type="password" name="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input required type="password" name="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password Confirmation</label>
-                                <input type="password" name="password_confirmation" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input required type="password" name="password_confirmation" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-5" hidden>
                                 <label for="" class="text-redlue text-xl font-medium"></label>
-                                <input type="text" name="role" value="client" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input required type="text" name="role" value="client" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-5 w-100">
                                 <button type="submit" class="bg-rose w-full text-white text-center py-3 rounded-md">Sign In</button>

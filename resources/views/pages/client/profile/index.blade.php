@@ -26,18 +26,23 @@
             <div class="mt-10">
                 <form action="">
                     <div class="">
+                        <label for="" class="font-medium text-2xl form-label text-rose-950">Full Name</label>
+                        <input type="text" placeholder="Enter your username" value="{{ $user->fullname }}"
+                            class="w-full mt-1 border text-rose-950 border-rose-950 bg-transparent placeholder-rose-950 py-3 px-3 focus:outline-none rounded-lg">
+                    </div>
+                    <div class="mt-5">
                         <label for="" class="font-medium text-2xl form-label text-rose-950">Username</label>
-                        <input type="text" placeholder="Enter your username"
+                        <input type="text" placeholder="Enter your username" value="{{ $user->username }}"
                             class="w-full mt-1 border text-rose-950 border-rose-950 bg-transparent placeholder-rose-950 py-3 px-3 focus:outline-none rounded-lg">
                     </div>
                     <div class="mt-5">
                         <label for="" class="font-medium text-2xl form-label text-rose-950">Email</label>
-                        <input type="text" placeholder="Enter your email"
+                        <input type="text" placeholder="Enter your email" value="{{ $user->email }}"
                             class="w-full mt-1 border text-rose-950 border-rose-950 bg-transparent placeholder-rose-950 py-3 px-3 focus:outline-none rounded-lg">
                     </div>
                     <div class="mt-5">
                         <label for="" class="font-medium text-2xl form-label text-rose-950">Phone Number</label>
-                        <input type="text" placeholder="Enter your phone number"
+                        <input type="text" placeholder="Enter your phone number" value="{{ $user->phone_number }}"
                             class="w-full mt-1 border text-rose-950 border-rose-950 bg-transparent placeholder-rose-950 py-3 px-3 focus:outline-none rounded-lg">
                     </div>
                 </form>

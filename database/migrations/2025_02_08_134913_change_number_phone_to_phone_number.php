@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('is_verified')->nullable()->default(null)->after('role');
+            $table->dropColumn('number_phone');
+            $table->string('phone_number')->unique();
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_verified');
+            $table->dropColumn('phone_number');
+            $table->string('number_phone')->nullable();
         });
     }
 };

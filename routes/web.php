@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
-use App\Http\Controllers\View\AuthController as ViewAuthController;
-use App\Http\Controllers\view\client\ClientAboutUsController;
-use App\Http\Controllers\View\Client\ClientArticleController;
-use App\Http\Controllers\View\Client\ClientDetailPacketController;
-use App\Http\Controllers\View\Client\ClientHomeController;
-use App\Http\Controllers\View\Client\ClientProfileController;
-use App\Http\Controllers\View\LandingController;
+use App\Http\Controllers\Views\AuthController as ViewAuthController;
+use App\Http\Controllers\views\Clients\ClientAboutUsController;
+use App\Http\Controllers\Views\Clients\ClientArticleController;
+use App\Http\Controllers\Views\Clients\ClientDetailPacketController;
+use App\Http\Controllers\Views\Clients\ClientHomeController;
+use App\Http\Controllers\Views\Clients\ClientProfileController;
+use App\Http\Controllers\Views\LandingController;
 use Illuminate\Support\Facades\Route;
 
 // auth route

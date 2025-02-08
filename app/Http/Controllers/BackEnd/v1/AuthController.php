@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
+    {   
         $validator = Validator::make($request->all(), [
             'fullname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'password' => ['required', 'confirmed', 'string', 'min:8', 'regex:/^[a-zA-Z0-9\-_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'number_phone' => ['nullable', 'string', 'max:15', 'unique:users,number_phone'],
-            'role' => ['nullable', 'string', 'in:client,mitra'],
+            'phone_number' => ['required', 'string', 'max:15', 'unique:users,phone_number'],
+            'role' => ['required', 'string', 'in:client,mitra'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
@@ -37,6 +37,7 @@ class AuthController extends Controller
 
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
+        $data['is_verified'] = $request->role == 'mitra' ? 0 : null;
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
@@ -50,13 +51,12 @@ class AuthController extends Controller
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
+            $response = $user;
+            $response['token'] = $token;
             return response()->json([
                 'status' => 'success',
                 'message' => 'User Created Successfully',
-                'data' => [
-                    'token' => $token,
-                    $user,
-                ]
+                'data' => $response,
             ], 200);
         }
 
@@ -99,13 +99,12 @@ class AuthController extends Controller
 
             if ($request->wantsJson()) {
                 $token = $request->user()->createToken('auth_token')->plainTextToken;
+                $response = $user;
+                $response['token'] = $token;
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Logged In Successfully',
-                    'data' => [
-                        'token' => $token,
-                        $user,
-                    ]
+                    'data' => $response
                 ]);
             }
 

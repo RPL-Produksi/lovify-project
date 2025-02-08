@@ -1,13 +1,18 @@
 @extends('template.master')
 @section('title', 'Home')
-@section('content')
-    <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    @include('components.navbar')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('css/master.css') }}">
+<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+@endpush
+
+@section('content')
+    @include('components.navbar')
 
     <section class="hero-section relative">
         <div class="flex justify-center items-center" style="height: 100vh">

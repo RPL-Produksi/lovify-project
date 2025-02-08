@@ -52,23 +52,20 @@ class ClientProductController extends Controller
         ], 200);
     }
 
-    public function getProductByCategory(Category $category)
+    public function detailProduct($id)
     {
-        // dd($category);
-        $category = Category::find($category->id);
+        $product = Product::find($id);
 
-        if (!$category) {
+        if (!$product) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Category Not Found',
+                'message' => 'Product Not Found',
             ], 404);
         }
 
-        $products = $category->products;
         return response()->json([
             'status' => 'success',
-            'category' => $category->name,
-            'data' => $products,
+            'data' => $product,
         ], 200);
     }
 }

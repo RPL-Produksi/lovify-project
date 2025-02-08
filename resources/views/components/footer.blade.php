@@ -110,7 +110,7 @@
                           </a>
                     </div>
                     <div class="flex items-center xl:mt-0 mt-10 justify-center xl:justify-end">
-                        <small class="text-gray-400">@2024 - Copyright</small>
+                        <small class="text-gray-400">@ {{ now()->year }} - Copyright</small>
                     </div>
                 </div>
             </div>

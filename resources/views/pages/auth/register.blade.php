@@ -34,11 +34,15 @@
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
-                                <input type="number" name="number_phone" value="{{ old('number_phone') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
+                                <input type="number" name="phone_number" value="{{ old('phone_number') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Email</label>
                                 <input type="email" name="email" value="{{ old('email') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                            </div>    
+                            <div class="mt-5">
+                                <label for="" class="text-redlue text-xl font-medium">Username</label>
+                                <input type="text" name="username" value="{{ old('username') }}" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password</label>
@@ -63,6 +67,11 @@
                             </div>
                             <div class="mt-3 w-100">
                                 <button type="submit" class="bg-rose w-full text-white text-center py-3 rounded-md">Sign In</button>
+                            </div>
+                            <div>
+                                @if ($errors->any())
+                                    <p>{{ $errors->first() }}</p>
+                                @endif
                             </div>
                         </form>
                         <div class="mt-3">

@@ -23,7 +23,6 @@ class AuthController extends Controller
             'role' => ['required', 'string', 'in:client,mitra'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
-        
 
         if ($validator->fails()) {
             if ($request->wantsJson()) {
@@ -62,8 +61,8 @@ class AuthController extends Controller
         }
 
         Auth::login($user);
-        dd('halloo');
-        // return redirect()->route($user->role, '.home');
+        $route = $user->role . '.home';
+        return redirect()->route($route);
     }
 
     public function login(Request $request)
@@ -110,7 +109,8 @@ class AuthController extends Controller
                 ]);
             }
 
-            return redirect()->route($user->role, '.home');
+            $route = $user->role . '.home';
+            return redirect()->route($route);
         }
 
         if ($request->wantsJson()) {
@@ -125,16 +125,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-
         if ($request->wantsJson()) {
+            $request->user()->currentAccessToken()->delete();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Logged Out Successfully',
             ]);
         }
 
-        // return redirect()->route('login');
-        return true;
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

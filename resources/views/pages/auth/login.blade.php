@@ -20,14 +20,15 @@
                         <h1 class="text-redlue text-6xl font-bold">Welcome Back !</h1>
                     </div>
                     <div class="mt-16">
-                        <form action="" method="" enctype="multipart/form-data">
+                        <form action="{{ route('be.login') }}" method="" enctype="multipart/form-data">
+                            @csrf
                             <div>
-                                <label for="" class="text-redlue text-xl font-medium">Email</label>
-                                <input type="text" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                <label for="" class="text-redlue text-xl font-medium">Username/email</label>
+                                <input type="text" name="login" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input type="password" name="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-3 flex justify-between">
                                 <div>
@@ -39,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="mt-3 w-full">
-                                <a href="" class="bg-rose block text-white text-center py-3 rounded-md">Sign In</a>
+                                <button type="submit" class="bg-rose block text-white text-center py-3 rounded-md">Sign In</button>
                             </div>
                         </form>
                         <div class="mt-3">

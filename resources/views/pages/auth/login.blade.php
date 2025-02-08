@@ -14,13 +14,15 @@
             <div class="xl:col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
                 <div class="xl:px-48 px-7">
                     <div class="flex xl:justify-end">
-                        <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        <a href="{{ route('client.home') }}">
+                            <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        </a>
                     </div>
                     <div>
                         <h1 class="text-redlue text-6xl font-bold">Welcome Back !</h1>
                     </div>
                     <div class="mt-16">
-                        <form action="{{ route('be.login') }}" method="" enctype="multipart/form-data">
+                        <form action="{{ route('be.login') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div>
                                 <label for="" class="text-redlue text-xl font-medium">Username/email</label>
@@ -32,15 +34,15 @@
                             </div>    
                             <div class="mt-3 flex justify-between">
                                 <div>
-                                    <input type="checkbox">
+                                    <input name="remember" type="checkbox">
                                     <label for="" class="text-redlue font-medium">Remember me</label>
                                 </div>
                                 <div>
                                     <a href="" class="text-redlue font-medium">Forgot Password</a>
                                 </div>
                             </div>
-                            <div class="mt-3 w-full">
-                                <button type="submit" class="bg-rose block text-white text-center py-3 rounded-md">Sign In</button>
+                            <div class="mt-3 w-100">
+                                <button type="submit" class="bg-rose block text-white text-center py-3 w-full rounded-md">Sign In</button>
                             </div>
                         </form>
                         <div class="mt-3">

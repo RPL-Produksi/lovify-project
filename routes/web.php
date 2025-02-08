@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
 });
 
 // client route
-Route::get('/', [LandingController::class, 'landing'])->name('landing');
+Route::get('/', [LandingController::class, 'landing'])->name('client.home');
 Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');
 Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs');
@@ -42,5 +42,5 @@ Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs
 Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
 // Route::get('/cart', [ClientCartController::class, 'cart'])->name('cart');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [ClientHomeController::class, 'home'])->name('client.home');
+    // Route::get('/home', [ClientHomeController::class, 'home'])->name('client.home');
 });

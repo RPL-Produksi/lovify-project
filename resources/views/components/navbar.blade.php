@@ -10,10 +10,10 @@
             </div>
             <!-- Menu Items -->
             <div class="hidden md:flex space-x-12">
-                <a href="{{ route('landing') }}" class="font-light relative overflow-hidden group">
+                <a href="{{ route('client.home') }}" class="font-light relative overflow-hidden group">
                     Home
                     <span class="absolute left-0 bottom-0 bg-white transition-all duration-300 group-hover:w-full
-                        {{ request()->routeIs('landing') ? 'w-full' : 'w-0' }}"
+                        {{ request()->routeIs('client.home') ? 'w-full' : 'w-0' }}"
                         style="height: 1px;"></span>
                 </a>
                 <a href="{{ route('article') }}" class="font-light relative overflow-hidden group">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="md:hidden hidden" id="mobile-menu">
-        <a href="{{ route('landing') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
+        <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
         <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
         <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Vendors</a>
         <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>

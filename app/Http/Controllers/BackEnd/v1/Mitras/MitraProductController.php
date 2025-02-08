@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd\v1\Mitra;
+namespace App\Http\Controllers\Backend\v1\Mitras;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;

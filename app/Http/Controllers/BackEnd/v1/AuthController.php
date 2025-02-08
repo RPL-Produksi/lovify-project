@@ -51,8 +51,10 @@ class AuthController extends Controller
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
+            $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
             $response = $user;
             $response['token'] = $token;
+            $response['avatar'] = Storage::url($path);
             return response()->json([
                 'status' => 'success',
                 'message' => 'User Created Successfully',
@@ -100,8 +102,10 @@ class AuthController extends Controller
 
             if ($request->wantsJson()) {
                 $token = $request->user()->createToken('auth_token')->plainTextToken;
+                $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
                 $response = $user;
                 $response['token'] = $token;
+                $response['avatar'] = Storage::url($path);
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Logged In Successfully',

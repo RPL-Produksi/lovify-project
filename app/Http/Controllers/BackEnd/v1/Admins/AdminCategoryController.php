@@ -20,6 +20,7 @@ class AdminCategoryController extends Controller
         }
 
         $data = $request->all();
+        $data['name'] = strtolower($data['name']);
         $category = Category::updateOrCreate(['id' => $id], $data);
 
         if ($request->wantsJson()) {

@@ -9,24 +9,12 @@ class Product extends Model
 {
     use HasUuids;
 
-    // $table->uuid('id')->primary();
-    // $table->foreignUuid('mitra_id')->constrained('users')->cascadeOnDelete();
-    // $table->string('name');
-    // $table->text('description');
-    // $table->integer('price');
-    // $table->string('cover');
-    // $table->enum('status', ['draft', 'active', 'inactive'])->default('draft');
-    // $table->uuid('id')->primary();
-    // $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
-    // $table->string('image_path');
-    // $table->timestamps();
     protected $fillable = [
         'category_id',
         'slug',
         'name',
         'description',
         'price',
-        'stock',
         'mitra_id',
         'cover',
         'status',
@@ -34,7 +22,7 @@ class Product extends Model
 
     protected $with = [
         'attachments',
-        'user',
+        'category'
     ];
 
     protected $hidden = [

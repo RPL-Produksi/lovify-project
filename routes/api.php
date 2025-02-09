@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
     // Umum
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/categories/{id?}', [CategoryController::class, 'getCategory']);
-        Route::get('/products/{id?}', [ProductController::class, 'getProducts']);
+        Route::get('/products/{slug?}', [ProductController::class, 'getProducts']);
     });
     // Admin
     Route::group(['prefix' => 'admins', 'middleware' => ['auth:sanctum', 'can:admin']], function () {
@@ -34,15 +34,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'deleteCategory');
         });
     });
-
-    Route::group(['prefix' => 'mitra', 'middleware' => 'auth:sanctum'], function () {
-        Route::group(['prefix' => 'product', 'controller' => MitraProductController::class], function () {
-            Route::post('/store/{id?}', 'store');
-            Route::delete('/{id}', 'delete');
+    // Mitra
+    Route::group(['prefix' => 'mitras', 'middleware' => ['auth:sanctum', 'can:mitra']], function () {
+        Route::group(['prefix' => 'products', 'controller' => MitraProductController::class], function () {
+            Route::post('/{id?}', 'storeProduct');
+            Route::delete('/{id}', 'deleteProduct');
         });
     });
 
-    Route::prefix('client')->group(function () {
+    Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
     });
 });
 

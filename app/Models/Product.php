@@ -22,18 +22,14 @@ class Product extends Model
 
     protected $with = [
         'attachments',
-        'category'
+        'category',
+        'vendor'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'mitra_id');
-    }
 
     public function category()
     {
@@ -43,5 +39,10 @@ class Product extends Model
     public function attachments()
     {
         return $this->hasMany(ProductAttachment::class);
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 }

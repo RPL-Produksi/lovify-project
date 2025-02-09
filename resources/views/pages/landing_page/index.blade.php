@@ -48,20 +48,12 @@
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-redlue" data-aos="fade-up"
                 data-aos-duration="1000">Our Services</h1>
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 mt-14 gap-5 justify-center items-center">
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 mt-14 gap-5 justify-center items-center">
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1000">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Plannings</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">With careful planning, your wedding is
                         set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
                     <a href="#plannings-section" class="text-redlue">See Plannings <i
-                            class="fa-sharp fa-light fa-arrow-right"></i></a>
-                </div>
-                <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1500">
-                    <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Packets</h1>
-                    <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Wedding packages are the perfect
-                        solution for couples who want to celebrate their love without the stress of managing...
-                    </p>
-                    <a href="#packets-section" class="text-redlue">See Packets <i
                             class="fa-sharp fa-light fa-arrow-right"></i></a>
                 </div>
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2000">

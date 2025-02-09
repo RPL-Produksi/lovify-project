@@ -12,7 +12,7 @@
             data-aos-duration="1500">
             <div class="flex items-center gap-5">
                 <div>
-                    <img src="{{ asset('asset/image/matching pfp (2).jpg') }}" class="rounded-full w-40 mr-3"
+                    <img src="{{ $user->avatar }}" class="rounded-full w-40 mr-3"
                         alt="">
                 </div>
                 <div>

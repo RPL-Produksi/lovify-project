@@ -44,6 +44,11 @@
                             <div class="mt-3 w-100">
                                 <button type="submit" class="bg-rose block text-white text-center py-3 w-full rounded-md">Sign In</button>
                             </div>
+                            <div>
+                                @if ($errors->any())
+                                    <p class="text-red-600 font-bold mt-3">{{ $errors->first() }}</p>
+                                @endif
+                            </div>
                         </form>
                         <div class="mt-3">
                             <p class="text-center text-redlue">Don't Have an Account? <a href="{{ route('register') }}" class="font-bold underline">Sign Up</a></p>

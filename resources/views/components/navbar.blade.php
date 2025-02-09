@@ -98,7 +98,7 @@
                     </div>
                     
                     <a class="relative overflow-hidden group inline-block">
-                        <img src="{{ asset('asset/image/matching pfp (2).jpg') }}" class="rounded-full w-14" alt=""> 
+                        <img src="{{ $user->avatar }}" class="rounded-full w-14" alt=""> 
                     </a>
                 </div>
                 <div class="absolute left-16 top-full mt-6 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible transform -translate-x-1/2">

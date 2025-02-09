@@ -169,7 +169,7 @@
                         style="height: 230px; object-fit: cover;" alt="">
                     <div class="mt-6 flex justify-between mb-3 items-center">
                         <h3 class=" text-rose-950 text-2xl font-bold">{{ $item->name }}</h3>
-                        <a href=""
+                        <a href="{{ route('vendors', $item->id) }}"
                             class="py-3 px-4 text-white rounded-lg shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100">See
                             More</a>
                     </div>

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'fullname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],

@@ -1,18 +1,14 @@
 <?php
 
-use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
-use App\Http\Controllers\BackEnd\v1\Admin\AdminPacketController;
-use App\Http\Controllers\BackEnd\v1\AuthController;
-use App\Http\Controllers\Backend\v1\CategoryController;
-use App\Http\Controllers\BackEnd\v1\Client\ClientCategoryController;
-use App\Http\Controllers\Backend\v1\Client\ClientPlanningController;
-use App\Http\Controllers\BackEnd\v1\Client\ClientProductController;
-use App\Http\Controllers\BackEnd\v1\Mitra\MitraProductController;
-use App\Http\Controllers\Backend\v1\PacketController;
-use App\Http\Controllers\Backend\v1\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BackEnd\v1\AuthController;
+use App\Http\Controllers\Backend\v1\CategoryController;
+use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientCategoryController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientProductController;
+use App\Http\Controllers\Backend\v1\ProductController;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/', function (Request $request) {
@@ -29,32 +25,24 @@ Route::prefix('v1')->group(function () {
     // Umum
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/categories/{id?}', [CategoryController::class, 'getCategory']);
+        Route::get('/products/{slug?}', [ProductController::class, 'getProducts']);
     });
     // Admin
-    Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+    Route::group(['prefix' => 'admins', 'middleware' => ['auth:sanctum', 'can:admin']], function () {
         Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
             Route::post('/{id?}', 'storeCategory');
             Route::delete('/{id}', 'deleteCategory');
         });
     });
-
-    Route::group(['prefix' => 'mitra', 'middleware' => 'auth:sanctum'], function () {
-        Route::group(['prefix' => 'product', 'controller' => MitraProductController::class], function () {
-            Route::post('/store/{id?}', 'store');
-            Route::delete('/{id}', 'delete');
+    // Mitra
+    Route::group(['prefix' => 'mitras', 'middleware' => ['auth:sanctum', 'can:mitra']], function () {
+        Route::group(['prefix' => 'products', 'controller' => MitraProductController::class], function () {
+            Route::post('/{id?}', 'storeProduct');
+            Route::delete('/{id}', 'deleteProduct');
         });
     });
 
-    Route::prefix('client')->group(function () {
-        Route::group(['prefix' => 'category', 'controller' => ClientCategoryController::class], function () {
-            Route::get('/', 'getCategory');
-            Route::get('/{id}/products', 'getProductByCategory');
-        });
-
-        Route::group(['prefix' => 'product', 'controller' => ClientProductController::class], function () {
-            Route::get('/', 'getProduct');
-            Route::get('/{id}', 'getProduct');
-        });
+    Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
     });
 });
 

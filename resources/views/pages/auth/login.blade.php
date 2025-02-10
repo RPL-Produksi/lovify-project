@@ -14,32 +14,40 @@
             <div class="xl:col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
                 <div class="xl:px-48 px-7">
                     <div class="flex xl:justify-end">
-                        <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        <a href="{{ route('client.home') }}">
+                            <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        </a>
                     </div>
                     <div>
                         <h1 class="text-redlue text-6xl font-bold">Welcome Back !</h1>
                     </div>
                     <div class="mt-16">
-                        <form action="" method="" enctype="multipart/form-data">
+                        <form action="{{ route('be.login') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div>
-                                <label for="" class="text-redlue text-xl font-medium">Email</label>
-                                <input type="text" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                <label for="" class="text-redlue text-xl font-medium">Username/email</label>
+                                <input type="text" name="login" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input type="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
+                                <input type="password" name="password" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-3 flex justify-between">
                                 <div>
-                                    <input type="checkbox">
+                                    <input name="remember" type="checkbox">
                                     <label for="" class="text-redlue font-medium">Remember me</label>
                                 </div>
                                 <div>
                                     <a href="" class="text-redlue font-medium">Forgot Password</a>
                                 </div>
                             </div>
-                            <div class="mt-3 w-full">
-                                <a href="" class="bg-rose block text-white text-center py-3 rounded-md">Sign In</a>
+                            <div class="mt-3 w-100">
+                                <button type="submit" class="bg-rose block text-white text-center py-3 w-full rounded-md">Sign In</button>
+                            </div>
+                            <div>
+                                @if ($errors->any())
+                                    <p class="text-red-600 font-bold mt-3">{{ $errors->first() }}</p>
+                                @endif
                             </div>
                         </form>
                         <div class="mt-3">

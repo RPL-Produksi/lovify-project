@@ -9,6 +9,10 @@ class ProductAttachment extends Model
 {
     use HasUuids;
 
+    protected $fillable = [
+        'image_path',
+    ];
+
     protected $hidden = [
         'created_at',
         'updated_at',

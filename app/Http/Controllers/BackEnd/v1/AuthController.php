@@ -19,8 +19,8 @@ class AuthController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'password' => ['required', 'confirmed', 'string', 'min:8', 'regex:/^[a-zA-Z0-9\-_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'number_phone' => ['nullable', 'string', 'max:15', 'unique:users,number_phone'],
-            'role' => ['nullable', 'string', 'in:client,mitra'],
+            'phone_number' => ['required', 'string', 'max:15', 'unique:users,phone_number'],
+            'role' => ['required', 'string', 'in:client,mitra'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
@@ -37,6 +37,7 @@ class AuthController extends Controller
 
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
+        $data['is_verified'] = $request->role == 'mitra' ? 0 : null;
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
@@ -50,19 +51,20 @@ class AuthController extends Controller
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
+            $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
+            $response = $user;
+            $response['token'] = $token;
+            $response['avatar'] = Storage::url($path);
             return response()->json([
                 'status' => 'success',
                 'message' => 'User Created Successfully',
-                'data' => [
-                    'token' => $token,
-                    $user,
-                ]
+                'data' => $response,
             ], 200);
         }
 
         Auth::login($user);
-        // return redirect()->route($user->role, '.home');
-        return true;
+        $route = $user->role . '.home';
+        return redirect()->route($route);
     }
 
     public function login(Request $request)
@@ -81,10 +83,11 @@ class AuthController extends Controller
             }
         }
 
+        $remember = $request->has('remember') ? true : false;
         $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         $admin = $request->has('admin') ? true : false;
 
-        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password])) {
+        if (Auth::attempt([$loginType => $request->login, 'password' => $request->password], $remember)) {
             $user = Auth::user();
 
             if ($user->role == 'admin' && !$admin) {
@@ -99,18 +102,19 @@ class AuthController extends Controller
 
             if ($request->wantsJson()) {
                 $token = $request->user()->createToken('auth_token')->plainTextToken;
+                $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
+                $response = $user;
+                $response['token'] = $token;
+                $response['avatar'] = Storage::url($path);
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Logged In Successfully',
-                    'data' => [
-                        'token' => $token,
-                        $user,
-                    ]
+                    'data' => $response
                 ]);
             }
 
-            // return redirect()->route($user->role, '.home');
-            return true;
+            $route = $user->role . '.home';
+            return redirect()->route($route);
         }
 
         if ($request->wantsJson()) {
@@ -125,16 +129,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-
         if ($request->wantsJson()) {
+            $request->user()->currentAccessToken()->delete();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Logged Out Successfully',
             ]);
         }
 
-        // return redirect()->route('login');
-        return true;
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

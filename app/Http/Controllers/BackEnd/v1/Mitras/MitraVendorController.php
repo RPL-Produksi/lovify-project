@@ -64,5 +64,6 @@ class MitraVendorController extends Controller
         $vendor = Vendor::create($data);
 
         $response = $vendor;
+        dd($response);
     }
 }

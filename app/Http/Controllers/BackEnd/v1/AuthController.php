@@ -35,7 +35,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $data = $request->all();
+        $data = array_map('trim', $request->all());
         $data['password'] = bcrypt($data['password']);
         $data['is_verified'] = $request->role == 'mitra' ? 0 : null;
         if ($request->hasFile('avatar')) {
@@ -51,10 +51,10 @@ class AuthController extends Controller
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
-            $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
+            $path = $user->avatar == null ? Storage::url('avatars/default.png') : $user->avatar;
             $response = $user;
             $response['token'] = $token;
-            $response['avatar'] = Storage::url($path);
+            $response['avatar'] = $path;
             return response()->json([
                 'status' => 'success',
                 'message' => 'User Created Successfully',

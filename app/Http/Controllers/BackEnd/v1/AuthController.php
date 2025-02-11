@@ -16,8 +16,8 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fullname' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
-            'password' => ['required', 'confirmed', 'string', 'min:8', 'regex:/^[a-zA-Z0-9\-_]+$/'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username', 'regex:/^[a-zA-Z0-9\-_]+$/'],
+            'password' => ['required', 'confirmed', 'string', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'phone_number' => ['required', 'string', 'max:15', 'unique:users,phone_number'],
             'role' => ['required', 'string', 'in:client,mitra'],
@@ -35,7 +35,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $data = array_map('trim', $request->all());
+        $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         $data['is_verified'] = $request->role == 'mitra' ? 0 : null;
         if ($request->hasFile('avatar')) {
@@ -51,10 +51,9 @@ class AuthController extends Controller
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
-            $path = $user->avatar == null ? Storage::url('avatars/default.png') : $user->avatar;
             $response = $user;
             $response['token'] = $token;
-            $response['avatar'] = $path;
+            $response['avatar'] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
             return response()->json([
                 'status' => 'success',
                 'message' => 'User Created Successfully',
@@ -98,14 +97,15 @@ class AuthController extends Controller
                         'message' => 'Unauthorized',
                     ], 401);
                 }
+
+                return redirect()->back()->withErrors(['error' => 'Username or Password is Incorrect'])->withInput(['login']);
             }
 
             if ($request->wantsJson()) {
                 $token = $request->user()->createToken('auth_token')->plainTextToken;
-                $path = $user->avatar == null ? 'avatars/default.png' : $user->avatar;
                 $response = $user;
                 $response['token'] = $token;
-                $response['avatar'] = Storage::url($path);
+                $response['avatar'] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Logged In Successfully',

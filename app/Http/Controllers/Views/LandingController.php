@@ -12,13 +12,7 @@ class LandingController extends Controller
 {
     public function landing()
     {
-        $user = Auth::check() ? Auth::user() : null;
-
-        if ($user) {
-            $folder = $user->avatar == null ? "avatars/default.png" : $user->avatar;
-            $path = Storage::url($folder);
-            $user["avatar"] = $path;
-        }
+        $user = Auth::user();
 
         $category = Category::all();
         return view('pages.landing_page.index', compact('category', 'user'));

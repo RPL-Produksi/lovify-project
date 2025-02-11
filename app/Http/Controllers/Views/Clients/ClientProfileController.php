@@ -11,9 +11,7 @@ class ClientProfileController extends Controller
 {
     public function profile() {
         $user = Auth::user();
-        $folder = $user->avatar == null ? "avatars/default.png" : $user->avatar;
-        $path = Storage::url($folder);
-        $user["avatar"] = $path;
+       
         return view('pages.client.profile.index', compact('user'));
     }
 }

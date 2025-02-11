@@ -10,13 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class ClientAboutUsController extends Controller
 {
     public function index() {
-        $user = Auth::check() ? Auth::user() : null;
-
-        if ($user) {
-            $folder = $user->avatar == null ? "avatars/default.png" : $user->avatar;
-            $path = Storage::url($folder);
-            $user["avatar"] = $path;
-        }
+        $user = Auth::user();
         return view('pages.client.about_us.index', compact('user'));
     }
 }

@@ -12,8 +12,13 @@
             data-aos-duration="1500">
             <div class="flex items-center gap-5">
                 <div>
-                    <img src="{{ $user->avatar }}" class="rounded-full w-40 mr-3"
+                    @if (is_null($user->avatar))
+                    <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-40 mr-3"
                         alt="">
+                        @else
+                        <img src="{{ $user->avatar }}" class="rounded-full w-40 mr-3"
+                            alt="">
+                    @endif
                 </div>
                 <div>
                     <a href="" class="bg-rose-950 text-white rounded-lg font-medium p-3 hover:text-rose-950 hover:border-2 hover:border-rose-950 hover:bg-transparent">Change Picture</a>

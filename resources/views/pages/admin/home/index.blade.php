@@ -7,7 +7,7 @@
     <title>Home</title>
 </head>
 <body>
-    <form action="{{ route('logout') }}" method="post">
+    <form action="{{ route('be.logout') }}" method="POST">
         @csrf
         <button type="submit">Logout</button>
     </form>

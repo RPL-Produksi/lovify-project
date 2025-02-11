@@ -21,11 +21,6 @@
                             class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('article') ? 'w-full' : 'w-0' }}""
                             style="height: 1px;"></span>
                     </a>
-                    <a href="#" class="font-light relative overflow-hidden group">
-                        Vendors
-                        <span class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full"
-                            style="height: 1px;"></span>
-                    </a>
                     <a href="{{ route('aboutUs') }}" class="font-light relative overflow-hidden group">
                         About Us
                         <span
@@ -50,7 +45,6 @@
         <div class="md:hidden hidden" id="mobile-menu">
             <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
             <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
-            <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Vendors</a>
             <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
         </div>
     @endguest
@@ -75,15 +69,16 @@
                             class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('article') ? 'w-full' : 'w-0' }}""
                             style="height: 1px;"></span>
                     </a>
-                    <a href="#" class="font-light relative overflow-hidden group">
-                        Vendors
-                        <span class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full"
-                            style="height: 1px;"></span>
-                    </a>
                     <a href="{{ route('aboutUs') }}" class="font-light relative overflow-hidden group">
                         About Us
                         <span
                             class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('aboutUs') ? 'w-full' : 'w-0' }}"
+                            style="height: 1px;"></span>
+                    </a>
+                    <a href="" class="font-light relative overflow-hidden group ">
+                        My Plannings
+                        <span
+                            class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('article') ? 'w-full' : 'w-0' }}""
                             style="height: 1px;"></span>
                     </a>
                 </div>
@@ -95,7 +90,11 @@
                         </div>
 
                         <a class="relative overflow-hidden group inline-block">
-                            <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                            @if (is_null($user->avatar))
+                                <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14" alt="">
+                            @else
+                                <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                            @endif
                         </a>
                     </div>
                     <div
@@ -116,7 +115,12 @@
                 <div class="md:hidden">
                     <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
                         <a class="relative overflow-hidden group inline-block">
-                            <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                            @if (is_null($user->avatar))
+                                <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14"
+                                    alt="">
+                            @else
+                                <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                            @endif
                         </a>
                     </button>
                 </div>
@@ -126,7 +130,8 @@
         <div class="md:hidden hidden" id="mobile-menu">
             <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
             <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
-            <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white {{ request()->routeIs('article') ? 'bg-redlue' : 't-white' }}">Article</a>
+            <a href="{{ route('article') }}"
+                class="block px-4 py-2 hover:bg-rose-950 hover:text-white {{ request()->routeIs('article') ? 'bg-redlue' : 't-white' }}">Article</a>
             <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">My Plannings</a>
             <hr class="my-3">
             <a href="{{ route('profile') }}"
@@ -134,8 +139,7 @@
                     class="fa-solid fa-user mr-2"></i>Profile</a>
             <form action="{{ route('be.logout') }}" method="POST">
                 @csrf
-                <button href="#"
-                    class="w-full text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-b-lg"><i
+                <button href="#" class="w-full text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-b-lg"><i
                         class="fa-solid fa-right-from-bracket mr-2"></i>Logout</button>
             </form>
 

@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
+
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
+
+use App\Http\Controllers\Views\Admins\AdminHomeController;
 use App\Http\Controllers\Views\AuthController as ViewAuthController;
 use App\Http\Controllers\views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
@@ -28,6 +31,7 @@ Route::prefix('auth')->group(function () {
 
 // Client Admin
 Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+    Route::get('/', [AdminHomeController::class, 'home'])->name('admin.home');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/{id?}', 'storeCategory')->name('be.category.store');
         Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
@@ -40,6 +44,8 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
 
 
 // client route
+
+// Umum
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');
 Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');

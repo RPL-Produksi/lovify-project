@@ -24,6 +24,11 @@
                     <div class="mt-16">
                         <form action="{{ route('be.login') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @if ($isAdmin)
+                                <div>
+                                    <input hidden type="text" name="admin" value="true"class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                </div>    
+                            @endif
                             <div>
                                 <label for="" class="text-redlue text-xl font-medium">Username/email</label>
                                 <input type="text" name="login" class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    

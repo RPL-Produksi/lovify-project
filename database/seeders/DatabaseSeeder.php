@@ -54,6 +54,31 @@ class DatabaseSeeder extends Seeder
             'is_verified' => true
         ]);
 
-       
+        $categories = ['venue', 'mua', 'catering', 'photographer', 'organize', 'decoration'];
+        foreach ($categories as $category) {
+            $path = 'categories/' . $category . '.jpg';
+            Category::create([
+                'name' => $category,
+                'image' => Storage::url($path),
+            ]);
+        }
+
+        // id	mitra_id	category_id	name	slug	description	price	cover	status	
+        // $categories = Category::all();
+        // for ($i = 1; $i <= 10; $i++) {
+        //     foreach ($categories as $category) {
+        //         Product::create([
+        //             'category_id' => $category->id,
+        //             'name' => 'Product ' . $category->name . ' ' . $i,
+        //             'slug' => 'product-' . $category->name . '-' . $i,
+        //             'description' => 'Product ' . $category->name . ' ' . $i . ' yang sangat menarik',
+        //             'price' => [10000, 20000, 50000, 75000, 100000][rand(0,4)],
+        //             'cover' => $category->image,
+        //             'status' => 'active',
+        //             'mitra_id' => User::where('role', 'mitra')->first()->id,
+        //         ]);
+        //     }
+        // }
+
     }
 }

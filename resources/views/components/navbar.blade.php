@@ -56,6 +56,12 @@
 
     @auth
         @if ($user->role == 'client')
+<<<<<<< HEAD
+=======
+            @php
+                dd($user);
+            @endphp
+>>>>>>> bd6d906c106d9d13b07b4d991d1da87b35a84ba5
             <div class="xl:px-40 px-2 md:px-10">
                 <div class="flex items-center h-16 lg:p-0 p-2 justify-between">
                     <!-- Logo -->
@@ -101,11 +107,15 @@
                             </div>
 
                             <a class="relative overflow-hidden group inline-block">
+<<<<<<< HEAD
                                 @if (is_null($user->avatar))
                                 <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14" alt="">
                                 @else
                                 <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
                                 @endif
+=======
+                                <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+>>>>>>> bd6d906c106d9d13b07b4d991d1da87b35a84ba5
                             </a>
                         </div>
                         <div
@@ -128,12 +138,16 @@
                         <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
                             <div class="flex">
                                 <a class="relative overflow-hidden group inline-block">
+<<<<<<< HEAD
                                     @if (is_null($user->avatar))
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-12" alt="">
                                     @else
                                         <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
                                     @endif
+=======
+                                    <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
+>>>>>>> bd6d906c106d9d13b07b4d991d1da87b35a84ba5
                                 </a>
                             </div>
                         </button>

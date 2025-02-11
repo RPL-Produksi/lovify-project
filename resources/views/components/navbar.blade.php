@@ -22,11 +22,6 @@
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
                         style="height: 1px;"></span>
                 </a>
-                <a href="#" class="font-light relative overflow-hidden group">
-                    Vendors
-                    <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
-                        style="height: 1px;"></span>
-                </a>
                 <a href="{{ route('aboutUs') }}" class="font-light relative overflow-hidden group">
                     About Us
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
@@ -47,11 +42,14 @@
         </div>
     </div>
 
-    <div class="md:hidden hidden" id="mobile-menu">
+    <div class="md:hidden hidden pb-10" id="mobile-menu">
         <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
         <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
-        <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Vendors</a>
         <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
+        <div class="space-x-6 mt-5">
+            <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn"
+                style="background-color: #3D0A05">Login</a>
+        </div>
     </div>
     @endguest
 
@@ -79,13 +77,13 @@
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
                         style="height: 1px;"></span>
                 </a>
-                <a href="#" class="font-light relative overflow-hidden group">
-                    Vendors
-                    <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
-                        style="height: 1px;"></span>
-                </a>
                 <a href="{{ route('aboutUs') }}" class="font-light relative overflow-hidden group">
                     About Us
+                    <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
+                    style="height: 1px;"></span>
+                </a>
+                <a href="#" class="font-light relative overflow-hidden group">
+                    My Plannings
                     <span class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
                         style="height: 1px;"></span>
                 </a>
@@ -114,7 +112,11 @@
             
             <div class="md:hidden">
                 <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
-                    <i class="fa-solid fa-bars" style="color: #3D0A05"></i>
+                    <div class="flex">
+                        <a class="relative overflow-hidden group inline-block">
+                            <img src="{{ $user->avatar }}" class="rounded-full w-12" alt=""> 
+                        </a>
+                    </div>
                 </button>
             </div>
         </div>
@@ -123,8 +125,14 @@
     <div class="md:hidden hidden" id="mobile-menu">
         <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
         <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
-        <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Vendors</a>
         <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
+        <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">My Plannings</a>
+        <hr class="my-">
+        <a href="{{ route('profile') }}" class="block text-center text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i class="fa-solid fa-user mr-2"></i>Profile</a>
+        <form action="{{ route('be.logout') }}" method="POST">
+            @csrf
+            <button href="#" class="w-full text-center text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-b-lg"><i class="fa-solid fa-right-from-bracket mr-2"></i>Logout</button>
+        </form>
     </div>
     @endif
     @endauth

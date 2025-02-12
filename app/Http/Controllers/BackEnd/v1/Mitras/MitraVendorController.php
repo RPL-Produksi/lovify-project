@@ -63,7 +63,20 @@ class MitraVendorController extends Controller
         $message = $message == null ? 'Vendor created successfully' : $message;
         $vendor = Vendor::create($data);
 
+        $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
         $response = $vendor;
-        dd($response);
+        $response['profile'] = $vendor->profile == null ? asset('vendors/default.png') : $vendor->profile;
+        $response['mitra']['avatar'] = $response->mitra->avatar == null ? asset('avatars/default.png') : $response->mitra->avatar;
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => $message,
+                'data' => $response,
+            ], 200);
+        }
+
+        // return redirect()->back()->with('success', $message);
+        return true;
     }
 }

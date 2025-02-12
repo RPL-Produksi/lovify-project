@@ -15,9 +15,7 @@ class LandingController extends Controller
         $user = Auth::check() ? Auth::user() : null;
 
         if ($user) {
-            $folder = $user->avatar == null ? "avatars/default.png" : $user->avatar;
-            $path = Storage::url($folder);
-            $user["avatar"] = $path;
+            $user["avatar"] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
         }
 
         $category = Category::all();

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['mitra_id']);
+            $table->dropColumn('mitra_id');
             $table->foreignUuid('vendor_id')->constrained('vendors')->cascadeOnDelete();
         });
     }
@@ -24,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['vendor_id']);
+            $table->dropColumn('vendor_id');
             $table->foreignUuid('mitra_id')->constrained('users')->cascadeOnDelete();
         });
     }

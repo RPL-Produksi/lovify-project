@@ -15,14 +15,14 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'mitra_id',
         'cover',
         'status',
+        'vendor_id'
     ];
 
     protected $with = [
-        'attachments',
         'category',
+        'attachments',
         'vendor'
     ];
 

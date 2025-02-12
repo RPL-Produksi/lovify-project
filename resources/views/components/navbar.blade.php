@@ -56,9 +56,6 @@
 
     @auth
         @if ($user->role == 'client')
-            @php
-                dd($user);
-            @endphp
             <div class="xl:px-40 px-2 md:px-10">
                 <div class="flex items-center h-16 lg:p-0 p-2 justify-between">
                     <!-- Logo -->

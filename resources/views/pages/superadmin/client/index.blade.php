@@ -1,14 +1,15 @@
 @extends('template-dashboard.layouts.app-admin')
-@section('title', 'Kelola Admin')
+@section('title', 'Kelola Client')
 
 @push('css')
+    {{-- CSS Only For This Page --}}
 @endpush
 
 @section('content')
 
     <div class="card p-3">
         <div class="d-flex justify-content-between">
-            <h3 class="text-rose">Kelola Admin</h3>
+            <h3 class="text-rose">Kelola Client</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
                 data-target="#modalStore">
                 <i class="fa-solid fa-plus"></i>
@@ -27,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($admin as $item)
+                @foreach ($client as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->fullname }}</td>

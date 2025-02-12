@@ -7,11 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SuperadminKelolaAdminController extends Controller
+class SuperadminKelolaClientController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $admin = User::where('role', 'admin')->get();
-        return view('pages.superadmin.admin.index', compact('admin', 'user'));
+        $client = User::where('role', 'client')->get();
+        return view('pages.superadmin.client.index', compact('user','client'));
     }
 }

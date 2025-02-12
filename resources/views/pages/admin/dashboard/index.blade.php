@@ -7,8 +7,14 @@
 
 @section('content')
 
-    <div>
-        <h1>Dashboard Admin</h1>
+    @if (session('message'))
+        <div class="alert alert-success mb-3 border-left-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <div class="card p-3 border-left-rose">
+        <h3 class="text-rose">Dashboard Admin</h1>
     </div>
 
 @endsection

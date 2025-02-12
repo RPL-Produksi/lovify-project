@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Views\Admin;
+namespace App\Http\Controllers\Views\Mitra;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminDashboardController extends Controller
+class MitraDashboardController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        return view('pages.admin.dashboard.index', compact('user'));
+        return view('pages.mitra.home.index', compact('user'));
     }
 }

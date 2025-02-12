@@ -1,5 +1,5 @@
 @extends('template-dashboard.layouts.app-admin')
-@section('title', 'Kelola Admin')
+@section('title', 'Kelola Produk')
 
 @push('css')
 @endpush
@@ -8,39 +8,42 @@
 
     <div class="card p-3">
         <div class="d-flex justify-content-between">
-            <h3 class="text-rose">Kelola Admin</h3>
+            <h3 class="text-rose">Kelola Produk</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
                 data-target="#modalStore">
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
         <hr>
-        <table class="table table-striped" id="example">
+        <table class="table table-bordered table-striped" id="example">
             <thead>
                 <tr>
                     <td>No</td>
+                    <td>Gambar</td>
+                    <td>Kategori</td>
                     <td>Nama</td>
-                    <td>Username</td>
-                    <td>Email</td>
-                    <td>Nomor Telepon</td>
+                    <td>Slug</td>
+                    <td>Harga</td>
+                    <td>Vendor</td>
                     <td>Aksi</td>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($admin as $item)
+                @foreach ($produk as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->fullname }}</td>
-                        <td>{{ $item->username }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->phone_number }}</td>
+                        <td><img width="70" height="50" style="object-fit: cover" src="{{ $item->image }}" alt=""></td>
+                        <td vertical>{{ $item->name }}</td>
+                        <td vertical>{{ $item->name }}</td>
+                        <td vertical>{{ $item->name }}</td>
+                        <td vertical>{{ $item->name }}</td>
+                        <td vertical>{{ $item->name }}</td>
                         <td>
                             <button type="button" data-toggle="modal" data-target="" class="btn btn-primary"><i
                                     class="fa-solid fa-pen-to-square"></i></button>
                             <a href="" class="btn btn-danger btn-delete" data-id="{{ $item->id }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
-
                         </td>
                     </tr>
                 @endforeach

@@ -89,7 +89,7 @@ class AuthController extends Controller
         if (Auth::attempt([$loginType => $request->login, 'password' => $request->password], $remember)) {
             $user = Auth::user();
 
-            if ($user->role == 'admin' && !$admin) {
+            if (($user->role == 'admin' || $user->role == 'superadmin') && !$admin) {
                 Auth::logout();
                 if ($request->wantsJson()) {
                     return response()->json([

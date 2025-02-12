@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
-</head>
-<body>
-    <form action="{{ route('logout') }}" method="post">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-    <h1 align="center">Ini Home Mitra</h1>
-</body>
-</html>
+@extends('template-dashboard.layouts.app-admin')
+@section('title', 'Dashboard')
+
+@push('css')
+    {{-- CSS Only For This Page --}}
+@endpush
+
+@section('content')
+
+@if (session('message'))
+<div class="alert alert-success mb-3 border-left-success">
+    {{ session('message') }}
+</div>
+@endif
+    <div class="card p-3 border-left-rose">
+        <h3 class="text-rose">Dashboard Mitra</h1>
+    </div>
+
+@endsection
+
+@push('js')
+    {{-- JS Only For This Page --}}
+@endpush

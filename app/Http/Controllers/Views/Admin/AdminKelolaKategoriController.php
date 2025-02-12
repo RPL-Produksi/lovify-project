@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Views\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminDashboardController extends Controller
+class AdminKelolaKategoriController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        return view('pages.admin.dashboard.index', compact('user'));
+        $kategori = Category::all();
+        return view('pages.admin.kategori.index', compact('kategori', 'user'));
     }
 }

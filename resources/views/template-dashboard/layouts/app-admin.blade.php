@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/sb-admin.min.css') }}">
     <link rel="stylesheet" href="https://naramizaru.github.io/awesome-2.0/css/all.css">
     @stack('css')
-    <title>LumiStore | @yield('title')</title>
+    <title>Lovify | @yield('title')</title>
 </head>
 
 <body id="page-top">

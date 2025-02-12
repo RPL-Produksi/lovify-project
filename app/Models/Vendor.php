@@ -14,11 +14,14 @@ class Vendor extends Model
         'email',
         'phone_number',
         'mitra_id',
-        'profile'
+        'profile',
+        'category_id'
     ];
 
     protected $with = [
-        'mitra'
+        'mitra',
+        'products',
+        'category'
     ];
 
     protected $hidden = [
@@ -26,6 +29,11 @@ class Vendor extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function mitra()
     {

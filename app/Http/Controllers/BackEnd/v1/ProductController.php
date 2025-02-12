@@ -19,7 +19,7 @@ class ProductController extends Controller
         } else if ($user->role == 'client') {
             $products->where('status', 'active');
         }
-
+        
         $categoryQuery = $request->query('category');
         $statusQuery = $request->query('status');
         
@@ -37,7 +37,7 @@ class ProductController extends Controller
                 ], 400);
             }
 
-            $products = $products->where('category_id', $category->id);
+            $products = $products->vendor->where('category_id', $category->id);
         }
 
         if ($statusQuery != null) {
@@ -54,14 +54,7 @@ class ProductController extends Controller
 
         $products = $products->get();
         $response = [];
-        $products->makeHidden(['vendor_id', 'category_id']);
-        if ($categoryQuery != null) {
-            $products->makeHidden(['category']);
-        } else {
-            $products->map(function ($product) {
-                $product->category->makeHidden(['id']);
-            });
-        }
+        $products->makeHidden(['vendor_id']);
         $products->map(function ($product) {
             if ($product->vendor->profile == null) {
                 $product->vendor->profile = asset('vendors/default.png');

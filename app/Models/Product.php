@@ -10,7 +10,6 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        'category_id',
         'slug',
         'name',
         'description',
@@ -21,7 +20,6 @@ class Product extends Model
     ];
 
     protected $with = [
-        'category',
         'attachments',
         'vendor'
     ];
@@ -31,11 +29,6 @@ class Product extends Model
         'updated_at'
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function attachments()
     {
         return $this->hasMany(ProductAttachment::class);
@@ -43,6 +36,6 @@ class Product extends Model
 
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class, 'vendor_id');
+        return $this->belongsTo(Vendor::class);
     }
 }

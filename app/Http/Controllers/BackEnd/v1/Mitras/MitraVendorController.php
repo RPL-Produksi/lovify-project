@@ -14,8 +14,8 @@ class MitraVendorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:vendors,email'],
-            'phone_number' => ['required', 'string', 'unique:vendors,phone_number'],
+            'email' => ['required', 'email', 'unique:vendors,email,' . $id],
+            'phone_number' => ['required', 'string', 'unique:vendors,phone_number,' . $id],
             'profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
@@ -31,7 +31,6 @@ class MitraVendorController extends Controller
         }
 
         $data = $request->all();
-        $message = null;
         $data['mitra_id'] = $request->user()->id;
 
         if ($request->hasFile('profile')) {
@@ -57,10 +56,18 @@ class MitraVendorController extends Controller
             }
 
             $vendor->update($data);
-            $message = 'Vendor updated successfully';
+
+            $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
+            $response = $vendor;
+            $response['profile'] = $vendor->profile == null ? asset('vendors/default.png') : $vendor->profile;
+            $response['mitra']['avatar'] = $response->mitra->avatar == null ? asset('avatars/default.png') : $response->mitra->avatar;
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Vendor updated successfully',
+                'data' => $response,
+            ], 200);
         }
 
-        $message = $message == null ? 'Vendor created successfully' : $message;
         $vendor = Vendor::create($data);
 
         $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
@@ -71,7 +78,7 @@ class MitraVendorController extends Controller
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'success',
-                'message' => $message,
+                'message' => 'Vendor created successfully',
                 'data' => $response,
             ], 200);
         }

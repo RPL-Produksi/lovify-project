@@ -90,9 +90,9 @@ class MitraProductController extends Controller
         }
 
         $product->makeHidden(['vendor_id', 'category_id']);
-        $category = $product->category;
         $response = $product;
-        $response['category'] = $category->name;
+        $response['category'] = $product->category->makeHidden('id', 'image');
+        $response['attachments'] = $product->attachments->makeHidden('product_id');
 
         if ($request->wantsJson()) {
             return response()->json([

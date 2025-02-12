@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     @include('components.navbar_rose')
 
-    <div class="profile-section py-24 flex items-center justify-center" style="background-color: #f7f0f0">
+    <div class="profile-section py-28 flex items-center justify-center" style="background-color: #f7f0f0">
         <div class="card-profile border-2 rounded-lg p-6 border-rose-950 shadow-2xl" data-aos="fade-up"
             data-aos-duration="1500">
             <div class="flex items-center gap-5">

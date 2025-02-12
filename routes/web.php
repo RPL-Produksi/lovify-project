@@ -14,6 +14,8 @@ use App\Http\Controllers\Views\Clients\ClientHomeController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
 use App\Http\Controllers\Views\Clients\ClientVendorsController;
 use App\Http\Controllers\Views\LandingController;
+use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
+use App\Http\Controllers\Views\Superadmin\SuperadminKelolaAdminController;
 use Illuminate\Support\Facades\Route;
 
 // auth route
@@ -31,7 +33,7 @@ Route::prefix('auth')->group(function () {
 
 // Client Admin
 Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
-    Route::get('/', [AdminHomeController::class, 'home'])->name('admin.home');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.home');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/{id?}', 'storeCategory')->name('be.category.store');
         Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
@@ -40,10 +42,8 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
 Route::group(['middleware' => 'auth'], function () {
 });
 
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.home');
-
-
-// client route
+Route::get('/superadmin/dashboard', [SuperadminDashboardController::class, 'index'])->name('superadmin.home');
+Route::get('/superadmin/kelola/admin', [SuperadminKelolaAdminController::class, 'index'])->name('superadmin.kelola.admin');
 
 // Umum
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');

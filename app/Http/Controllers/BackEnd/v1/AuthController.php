@@ -114,7 +114,7 @@ class AuthController extends Controller
             }
 
             $route = $user->role . '.home';
-            return redirect()->route($route);
+            return redirect()->route($route)->with('message', 'Logged In Successfully');
         }
 
         if ($request->wantsJson()) {

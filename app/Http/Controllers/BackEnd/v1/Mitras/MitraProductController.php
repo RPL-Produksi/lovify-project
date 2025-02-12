@@ -12,6 +12,19 @@ class MitraProductController extends Controller
 {
     public function storeProduct(Request $request, $id = null)
     {
+        $user = $request->user();
+        $vendor = $user->vendor;
+        if ($vendor == null) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You cannot create product without being a vendor',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'You are not authorized to create product');
+        }
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
@@ -19,7 +32,7 @@ class MitraProductController extends Controller
             'cover' => ['required', 'image'],
             'status' => ['required', 'in:draft,active,inactive'],
             'category_id' => ['required', 'exists:categories,id'],
-            'attachemnts.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'attachments.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
         if ($validator->fails()) {
@@ -34,8 +47,8 @@ class MitraProductController extends Controller
         }
 
         $data = $request->all();
-        $data['mitra_id'] = $request->user()->id;
         $data['slug'] = $this->makeSlug($request->name);
+        $data['vendor_id'] = $vendor->id;
 
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
@@ -76,7 +89,10 @@ class MitraProductController extends Controller
             $product->attachments()->createMany($attachmentPaths);
         }
 
+        $product->makeHidden(['vendor_id', 'category_id']);
+        $category = $product->category;
         $response = $product;
+        $response['category'] = $category->name;
 
         if ($request->wantsJson()) {
             return response()->json([
@@ -92,6 +108,17 @@ class MitraProductController extends Controller
     public function deleteProduct(Request $request, $id)
     {
         $product = Product::find($id);
+        if ($product->vendor_id != $request->user()->vendor->id) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not authorized to delete this product',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'You are not authorized to delete this product');
+        }
+
         $product->delete();
 
         if ($request->wantsJson()) {

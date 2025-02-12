@@ -3,11 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
-use App\Http\Controllers\Backend\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
+use App\Http\Controllers\Backend\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
-use App\Http\Controllers\BackEnd\v1\Clients\ClientCategoryController;
-use App\Http\Controllers\BackEnd\v1\Clients\ClientProductController;
 use App\Http\Controllers\Backend\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\Backend\v1\ProductController;
 

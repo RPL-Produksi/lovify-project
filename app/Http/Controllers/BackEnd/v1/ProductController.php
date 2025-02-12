@@ -15,7 +15,7 @@ class ProductController extends Controller
         $user = Auth::user();
         $products = Product::query();
         if ($user->role == 'mitra') {
-            $products->where('mitra_id', $user->id);
+            $products->where('vendor_id', $user->vendor->id);
         } else if ($user->role == 'client') {
             $products->where('status', 'active');
         }
@@ -54,18 +54,21 @@ class ProductController extends Controller
 
         $products = $products->get();
         $response = [];
+        $products->makeHidden(['vendor_id', 'category_id']);
         if ($categoryQuery != null) {
-            $response['category'] = $categoryQuery;
-        };
-        $response['products'] = $products;
-        $response['products']->map(function ($product) use ($categoryQuery) {
-            unset($product->category_id);
-            unset($product->mitra_id);
-            unset($product->category->id);
-            if ($categoryQuery != null) {
-                unset($product->category);
+            $products->makeHidden(['category']);
+        } else {
+            $products->map(function ($product) {
+                $product->category->makeHidden(['id']);
+            });
+        }
+        $products->map(function ($product) {
+            if ($product->vendor->profile == null) {
+                $product->vendor->profile = asset('vendors/default.png');
             }
+            $product->vendor->makeHidden(['id', 'mitra']);
         });
+        $response['products'] = $products;
 
         return response()->json([
             'status' => 'success',

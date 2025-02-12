@@ -21,10 +21,10 @@
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('be.logout') }}" method="POST">
                     @csrf
-                    <button class="dropdown-item" type="submit" data-toggle="modal" data-target="#logoutModal">
+                    <a class="dropdown-item" href="{{ route('be.logout') }}" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Keluar
-                    </button>
+                    </a>
                 </form>
             </div>
         </li>

@@ -9,8 +9,14 @@ use Illuminate\Http\Request;
 
 class MitraKelolaProdukController extends Controller
 {
-    public function index(Request $request) {
-        $produk = $request->user()->vendor->products;
-        return view('pages.mitra.produk.index', compact('produk'));
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        if ($user->vendor) {
+            $produk = $user->vendor->products;
+        } else {
+            $produk = [];
+        }
+        return view('pages.mitra.produk.index', compact('produk', 'user'));
     }
 }

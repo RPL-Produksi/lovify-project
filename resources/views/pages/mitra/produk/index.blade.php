@@ -29,24 +29,26 @@
                 </tr>
             </thead>
             <tbody>
+                @isset($produk)
                 @foreach ($produk as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><img width="70" height="50" style="object-fit: cover" src="{{ $item->image }}" alt=""></td>
-                        <td vertical>{{ $item->name }}</td>
-                        <td vertical>{{ $item->name }}</td>
-                        <td vertical>{{ $item->name }}</td>
-                        <td vertical>{{ $item->name }}</td>
-                        <td vertical>{{ $item->name }}</td>
-                        <td>
-                            <button type="button" data-toggle="modal" data-target="" class="btn btn-primary"><i
-                                    class="fa-solid fa-pen-to-square"></i></button>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td><img width="70" height="50" style="object-fit: cover" src="{{ $item->image }}" alt=""></td>
+                    <td vertical>{{ $item->name }}</td>
+                    <td vertical>{{ $item->name }}</td>
+                    <td vertical>{{ $item->name }}</td>
+                    <td vertical>{{ $item->name }}</td>
+                    <td vertical>{{ $item->name }}</td>
+                    <td>
+                        <button type="button" data-toggle="modal" data-target="" class="btn btn-primary"><i
+                            class="fa-solid fa-pen-to-square"></i></button>
                             <a href="" class="btn btn-danger btn-delete" data-id="{{ $item->id }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                    @endforeach
+                @endisset
             </tbody>
         </table>
     </div>

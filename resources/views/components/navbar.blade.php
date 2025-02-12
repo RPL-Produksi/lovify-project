@@ -101,7 +101,11 @@
                             </div>
 
                             <a class="relative overflow-hidden group inline-block">
+                                @if (is_null($user->avatar))
+                                <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14" alt="">
+                                @else
                                 <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                                @endif
                             </a>
                         </div>
                         <div
@@ -124,7 +128,12 @@
                         <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
                             <div class="flex">
                                 <a class="relative overflow-hidden group inline-block">
-                                    <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
+                                    @if (is_null($user->avatar))
+                                        <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
+                                            class="rounded-full w-12" alt="">
+                                    @else
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
+                                    @endif
                                 </a>
                             </div>
                         </button>

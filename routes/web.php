@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
+
+use App\Http\Controllers\Views\Admin\AdminDashboardController;
+use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admins\AdminHomeController;
 use App\Http\Controllers\Views\AuthController as ViewAuthController;
 use App\Http\Controllers\views\Clients\ClientAboutUsController;
@@ -11,6 +14,12 @@ use App\Http\Controllers\Views\Clients\ClientHomeController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
 use App\Http\Controllers\Views\Clients\ClientVendorsController;
 use App\Http\Controllers\Views\LandingController;
+use App\Http\Controllers\Views\Mitra\MitraDashboardController;
+use App\Http\Controllers\Views\Mitra\MitraKelolaProdukController;
+use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
+use App\Http\Controllers\Views\Superadmin\SuperadminKelolaAdminController;
+use App\Http\Controllers\Views\Superadmin\SuperadminKelolaClientController;
+use App\Http\Controllers\Views\Superadmin\SuperadminKelolaMitraController;
 use Illuminate\Support\Facades\Route;
 
 // auth route
@@ -26,25 +35,37 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-// Admin
+// superadmin route
+Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], function() {
+    Route::get('/superadmin/dashboard', [SuperadminDashboardController::class, 'index'])->name('superadmin.home');
+    Route::get('/superadmin/kelola/admin', [SuperadminKelolaAdminController::class, 'index'])->name('superadmin.kelola.admin');
+    Route::get('/superadmin/kelola/mitra', [SuperadminKelolaMitraController::class, 'index'])->name('superadmin.kelola.mitra');
+    Route::get('/superadmin/kelola/client', [SuperadminKelolaClientController::class, 'index'])->name('superadmin.kelola.client');
+});
+
+// admin route
 Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
-    Route::get('/', [AdminHomeController::class, 'home'])->name('admin.home');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.home');
+    Route::get('/admin/kelola/kategori', [AdminKelolaKategoriController::class, 'index'])->name('admin.kelola.kategori');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/{id?}', 'storeCategory')->name('be.category.store');
         Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
     });
 });
 
-// client route
+// mitra route
+Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () {
+    Route::get('/mitra/dashboard', [MitraDashboardController::class, 'index'])->name('mitra.home');
+    Route::get('/mitra/kelola/produk', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
+});
 
-// Umum
+// client route
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');
 Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');
 Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs');
 Route::get('/vendors/{category}', [ClientVendorsController::class, 'index'])->name('vendors');
 
-// middleware auth
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
 });

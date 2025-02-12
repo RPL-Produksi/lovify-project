@@ -10,7 +10,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 @endpush
-
 @section('content')
     @include('components.navbar')
 
@@ -157,7 +156,7 @@
             @foreach ($category as $item)
                 <div class="planning-card p-4 border-2 border-rose-950 shadow-xl" data-aos="fade-up"
                     data-aos-duration="1000">
-                    <img src="{{ asset($item->image) }}" class="w-full hover:opacity-50"
+                    <img src="{{ $item->image }}" class="w-full hover:opacity-50"
                         style="height: 230px; object-fit: cover;" alt="">
                     <div class="mt-6 flex justify-between mb-3 items-center">
                         <h3 class=" text-rose-950 text-2xl font-bold">{{ $item->name }}</h3>

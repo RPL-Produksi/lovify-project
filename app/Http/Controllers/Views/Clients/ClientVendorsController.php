@@ -12,13 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class ClientVendorsController extends Controller
 {
     public function index(Category $category) {
-        $user = Auth::check() ? Auth::user() : null;
-
-        if ($user) {
-            $folder = $user->avatar == null ? "avatars/default.png" : $user->avatar;
-            $path = Storage::url($folder);
-            $user["avatar"] = $path;
-        }
+        $user  = Auth::user();
         $products = Product::where("category_id", $category->id)->with('user')->get();
         $products->map(function ($product) {
             $product['mitra'] = $product->user->username;

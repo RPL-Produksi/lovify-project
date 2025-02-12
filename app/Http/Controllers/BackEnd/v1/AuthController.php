@@ -88,7 +88,7 @@ class AuthController extends Controller
         if (Auth::attempt([$loginType => $request->login, 'password' => $request->password], $remember)) {
             $user = Auth::user();
 
-            if ($user->role == 'admin' && !$admin) {
+            if (($user->role == 'admin' || $user->role == 'superadmin') && !$admin) {
                 Auth::logout();
                 if ($request->wantsJson()) {
                     return response()->json([
@@ -113,7 +113,7 @@ class AuthController extends Controller
             }
 
             $route = $user->role . '.home';
-            return redirect()->route($route);
+            return redirect()->route($route)->with('message', 'Logged In Successfully');
         }
 
         if ($request->wantsJson()) {

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
-use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
-use App\Http\Controllers\Backend\v1\Superadmins\AdminController;
+use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
+use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
+use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admins\AdminHomeController;

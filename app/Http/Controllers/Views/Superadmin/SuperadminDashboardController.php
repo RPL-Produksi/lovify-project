@@ -10,6 +10,7 @@ class SuperadminDashboardController extends Controller
 {
     public function index() {
         $user = Auth::user();
+        $user['avatar'] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
         return view('pages.superadmin.dashboard.index', compact('user'));   
     }
 }

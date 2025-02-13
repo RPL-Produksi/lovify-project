@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\v1;
+namespace App\Http\Controllers\BackEnd\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Planning;

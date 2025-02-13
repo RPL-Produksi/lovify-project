@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\v1\Clients;
+namespace App\Http\Controllers\BackEnd\v1\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Planning;
@@ -32,8 +32,19 @@ class ClientOrderController extends Controller
         }
 
         $planning = Planning::find($id);
-        
+
+        if (!$planning) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Planning not found',
+                ], 404);
+            }
+
+            return redirect()->back()->with('error', 'Planning not found');
+        }
+
         $data = [];
-        $data['total_price'] = '';
+        $data['total_price'] = $planning->products->toArray();
     }
 }

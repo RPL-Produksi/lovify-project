@@ -18,7 +18,7 @@ class AdminController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^[a-zA-Z0-9\-_]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'number_phone' => ['nullable', 'string', 'max:255', 'unique:users,number_phone'],
+            'phone_number' => ['nullable', 'string', 'max:255', 'unique:users,phone_number'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 

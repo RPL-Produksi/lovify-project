@@ -9,8 +9,7 @@
     <div class="card p-3">
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Admin</h3>
-            <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
-                data-target="#modalStore">
+            <button type="button" data-toggle="modal" data-target="#addAdminModal" class="btn text-white" style="background-color: #3D0A05" data-target="#addUserModal" data-toggle="modal">
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
@@ -35,7 +34,7 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phone_number }}</td>
                         <td>
-                            <button type="button" data-toggle="modal" data-target="" class="btn btn-primary"><i
+                            <button type="button"  class="btn btn-primary"><i
                                     class="fa-solid fa-pen-to-square"></i></button>
                             <a href="" class="btn btn-danger btn-delete" data-id="{{ $item->id }}">
                                 <i class="fa-solid fa-trash"></i>
@@ -47,6 +46,54 @@
             </tbody>
         </table>
     </div>
+
+    {{-- modal tambah admin --}}
+    <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAdminModalLabel">Tambah Admin</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('superadmin.make.admin') }}" method="POST" class="form-with-loading">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="fullname">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Masukkan nama lengkap" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Nomor Telepon</label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Masukkan nomor telepon" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password_confirmation" id="password" placeholder="Masukkan password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-link" type="button" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
 
 @endsection
 

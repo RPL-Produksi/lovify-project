@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Backend\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\AuthController as BackendAuthController;
-
+use App\Http\Controllers\Backend\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admins\AdminHomeController;
@@ -41,6 +41,8 @@ Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], fu
     Route::get('/superadmin/kelola/admin', [SuperadminKelolaAdminController::class, 'index'])->name('superadmin.kelola.admin');
     Route::get('/superadmin/kelola/mitra', [SuperadminKelolaMitraController::class, 'index'])->name('superadmin.kelola.mitra');
     Route::get('/superadmin/kelola/client', [SuperadminKelolaClientController::class, 'index'])->name('superadmin.kelola.client');
+
+    Route::post('/superadmin/add/admin', [AdminController::class, 'makeAdmin'])->name('superadmin.make.admin');
 });
 
 // admin route

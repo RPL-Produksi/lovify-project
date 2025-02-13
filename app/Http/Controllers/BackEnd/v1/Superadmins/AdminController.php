@@ -20,6 +20,7 @@ class AdminController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'phone_number' => ['nullable', 'string', 'max:255', 'unique:users,phone_number'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'role' => ['required', 'in:admin,superadmin'],
         ]);
 
         if ($validator->fails()) {
@@ -55,6 +56,6 @@ class AdminController extends Controller
             ], 200);
         }
 
-        return true;
+        return redirect()->back()->with('success', 'User Created Successfully');
     }
 }

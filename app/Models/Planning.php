@@ -12,6 +12,7 @@ class Planning extends Model
     protected $fillable = [
         'title',
         'description',
+        'client_id',
     ];
 
     public function products()

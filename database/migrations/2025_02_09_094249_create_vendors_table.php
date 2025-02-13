@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('profile')->nullable();
             $table->foreignUuid('mitra_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignUuid('location_id')->constrained('locations')->cascadeOnDelete();
             $table->timestamps();
         });
     }

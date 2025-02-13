@@ -15,13 +15,15 @@ class Vendor extends Model
         'phone_number',
         'mitra_id',
         'profile',
-        'category_id'
+        'category_id',
+        'location_id'
     ];
 
     protected $with = [
         'mitra',
         'products',
-        'category'
+        'category',
+        'location'
     ];
 
     protected $hidden = [
@@ -43,5 +45,10 @@ class Vendor extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 }

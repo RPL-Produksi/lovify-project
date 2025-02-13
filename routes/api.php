@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\CategoryController;
+use App\Http\Controllers\Backend\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\Backend\v1\Mitras\MitraVendorController;
+use App\Http\Controllers\Backend\v1\PlanningController;
 use App\Http\Controllers\Backend\v1\ProductController;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
@@ -25,6 +27,7 @@ Route::prefix('v1')->group(function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/categories/{id?}', [CategoryController::class, 'getCategory']);
         Route::get('/products/{slug?}', [ProductController::class, 'getProducts']);
+        Route::get('/plannings/{id?}', [PlanningController::class, 'getPlanning']);
     });
     // Admin
     Route::group(['prefix' => 'admins', 'middleware' => ['auth:sanctum', 'can:admin']], function () {
@@ -46,6 +49,10 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
+        Route::group(['prefix' => 'plannings', 'controller' => ClientPlanningController::class], function () {
+            Route::post('/{id?}', 'storePlanning');
+            Route::delete('/{id}', 'deletePlanning');
+        });
     });
 });
 

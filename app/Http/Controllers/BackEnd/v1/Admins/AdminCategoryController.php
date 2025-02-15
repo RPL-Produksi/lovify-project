@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackEnd\v1\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminCategoryController extends Controller
@@ -13,6 +14,7 @@ class AdminCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
+            'image' => ['required', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
         if ($validator->fails()) {
@@ -21,6 +23,11 @@ class AdminCategoryController extends Controller
 
         $data = $request->all();
         $data['name'] = strtolower($data['name']);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->storeAs('categories/' . $request->name, $image->hashName());
+            $data['image'] = Storage::url($path);
+        }
         $category = Category::updateOrCreate(['id' => $id], $data);
 
         if ($request->wantsJson()) {

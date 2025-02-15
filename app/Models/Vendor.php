@@ -9,6 +9,25 @@ class Vendor extends Model
 {
     use HasUuids;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'phone_number',
+        'profile',
+        'mitra_id',
+        'category_id',
+        'location_id',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $with = [
+        'mitra',
+        'location',
+    ];
 
     public function category()
     {

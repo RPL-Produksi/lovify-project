@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
             $category = Category::where('name', $categories[rand(0, 5)])->first();
             $location = Location::where('name', $locations[rand(0, 5)])->first();
             Vendor::create([
-               'name' => $mitra->fullname,
+                'name' => $mitra->fullname,
                 'email' => $mitra->email,
                 'phone_number' => $mitra->phone_number,
                 'profile' => null,

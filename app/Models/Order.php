@@ -26,6 +26,12 @@ class Order extends Model
         'marry_date' => 'date',
     ];
 
+    protected $hidden = [
+        'planning_id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function planning()
     {
         return $this->belongsTo(Planning::class);

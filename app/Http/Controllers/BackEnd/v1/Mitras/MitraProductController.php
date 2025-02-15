@@ -71,30 +71,37 @@ class MitraProductController extends Controller
             }
 
             $product->update($data);
-        }
-
-        $product = Product::create($data);
-
-        if ($request->hasFile('attachments')) {
-            $attachments = $request->attachments;
-            $attachmentPaths = [];
-
-            $folderPath = 'products/' . $product->slug;
-            foreach ($attachments as $attachment) {
-                $path = $attachment->storeAs($folderPath, $attachment->hashName());
-                $filePath = Storage::url($path);
-                $attachmentPaths[] = ['image_path' => $filePath];
+        } else {
+            $product = Product::create($data);
+            if ($request->hasFile('attachments')) {
+                $attachments = $request->attachments;
+                $attachmentPaths = [];
+    
+                $folderPath = 'products/' . $product->slug;
+                foreach ($attachments as $attachment) {
+                    $path = $attachment->storeAs($folderPath, $attachment->hashName());
+                    $filePath = Storage::url($path);
+                    $attachmentPaths[] = ['image_path' => $filePath];
+                }
+    
+                $product->attachments()->createMany($attachmentPaths);
             }
-
-            $product->attachments()->createMany($attachmentPaths);
         }
-
         
         if ($request->wantsJson()) {
-            $product->makeHidden(['vendor_id', 'category_id']);
-            $response = $product;
-            $response['category'] = $product->category->makeHidden('id', 'image');
-            $response['attachments'] = $product->attachments->makeHidden('product_id');
+            $response = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'description' => $product->description,
+                'price' => $product->price,
+                'cover' => $product->cover,
+                'status' => $product->status,
+                'vendor' => $product->vendor->name,
+                'location' => $product->vendor->location->name,
+                'category' => $product->vendor->category->name,
+                'attachments' => $product->attachments,
+            ];
             return response()->json([
                 'status' => 'success',
                 'data' => $response,
@@ -107,6 +114,16 @@ class MitraProductController extends Controller
     public function deleteProduct(Request $request, $id)
     {
         $product = Product::find($id);
+        if ($product == null) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Product not found',
+                ], 404);
+            }
+            return redirect()->back()->with('error', 'Product not found');
+        }
+
         if ($product->vendor_id != $request->user()->vendor->id) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -114,7 +131,6 @@ class MitraProductController extends Controller
                     'message' => 'You are not authorized to delete this product',
                 ], 400);
             }
-
             return redirect()->back()->with('error', 'You are not authorized to delete this product');
         }
 

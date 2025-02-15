@@ -17,6 +17,8 @@ class MitraVendorController extends Controller
             'email' => ['required', 'email', 'unique:vendors,email,' . $id],
             'phone_number' => ['required', 'string', 'unique:vendors,phone_number,' . $id],
             'profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'location_id' => ['required', 'exists:locations,id'],
         ]);
 
         if ($validator->fails()) {

@@ -46,5 +46,6 @@ class ClientOrderController extends Controller
 
         $data = [];
         $data['total_price'] = $planning->products->toArray();
+        dd($data);
     }
 }

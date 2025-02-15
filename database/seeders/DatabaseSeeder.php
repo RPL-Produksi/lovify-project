@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\Packet;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vendor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -63,22 +65,61 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // id	mitra_id	category_id	name	slug	description	price	cover	status	
-        // $categories = Category::all();
-        // for ($i = 1; $i <= 10; $i++) {
-        //     foreach ($categories as $category) {
-        //         Product::create([
-        //             'category_id' => $category->id,
-        //             'name' => 'Product ' . $category->name . ' ' . $i,
-        //             'slug' => 'product-' . $category->name . '-' . $i,
-        //             'description' => 'Product ' . $category->name . ' ' . $i . ' yang sangat menarik',
-        //             'price' => [10000, 20000, 50000, 75000, 100000][rand(0,4)],
-        //             'cover' => $category->image,
-        //             'status' => 'active',
-        //             'mitra_id' => User::where('role', 'mitra')->first()->id,
-        //         ]);
-        //     }
-        // }
+        for ($i = 2; $i <= 6; $i++) {
+            User::create([
+                'fullname' => 'Mitra ' . $i,
+                'username' => 'mitra' . $i,
+                'password' => bcrypt('mitra123'),
+                'email' => 'mitra' . $i . '@example.com',
+                'phone_number' => '08123456789' . $i,
+                'role' => 'mitra',
+                'is_verified' => true,
+                'avatar' => null,
+            ]);
+        }
 
+        $mitras = User::where('role', 'mitra')
+            ->orderBy('created_at', 'asc') // Mengurutkan berdasarkan tanggal pembuatan
+            ->take(6) // Membatasi hasil hanya 6
+            ->get();
+
+        $locations = ['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta', 'Semarang', 'Malang'];
+        foreach ($locations as $location) {
+            Location::create([
+                'name' => $location,
+            ]);
+        }
+
+        foreach ($mitras as $mitra) {
+            $category = Category::where('name', $categories[rand(0, 5)])->first();
+            $location = Location::where('name', $locations[rand(0, 5)])->first();
+            Vendor::create([
+               'name' => $mitra->fullname,
+                'email' => $mitra->email,
+                'phone_number' => $mitra->phone_number,
+                'profile' => null,
+                'mitra_id' => $mitra->id,
+                'category_id' => $category->id,
+                'location_id' => $location->id,
+            ]);
+        }
+
+        $vendors = Vendor::orderBy('created_at', 'asc')->take(6)->get();
+        for ($i = 1; $i <= 5; $i++) {
+            foreach ($vendors as $vendor) {
+                $path = 'products/' . $vendor->category->name . $i . '.jpg';
+                $toLower = strtolower($vendor->category->name . ' ' . $i);
+                $slug = str_replace([' ', '/'], '-', $toLower);
+                Product::create([
+                    'name' => $vendor->category->name . ' ' . $i,
+                    'slug' => $slug,
+                    'price' => [100000, 200000, 300000, 400000, 500000][rand(0, 4)],
+                    'description' => 'Description ' . $vendor->category->name . ' ' . $i,
+                    'cover' => Storage::url($path),
+                    'vendor_id' => $vendor->id,
+                    'status' => 'active',
+                ]);
+            }
+        }
     }
 }

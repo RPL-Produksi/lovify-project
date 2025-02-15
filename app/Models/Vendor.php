@@ -20,7 +20,6 @@ class Vendor extends Model
     ];
 
     protected $with = [
-        'mitra',
         'products',
         'category',
         'location'
@@ -35,11 +34,6 @@ class Vendor extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function mitra()
-    {
-        return $this->belongsTo(User::class, 'mitra_id');
     }
 
     public function products()

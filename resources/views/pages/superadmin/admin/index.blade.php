@@ -81,8 +81,16 @@
                             <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password">Konfirmasi Password</label>
                             <input type="password" class="form-control" name="password_confirmation" id="password" placeholder="Masukkan password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="" disabled selected>Pilih role</option>
+                                <option value="admin">Admin</option>
+                                <option value="superadmin">Superadmin</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -44,6 +44,12 @@
             <span>Kelola Kategori</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.kelola.kategori') }}" class="nav-link">
+            <i class="fa-solid fa-note"></i>
+            <span>Kelola Planning</span>
+        </a>
+    </li>
     @endif
 
     @if ($user->role == 'superadmin')

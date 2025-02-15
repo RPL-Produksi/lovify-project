@@ -29,6 +29,11 @@ class Product extends Model
         'updated_at'
     ];
 
+    public function plannings()
+    {
+        return $this->belongsToMany(Planning::class, 'product_planning', 'product_id', 'planning_id');
+    }
+
     public function attachments()
     {
         return $this->hasMany(ProductAttachment::class);

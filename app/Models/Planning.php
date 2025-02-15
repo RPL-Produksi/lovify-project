@@ -15,8 +15,18 @@ class Planning extends Model
         'client_id',
     ];
 
+    protected $with = [
+        'products'
+    ];
+
+    protected $hidden = [
+        'client_id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'planning_products', 'planning_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'product_planning', 'planning_id', 'product_id');
     }
 }

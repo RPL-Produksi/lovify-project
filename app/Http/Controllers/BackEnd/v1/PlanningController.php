@@ -13,8 +13,8 @@ class PlanningController extends Controller
         $plannings = Planning::query();
 
         if ($id != null) {
-            $planning = Planning::find($id);
-            if ($planning == null) {
+            $plannings->find($id);
+            if ($plannings == null) {
                 if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 'error',
@@ -26,7 +26,7 @@ class PlanningController extends Controller
                 return true;
             }
 
-            if ($request->user()->id != $planning->client_id) {
+            if ($request->user()->id != $plannings->client_id) {
                 if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 'error',
@@ -37,16 +37,6 @@ class PlanningController extends Controller
                 // return redirect()->back()->with('error', 'You are not authorized to view this planning');
                 return true;
             }
-
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'status' => 'success',
-                    'data' => $planning,
-                ], 200);
-            }
-
-            // return view('planning.show', compact('planning'));
-            return true;
         }
 
         if ($request->user()->role == 'client') {
@@ -57,8 +47,9 @@ class PlanningController extends Controller
                 'message' => 'You are not authorized to view this planning',
             ], 403);
         }
-
-        $plannings->get();
+        
+        $plannings = $plannings->get();
+        
 
         if ($request->wantsJson()) {
             return response()->json([

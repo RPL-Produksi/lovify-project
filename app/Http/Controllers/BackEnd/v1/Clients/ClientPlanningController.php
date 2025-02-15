@@ -13,7 +13,8 @@ class ClientPlanningController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'description' => ['string'],
+            'product_ids' => ['required', 'array'],
             'product_ids.*' => ['required', 'exists:products,id', 'min:1'],
         ]);
 
@@ -21,7 +22,7 @@ class ClientPlanningController extends Controller
             if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => $validator->errors()->first(),
+                    'message' => $validator->errors(),
                 ], 400);
             }
 
@@ -56,7 +57,9 @@ class ClientPlanningController extends Controller
             return true;
         }
 
-        $planning = Planning::create($request->only('title', 'description'));
+        $data = $request->only('title', 'description');
+        $data['client_id'] = $request->user()->id;
+        $planning = Planning::create($data);
         $planning->products()->sync($request->product_ids);
 
         if ($request->wantsJson()) {
@@ -96,5 +99,16 @@ class ClientPlanningController extends Controller
             // return redirect()->back()->with('error', 'You are not authorized to delete this planning');
             return true;
         }
+
+        $planning->delete();
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Planning deleted successfully',
+            ], 200);
+        }
+
+        // return redirect()->back()->with('success', 'Planning deleted successfully');
+        return true;
     }
 }

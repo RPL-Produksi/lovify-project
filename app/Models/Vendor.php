@@ -41,11 +41,11 @@ class Vendor extends Model
 
     public function mitra()
     {
-        return $this->hasOne(User::class, 'mitra_id');
+        return $this->hasOne(User::class, 'id', 'mitra_id');
     }
 
     public function location()
     {
-        return $this->hasOne(Location::class);
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
 }

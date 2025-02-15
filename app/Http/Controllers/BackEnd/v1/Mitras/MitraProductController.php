@@ -22,7 +22,6 @@ class MitraProductController extends Controller
                 ], 400);
             }
 
-            dd('asdasdsa');
             return redirect()->back()->with('error', 'You are not authorized to create product');
         }
         
@@ -44,12 +43,10 @@ class MitraProductController extends Controller
                 ], 400);
             }
 
-            dd($validator->errors()->first());
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $data = $request->all();
-        dd(vars: $data);
         $data['slug'] = $this->makeSlug($request->name);
         $data['vendor_id'] = $vendor->id;
 
@@ -92,20 +89,19 @@ class MitraProductController extends Controller
             $product->attachments()->createMany($attachmentPaths);
         }
 
-        $product->makeHidden(['vendor_id', 'category_id']);
-        $response = $product;
-        $response['category'] = $product->category->makeHidden('id', 'image');
-        $response['attachments'] = $product->attachments->makeHidden('product_id');
-
+        
         if ($request->wantsJson()) {
+            $product->makeHidden(['vendor_id', 'category_id']);
+            $response = $product;
+            $response['category'] = $product->category->makeHidden('id', 'image');
+            $response['attachments'] = $product->attachments->makeHidden('product_id');
             return response()->json([
                 'status' => 'success',
                 'data' => $response,
             ], 200);
         }
 
-        // return redirect()->route('mitra.product.index')->with('success', 'Product has been saved');
-        return true;
+        return redirect()->route('mitra.home')->with('success', 'Product has been saved');
     }
 
     public function deleteProduct(Request $request, $id)

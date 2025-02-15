@@ -34,7 +34,7 @@ class MitraVendorController extends Controller
 
         $data = $request->all();
         $data['mitra_id'] = $request->user()->id;
-
+        
         if ($request->hasFile('profile')) {
             $file = $request->file('profile');
             $path = $file->storeAs('vendors/' . $data['name'], $file->hashName());
@@ -43,7 +43,7 @@ class MitraVendorController extends Controller
         } else {
             $data['profile'] = null;
         }
-
+        
         if ($id != null) {
             $vendor = Vendor::find($id);
             if ($vendor != null && $vendor->mitra_id != $request->user()->id) {
@@ -53,12 +53,12 @@ class MitraVendorController extends Controller
                         'message' => 'You are not authorized to update this vendor',
                     ], 400);
                 }
-
+                
                 return redirect()->back()->with('error', 'You are not authorized to update this vendor');
             }
-
+            
             $vendor->update($data);
-
+            
             $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
             $response = $vendor;
             $response['profile'] = $vendor->profile == null ? asset('vendors/default.png') : $vendor->profile;
@@ -69,23 +69,22 @@ class MitraVendorController extends Controller
                 'data' => $response,
             ], 200);
         }
-
+        
         $vendor = Vendor::create($data);
+        
+        // $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
+        // $response = $vendor;
+        // $response['profile'] = $vendor->profile == null ? asset('vendors/default.png') : $vendor->profile;
+        // $response['mitra']['avatar'] = $response->mitra->avatar == null ? asset('avatars/default.png') : $response->mitra->avatar;
 
-        $vendor->mitra->makeHidden(['id', 'role', 'is_verified', 'created_at', 'updated_at', 'phone_verified']);
-        $response = $vendor;
-        $response['profile'] = $vendor->profile == null ? asset('vendors/default.png') : $vendor->profile;
-        $response['mitra']['avatar'] = $response->mitra->avatar == null ? asset('avatars/default.png') : $response->mitra->avatar;
+        // if ($request->wantsJson()) {
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'Vendor created successfully',
+        //         'data' => $response,
+        //     ], 200);
+        // }
 
-        if ($request->wantsJson()) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Vendor created successfully',
-                'data' => $response,
-            ], 200);
-        }
-
-        // return redirect()->back()->with('success', $message);
-        return true;
+        return redirect()->route('mitra.home')->with('success', 'Vendor created successfully');
     }
 }

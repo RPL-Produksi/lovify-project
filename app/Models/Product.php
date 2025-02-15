@@ -10,16 +10,18 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        'id',
-        'category_id',
         'slug',
         'name',
         'description',
         'price',
-        'stock',
-        'mitra_id',
         'cover',
         'status',
+        'vendor_id'
+    ];
+
+    protected $with = [
+        'attachments',
+        'vendor'
     ];
 
     protected $hidden = [
@@ -27,23 +29,13 @@ class Product extends Model
         'updated_at'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'mitra_id');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function attachments()
     {
         return $this->hasMany(ProductAttachment::class);
     }
 
-    public function packets()
+    public function vendor()
     {
-        return $this->belongsToMany(Packet::class, 'product_packet', 'product_id', 'packet_id');
+        return $this->belongsTo(Vendor::class);
     }
 }

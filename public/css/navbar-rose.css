@@ -1,0 +1,29 @@
+.login-btn:hover {
+    background-color: white !important;
+    color: black;
+    transition: 0.2s;
+}
+
+.navbar {
+    color: #3D0A05;
+    transition: 0.5s;
+}
+
+.text-redlue {
+    color: #3D0A05;
+}
+
+.navbar.scrolled {
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #3D0A05;
+    transition: 0.5s ease-in-out;
+}
+
+.bg-redlue {
+    background-color: #3D0A05 !important;
+}
+
+.t-white {
+    color: white !important;
+}

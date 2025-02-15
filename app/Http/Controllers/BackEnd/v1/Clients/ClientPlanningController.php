@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Http\Controllers\BackEnd\v1\Clients;
+
+use App\Http\Controllers\Controller;
+use App\Models\Planning;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class ClientPlanningController extends Controller
+{
+    public function storePlanning(Request $request, $id = null)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'product_ids.*' => ['required', 'exists:products,id', 'min:1'],
+        ]);
+
+        if ($validator->fails()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()->first(),
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', $validator->errors());
+        }
+
+        if ($id != null) {
+            $planning = Planning::find($id);
+            if ($planning == null) {
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Planning not found',
+                    ], 404);
+                }
+
+                // return redirect()->back()->with('error', 'Planning not found');
+                return true;
+            }
+
+            $planning->update($request->only('title', 'description'));
+            $planning->products()->sync($request->product_ids);
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Planning updated successfully',
+                ], 200);
+            }
+
+            // return redirect()->back()->with('success', 'Planning updated successfully');
+            return true;
+        }
+
+        $planning = Planning::create($request->only('title', 'description'));
+        $planning->products()->sync($request->product_ids);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Planning created successfully',
+            ], 201);
+        }
+
+        // return redirect()->back()->with('success', 'Planning created successfully');
+        return true;
+    }
+
+    public function deletePlanning(Request $request, $id)
+    {
+        $planning = Planning::find($id);
+        if ($planning == null) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Planning not found',
+                ], 404);
+            }
+
+            // return redirect()->back()->with('error', 'Planning not found');
+            return true;
+        }
+
+        if ($request->user()->id != $planning->client_id) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not authorized to delete this planning',
+                ], 403);
+            }
+
+            // return redirect()->back()->with('error', 'You are not authorized to delete this planning');
+            return true;
+        }
+    }
+}

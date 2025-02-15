@@ -1,0 +1,28 @@
+.login-btn:hover {
+    background-color: white !important;
+    color: black;
+    transition: 0.2s;
+}
+
+.navbar {
+    transition: 0.5s;
+}
+
+.navbar.scrolled {
+    background-color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #3D0A05;
+    transition: 0.5s ease-in-out;
+}
+
+h1, h3, a, p, h4, h6, label, small, input, button {
+    font-family: 'IBM Plex Serif', serif;
+}
+
+@media screen and (max-width: 765px) {
+    .navbar {
+        background-color: #fff !important;
+        color: #3D0A05;
+    }
+}

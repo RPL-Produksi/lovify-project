@@ -1,0 +1,17 @@
+.border-rose {
+    border: #3D0A05 solid 2px;
+}
+
+.bg-rose {
+    background-color: #3D0A05;
+}
+
+.vendors-section {
+    position: relative;
+    overflow: hidden;
+    background-color: #f7f0f0;
+}
+
+h1, h3, a, p, h4, h6, h2, h5, label, small, input, ul {
+    font-family: 'IBM Plex Serif', serif;
+}

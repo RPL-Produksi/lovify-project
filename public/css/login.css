@@ -1,0 +1,22 @@
+.login-section {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.col-a {
+    height: 100vh;
+    background-image: url(../asset/image/bg-login.png);
+    background-size: cover; /* Ensure image covers the entire div */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+h1, h3, a, p, h4, h6, label, small, input {
+    font-family: 'IBM Plex Serif', serif;
+}
+
+.bg-rose {
+    background-color: #3D0A05;
+}
+

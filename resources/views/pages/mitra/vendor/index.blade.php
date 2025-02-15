@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Login')
+@section('title', 'Create Vendor')
 @push('css')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
@@ -14,15 +14,15 @@
                         <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
                     </div>
                     <div>
-                        <h1 class="text-redlue text-6xl font-bold">Welcome</h1>
+                        <h1 class="text-redlue text-6xl font-bold">Create Vendor</h1>
                     </div>
 
                     <div class="mt-7">
-                        <form action="{{ route('be.register') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('mitra.store.vendor') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div>
                                 <label for="" class="text-redlue text-xl font-medium">Full Name</label>
-                                <input required type="text" name="fullname" value="{{ old('fullname') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
+                                <input required type="text" name="name" value="{{ old('name') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
                             </div>    
                             <div class="mt-5">
                                 <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
@@ -33,26 +33,23 @@
                                 <input required type="email" name="email" value="{{ old('email') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Username</label>
-                                <input required type="text" name="username" value="{{ old('username') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
+                                <label for="" class="text-redlue text-xl font-medium">Kategori</label>
+                                <select name="category_id" id="category_id" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5">
+                                    @foreach ($kategori as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password</label>
-                                <input required type="password" name="password" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
-                            </div>    
-                            <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password Confirmation</label>
-                                <input required type="password" name="password_confirmation" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
-                            </div>    
-                            <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Acount Type</label>
-                                <select name="role" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5">
-                                    <option value="client">Client</option>
-                                    <option value="mitra">Mitra</option>
+                                <label for="" class="text-redlue text-xl font-medium">Lokasi</label>
+                                <select name="location_id" id="location_id" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5">
+                                    @foreach ($lokasi as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>    
                             <div class="mt-5 w-100">
-                                <button type="submit" class="bg-rose w-full text-white text-center py-3 rounded-md">Sign Up</button>
+                                <button type="submit" class="bg-rose w-full text-white text-center py-3 rounded-md">Create Vendor</button>
                             </div>
                             <div>
                                 @if ($errors->any())
@@ -60,9 +57,6 @@
                                 @endif
                             </div>
                         </form>
-                        <div class="mt-3">
-                            <p class="text-center text-redlue">Already Have an Account? <a href="{{ route('login') }}" class="font-bold underline">Sign In</a></p>
-                        </div>
                     </div>
                 </div>
             </div>

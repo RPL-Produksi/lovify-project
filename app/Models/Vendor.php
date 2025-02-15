@@ -9,6 +9,7 @@ class Vendor extends Model
 {
     use HasUuids;
 
+
     public function category()
     {
         return $this->belongsTo(Category::class);

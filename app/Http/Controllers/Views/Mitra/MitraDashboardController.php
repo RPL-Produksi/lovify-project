@@ -12,7 +12,7 @@ class MitraDashboardController extends Controller
     public function index() {
         $user = Auth::user();
         if ($user->vendor == null) {
-            return redirect()->route('mitra.vendor.create');
+            return redirect()->route('mitra.tambah.vendor.show');
         }
         return view('pages.mitra.home.index', compact('user'));
     }

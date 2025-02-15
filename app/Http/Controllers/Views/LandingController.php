@@ -14,7 +14,6 @@ class LandingController extends Controller
     public function landing()
     {
         $vendor = Vendor::first();
-        dd($vendor);
         $user = Auth::check() ? Auth::user() : null;
 
         if ($user) {

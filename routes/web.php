@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Views\Clients\ClientHomeController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
 use App\Http\Controllers\Views\Clients\ClientVendorsController;
 use App\Http\Controllers\Views\LandingController;
+use App\Http\Controllers\Views\Mitra\MitraCreateVendorController;
 use App\Http\Controllers\Views\Mitra\MitraDashboardController;
 use App\Http\Controllers\Views\Mitra\MitraKelolaProdukController;
 use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
@@ -59,6 +62,9 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
 Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () {
     Route::get('/mitra/dashboard', [MitraDashboardController::class, 'index'])->name('mitra.home');
     Route::get('/mitra/kelola/produk', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
+    Route::post('/mitra/tambah/produk', [MitraProductController::class, 'storeProduct'])->name('mitra.tambah.produk');
+    Route::get('/mitra/make/vendor', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');
+    Route::post('/mitra/store/vendor', [MitraVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
 });
 
 // client route

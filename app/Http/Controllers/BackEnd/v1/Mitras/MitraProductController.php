@@ -22,6 +22,7 @@ class MitraProductController extends Controller
                 ], 400);
             }
 
+            dd('asdasdsa');
             return redirect()->back()->with('error', 'You are not authorized to create product');
         }
         
@@ -43,10 +44,12 @@ class MitraProductController extends Controller
                 ], 400);
             }
 
+            dd($validator->errors()->first());
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $data = $request->all();
+        dd(vars: $data);
         $data['slug'] = $this->makeSlug($request->name);
         $data['vendor_id'] = $vendor->id;
 

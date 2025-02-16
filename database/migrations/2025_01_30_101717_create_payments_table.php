@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->dateTime('payment_date');
             $table->enum('payment_type', ['down_payment', 'remaining_payment', 'full_payment']);
-            $table->enum('status', ['pending', 'completed', 'failed']);
+            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->foreignUuid('order_id')->constrained('orders')->cascadeOnDelete();
             $table->timestamps();
         });

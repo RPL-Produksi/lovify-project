@@ -43,9 +43,6 @@
                                     style="background-color: #3D0A05"><i class="fa-solid fa-pen-to-square" data-toggle="modal"
                                     data-target="#editProductModal"
                                     onclick="setEditProductData('{{ $item->id }}', '{{ $item->name }}', '{{ $item->description }}', '{{ $item->slug }}', '{{ $item->price }}', '{{ $item->status }}', '{{ $item->category_id }}', '{{ $item->cover }}')"></i></button>
-                               
-                                
-
                                 <a href="{{ route('mitra.delete.produk', $item->id) }}" class="btn text-white btn-delete"
                                     data-id="{{ $item->id }}" style="background-color: #3D0A05">
                                     <i class="fa-solid fa-trash"></i>
@@ -79,10 +76,6 @@
                             <textarea class="form-control" id="description" name="description" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="slug" class="form-label">slug</label>
-                            <textarea class="form-control" id="slug" name="slug" required></textarea>
-                        </div>
-                        <div class="mb-3">
                             <label for="price" class="form-label">Harga</label>
                             <input type="number" class="form-control" id="price" name="price" required>
                         </div>
@@ -97,17 +90,6 @@
                                 <option value="draft">Draft</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_category_id">Kategori</label>
-                            <select class="form-control" id="edit_category_id" name="category_id" required>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ old('category_id') == $item->id ? 'selected' : '' }}>
-                                        {{ $item->name }}
-                                    </option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
@@ -146,7 +128,7 @@
                             <label for="edit_description">Deskripsi</label>
                             <textarea class="form-control" id="edit_description" name="description" required></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label for="edit_slug">Slug</label>
                             <input type="text" class="form-control" id="edit_slug" name="slug" required>
                         </div>
@@ -170,11 +152,14 @@
                                 <option value="inactive">Inactive</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label for="edit_category_id">Kategori</label>
                             <select class="form-control" id="edit_category_id" name="category_id" required>
                                 @foreach ($kategori as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}"
+                                        {{ old('category_id') == $item->id ? 'selected' : '' }}>
+                                        {{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

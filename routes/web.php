@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
     Route::get('/admin/kelola/kategori', [AdminKelolaKategoriController::class, 'index'])->name('admin.kelola.kategori');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/{id?}', 'storeCategory')->name('be.category.store');
-        Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
+        Route::get('/{id}', 'deleteCategory')->name('be.category.delete');
     });
 });
 

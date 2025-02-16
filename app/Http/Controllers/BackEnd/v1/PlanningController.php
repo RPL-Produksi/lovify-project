@@ -49,6 +49,25 @@ class PlanningController extends Controller
         }
         
         $plannings = $plannings->get();
+        $plannings = $plannings->map(function ($planning) {
+            return [
+                'id' => $planning->id,
+                'title' => $planning->title,
+                'description' => $planning->description,
+                'products' => $planning->products->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'slug' => $product->slug,
+                        'price' => $product->price,
+                        'location' => $product->vendor->location->name,
+                        'category' => $product->vendor->category->name,
+                        'vendor' => $product->vendor->name
+                    ];
+                })
+            ];
+        });
+        
         
 
         if ($request->wantsJson()) {

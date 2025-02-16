@@ -27,7 +27,7 @@ class ProductController extends Controller
         $statusQuery = $request->query('status');
         
         if ($slug != null) {
-            $products = $products->where('slug', $slug);
+            $products->where('slug', $slug);
         }
 
         if ($categoryQuery != null) {
@@ -40,7 +40,9 @@ class ProductController extends Controller
                 ], 400);
             }
 
-            $products = $products->vendor->where('category_id', $category->id);
+            $products->whereHas('vendor', function ($query) use ($category) {
+                $query->where('category_id', $category->id);
+            });
         }
 
         if ($statusQuery != null) {
@@ -52,19 +54,25 @@ class ProductController extends Controller
             }
 
             $statusQuery = strtolower($statusQuery);
-            $products = $products->where('status', $statusQuery);
+            $products->where('status', $statusQuery);
         }
 
         $products = $products->get();
-        $response = [];
-        $products->makeHidden(['vendor_id']);
-        $products->map(function ($product) {
-            if ($product->vendor->profile == null) {
-                $product->vendor->profile = asset('vendors/default.png');
-            }
-            $product->vendor->makeHidden(['id', 'mitra']);
+        $products = $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'description' => $product->description,
+                'price' => $product->price,
+                'cover' => $product->cover,
+                'vendor' => $product->vendor->name,
+                'location' => $product->vendor->location->name,
+                'category' => $product->vendor->category->name,
+                'attachments' => $product->attachments,
+            ];
         });
-        $response['products'] = $products;
+        $response = $products;
 
         return response()->json([
             'status' => 'success',

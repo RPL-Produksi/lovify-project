@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_progress', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('status', ['pending', 'in_progress', 'completed']);
+            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
             $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
             $table->foreignUuid('order_id')->constrained('orders')->cascadeOnDelete();
             $table->timestamps();

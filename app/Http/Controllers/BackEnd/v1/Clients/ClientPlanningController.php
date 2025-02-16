@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd\v1\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Planning;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,7 @@ class ClientPlanningController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string'],
-            'description' => ['string'],
+            'description' => ['string', 'nullable'],
             'product_ids' => ['required', 'array'],
             'product_ids.*' => ['required', 'exists:products,id', 'min:1'],
         ]);
@@ -27,6 +28,18 @@ class ClientPlanningController extends Controller
             }
 
             return redirect()->back()->with('error', $validator->errors());
+        }
+
+        $productCategories = Product::whereIn('id', $request->product_ids)->with('vendor.category')->get()->pluck('vendor.category.id')->toArray();
+        if (count($productCategories) != count(array_unique($productCategories))) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Product categories must be unique',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'Product categories must be unique');
         }
 
         if ($id != null) {

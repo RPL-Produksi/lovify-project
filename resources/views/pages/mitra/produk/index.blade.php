@@ -68,7 +68,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="addProductForm" enctype="multipart/form-data" method="POST"
-                        action="{{ route('mitra.tambah.produk') }}">
+                        action="{{ route('mitra.store.produk') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Produk</label>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="editProductForm" enctype="multipart/form-data" method="POST"
-                        action="{{ route('mitra.tambah.produk') }}">
+                        action="{{ route('mitra.store.produk') }}">
                         @csrf
                         <input type="hidden" id="edit_id" name="id">
                         <div class="form-group">
@@ -244,6 +244,12 @@
 
     <script>
         function setEditProductData(id, name, description, slug, price, status, categoryId, cover) {
+            const editUrl = '{{ route("mitra.store.produk", ":id") }}'
+
+            console.log(id);
+
+
+            document.getElementById('editProductForm').action = editUrl.replace(':id', id);
             document.getElementById('edit_id').value = id;
             document.getElementById('edit_name').value = name;
             document.getElementById('edit_description').value = description;

@@ -25,16 +25,22 @@ class MitraProductController extends Controller
             return redirect()->back()->with('error', 'You are not authorized to create product');
         }
         
-        $validator = Validator::make($request->all(), [
+        $rule = [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'integer'],
-            'cover' => ['required', 'image'],
             'status' => ['required', 'in:draft,active,inactive'],
             'category_id' => ['required', 'exists:categories,id'],
-            'attachments.*' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-        ]);
+            'attachments.*' => ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ];
 
+        if ($id == null) {
+            $rule['cover'] = ['required', 'mimes:jpeg,png,jpg', 'max:2048'];
+        } else {
+            $rule['cover'] = ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'];
+        }
+        $validator = Validator::make($request->all(), $rule);
+        
         if ($validator->fails()) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -49,17 +55,18 @@ class MitraProductController extends Controller
         $data = $request->all();
         $data['slug'] = $this->makeSlug($request->name);
         $data['vendor_id'] = $vendor->id;
-
+        
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $path = $file->storeAs('products/' . $data['slug'], $file->hashName());
             $filePath = Storage::url($path);
             $data['cover'] = $filePath;
         }
-
+        
         if ($id != null) {
             $product = Product::find($id);
-            if ($product != null && $product->mitra_id != $request->user()->id) {
+            if ($product != null && $product->vendor_id != $request->user()->vendor->id) {
+                dd($request->all());
                 if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 'error',

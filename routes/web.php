@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
 // mitra route
 Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () {
     Route::get('/produk/{id}/data', [MitraProductController::class, 'dataById'])->name('mitra.produk.data');
-    Route::post('/mitra/tambah/produk', [MitraProductController::class, 'storeProduct'])->name('mitra.tambah.produk');
+    Route::post('/mitra/store/produk/{id?}', [MitraProductController::class, 'storeProduct'])->name('mitra.store.produk');
     Route::get('/mitra/dashboard', [MitraDashboardController::class, 'index'])->name('mitra.home');
     Route::get('/mitra/kelola/produk', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
     Route::get('/mitra/delete/produk/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');

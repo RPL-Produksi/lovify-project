@@ -4,8 +4,13 @@ namespace App\Http\Controllers\BackEnd\v1\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Midtrans\Config;
+use Midtrans\Snap;
 
 class ClientTransactionController extends Controller
 {
@@ -20,6 +25,10 @@ class ClientTransactionController extends Controller
 
     public function storePayment(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'payment_type' => ['required', 'in:down_payment,remaining_payment,full_payment'],
+        ]);
+
         $order = Order::find($id);
 
         if (!$order) {
@@ -33,6 +42,105 @@ class ClientTransactionController extends Controller
             return redirect()->back()->with('error', 'Order not found');
         }
 
-        // if ($order->planning)
+        if ($order->planning->client_id != $request->user()->id) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Unauthorized',
+                ], 401);
+            }
+
+            return redirect()->back()->with('error', 'Unauthorized');
+        }
+
+        $payments = Payment::where('order_id', $order->id)->get();
+
+        if ($payments->where('status', 'pending')->isNotEmpty()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You still have pending payment',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'You still have pending payment');
+        }
+
+        $hasDp = $payments->where('payment_type', 'down_payment')->where('status', 'completed')->isNotEmpty();
+        $hasRemaining = $payments->where('payment_type', 'remaining_payment')->where('status', 'completed')->isNotEmpty();;
+        $hasFull = $payments->where('payment_type', 'full_payment')->where('status', 'completed')->isNotEmpty();;
+
+        if ($hasFull || ($hasDp && $hasRemaining)) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You already completed the payment',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'You already completed the payment');
+        }
+
+        if ($hasDp && in_array($request->payment_type, ['down_payment', 'full_payment'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You can only pay the remaining amount',
+            ], 400);
+
+            return redirect()->back()->with('error', 'You can only pay the remaining amount');
+        }
+
+        $amount = match ($request->payment_type) {
+            'down_payment' => $order->down_payment,
+            'remaining_payment' => $order->remaining_payment,
+            'full_payment' => $order->total_price,
+        };
+
+        $data = [
+            'payment_type' => $request->payment_type,
+            'payment_date' => Carbon::now(),
+            'amount' => $amount,
+            'order_id' => $id,
+        ];
+
+        try {
+            $invoice = Str::uuid();
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $invoice,
+                    'gross_amount' => $data['amount'],
+                ],
+                'expiry' => [
+                    'start_time' => now()->format('Y-m-d H:i:s O'),
+                    'unit' => 'minutes',
+                    'duration' => '10'
+                ]
+            ];
+
+            $snapToken = Snap::getSnapToken($params);
+            $payment = Payment::create($data);
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Payment created',
+                    'data' => [
+                        'snap_token' => $snapToken,
+                        'payment' => $payment,
+                    ],
+                ], 201);
+            }
+
+            return redirect()->back()->with('success', 'Payment created');
+        } catch (\Throwable $th) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $th->getMessage(),
+                ], 500);
+            }
+
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

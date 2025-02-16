@@ -101,7 +101,7 @@ class MitraProductController extends Controller
             ], 200);
         }
 
-        return redirect()->route('mitra.home')->with('success', 'Product has been saved');
+        return redirect()->back()->with('success', 'Product has been saved');
     }
 
     public function deleteProduct(Request $request, $id)
@@ -127,7 +127,13 @@ class MitraProductController extends Controller
             ], 200);
         }
 
-        // return redirect()->back()->with('success', 'Product deleted successfully');
-        return true;
+        return redirect()->back()->with('success', 'Product deleted successfully');
     }
+
+    public function dataById($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+    
 }

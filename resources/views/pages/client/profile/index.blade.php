@@ -21,7 +21,7 @@
                     @endif
                 </div>
                 <div>
-                    <a href="" class="bg-rose-950 text-white rounded-lg font-medium p-3 hover:text-rose-950 hover:border-2 hover:border-rose-950 hover:bg-transparent">Change Picture</a>
+                    <a href="" class="bg-rose-950 border-2 border-rose-950 text-white rounded-lg font-medium p-3 hover:text-rose-950 hover:border-2 hover:border-rose-950 hover:bg-transparent">Change Picture</a>
                 </div>
                 <div>
                     <a href="" class="border-2 border-rose-950 text-rose-950 rounded-lg font-medium p-3 hover:text-white hover:bg-rose-950">Delete

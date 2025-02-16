@@ -14,6 +14,11 @@
             </button>
         </div>
         <hr>
+        <div>
+            @if ($errors->any())
+                <p class="alert alert-danger border-left-danger">{{ $errors->first() }}</p>
+            @endif
+        </div>
         <table class="table table-striped" id="example">
             <thead>
                 <tr>
@@ -34,9 +39,9 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phone_number }}</td>
                         <td>
-                            <button type="button"  class="btn btn-primary"><i
+                            <button type="button"  class="btn text-white" style="background-color: #3D0A05"><i
                                     class="fa-solid fa-pen-to-square"></i></button>
-                            <a href="" class="btn btn-danger btn-delete" data-id="{{ $item->id }}">
+                            <a href="" class="btn btn-delete text-white" style="background-color: #3D0A05" data-id="{{ $item->id }}">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
 

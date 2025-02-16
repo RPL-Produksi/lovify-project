@@ -15,6 +15,11 @@
             </button>
         </div>
         <hr>
+        <div>
+            @if ($errors->any())
+                <p class="alert alert-danger border-left-danger">{{ $errors->first() }}</p>
+            @endif
+        </div>
         <table class="table table-bordered table-striped" id="example">
             <thead>
                 <tr>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
 use App\Http\Controllers\Views\Clients\ClientDetailPacketController;
 use App\Http\Controllers\Views\Clients\ClientHomeController;
+use App\Http\Controllers\Views\Clients\ClientPlanningShowController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
 use App\Http\Controllers\Views\Clients\ClientVendorsController;
 use App\Http\Controllers\Views\LandingController;
@@ -78,4 +80,5 @@ Route::get('/vendors/{category}', [ClientVendorsController::class, 'index'])->na
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
+    Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
 });

@@ -32,6 +32,11 @@ class Order extends Model
         'updated_at'
     ];
 
+    protected $with = [
+        'planning',
+        'orderProgress'
+    ];
+
     public function planning()
     {
         return $this->belongsTo(Planning::class);

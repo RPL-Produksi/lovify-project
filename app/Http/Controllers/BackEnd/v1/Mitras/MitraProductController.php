@@ -152,11 +152,4 @@ class MitraProductController extends Controller
 
         return redirect()->back()->with('success', 'Product deleted successfully');
     }
-
-    public function dataById($id)
-    {
-        $product = Product::findOrFail($id);
-        return response()->json($product);
-    }
-    
 }

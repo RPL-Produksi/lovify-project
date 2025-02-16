@@ -12,10 +12,17 @@ class AdminCategoryController extends Controller
 {
     public function storeCategory(Request $request, $id = null)
     {
-        $validator = Validator::make($request->all(), [
+        $rule = [
             'name' => ['required', 'string', 'max:255'],
-            'image' => ['required', 'mimes:jpeg,png,jpg', 'max:2048'],
-        ]);
+        ];
+
+        if ($id == null) {
+            $rule['image'] = ['required', 'mimes:jpeg,png,jpg', 'max:2048'];
+        } else {
+            $rule['image'] = ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'];
+        }
+
+        $validator = Validator::make($request->all(), $rule);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);

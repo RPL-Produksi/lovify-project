@@ -25,6 +25,7 @@ use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaAdminController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaClientController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaMitraController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // auth route
@@ -84,3 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
     Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
 });
+
+// Route::get('/mail', function () {
+//     Mail::raw('ini test mail dari sipapii@smkn2smi.sch.id', function ($message) {
+//         $message->to('hilal.muhammad0807@gmail.com')->subject('Test Mail');
+//     });
+// });

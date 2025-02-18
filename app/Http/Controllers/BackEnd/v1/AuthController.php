@@ -8,6 +8,7 @@ use App\Notifications\VerifyEmailNotification;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -55,8 +56,16 @@ class AuthController extends Controller
         }
 
         $user = User::create($data);
-        $verificationUrl = url("/auth/verify?id={$user->id}&type=email&token={$user->email_verification_token}");
-        $user->notify(new VerifyEmailNotification($verificationUrl));
+        $verificationUrlEmail = url("/auth/verify?id={$user->id}&type=email&token={$user->email_verification_token}");
+        $user->notify(new VerifyEmailNotification($verificationUrlEmail));
+        $verificationUrlPhone = url("/auth/verify?id={$user->id}&type=phone&token={$user->phone_verification_token}");
+        Http::withHeaders([
+            'Authorization' => env('FONNTE_TOKEN'),
+        ])->post('https://api.fonnte.com/send', [
+            'target' => $user->phone_number,
+            'message' => "Link for verification Phone Number:\n" .  $verificationUrlPhone,
+            'countryCode' => '62',
+        ]);
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -195,11 +204,23 @@ class AuthController extends Controller
             }
 
             $verificationUrl = url("/auth/verify?id={$user->id}&type=phone&token={$user->phone_verification_token}");
-            // $user->notify(new VerifyPhoneNotification($verificationUrl));
+            $response = Http::withHeaders([
+                'Authorization' => env('FONNTE_TOKEN'),
+            ])->post('https://api.fonnte.com/send', [
+                'target' => $user->phone_number,
+                'message' => "Link for verification Phone Number:\n" .  $verificationUrl,
+                'countryCode' => '62',
+            ]);
 
-            $status = 'success';
-            $message = 'Verification SMS sent.';
-            $httpCode = 200;
+            if ($response->successful()) {
+                $status = 'success';
+                $message = 'Verification Phone Number sent.';
+                $httpCode = 200;
+            } else {
+                $status = 'error';
+                $message = 'Send Verification failed';
+                $httpCode = 400;
+            }
         }
 
         if ($request->wantsJson()) {

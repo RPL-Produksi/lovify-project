@@ -10,7 +10,6 @@
     <section class="vendors-section py-32 px-40">
         <div class="grid grid-cols-4 gap-7">
         @foreach ($products as $item)
-
             <div class="border-rose py-8 px-6 shadow-2xl">
                 <div class="mb-4">
                     <img src="{{ asset($item->cover) }}" alt="" class="w-full h-48 object-cover">

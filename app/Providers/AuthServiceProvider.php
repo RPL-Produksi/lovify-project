@@ -39,5 +39,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('verified', function ($user) {
             return $user->is_verified == 1;
         });
+
+        Gate::define('phone_verified', function ($user) {
+            return $user->phone_verified == 1;
+        });
+
+        Gate::define('email_verified', function ($user) {
+            return $user->email_verified == 1;
+        });
     }
 }

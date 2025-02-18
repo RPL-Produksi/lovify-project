@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('number_phone')->nullable();
             $table->tinyInteger('phone_verified')->default(0);
+            $table->tinyInteger('email_verified')->default(0);
             $table->string('avatar')->nullable();
             $table->enum('role', ['client', 'mitra'])->default('client');
             $table->timestamps();

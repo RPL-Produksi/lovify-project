@@ -52,6 +52,17 @@ class MitraProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if ($request->status == 'active' && !$vendor->is_verified && !$vendor->is_active) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You cannot create active product without being an active vendor',
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', 'You cannot create active product without being an active vendor');
+        }
+
         $data = $request->all();
         $data['slug'] = $this->makeSlug($request->name);
         $data['vendor_id'] = $vendor->id;

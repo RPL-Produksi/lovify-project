@@ -7,6 +7,7 @@ use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\Backend\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\Backend\v1\Clients\ClientPlanningController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\Backend\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\Backend\v1\PlanningController;
@@ -48,14 +49,17 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', 'deleteVendor');
         });
     });
-
+    // Client
     Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
         Route::group(['prefix' => 'plannings', 'controller' => ClientPlanningController::class], function () {
             Route::post('/{id?}', 'storePlanning');
             Route::delete('/{id}', 'deletePlanning');
         });
-        Route::group(['prefix' => 'orders', 'controller' => ClientOrderController::class], function () {
+        Route::group(['prefix' => 'orders', 'middleware' => ['can:email_verified, can:phone_verified'], 'controller' => ClientOrderController::class], function () {
             Route::post('/{id}', 'storeOrder');
+        });
+        Route::group(['prefix' => 'transactions', 'controller' => ClientTransactionController::class], function () {
+            Route::post('/{id}', 'storePayment');
         });
     });
 });

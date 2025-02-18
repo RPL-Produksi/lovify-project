@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
             $table->string('profile')->nullable();
+            $table->tinyInteger('is_verified')->default(0);
+            $table->tinyInteger('email_verified')->default(0);
+            $table->tinyInteger('phone_verified')->default(0);
             $table->foreignUuid('mitra_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignUuid('location_id')->constrained('locations')->cascadeOnDelete();

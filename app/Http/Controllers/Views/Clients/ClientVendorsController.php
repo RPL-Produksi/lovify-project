@@ -11,12 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ClientVendorsController extends Controller
 {
-    public function index(Category $category) {
+    public function index($categoryId) 
+    {
+        // dd($categoryId);
         $user  = Auth::user();
-        $products = Product::where("category_id", $category->id)->with('user')->get();
-        $products->map(function ($product) {
-            $product['mitra'] = $product->user->username;
-        });
+        $products = Product::whereHas('vendor', function ($query) use ($categoryId) {
+            $query->where('category_id', $categoryId);
+        })->get();
+
+        // dd($products);
         return view('pages.client.vendors.index', compact('products','user'));
     }
 }

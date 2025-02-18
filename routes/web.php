@@ -31,11 +31,13 @@ Route::prefix('auth')->group(function () {
     Route::group(['controller' => ViewAuthController::class], function () {
         Route::get('/login', 'login')->name('login');
         Route::get('/register', 'register')->name('register');
+        Route::get('/verify', 'verify');
     });
     Route::group(['controller' => BackendAuthController::class], function () {
         Route::post('/register', 'register')->name('be.register');
         Route::post('/login', 'login')->name('be.login');
         Route::post('/logout', 'logout')->name('be.logout')->middleware('auth');
+        Route::post('/resend-verification', 'resend');
     });
 });
 

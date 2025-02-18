@@ -4,14 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
-use App\Http\Controllers\Backend\v1\CategoryController;
+use App\Http\Controllers\BackEnd\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
-use App\Http\Controllers\Backend\v1\Clients\ClientPlanningController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
-use App\Http\Controllers\Backend\v1\Mitras\MitraVendorController;
-use App\Http\Controllers\Backend\v1\PlanningController;
-use App\Http\Controllers\Backend\v1\ProductController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
+use App\Http\Controllers\BackEnd\v1\PlanningController;
+use App\Http\Controllers\BackEnd\v1\ProductController;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
     Route::get('/', function (Request $request) {
@@ -23,6 +23,7 @@ Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         Route::post('/register', 'register');
         Route::post('/login', 'login');
+        Route::post('/resend-verification', 'resend');
         Route::post('/logout', 'logout')->middleware('auth:sanctum');
     });
     // Umum

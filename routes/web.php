@@ -76,14 +76,15 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
 
 // client route
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');
-Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');
 Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs');
-Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('store/plannig', [ClientPlanningController::class,'storePlanning'])->name('client.store.planning');
+    Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
     Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
+    Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
 });
 
 // Route::get('/mail', function () {

@@ -28,7 +28,7 @@
                         <p style="color: #917270">{{ $item->description }}</p>
                     </div>
                     <div class="flex items-center mt-4">
-                        <a href="{{ route('client.detail.product', $item->id) }}" class="bg-rose p-3 w-full text-center text-white rounded-lg">Booking</a>
+                        <a href="{{ route('client.detail.product', $item->id) }}" class="bg-rose p-2 w-full text-center text-white rounded-lg">Detail</a>
                     </div>
             </div>
 

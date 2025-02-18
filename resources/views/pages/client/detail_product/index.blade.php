@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    @include('components.navbar_detail_packet')
+    @include('components.navbar')
 
     <section class="hero-section relative">
         <div class="flex justify-center pt-72" style="height: 100vh">

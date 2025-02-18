@@ -150,7 +150,7 @@
     <section class="planning-section xl:px-40 md:px-10 px-4 pt-10 pb-10" id="plannings-section"
         style="background-color: #f7f0f0">
         <h1 class="font-semibold template-h1" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
-            Plannings
+            Category
         </h1>
         <div class="grid xl:grid-cols-3 md:grid-cols-2 mt-7 gap-7">
             @foreach ($category as $item)

@@ -12,6 +12,7 @@ use App\Http\Controllers\Views\AuthController as ViewAuthController;
 use App\Http\Controllers\views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
 use App\Http\Controllers\Views\Clients\ClientDetailPacketController;
+use App\Http\Controllers\Views\Clients\ClientDetailProductController;
 use App\Http\Controllers\Views\Clients\ClientHomeController;
 use App\Http\Controllers\Views\Clients\ClientPlanningShowController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
@@ -68,12 +69,11 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
     Route::get('/mitra/delete/produk/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
     Route::get('/mitra/make/vendor', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');
     Route::post('/mitra/store/vendor', [MitraCreateVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
-
 });
 
 // client route
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');
-Route::get('/detailPacket', [ClientDetailPacketController::class, 'detailPacket'])->name('detailPacket');
+Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
 Route::get('/article', [ClientArticleController::class, 'index'])->name('article');
 Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs');
 Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');

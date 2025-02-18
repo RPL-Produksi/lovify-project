@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="{{ asset('css/vendors.css') }}">
     @include('components.navbar_rose')
 
-    <section class="vendors-section py-32 px-40">
+    <section class="vendors-section py-32 px-40" style="min-height: 100vh">
+        <div class="mb-6">
+            <h1 class="font-semibold template-h1 text-4xl" data-aos="fade-up" data-aos-duration="1000" style="color: #3D0A05">
+                List Product
+            </h1>
+        </div>
         <div class="grid grid-cols-4 gap-7">
         @foreach ($products as $item)
             <div class="border-rose py-8 px-6 shadow-2xl">
@@ -23,7 +28,7 @@
                         <p style="color: #917270">{{ $item->description }}</p>
                     </div>
                     <div class="flex items-center mt-4">
-                        <a href="" class="bg-rose p-3 w-full text-center text-white rounded-lg">Booking</a>
+                        <a href="{{ route('client.detail.product', $item->id) }}" class="bg-rose p-3 w-full text-center text-white rounded-lg">Booking</a>
                     </div>
             </div>
 

@@ -45,8 +45,8 @@ class AdminCategoryController extends Controller
             ], 200);
         }
 
-        // return redirect()->back()->with('success', 'Category created successfully');
-        return true;
+        return redirect()->back()->with('success', 'Category created successfully');
+        // return true;
     }
 
     public function deleteCategory(Request $request, $id)
@@ -61,7 +61,7 @@ class AdminCategoryController extends Controller
             ], 200);
         }
 
-        // return redirect()->back()->with('success', 'Category deleted successfully');
-        return true;
+        return redirect()->back()->with('success', 'Category deleted successfully');
+        // return true;
     }
 }

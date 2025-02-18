@@ -75,10 +75,10 @@
                             class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('aboutUs') ? 'w-full' : 'w-0' }}"
                             style="height: 1px;"></span>
                     </a>
-                    <a href="" class="font-light relative overflow-hidden group ">
+                    <a href="{{ route('planning') }}" class="font-light relative overflow-hidden group ">
                         My Plannings
                         <span
-                            class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('article') ? 'w-full' : 'w-0' }}""
+                            class="absolute left-0 bottom-0 w-0 bg-redlue transition-all duration-300 group-hover:w-full {{ request()->routeIs('planning') ? 'w-full' : 'w-0' }}""
                             style="height: 1px;"></span>
                     </a>
                 </div>

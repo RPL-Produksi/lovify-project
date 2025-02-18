@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('number_phone')->nullable();
             $table->tinyInteger('phone_verified')->default(0);
             $table->tinyInteger('email_verified')->default(0);
+            $table->string('email_verification_token')->nullable();
+            $table->string('phone_verification_token')->nullable();
             $table->string('avatar')->nullable();
             $table->enum('role', ['client', 'mitra'])->default('client');
             $table->timestamps();

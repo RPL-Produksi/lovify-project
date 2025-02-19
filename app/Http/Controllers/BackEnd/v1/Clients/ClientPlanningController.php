@@ -66,8 +66,8 @@ class ClientPlanningController extends Controller
                 ], 200);
             }
 
-            // return redirect()->back()->with('success', 'Planning updated successfully');
-            return true;
+            return redirect()->route('planning')->with('success', 'Planning updated successfully');
+            // return true;
         }
 
         $data = $request->only('title', 'description');

@@ -117,7 +117,7 @@
                     Book {{ $product->name }}</h1>
                 <div class="flex justify-center mt-3">
                     <form action="{{ route('client.store.planning') }}" method="POST">
-                        <input type="text">
+                        <input type="text" value="{{ $product->id }}">
                         <button type="submit" class="text-white rounded-3xl px-7 py-3 book-btn" data-aos="fade-up"
                             data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</button>
                     </form>

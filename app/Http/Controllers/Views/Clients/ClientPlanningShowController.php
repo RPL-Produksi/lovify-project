@@ -12,4 +12,14 @@ class ClientPlanningShowController extends Controller
         $user = Auth::user();
         return view('pages.client.planning.index', compact('user'));
     }
+
+    public function detail() {
+        $user = Auth::user();
+        return view('pages.client.planning.detail', compact('user'));
+    }
+
+    public function store() {
+        $user = Auth::user();
+        return view('pages.client.planning.store', compact('user'));
+    }
 }

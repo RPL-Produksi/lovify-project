@@ -9,10 +9,14 @@
     background-color: #f7f0f0;
 }
 
-h1, h3, a, p, h4, h6, h2, h5, label, small, input, ul, select {
+h1, h3, a, p, h4, h6, h2, h5, label, small, input, ul, select, textarea {
     font-family: 'IBM Plex Serif', serif;
 }
 
 .bg-rose {
     background-color: #3D0A05;
+}
+
+.text-rs {
+    color: #3D0A05;
 }

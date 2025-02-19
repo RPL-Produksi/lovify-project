@@ -30,7 +30,7 @@ class ClientPlanningController extends Controller
             return redirect()->back()->with('error', $validator->errors());
         }
 
-        $productCategories = Product::whereIn('id', $request->product_ids)->with('vendor.category')->get()->pluck('vendor.category.id')->toArray() ?? [];
+        $productCategories = Product::whereIn('id', $request->product_ids ?? [])->with('vendor.category')->get()->pluck('vendor.category.id')->toArray();
         if (count($productCategories) != count(array_unique($productCategories))) {
             if ($request->wantsJson()) {
                 return response()->json([

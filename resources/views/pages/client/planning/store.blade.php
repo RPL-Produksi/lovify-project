@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Cart')
+@section('title', 'Tambah Planning')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">

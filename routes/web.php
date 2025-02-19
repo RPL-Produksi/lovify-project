@@ -84,8 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
     Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
-    Route::get('/planning/detail', [ClientPlanningShowController::class,'detail'])->name('planning.detail');
+    Route::get('/planning/detail/{id}', [ClientPlanningShowController::class,'detail'])->name('planning.detail');
     Route::get('/planning/tambah', [ClientPlanningShowController::class,'store'])->name('planning.store');
+    Route::get('/planning/category', [ClientPlanningShowController::class,'category'])->name('planning.category');
     Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
 });
 

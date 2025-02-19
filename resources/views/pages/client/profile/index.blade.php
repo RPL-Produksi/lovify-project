@@ -24,6 +24,9 @@
                     <a href="" class="bg-rose-950 border-2 border-rose-950 text-white rounded-lg font-medium p-3 hover:text-rose-950 hover:border-2 hover:border-rose-950 hover:bg-transparent">Change Picture</a>
                 </div>
                 <div>
+                    <button type="button" @click="open = true" class="text-white rounded-3xl px-7 py-3 book-btn"
+                            data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book
+                            Now!</button>
                     <a href="" class="border-2 border-rose-950 text-rose-950 rounded-lg font-medium p-3 hover:text-white hover:bg-rose-950">Delete
                         Picture</a>
                 </div>

@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
             'email' => env('SUPERADMIN_EMAIL'),
             'phone_number' => env('SUPERADMIN_PHONE_NUMBER'),
             'role' => env('SUPERADMIN_ROLE'),
-            'is_verified' => null
         ]);
 
         User::create([
@@ -43,7 +42,6 @@ class DatabaseSeeder extends Seeder
             'email' => env('ADMIN_EMAIL'),
             'phone_number' => env('ADMIN_PHONE_NUMBER'),
             'role' => env('ADMIN_ROLE'),
-            'is_verified' => null
         ]);
 
         User::create([
@@ -53,7 +51,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'mitra@example.com',
             'phone_number' => '081234567890',
             'role' => 'mitra',
-            'is_verified' => true
         ]);
 
         $categories = ['venue', 'mua', 'catering', 'photographer', 'organize', 'decoration'];
@@ -73,7 +70,6 @@ class DatabaseSeeder extends Seeder
                 'email' => 'mitra' . $i . '@example.com',
                 'phone_number' => '08123456789' . $i,
                 'role' => 'mitra',
-                'is_verified' => true,
                 'avatar' => null,
             ]);
         }

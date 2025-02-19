@@ -10,13 +10,12 @@ use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
+use App\Http\Controllers\BackEnd\v1\PersonalController;
 use App\Http\Controllers\BackEnd\v1\PlanningController;
 use App\Http\Controllers\BackEnd\v1\ProductController;
+use Illuminate\Support\Facades\Validator;
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
-    Route::get('/', function (Request $request) {
-        return $request->user();
-    });
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
 });
 
 Route::prefix('v1')->group(function () {

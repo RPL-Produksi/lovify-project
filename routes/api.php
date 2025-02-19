@@ -16,6 +16,9 @@ use App\Http\Controllers\BackEnd\v1\ProductController;
 use Illuminate\Support\Facades\Validator;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
+    Route::get('/', 'getUser');
+    Route::post('/', 'changeProfile');
+    Route::post('/password', 'changePassword');
 });
 
 Route::prefix('v1')->group(function () {

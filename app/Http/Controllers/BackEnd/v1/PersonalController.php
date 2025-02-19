@@ -4,6 +4,8 @@ namespace App\Http\Controllers\BackEnd\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PersonalController extends Controller
@@ -11,18 +13,6 @@ class PersonalController extends Controller
     public function getUser(Request $request)
     {
         $user = $request->user();
-        
-        // $table->string('fullname');
-        // $table->string('username')->unique();
-        // $table->string('password');
-        // $table->string('email')->unique();
-        // $table->string('number_phone')->nullable();
-        // $table->tinyInteger('phone_verified')->default(0);
-        // $table->tinyInteger('email_verified')->default(0);
-        // $table->string('email_verification_token')->nullable();
-        // $table->string('phone_verification_token')->nullable();
-        // $table->string('avatar')->nullable();
-        // $table->enum('role', ['client', 'mitra'])->default('client');
         $response = [
             'fullname' => $user->fullname,
             'username' => $user->username,
@@ -46,7 +36,95 @@ class PersonalController extends Controller
         $user = $request->user();
         $validator = Validator::make($request->all(), [
             'username' => ['nullable', 'string', 'unique:users,username,' . $user->id],
-            'email' => ['nullable', 'email ']
+            'email' => ['nullable', 'email', 'unique:users,email,' . $user->id],
+            'phone_number' => ['nullable', 'number', 'unique:users,phone_number,' . $user->id],
+            'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg']
         ]);
+
+        if ($validator->fails()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()
+                ], 400);
+            }
+
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $data = $request->all();
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
+            $filePath = Storage::url($storedFile);
+            $data['avatar'] = $filePath;
+        } else {
+            $data['avatar'] = null;
+        }
+        $user->update($data);
+        $response = [
+            'fullname' => $user->fullname,
+            'username' => $user->username,
+            'email' => $user->email,
+            'phone_number' => $user->phone_number,
+            'email_verified' => $user->email_verified,
+            'phone_verified' => $user->phone_verified,
+            'avatar' => $user->avatar == null ? asset('avatars/default.png') : $user->avatar,
+            'role' => $user->role
+        ];
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Profile Change Successfully.',
+                'data' => $response
+            ], 200);
+        }
+
+        return redirect()->back();
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = $request->user();
+        $validator = Validator::make($request->all(), [
+            'old_password' => ['required', 'string'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        if ($validator->fails()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors()
+                ], 400);
+            }
+
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Old Password is incorrect.'
+                ], 400);
+            }
+
+            return redirect()->back()->withErrors(['old_password' => 'Old Password is incorrect.']);
+        }
+
+        $user->update([
+            'password' => bcrypt($request->new_password)
+        ]);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Password Change Successfully.'
+            ], 200);
+        }
+
+        return redirect()->back();
     }
 }

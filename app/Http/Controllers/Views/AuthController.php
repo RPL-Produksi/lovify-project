@@ -36,52 +36,44 @@ class AuthController extends Controller
             if ($user->email_verified) {
                 $status = 'error';
                 $message = 'Email already verified.';
-            }
-            
-            if ($token != $user->email_verification_token) {
+            } else if ($token != $user->email_verification_token) {
                 $status = 'error';
                 $message = 'Invalid verification link.';
-            }
-
-            if (Carbon::parse($user->email_token_expire)->greaterThan(now())) {
+            }else if (Carbon::parse($user->email_token_expire)->greaterThan(now())) {
                 $status = 'error';
                 $message = 'Verification link expired';
                 $httpCode = 400;
+            } else {
+                $user->update([
+                    'email_verified' => 1,
+                    'email_verification_token' => null,
+                    'email_token_expire' => null,
+                ]);
+                $status = 'success';
+                $message = 'Email successfully verified.';
             }
-            
-            $user->update([
-                'email_verified' => 1,
-                'email_verification_token' => null,
-                'email_token_expire' => null,
-            ]);
-            $status = 'success';
-            $message = 'Email successfully verified.';
         }
         
         if ($type == 'phone') {
             if ($user->phone_verified) {
                 $status = 'error';
                 $message = 'Phone Number already verified.';
-            }
-
-            if ($token != $user->phone_verification_token) {
+            }else if ($token != $user->phone_verification_token) {
                 $status = 'error';
                 $message = 'Invalid verification link.';
-            }
-
-            if (Carbon::parse($user->phone_token_expire)->greaterThan(now())) {
+            }else if (Carbon::parse($user->phone_token_expire)->greaterThan(now())) {
                 $status = 'error';
                 $message = 'Verification link expired';
                 $httpCode = 400;
+            } else {
+                $user->update([
+                    'phone_verified' => 1,
+                    'phone_verification_token' => null,
+                    'phone_token_expire' => null,
+                ]);
+                $status = 'success';
+                $message = 'Phone Number successfully verified';
             }
-
-            $user->update([
-                'phone_verified' => 1,
-                'phone_verification_token' => null,
-                'phone_token_expire' => null,
-            ]);
-            $status = 'success';
-            $message = 'Phone Number successfully verified';
         }
 
         return view('pages.auth.verify', compact('status', 'message'));

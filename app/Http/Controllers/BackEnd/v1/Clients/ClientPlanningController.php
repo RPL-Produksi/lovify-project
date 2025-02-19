@@ -15,8 +15,8 @@ class ClientPlanningController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string'],
             'description' => ['string', 'nullable'],
-            'product_ids' => ['required', 'array'],
-            'product_ids.*' => ['required', 'exists:products,id', 'min:1'],
+            'product_ids' => ['nullable', 'array'],
+            'product_ids.*' => ['nullable', 'exists:products,id', 'min:1'],
         ]);
 
         if ($validator->fails()) {

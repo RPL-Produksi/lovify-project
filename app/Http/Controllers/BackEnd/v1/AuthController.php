@@ -4,10 +4,15 @@ namespace App\Http\Controllers\BackEnd\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Stringable;
 
 class AuthController extends Controller
 {
@@ -37,6 +42,10 @@ class AuthController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         $data['is_verified'] = $request->role == 'mitra' ? 0 : null;
+        $data['email_verification_token'] = Str::random(64);
+        $data['phone_verification_token'] = Str::random(64);
+        $data['email_verification_expire'] = now()->addMinutes(10);
+        $data['phone_verification_expire'] = now()->addMinutes(10);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
@@ -47,6 +56,16 @@ class AuthController extends Controller
         }
 
         $user = User::create($data);
+        $verificationUrlEmail = url("/auth/verify?id={$user->id}&type=email&token={$user->email_verification_token}");
+        $user->notify(new VerifyEmailNotification($verificationUrlEmail));
+        $verificationUrlPhone = url("/auth/verify?id={$user->id}&type=phone&token={$user->phone_verification_token}");
+        Http::withHeaders([
+            'Authorization' => env('FONNTE_TOKEN'),
+        ])->post('https://api.fonnte.com/send', [
+            'target' => $user->phone_number,
+            'message' => "Link for verification Phone Number:\n" .  $verificationUrlPhone,
+            'countryCode' => '62',
+        ]);
 
         if ($request->wantsJson()) {
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -55,7 +74,7 @@ class AuthController extends Controller
             $response['avatar'] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
             return response()->json([
                 'status' => 'success',
-                'message' => 'User Created Successfully',
+                'message' => 'User Created Successfully. Please check your email for verification.',
                 'data' => $response,
             ], 200);
         }
@@ -113,7 +132,7 @@ class AuthController extends Controller
             }
 
             $route = $user->role . '.home';
-            return redirect()->route($route)->with('message', 'Logged In Successfully');
+            return redirect()->route($route)->with('success', 'Logged In Successfully');
         }
 
         if ($request->wantsJson()) {
@@ -137,6 +156,80 @@ class AuthController extends Controller
         }
 
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success','Logged Out Successfully');
     }
+    
+    public function resend(Request $request)
+    {
+        $user = $request->user();
+        $type = $request->query('type');
+        $status = '';
+        $message = '';
+        $httpCode = 200;
+    
+        if ($type == 'email') {
+            if ($user->email_verified) {
+                $status = 'error';
+                $message = 'Email already verified.';
+                $httpCode = 400;
+            }
+
+            if (now()->greaterThan($user->email_token_expire)) {
+                $user->update([
+                    'email_verification_token' => Str::random(64),
+                    'email_token_expire' => now()->addMinutes(10),
+                ]);
+            }
+
+            $verificationUrl = url("/auth/verify?id={$user->id}&type=email&token={$user->email_verification_token}");
+            $user->notify(new VerifyEmailNotification($verificationUrl));
+
+            $status = 'success';
+            $message = 'Verification email sent.';
+            $httpCode = 200;
+        }
+
+        if ($type == 'phone') {
+            if ($user->phone_verified) {
+                $status = 'error';
+                $message = 'Phone Number already verified.';
+                $httpCode = 400;
+            }
+            
+            if (now()->greaterThan($user->phone_token_expire)) {
+                $user->update([
+                    'phone_verification_token' => Str::random(64),
+                    'phone_token_expire' => now()->addMinutes(10),
+                ]);
+            }
+
+            $verificationUrl = url("/auth/verify?id={$user->id}&type=phone&token={$user->phone_verification_token}");
+            $response = Http::withHeaders([
+                'Authorization' => env('FONNTE_TOKEN'),
+            ])->post('https://api.fonnte.com/send', [
+                'target' => $user->phone_number,
+                'message' => "Link for verification Phone Number:\n" .  $verificationUrl,
+                'countryCode' => '62',
+            ]);
+
+            if ($response->successful()) {
+                $status = 'success';
+                $message = 'Verification Phone Number sent.';
+                $httpCode = 200;
+            } else {
+                $status = 'error';
+                $message = 'Send Verification failed';
+                $httpCode = 400;
+            }
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ], $httpCode);
+        }
+
+        return redirect()->back()->with(['status' => $status, 'message' => $message]);
+    }    
 }

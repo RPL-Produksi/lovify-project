@@ -99,7 +99,7 @@
                             @if (is_null($user->avatar))
                                 <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14" alt="">
                             @else
-                                <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                                <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover" alt="">
                             @endif
                         </a>
                     </div>
@@ -125,7 +125,7 @@
                                 <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14"
                                     alt="">
                             @else
-                                <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                                <img src="{{ $user->avatar }}" class="rounded-full w-11 h-11 object-cover" alt="">
                             @endif
                         </a>
                     </button>
@@ -137,7 +137,7 @@
             <a href="{{ route('client.home') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Home</a>
             <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
             <a href="{{ route('article') }}"
-                class="block px-4 py-2 hover:bg-rose-950 hover:text-white {{ request()->routeIs('article') ? 'bg-redlue' : 't-white' }}">Article</a>
+                class="block px-4 py-2 hover:bg-rose-950 hover:text-white text-redlue">Article</a>
             <a href="#" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">My Plannings</a>
             <hr class="my-3">
             <a href="{{ route('profile') }}"

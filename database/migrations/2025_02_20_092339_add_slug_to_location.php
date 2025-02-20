@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('is_verified')->nullable()->default(null)->after('role');
+        Schema::table('locations', function (Blueprint $table) {
+            $table->string('slug')->unique();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_verified');
+        Schema::table('locations', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 };

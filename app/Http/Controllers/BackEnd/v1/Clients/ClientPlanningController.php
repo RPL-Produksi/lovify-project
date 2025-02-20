@@ -15,8 +15,8 @@ class ClientPlanningController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string'],
             'description' => ['string', 'nullable'],
-            'product_ids' => ['required', 'array'],
-            'product_ids.*' => ['required', 'exists:products,id', 'min:1'],
+            'product_ids' => ['nullable', 'array'],
+            'product_ids.*' => ['nullable', 'exists:products,id', 'min:1'],
         ]);
 
         if ($validator->fails()) {
@@ -30,7 +30,7 @@ class ClientPlanningController extends Controller
             return redirect()->back()->with('error', $validator->errors());
         }
 
-        $productCategories = Product::whereIn('id', $request->product_ids)->with('vendor.category')->get()->pluck('vendor.category.id')->toArray();
+        $productCategories = Product::whereIn('id', $request->product_ids ?? [])->with('vendor.category')->get()->pluck('vendor.category.id')->toArray();
         if (count($productCategories) != count(array_unique($productCategories))) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -66,8 +66,8 @@ class ClientPlanningController extends Controller
                 ], 200);
             }
 
-            // return redirect()->back()->with('success', 'Planning updated successfully');
-            return true;
+            return redirect()->route('planning')->with('success', 'Planning updated successfully');
+            // return true;
         }
 
         $data = $request->only('title', 'description');
@@ -82,8 +82,8 @@ class ClientPlanningController extends Controller
             ], 201);
         }
 
-        // return redirect()->back()->with('success', 'Planning created successfully');
-        return true;
+        return redirect()->route('planning')->with('success', 'Planning created successfully');
+        // return true;
     }
 
     public function deletePlanning(Request $request, $id)
@@ -122,6 +122,46 @@ class ClientPlanningController extends Controller
         }
 
         // return redirect()->back()->with('success', 'Planning deleted successfully');
+        return true;
+    }
+
+    public function getPlannings(Request $request)
+    {
+        $user = $request->user();
+        $plannings = Planning::where('client_id', $user->id)->get();
+
+        
+        // $table->string('title');
+        // $table->text('description')->nullable();
+        // $table->foreignUuid('client_id')->constrained('users')->cascadeOnDelete();
+        if ($request->wantsJson()) {
+            $response = $plannings->map(function ($planning) {
+                return [
+                    'id' => $planning->id,
+                    'title' => $planning->title,
+                    'description' => $planning->description,
+                    'products' => $planning->products->map(function ($product) {
+                        return [
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'price' => $product->price,
+                            'category' => $product->vendor->category->name,
+                            'vendor' => [
+                                'id' => $product->vendor->id,
+                                'name' => $product->vendor->name,
+                            ],
+                        ];
+                    }),
+                ];
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $response,
+            ]);
+        }
+
+        // return view('plannings', compact('plannings'));
         return true;
     }
 }

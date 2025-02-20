@@ -99,7 +99,6 @@
                                 style="height: 1px;"></span>
                         </a>
                     </div>
-
                     @if (Route::is('client.detail.product'))
                         <div class="hidden md:flex space-x-6">
                             <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn"
@@ -117,7 +116,7 @@
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-14" alt="">
                                     @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover" alt="">
                                     @endif
                                 </a>
                             </div>
@@ -147,7 +146,7 @@
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-12" alt="">
                                     @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-11 h-11 object-cover" alt="">
                                     @endif
                                 </a>
                             </div>

@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $data = $request->all();
+        $data = $request->only('name', 'image');
         $data['name'] = strtolower($data['name']);
         if ($request->hasFile('image')) {
             $image = $request->file('image');

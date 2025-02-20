@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Cart')
+@section('title', 'Detail Planning')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">
@@ -11,22 +11,20 @@
         <div class="grid grid-cols-9 gap-5">
             <div class="col-span-5">
                 <div>
-                    <h2 class="text-redlue font-bold text-2xl">My Planning</h2>
+                    <h2 class="text-redlue font-bold text-2xl">Planning {{ $planning->title }}</h2>
                     <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
                         <div>
                             <div>
-                                <a href="" class="px-3 py-2 bg-rose rounded-lg text-xl text-white">Tambah</a>
+                                <a href="{{ route('planning.category') }}" class="px-3 py-2 bg-rose rounded-lg text-xl text-white">Tambah</a>
                             </div>
                             <div class="flex justify-between mt-6">
-                                <h2 class="text-redlue font-bold text-2xl">Bro's Make Up</h2>
+                                <h2 class="text-redlue font-bold text-2xl">Planning</h2>
                                 <h2 class="text-redlue font-bold text-2xl">Rp3.900.000</h2>
                             </div>
                             <hr class="border-rose-950 mt-7">
                         </div>
                     </div>
                 </div>
-
-            
             </div>
 
             <div class="col-span-4">

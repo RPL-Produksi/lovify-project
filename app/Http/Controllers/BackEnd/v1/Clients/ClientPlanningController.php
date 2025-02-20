@@ -82,8 +82,8 @@ class ClientPlanningController extends Controller
             ], 201);
         }
 
-        // return redirect()->back()->with('success', 'Planning created successfully');
-        return true;
+        return redirect()->route('planning')->with('success', 'Planning created successfully');
+        // return true;
     }
 
     public function deletePlanning(Request $request, $id)

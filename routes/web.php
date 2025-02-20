@@ -4,6 +4,7 @@ use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
+use App\Http\Controllers\BackEnd\v1\PersonalController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
@@ -82,7 +83,9 @@ Route::get('/aboutUs', [ClientAboutUsController::class, 'index'])->name('aboutUs
 Route::group(['middleware' => 'auth'], function () {
     Route::post('store/plannig', [ClientPlanningController::class,'storePlanning'])->name('client.store.planning');
     Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
+    Route::post('/profile/change', [PersonalController::class, 'changeProfile'])->name('profile.change');
     Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
+    Route::delete('/profile/avatar', [PersonalController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
     Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
     Route::get('/planning/detail/{id}', [ClientPlanningShowController::class,'detail'])->name('planning.detail');
     Route::get('/planning/tambah', [ClientPlanningShowController::class,'store'])->name('planning.store');

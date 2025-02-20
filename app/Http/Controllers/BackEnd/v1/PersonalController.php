@@ -37,7 +37,7 @@ class PersonalController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => ['nullable', 'string', 'unique:users,username,' . $user->id],
             'email' => ['nullable', 'email', 'unique:users,email,' . $user->id],
-            'phone_number' => ['nullable', 'number', 'unique:users,phone_number,' . $user->id],
+            'phone_number' => ['nullable', 'unique:users,phone_number,' . $user->id],
             'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg']
         ]);
 
@@ -59,8 +59,9 @@ class PersonalController extends Controller
             $filePath = Storage::url($storedFile);
             $data['avatar'] = $filePath;
         } else {
-            $data['avatar'] = null;
+            unset($data['avatar']);
         }
+
         $user->update($data);
         $response = [
             'fullname' => $user->fullname,
@@ -81,8 +82,33 @@ class PersonalController extends Controller
             ], 200);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Profile changes successfully');
     }
+
+    public function deleteAvatar(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->avatar) {
+            $avatarPath = str_replace('/storage', 'public', $user->avatar);
+            if (Storage::exists($avatarPath)) {
+                Storage::delete($avatarPath);
+            }
+
+            $user->update(['avatar' => null]);
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Avatar successfully deleted.',
+                'avatar' => asset('avatars/default.png')
+            ], 200);
+        }
+
+        return redirect()->back()->with('success', 'Avatar deleted successfully.');
+    }
+
 
     public function changePassword(Request $request)
     {

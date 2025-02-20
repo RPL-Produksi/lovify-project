@@ -11,6 +11,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">
     <title>Lovify | @yield('title')</title>
     @stack('css')
@@ -18,7 +19,41 @@
 
 <body style="background-color: black">
     @yield('content')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: "rounded-lg shadow-lg",
+                    title: "text-lg font-bold text-rose-950",
+                    confirmButton: "bg-rose-950 text-white px-4 py-2 rounded-md hover:bg-rose-950",
+                },
+                buttonsStyling: false
+            });
+        </script>
+    @endif
 
+    @if ($errors->any())
+        <script>
+            let errorMessages = `{!! implode('<br>', $errors->all()) !!}`;
+
+            Swal.fire({
+                title: "Validation Error!",
+                html: errorMessages,
+                icon: "error",
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: "rounded-lg shadow-lg",
+                    title: "text-lg font-bold text-red-600",
+                    confirmButton: "bg-rose text-white px-4 py-2 rounded-md hover:bg-red-700",
+                },
+                buttonsStyling: false
+            });
+        </script>
+    @endif
     @stack('js')
 </body>
 

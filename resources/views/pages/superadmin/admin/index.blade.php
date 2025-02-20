@@ -9,7 +9,8 @@
     <div class="card p-3">
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Admin</h3>
-            <button type="button" data-toggle="modal" data-target="#addAdminModal" class="btn text-white" style="background-color: #3D0A05" data-target="#addUserModal" data-toggle="modal">
+            <button type="button" data-toggle="modal" data-target="#addAdminModal" class="btn text-white"
+                style="background-color: #3D0A05" data-target="#addUserModal" data-toggle="modal">
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
@@ -30,30 +31,15 @@
                     <td>Aksi</td>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($admin as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->fullname }}</td>
-                        <td>{{ $item->username }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->phone_number }}</td>
-                        <td>
-                            <button type="button"  class="btn text-white" style="background-color: #3D0A05"><i
-                                    class="fa-solid fa-pen-to-square"></i></button>
-                            <a href="" class="btn btn-delete text-white" style="background-color: #3D0A05" data-id="{{ $item->id }}">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-
-                        </td>
-                    </tr>
-                @endforeach
+            <tbody id="adminTableBody">
+                <!-- Data akan dimuat melalui AJAX -->
             </tbody>
         </table>
     </div>
 
     {{-- modal tambah admin --}}
-    <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -67,27 +53,33 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="fullname">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Masukkan nama lengkap" required>
+                            <input type="text" class="form-control" name="fullname" id="fullname"
+                                placeholder="Masukkan nama lengkap" required>
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username" required>
+                            <input type="text" class="form-control" name="username" id="username"
+                                placeholder="Masukkan username" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email" required>
+                            <input type="email" class="form-control" name="email" id="email"
+                                placeholder="Masukkan email" required>
                         </div>
                         <div class="form-group">
                             <label for="phone_number">Nomor Telepon</label>
-                            <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Masukkan nomor telepon" required>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number"
+                                placeholder="Masukkan nomor telepon" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Masukkan password" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Konfirmasi Password</label>
-                            <input type="password" class="form-control" name="password_confirmation" id="password" placeholder="Masukkan password" required>
+                            <input type="password" class="form-control" name="password_confirmation" id="password"
+                                placeholder="Masukkan password" required>
                         </div>
                         <div class="form-group">
                             <label for="role">Role</label>
@@ -106,7 +98,7 @@
             </div>
         </div>
     </div>
-    
+
 
 @endsection
 
@@ -164,4 +156,46 @@
             });
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fetchAdmins();
+    });
+
+    function fetchAdmins() {
+        $.ajax({
+            url: "{{ route('superadmin.kelola.admin') }}", // Sesuaikan dengan nama route
+            method: "GET",
+            dataType: "json",
+            success: function (response) {
+                let rows = "";
+                response.forEach((item, index) => {
+                    rows += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${item.fullname}</td>
+                            <td>${item.username}</td>
+                            <td>${item.email}</td>
+                            <td>${item.phone_number}</td>
+                            <td>
+                                <button type="button" class="btn text-white" style="background-color: #3D0A05">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <a href="" class="btn btn-delete text-white" style="background-color: #3D0A05" data-id="${item.id}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+                $("#adminTableBody").html(rows);
+            },
+            error: function (xhr) {
+                console.error("Error fetching admins:", xhr);
+            }
+        });
+    }
+</script>
+
 @endpush

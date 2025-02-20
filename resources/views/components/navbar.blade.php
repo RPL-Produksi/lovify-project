@@ -116,7 +116,7 @@
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-14" alt="">
                                     @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-14" alt="">
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover" alt="">
                                     @endif
                                 </a>
                             </div>
@@ -146,7 +146,7 @@
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-12" alt="">
                                     @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-12" alt="">
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-11 h-11 object-cover" alt="">
                                     @endif
                                 </a>
                             </div>

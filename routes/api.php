@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
+use App\Http\Controllers\BackEnd\v1\Admins\AdminLocationController;
 use App\Http\Controllers\BackEnd\v1\CategoryController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
 use App\Http\Controllers\BackEnd\v1\PlanningController;
 use App\Http\Controllers\BackEnd\v1\ProductController;
+use App\Http\Controllers\BackEnd\v1\VendorController;
 use Illuminate\Support\Facades\Validator;
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
@@ -31,7 +33,8 @@ Route::prefix('v1')->group(function () {
     // Umum
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/categories/{id?}', [CategoryController::class, 'getCategory']);
-        Route::get('/products/{slug?}', [ProductController::class, 'getProducts']);
+        Route::get('/products/{id?}', [ProductController::class, 'getProducts']);
+        Route::get('/vendors/{id?}', [VendorController::class, 'getVendors']);
         Route::get('/plannings/{id?}', [PlanningController::class, 'getPlanning']);
     });
     // Admin
@@ -39,6 +42,10 @@ Route::prefix('v1')->group(function () {
         Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
             Route::post('/{id?}', 'storeCategory');
             Route::delete('/{id}', 'deleteCategory');
+        });
+        Route::group(['prefix' => 'locations', 'controller' => AdminLocationController::class], function () {
+            Route::post('/', 'storeLocation');
+            Route::delete('/{id}', 'deleteLocation');
         });
     });
     // Mitra
@@ -55,13 +62,16 @@ Route::prefix('v1')->group(function () {
     // Client
     Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
         Route::group(['prefix' => 'plannings', 'controller' => ClientPlanningController::class], function () {
+            Route::post('/', 'getPlannings');
             Route::post('/{id?}', 'storePlanning');
             Route::delete('/{id}', 'deletePlanning');
         });
         Route::group(['prefix' => 'orders', 'middleware' => ['can:email_verified, can:phone_verified'], 'controller' => ClientOrderController::class], function () {
+            Route::post('/', 'getOrders');
             Route::post('/{id}', 'storeOrder');
         });
         Route::group(['prefix' => 'transactions', 'controller' => ClientTransactionController::class], function () {
+            Route::post('/', 'getTransactions');
             Route::post('/{id}', 'storePayment');
         });
     });

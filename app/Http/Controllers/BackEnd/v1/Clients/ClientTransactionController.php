@@ -143,4 +143,41 @@ class ClientTransactionController extends Controller
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
+
+    public function getTransactions(Request $request){
+        $user = $request->user();
+        $transactions = Payment::whereHas('order.planning', function ($query) use ($user) {
+            $query->where('client_id', $user->id);
+        })->get();
+
+        if ($request->wantsJson()) {
+            $response = $transactions->map(function ($transaction) {
+                return [
+                    'id' => $transaction->id,
+                    'amount' => $transaction->amount,
+                    'payment_date' => $transaction->payment_date,
+                    'payment_type' => $transaction->payment_type,
+                    'status' => $transaction->status,
+                    'order' => [
+                        'id' => $transaction->order->id,
+                        'total_price' => $transaction->order->total_price,
+                        'down_payment' => $transaction->order->down_payment,
+                        'remaining_payment' => $transaction->order->remaining_payment,
+                    ],
+                    'planning' => [
+                        'id' => $transaction->order->planning->id,
+                        'title' => $transaction->order->planning->title,
+                        'description' => $transaction->order->planning->description,
+                    ],
+                ];
+            });
+            return response()->json([
+                'status' => 'success',
+                'data' => $response,
+            ]);
+        }
+
+        // return view('transactions', compact('transactions'));
+        return true;
+    }
 }

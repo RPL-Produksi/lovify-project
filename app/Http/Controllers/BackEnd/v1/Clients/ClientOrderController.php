@@ -35,6 +35,17 @@ class ClientOrderController extends Controller
         }
 
         $products_ids = $planning->products->pluck('id')->toArray();
+        if (count($products_ids) < 1) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Products not found',
+                ], 404);
+            }
+
+            return redirect()->back()->with('error', 'Products not found');
+        }
+        
         $orderSameDate = Order::where('marry_date', $request->marry_date)->whereHas('planning.products', function ($query) use ($products_ids) {
             $query->whereIn('id', $products_ids);
         })->exists();
@@ -97,6 +108,42 @@ class ClientOrderController extends Controller
         }
 
         // return redirect()->back()->with('success', 'Order created');
+        return true;
+    }
+
+    public function getOrders(Request $request)
+    {
+        $user = $request->user();
+        $orders = Order::whereHas('planning', function ($query) use ($user) {
+            $query->where('client_id', $user->id);
+        })->get();
+
+        if ($request->wantsJson()) {
+            $response = $orders->map(function ($order) {
+                return [
+                    'id' => $order->id,
+                    'total_price' => $order->total_price,
+                    'down_payment' => $order->down_payment,
+                    'remaining_payment' => $order->remaining_payment,
+                    'dp_deadline' => $order->dp_deadline,
+                    'payment_deadline' => $order->payment_deadline,
+                    'marry_date' => $order->marry_date,
+                    'status' => $order->status,
+                    'order_progress' => $order->orderProgress->map(function ($order) {
+                        return [
+                            'product' => $order->product->name,
+                            'status' => $order->status,
+                        ];
+                    }),
+                ];
+            });
+            return response()->json([
+                'status' => 'success',
+                'data' => $response,
+            ]);
+        }
+
+        // return view('clients.orders', compact('orders'));
         return true;
     }
 }

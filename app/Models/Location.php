@@ -11,6 +11,7 @@ class Location extends Model
 
     protected $fillable = [
         'name',
+        'slug',
     ];
 
     protected $hidden = [

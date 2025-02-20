@@ -124,4 +124,44 @@ class ClientPlanningController extends Controller
         // return redirect()->back()->with('success', 'Planning deleted successfully');
         return true;
     }
+
+    public function getPlannings(Request $request)
+    {
+        $user = $request->user();
+        $plannings = Planning::where('client_id', $user->id)->get();
+
+        
+        // $table->string('title');
+        // $table->text('description')->nullable();
+        // $table->foreignUuid('client_id')->constrained('users')->cascadeOnDelete();
+        if ($request->wantsJson()) {
+            $response = $plannings->map(function ($planning) {
+                return [
+                    'id' => $planning->id,
+                    'title' => $planning->title,
+                    'description' => $planning->description,
+                    'products' => $planning->products->map(function ($product) {
+                        return [
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'price' => $product->price,
+                            'category' => $product->vendor->category->name,
+                            'vendor' => [
+                                'id' => $product->vendor->id,
+                                'name' => $product->vendor->name,
+                            ],
+                        ];
+                    }),
+                ];
+            });
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $response,
+            ]);
+        }
+
+        // return view('plannings', compact('plannings'));
+        return true;
+    }
 }

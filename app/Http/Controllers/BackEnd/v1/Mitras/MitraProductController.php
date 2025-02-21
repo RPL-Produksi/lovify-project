@@ -30,7 +30,6 @@ class MitraProductController extends Controller
             'description' => ['required', 'string'],
             'price' => ['required', 'integer'],
             'status' => ['required', 'in:draft,active,inactive'],
-            'category_id' => ['required', 'exists:categories,id'],
             'attachments.*' => ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
 

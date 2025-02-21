@@ -45,11 +45,17 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{ route('admin.kelola.lokasi') }}" class="nav-link">
+            <i class="fa-regular fa-map"></i>
+            <span>Kelola Lokasi</span>
+        </a>
+    </li>
+    {{-- <li class="nav-item">
         <a href="{{ route('admin.kelola.kategori') }}" class="nav-link">
             <i class="fa-solid fa-note"></i>
             <span>Kelola Planning</span>
         </a>
-    </li>
+    </li> --}}
     @endif
 
     @if ($user->role == 'superadmin')

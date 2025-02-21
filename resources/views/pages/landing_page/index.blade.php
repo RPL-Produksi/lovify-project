@@ -24,8 +24,8 @@
                 </h3>
                 <div class="flex justify-center mt-7">
                     @guest
-                    <a href="{{ route('login') }}" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
-                    data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</a>
+                        <a href="{{ route('login') }}" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
+                            data-aos="fade-up" data-aos-duration="2000" style="background-color: #3D0A05">Book Now!</a>
                     @endguest
                     @auth
                         <a href="#plannings-section" class="border border-white text-white rounded-3xl px-7 py-3 book-btn"
@@ -46,29 +46,52 @@
         <div class="px-4 sm:px-8 xl:px-40 lg:px-10">
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-redlue" data-aos="fade-up"
                 data-aos-duration="1000">Our Services</h1>
-            <div
+                @guest
+                <div
                 class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 mt-14 gap-5 justify-center items-center">
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1000">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Plannings</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">With careful planning, your wedding is
                         set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
-                    <a href="#plannings-section" class="text-redlue">See Plannings <i
-                            class="fa-sharp fa-light fa-arrow-right"></i></a>
+                    <a href="{{ route('login') }}" class="text-redlue">See Plannings <i class="fa-light fa-arrow-right"></i></a>
                 </div>
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2000">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Calculator</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Easily calculate your wedding costs by
                         selecting your preferred vendors and packages. Plan with confidence and...</p>
-                    <a href="#plannings-section" class="text-redlue">Calculator <i
-                            class="fa-sharp fa-light fa-arrow-right"></i></a>
+                    <a href="{{ route('login') }}" class="text-redlue">Calculator <i class="fa-light fa-arrow-right"></i></a>
                 </div>
                 <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2500">
                     <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Blogs & Articles</h1>
                     <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Your guide to a perfect wedding! Lets
                         get tips now, ideas, and inspiration to plan your dream day effortlessly.</p>
-                    <a href="" class="text-redlue">See More <i class="fa-sharp fa-light fa-arrow-right"></i></a>
+                    <a href="{{ route('article') }}" class="text-redlue">See More <i class="fa-light fa-arrow-right"></i></a>
                 </div>
             </div>
+                @endguest
+                @auth
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 mt-14 gap-5 justify-center items-center">
+                    <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="1000">
+                        <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Plannings</h1>
+                        <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">With careful planning, your wedding is
+                            set to unfold seamlessly, creating a beautiful moment for everyone involved.</p>
+                        <a href="{{ route('planning') }}" class="text-redlue">See Plannings <i class="fa-light fa-arrow-right"></i></a>
+                    </div>
+                    <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2000">
+                        <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Calculator</h1>
+                        <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Easily calculate your wedding costs by
+                            selecting your preferred vendors and packages. Plan with confidence and...</p>
+                        <a href="{{ route('planning') }}" class="text-redlue">Calculator <i class="fa-light fa-arrow-right"></i></a>
+                    </div>
+                    <div class="shadow-2xl py-4 px-5 border-redlue justify-center" data-aos="fade-up" data-aos-duration="2500">
+                        <h1 class="text-redlue text-2xl sm:text-3xl lg:text-4xl font-semibold">Blogs & Articles</h1>
+                        <p class="text-redlue text-base sm:text-lg lg:text-xl mt-2 mb-6">Your guide to a perfect wedding! Lets
+                            get tips now, ideas, and inspiration to plan your dream day effortlessly.</p>
+                        <a href="{{ route('article') }}" class="text-redlue">See More <i class="fa-light fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                @endauth
         </div>
     </section>
 
@@ -168,9 +191,16 @@
             @endforeach
         </div>
         <div class="flex justify-center items-center mt-7">
-            <a href=""
-                class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
-                data-aos="fade-up" data-aos-duration="1000">See More</a>
+            @guest
+                <a href="{{ route('login') }}"
+                    class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
+                    data-aos="fade-up" data-aos-duration="1000">See More</a>
+            @endguest
+            @auth
+                <a href="{{ route('planning.category') }}"
+                    class="py-4 px-7 text-white rounded-full shadow-lg bg-rose hover:bg-white hover:text-black transition-all duration-100 text-xl"
+                    data-aos="fade-up" data-aos-duration="1000">See More</a>
+            @endauth
         </div>
     </section>
 

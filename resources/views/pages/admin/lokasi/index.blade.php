@@ -1,5 +1,5 @@
 @extends('template-dashboard.layouts.app-admin')
-@section('title', 'Kelola Kategori')
+@section('title', 'Kelola Lokasi')
 
 @push('css')
 @endpush
@@ -8,9 +8,9 @@
 
     <div class="card p-3">
         <div class="d-flex justify-content-between">
-            <h3 class="text-rose">Kelola Kategori</h3>
+            <h3 class="text-rose">Kelola Lokasi</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
-                data-target="#addKategoriModal">
+                data-target="#addLokasi">
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
@@ -24,8 +24,7 @@
             <thead>
                 <tr>
                     <td>No</td>
-                    <td>Gambar</td>
-                    <td>Nama Kategori</td>
+                    <td>Nama Lokasi</td>
                     <td>Aksi</td>
                 </tr>
             </thead>
@@ -33,29 +32,24 @@
         </table>
     </div>
 
-    <div class="modal fade" id="addKategoriModal" tabindex="-1" role="dialog" aria-labelledby="addKategoriModalLabel"
+    <div class="modal fade" id="addLokasi" tabindex="-1" role="dialog" aria-labelledby="addLokasiLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addKategoriModalLabel">Tambah Kategori</h5>
+                    <h5 class="modal-title" id="addLokasiLabel">Tambah Lokasi</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('be.category.store') }}" method="POST" class="form-with-loading"
+                <form action="{{ route('admin.lokasi.store') }}" method="POST" class="form-with-loading"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Nama Kategori</label>
+                            <label for="name">Nama Lokasi</label>
                             <input type="text" class="form-control" name="name" id="name"
-                                placeholder="Masukkan nama kategori" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Gambar</label>
-                            <input type="file" class="form-control" name="image" id="image"
-                                placeholder="Masukkan gambar kategori" required>
+                                placeholder="Masukkan nama lokasi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -67,31 +61,24 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel"
+    <div class="modal fade" id="editLokasi" tabindex="-1" role="dialog" aria-labelledby="editLokasiLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Kategori</h5>
+                    <h5 class="modal-title" id="editLokasiLabel">Edit Lokasi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editCategoryForm" enctype="multipart/form-data" method="POST"
-                        action="{{ route('be.category.store') }}">
+                    <form id="editLokasiForm" enctype="multipart/form-data" method="POST"
+                        action="{{ route('admin.lokasi.store') }}">
                         @csrf
                         <input type="hidden" id="edit_id" name="id">
                         <div class="form-group">
-                            <label for="edit_name">Nama Kategori</label>
+                            <label for="edit_name">Nama Lokasi</label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_image">Image Kategori</label>
-                            <br>
-                            <img id="edit_image_preview" src="" alt="Image Kategori" width="100" height="100"
-                                style="object-fit: cover; border-radius: 5px; margin-bottom: 10px;">
-                            <input type="file" class="form-control" id="edit_image" name="image" accept="image/*">
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </form>
@@ -110,18 +97,17 @@
         $(document).ready(function() {
             function loadKategori() {
                 $.ajax({
-                    url: '{{ route('admin.kelola.kategori.data') }}',
+                    url: '{{ route('admin.kelola.lokasi.data') }}',
                     method: 'GET',
                     success: function(response) {
                         let rows = '';
                         response.forEach((item, index) => {
                             rows += `<tr>
                         <td>${index + 1}</td>
-                        <td><img src="${item.image}" width="70" height="50" style="object-fit: cover;"></td>
                         <td>${item.name}</td>
                         <td>
                             <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}"> 
-                                <i class="fa-solid fa-pen-to-square" data-target="#editCategoryModal" data-toggle="modal" ></i>
+                                <i class="fa-solid fa-pen-to-square" data-target="#editLokasi" data-toggle="modal" ></i>
                             </button>
                             <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05"> 
                                 <i class="fa-solid fa-trash"></i>
@@ -139,13 +125,11 @@
             $(document).on('click', '.edit-btn', function() {
                 let id = $(this).data('id');
                 let name = $(this).data('name');
-                let image = $(this).data('image');
 
                 $('#edit_id').val(id);
                 $('#edit_name').val(name);
-                $('#edit_image_preview').attr('src', image ? image : 'https://via.placeholder.com/100');
 
-                $('#editCategoryModal').modal('show');
+                $('#edditLokasi').modal('show');
             });
 
             $(document).on('click', '.btn-delete', function() {
@@ -163,7 +147,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('be.category.delete', ':id') }}'.replace(':id',
+                            url: '{{ route('admin.lokasi.delete', ':id') }}'.replace(':id',
                                 id),
                             method: 'POST',
                             data: {

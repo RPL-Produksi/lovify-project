@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
+use App\Http\Controllers\BackEnd\v1\Admins\AdminLocationController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
+use App\Http\Controllers\BackEnd\v1\ProductController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
+use App\Http\Controllers\Views\Admin\AdminKelolaLokasiController;
 use App\Http\Controllers\Views\Admins\AdminHomeController;
 use App\Http\Controllers\views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
@@ -50,7 +53,7 @@ Route::get('/articles', [ClientArticleController::class, 'index'])->name('articl
 Route::get('/about', [ClientAboutUsController::class, 'index'])->name('aboutUs');
 
 // superadmin route
-Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], function() {
+Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], function () {
     Route::get('/', [SuperadminDashboardController::class, 'index'])->name('superadmin.home');
     Route::get('/admins', [SuperadminKelolaAdminController::class, 'index'])->name('superadmin.kelola.admin');
     Route::get('/mitras', [SuperadminKelolaMitraController::class, 'index'])->name('superadmin.kelola.mitra');
@@ -60,17 +63,27 @@ Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], fu
 
 // admin route
 Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+    Route::get('/lokasi', [AdminKelolaLokasiController::class, 'index'])->name('admin.kelola.lokasi');
+    Route::get('/lokasi/data', [AdminKelolaLokasiController::class, 'getData'])->name('admin.kelola.lokasi.data');
+
+    Route::post('/lokasi/store', [AdminLocationController::class, 'storeLocation'])->name('admin.lokasi.store');
+    Route::post('/lokasi/update/{id}', [AdminLocationController::class, 'storeLocation'])->name('admin.lokasi.update');
+    Route::delete('/lokasi/delete/{id}', [AdminLocationController::class, 'deleteLocation'])->name('admin.lokasi.delete');
+
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.home');
     Route::get('/categories', [AdminKelolaKategoriController::class, 'index'])->name('admin.kelola.kategori');
+    Route::get('/categories/data', [AdminKelolaKategoriController::class, 'getData'])->name('admin.kelola.kategori.data');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
-        Route::post('/{id?}', 'storeCategory')->name('be.category.store');
-        Route::get('/{id}', 'deleteCategory')->name('be.category.delete');
+        Route::post('/', 'storeCategory')->name('be.category.store');
+        Route::post('/{id}', 'storeCategory')->name('be.category.update'); 
+        Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
     });
 });
 
 // mitra route
 Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () {
     Route::get('/', [MitraDashboardController::class, 'index'])->name('mitra.home');
+    Route::get('/get/products', [ProductController::class, 'getProducts'])->name('mitra.get.products');
     Route::get('/products/{id}/data', [MitraProductController::class, 'dataById'])->name('mitra.produk.data');
     Route::get('/products', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
     Route::get('/products/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
@@ -81,15 +94,15 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
 
 // client route
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('store/plannig', [ClientPlanningController::class,'storePlanning'])->name('client.store.planning');
+    Route::post('store/plannig', [ClientPlanningController::class, 'storePlanning'])->name('client.store.planning');
     Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
     Route::post('/profile/change', [PersonalController::class, 'changeProfile'])->name('profile.change');
-    Route::get('/profile', [ClientProfileController::class,'profile'])->name('profile');
+    Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
     Route::delete('/profile/avatar', [PersonalController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
-    Route::get('/planning', [ClientPlanningShowController::class,'index'])->name('planning');
-    Route::get('/planning/detail/{id}', [ClientPlanningShowController::class,'detail'])->name('planning.detail');
-    Route::get('/planning/tambah', [ClientPlanningShowController::class,'store'])->name('planning.store');
-    Route::get('/planning/category', [ClientPlanningShowController::class,'category'])->name('planning.category');
+    Route::get('/planning', [ClientPlanningShowController::class, 'index'])->name('planning');
+    Route::get('/planning/detail/{id}', [ClientPlanningShowController::class, 'detail'])->name('planning.detail');
+    Route::get('/planning/tambah', [ClientPlanningShowController::class, 'store'])->name('planning.store');
+    Route::get('/planning/category', [ClientPlanningShowController::class, 'category'])->name('planning.category');
     Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
 });
 

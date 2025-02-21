@@ -19,7 +19,7 @@ class LandingController extends Controller
             $user["avatar"] = $user->avatar == null ? asset('avatars/default.png') : $user->avatar;
         }
         
-        $category = Category::all();
+        $category = Category::paginate(6);
         return view('pages.landing_page.index', compact('category', 'user'));
     }
 }

@@ -21,31 +21,31 @@
                         <form action="{{ route('be.register') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div>
-                                <label for="" class="text-redlue text-xl font-medium">Full Name</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-user"></i> Full Name</label>
                                 <input required type="text" name="fullname" value="{{ old('fullname') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your full name">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Phone Number</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-phone"></i> Phone Number</label>
                                 <input required type="number" name="phone_number" value="{{ old('phone_number') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your phone number">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Email</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-envelope"></i> Email</label>
                                 <input required type="email" name="email" value="{{ old('email') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Username</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-user"></i> Username</label>
                                 <input required type="text" name="username" value="{{ old('username') }}" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your email">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-lock"></i> Password</label>
                                 <input required type="password" name="password" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password Confirmation</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-lock"></i> Password Confirmation</label>
                                 <input required type="password" name="password_confirmation" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5" placeholder="Enter your password">    
                             </div>    
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Acount Type</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-user"></i> Acount Type</label>
                                 <select name="role" class="w-full text-redlue bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5">
                                     <option value="client">Client</option>
                                     <option value="mitra">Mitra</option>

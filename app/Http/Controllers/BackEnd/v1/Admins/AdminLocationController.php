@@ -27,10 +27,32 @@ class AdminLocationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        if ($request->has('id')) {
+            $location = Location::find($request->id);
+
+            if (!$location) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Location not found',
+                ], 404);
+            }
+
+            $location->update(['name' => $request->name]);
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Location has been updated',
+                    'data' => $location,
+                ]);
+            }
+
+            return redirect()->back()->with('success', 'Location has been updated');
+        }
+
         $data = $request->only('name');
-        $data['slug'] = Str::slug($data['name']);
         $location = Location::create($data);
-        
+
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'success',
@@ -39,8 +61,7 @@ class AdminLocationController extends Controller
             ]);
         }
 
-        // return redirect()->back()->with('success', 'Location has been created');
-        return true;
+        return redirect()->back()->with('success', 'Location has been created');
     }
 
     public function deleteLocation(Request $request, $id)
@@ -68,7 +89,7 @@ class AdminLocationController extends Controller
             ]);
         }
 
-        // return redirect()->back()->with('success', 'Location has been deleted');
-        return true;
+        return redirect()->back()->with('success', 'Location has been deleted');
+        // return true;
     }
 }

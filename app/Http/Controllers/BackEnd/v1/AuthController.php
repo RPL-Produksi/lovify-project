@@ -132,7 +132,7 @@ class AuthController extends Controller
             }
 
             $route = $user->role . '.home';
-            return redirect()->route($route)->with('message', 'Logged In Successfully');
+            return redirect()->route($route)->with('success', 'Logged In Successfully');
         }
 
         if ($request->wantsJson()) {
@@ -156,7 +156,7 @@ class AuthController extends Controller
         }
 
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success','Logged Out Successfully');
     }
     
     public function resend(Request $request)

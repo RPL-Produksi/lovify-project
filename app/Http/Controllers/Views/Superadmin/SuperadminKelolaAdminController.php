@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SuperadminKelolaAdminController extends Controller
 {
-    public function index() {
+    public function index(Request $request)
+    {
         $user = Auth::user();
-        $admin = User::where('role', 'admin')->get();
-        return view('pages.superadmin.admin.index', compact('admin', 'user'));
+
+        if ($request->ajax()) {
+            $admin = User::where('role', 'admin')->get();
+            return response()->json($admin);
+        }
+
+        return view('pages.superadmin.admin.index', compact('user'));
     }
 }

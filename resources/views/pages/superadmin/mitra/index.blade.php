@@ -152,16 +152,27 @@
                         <td>${item.email}</td>
                         <td>${item.phone_number}</td>
                         <td>
-                            <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-fullname="${item.fullname}" data-username="${item.username}" data-email="${item.email}" data-phone_number="${item.phone_number}"> 
+                            <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-fullname="${item.fullname}" data-username="${item.username}" data-email="${item.email}" data-phone_number="${item.phone_number}">
                                 <i class="fa-solid fa-pen-to-square" data-target="#editAdminModal" data-toggle="modal" ></i>
                             </button>
-                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05"> 
+                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>`;
                         });
+                        if ($.fn.DataTable.isDataTable('#kategoriTable')) {
+                            $('#kategoriTable').DataTable().destroy();
+                        }
+
                         $('#kategoriTable tbody').html(rows);
+
+                        $('#kategoriTable').DataTable({
+                            paging: true,
+                            searching: true,
+                            ordering: true,
+                            pageLength: 10
+                        });
                     }
                 });
             }
@@ -202,7 +213,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('superadmin.delete.admin', ':id') }}'.replace(':id',
+                            url: '{{ route('superadmin.delete.admin', ':id') }}'.replace(
+                                ':id',
                                 id),
                             method: 'POST',
                             data: {
@@ -212,7 +224,7 @@
                             success: function(response) {
                                 Swal.fire({
                                     title: "Deleted!",
-                                    text: "Kategori berhasil dihapus.",
+                                    text: "Mitra berhasil dihapus.",
                                     icon: "success",
                                     confirmButtonText: "OK",
                                     confirmButtonColor: "#3D0A05"

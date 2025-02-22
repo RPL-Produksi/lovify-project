@@ -87,7 +87,7 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
     Route::get('/categories/data', [AdminKelolaKategoriController::class, 'getData'])->name('admin.kelola.kategori.data');
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/', 'storeCategory')->name('be.category.store');
-        Route::post('/{id}', 'storeCategory')->name('be.category.update'); 
+        Route::post('/{id}', 'storeCategory')->name('be.category.update');
         Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
     });
 });
@@ -98,11 +98,11 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
     Route::get('/get/products', [ProductController::class, 'getProducts'])->name('mitra.get.products');
     Route::get('/products/{id}/data', [MitraProductController::class, 'dataById'])->name('mitra.produk.data');
     Route::get('/products', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
-    Route::get('/products/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
     Route::get('/vendors', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');
     Route::post('/products/{id?}', [MitraProductController::class, 'storeProduct'])->name('mitra.store.produk');
     Route::post('/vendors', [MitraCreateVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
 
+    Route::delete('/products/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
     Route::get('/data', [MitraKelolaProdukController::class, 'getData'])->name('mitra.kelola.produk.data');
 });
 

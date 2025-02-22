@@ -130,7 +130,7 @@ class ClientPlanningController extends Controller
         $user = $request->user();
         $plannings = Planning::where('client_id', $user->id)->get();
 
-        
+
         // $table->string('title');
         // $table->text('description')->nullable();
         // $table->foreignUuid('client_id')->constrained('users')->cascadeOnDelete();

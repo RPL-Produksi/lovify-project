@@ -108,31 +108,44 @@
 
     <script>
         $(document).ready(function() {
-            function loadKategori() {
-                $.ajax({
-                    url: '{{ route('admin.kelola.kategori.data') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let rows = '';
-                        response.forEach((item, index) => {
-                            rows += `<tr>
+    function loadKategori() {
+        $.ajax({
+            url: '{{ route('admin.kelola.kategori.data') }}',
+            method: 'GET',
+            success: function(response) {
+                let rows = '';
+                response.forEach((item, index) => {
+                    rows += `<tr>
                         <td>${index + 1}</td>
                         <td><img src="${item.image}" width="55" height="35" style="object-fit: cover;"></td>
                         <td>${item.name}</td>
                         <td>
-                            <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}"> 
-                                <i class="fa-solid fa-pen-to-square" data-target="#editCategoryModal" data-toggle="modal" ></i>
+                            <button class="btn text-white edit-btn" style="background-color: #3D0A05"
+                                data-id="${item.id}" data-name="${item.name}" data-image="${item.image}">
+                                <i class="fa-solid fa-pen-to-square" data-target="#editCategoryModal" data-toggle="modal"></i>
                             </button>
-                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05"> 
+                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>`;
-                        });
-                        $('#kategoriTable tbody').html(rows);
-                    }
+                });
+
+                if ($.fn.DataTable.isDataTable('#kategoriTable')) {
+                    $('#kategoriTable').DataTable().destroy();
+                }
+
+                $('#kategoriTable tbody').html(rows);
+
+                $('#kategoriTable').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    pageLength: 10
                 });
             }
+        });
+    }
 
             loadKategori();
 

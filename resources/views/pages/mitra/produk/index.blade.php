@@ -49,7 +49,6 @@
                 <form id="addProductForm" enctype="multipart/form-data" class="p-3" method="POST"
                     action="{{ route('mitra.store.produk') }}">
                     @csrf
-                    <input type="text">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Produk</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -96,8 +95,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editProductForm" enctype="multipart/form-data" method="POST"
-                        action="{{ route('mitra.store.produk') }}">
+                    <form id="editProductForm" enctype="multipart/form-data" method="POST">
                         @csrf
                         <input type="hidden" id="edit_id" name="id">
                         <div class="form-group">
@@ -173,39 +171,62 @@
                                 <td>${item.price}</td>
                                 <td>${item.status}</td>
                                 <td>
-                                    <button class="btn text-white edit-btn" style="background-color: #3D0A05" 
+                                    <button class="btn text-white edit-btn" style="background-color: #3D0A05"
                                         data-id="${item.id}" data-cover="${item.cover}" data-name="${item.name}"
-                                        data-description="${item.description}" data-price="${item.price}" data-status="${item.status}"> 
-                                        <i class="fa-solid fa-pen-to-square" data-target="#editProdukModal" data-toggle="modal"></i>
+                                        data-description="${item.description}" data-price="${item.price}" data-status="${item.status}">
+                                        <i class="fa-solid fa-pen-to-square" data-target="#editProductModal" data-toggle="modal"></i>
                                     </button>
-                                    <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05"> 
+                                    <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>`;
                         });
+                        if ($.fn.DataTable.isDataTable('#kategoriTable')) {
+                            $('#kategoriTable').DataTable().destroy();
+                        }
+
                         $('#kategoriTable tbody').html(rows);
+
+                        $('#kategoriTable').DataTable({
+                            paging: true,
+                            searching: true,
+                            ordering: true,
+                            pageLength: 10
+                        });
                     }
                 });
             }
-    
+
             loadKategori();
-    
+
             $(document).on('click', '.edit-btn', function() {
-                let id = $(this).data('id');
-                let name = $(this).data('name');
-                let cover = $(this).data('cover');
-    
-                $('#edit_id').val(id);
-                $('#edit_name').val(name);
-                $('#edit_image_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
-    
-                $('#editCategoryModal').modal('show');
-            });
-    
+    let id = $(this).data('id');
+    console.log("Edit button clicked, ID:", id); // Debugging
+
+    let cover = $(this).data('cover');
+    let name = $(this).data('name');
+    let description = $(this).data('description');
+    let price = $(this).data('price');
+    let status = $(this).data('status');
+
+    $('#edit_id').val(id);
+    $('#edit_name').val(name);
+    $('#edit_description').val(description);
+    $('#edit_price').val(price);
+    $('#edit_status').val(status);
+    $('#edit_cover_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
+
+    let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
+    $('#editProductForm').attr('action', updateUrl);
+    console.log("Update URL:", updateUrl); // Debugging
+
+    $('#editProductModal').modal('show');
+});
+
             $(document).on('click', '.btn-delete', function() {
                 let id = $(this).data('id');
-    
+
                 Swal.fire({
                     title: "Yakin ingin menghapus?",
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -218,7 +239,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('be.category.delete', ':id') }}'.replace(':id', id),
+                            url: '{{ route('mitra.delete.produk', ':id') }}'.replace(':id', id),
                             method: 'POST',
                             data: {
                                 _method: 'DELETE',
@@ -227,7 +248,7 @@
                             success: function(response) {
                                 Swal.fire({
                                     title: "Deleted!",
-                                    text: "Kategori berhasil dihapus.",
+                                    text: "Produk berhasil dihapus.",
                                     icon: "success",
                                     confirmButtonText: "OK",
                                     confirmButtonColor: "#3D0A05"

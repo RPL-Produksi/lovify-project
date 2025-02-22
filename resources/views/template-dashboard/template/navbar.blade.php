@@ -3,7 +3,7 @@
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa-regular fa-bars"></i>
     </button>
- 
+
     <h5 class="d-none d-md-block text-rose">Lovify | Wedding</h5>
 
     <ul class="navbar-nav ml-auto">
@@ -15,7 +15,7 @@
                     class="img-profile rounded-circle font-weight-bold"></img>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{{ route('profile') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>

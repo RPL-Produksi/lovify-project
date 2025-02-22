@@ -14,4 +14,8 @@ class SuperadminKelolaMitraController extends Controller
         $mitra = User::where('role', 'mitra')->get();
         return view('pages.superadmin.mitra.index', compact('mitra', 'user'));
     }
+
+    public function getData() {
+        return response()->json(User::where('role', 'mitra')->get());
+    }
 }

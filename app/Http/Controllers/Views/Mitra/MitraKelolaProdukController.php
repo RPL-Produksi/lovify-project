@@ -21,4 +21,23 @@ class MitraKelolaProdukController extends Controller
         }
         return view('pages.mitra.produk.index', compact('produk', 'user', 'kategori'));
     }
+
+    public function getData(Request $request)
+    {
+        $user = $request->user();
+
+        $vendor = $user->load('vendor.products')->vendor;
+
+        if (!$vendor) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User tidak memiliki vendor',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'produk' => $vendor->products,
+        ], 200);
+    }
 }

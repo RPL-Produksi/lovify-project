@@ -35,6 +35,19 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-easing/jquery-easing.min.js') }}"></script>
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "<span style='color: #3D0A05;'>Berhasil!</span>",
+                    html: "<span style='color: #000;'>{{ session('success') }}</span>", 
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#3D0A05"
+                });
+            });
+        </script>
+    @endif
     @stack('js')
 </body>
 

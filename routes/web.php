@@ -8,6 +8,8 @@ use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
 use App\Http\Controllers\BackEnd\v1\ProductController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
+use App\Http\Controllers\BackEnd\v1\Superadmins\ClientController;
+use App\Http\Controllers\BackEnd\v1\Superadmins\MitraController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admin\AdminKelolaLokasiController;
@@ -55,10 +57,20 @@ Route::get('/about', [ClientAboutUsController::class, 'index'])->name('aboutUs')
 // superadmin route
 Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], function () {
     Route::get('/', [SuperadminDashboardController::class, 'index'])->name('superadmin.home');
+
     Route::get('/admins', [SuperadminKelolaAdminController::class, 'index'])->name('superadmin.kelola.admin');
-    Route::get('/mitras', [SuperadminKelolaMitraController::class, 'index'])->name('superadmin.kelola.mitra');
-    Route::get('/clients', [SuperadminKelolaClientController::class, 'index'])->name('superadmin.kelola.client');
-    Route::post('/admins', [AdminController::class, 'makeAdmin'])->name('superadmin.make.admin');
+    Route::get('/admins/data', [SuperadminKelolaAdminController::class, 'getData'])->name('superadmin.kelola.admin.data');
+    Route::post('/admins/store', [AdminController::class, 'makeAdmin'])->name('superadmin.make.admin');
+    Route::post('/admins/update/{id}', [AdminController::class, 'updateAdmin'])->name('superadmin.update.admin');
+    Route::delete('/admins/delete/{id}', [AdminController::class, 'deleteAdmin'])->name('superadmin.delete.admin');
+
+    Route::get('/mitra', [SuperadminKelolaMitraController::class, 'index'])->name('superadmin.kelola.mitra');
+    Route::get('/mitra/data', [SuperadminKelolaMitraController::class, 'getData'])->name('superadmin.kelola.mitra.data');
+    Route::post('/mitra/store', [MitraController::class, 'makeMitra'])->name('superadmin.store.mitra');
+
+    Route::get('/client', [SuperadminKelolaClientController::class, 'index'])->name('superadmin.kelola.client');
+    Route::get('/client/data', [SuperadminKelolaClientController::class, 'getData'])->name('superadmin.kelola.client.data');
+    Route::post('/client/store', [ClientController::class, 'makeClient'])->name('superadmin.make.client');
 });
 
 // admin route
@@ -90,6 +102,8 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
     Route::get('/vendors', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');
     Route::post('/products/{id?}', [MitraProductController::class, 'storeProduct'])->name('mitra.store.produk');
     Route::post('/vendors', [MitraCreateVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
+
+    Route::get('/data', [MitraKelolaProdukController::class, 'getData'])->name('mitra.kelola.produk.data');
 });
 
 // client route

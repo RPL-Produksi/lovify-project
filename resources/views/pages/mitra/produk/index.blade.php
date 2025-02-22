@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Produk</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
-                data-target="#addProductModal">
+                data-target="#addProdukModal">
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
@@ -20,100 +20,71 @@
                 <p class="alert alert-danger border-left-danger">{{ $errors->first() }}</p>
             @endif
         </div>
-        <table class="table table-bordered table-striped" id="example">
+        <table class="table table-bordered" id="kategoriTable">
             <thead>
                 <tr>
                     <td>No</td>
                     <td>Gambar</td>
                     <td>Kategori</td>
                     <td>Nama</td>
-                    <td>Slug</td>
                     <td>Harga</td>
+                    <td>Status</td>
                     <td>Aksi</td>
                 </tr>
             </thead>
-            <tbody>
-                @isset($produk)
-                    @foreach ($produk as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td><img width="70" height="50" style="object-fit: cover" src="{{ $item->cover }}"
-                                    alt=""></td>
-                            <td vertical>{{ ucwords($item->vendor->category->name) }}</td>
-                            <td vertical>{{ ucwords($item->name) }}</td>
-                            <td vertical>{{ ucwords($item->slug) }}</td>
-                            <td vertical>{{ number_format($item->price, 0, ',', '.') }}</td>
-                            <td>
-                                <button type="button" class="btn text-white"
-                                    style="background-color: #3D0A05"><i class="fa-solid fa-pen-to-square" data-toggle="modal"
-                                    data-target="#editProductModal"
-                                    onclick="setEditProductData('{{ $item->id }}', '{{ $item->name }}', '{{ $item->description }}', '{{ $item->slug }}', '{{ $item->price }}', '{{ $item->status }}', '{{ $item->category_id }}', '{{ $item->cover }}')"></i></button>
-                                <a href="{{ route('mitra.delete.produk', $item->id) }}" class="btn text-white btn-delete"
-                                    data-id="{{ $item->id }}" style="background-color: #3D0A05">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endisset
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 
-    <!-- modal add produk -->
-    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="addProdukModal" tabindex="-1" role="dialog" aria-labelledby="addProdukModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addProductModalLabel">Tambah Produk</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="addProdukModalLabel">Tambah Produk</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    
                 </div>
-                <div class="modal-body">
-                    <form id="addProductForm" enctype="multipart/form-data" method="POST"
-                        action="{{ route('mitra.store.produk') }}">
-                        @csrf
-                        <input type="text">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
-                            <textarea class="form-control" id="description" name="description" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price" class="form-label">Harga</label>
-                            <input type="number" class="form-control" id="price" name="price" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cover" class="form-label">Gambar Cover</label>
-                            <input type="file" class="form-control" id="cover" name="cover" accept="image/*"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control" id="status" name="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="attachments" class="form-label">Lampiran (Opsional)</label>
-                            <input type="file" class="form-control" id="attachments" name="attachments[]"
-                                accept="image/*" multiple>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
+                <form id="addProductForm" enctype="multipart/form-data" class="p-3" method="POST"
+                    action="{{ route('mitra.store.produk') }}">
+                    @csrf
+                    <input type="text">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama Produk</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="description" name="description" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Harga</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cover" class="form-label">Gambar Cover</label>
+                        <input type="file" class="form-control" id="cover" name="cover" accept="image/*" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" id="status" name="status" required>
+                            <option value="draft">Draft</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="attachments" class="form-label">Lampiran (Opsional)</label>
+                        <input type="file" class="form-control" id="attachments" name="attachments[]" accept="image/*"
+                            multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- modal edit produk -->
     <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -187,79 +158,100 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+            function loadKategori() {
+                $.ajax({
+                    url: '{{ route('mitra.kelola.produk.data') }}',
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        response.produk.forEach((item, index) => {
+                            rows += `<tr>
+                                <td>${index + 1}</td>
+                                <td><img src="${item.cover}" width="55" height="35" style="object-fit: cover;"></td>
+                                <td>${item.name}</td>
+                                <td>${item.description}</td>
+                                <td>${item.price}</td>
+                                <td>${item.status}</td>
+                                <td>
+                                    <button class="btn text-white edit-btn" style="background-color: #3D0A05" 
+                                        data-id="${item.id}" data-cover="${item.cover}" data-name="${item.name}"
+                                        data-description="${item.description}" data-price="${item.price}" data-status="${item.status}"> 
+                                        <i class="fa-solid fa-pen-to-square" data-target="#editProdukModal" data-toggle="modal"></i>
+                                    </button>
+                                    <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05"> 
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
+                        });
+                        $('#kategoriTable tbody').html(rows);
+                    }
+                });
+            }
+    
+            loadKategori();
+    
+            $(document).on('click', '.edit-btn', function() {
+                let id = $(this).data('id');
+                let name = $(this).data('name');
+                let cover = $(this).data('cover');
+    
+                $('#edit_id').val(id);
+                $('#edit_name').val(name);
+                $('#edit_image_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
+    
+                $('#editCategoryModal').modal('show');
+            });
+    
+            $(document).on('click', '.btn-delete', function() {
+                let id = $(this).data('id');
+    
+                Swal.fire({
+                    title: "Yakin ingin menghapus?",
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3D0A05",
+                    cancelButtonColor: "#3D0A05",
+                    confirmButtonText: "Ya, hapus!",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ route('be.category.delete', ':id') }}'.replace(':id', id),
+                            method: 'POST',
+                            data: {
+                                _method: 'DELETE',
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Kategori berhasil dihapus.",
+                                    icon: "success",
+                                    confirmButtonText: "OK",
+                                    confirmButtonColor: "#3D0A05"
+                                });
+                                loadKategori();
+                            },
+                            error: function(xhr) {
+                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus kategori.", "error");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#kategoriTable').DataTable({
                 paging: true,
                 searching: true,
                 ordering: true,
                 pageLength: 10
             });
         });
-    </script>
-
-    @if (session('success'))
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Berhasil!",
-                    text: "{{ session('success') }}",
-                    icon: "success",
-                    confirmButtonText: "OK"
-                });
-            });
-        </script>
-    @endif
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".btn-delete").forEach(button => {
-                button.addEventListener("click", function(event) {
-                    event.preventDefault();
-
-                    let url = this.getAttribute("href");
-
-                    Swal.fire({
-                        title: "Yakin ingin menghapus?",
-                        text: "Data yang dihapus tidak bisa dikembalikan!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "Ya, hapus!",
-                        cancelButtonText: "Batal"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = url;
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-
-    <script>
-        function setEditProductData(id, name, description, slug, price, status, categoryId, cover) {
-            const editUrl = '{{ route("mitra.store.produk", ":id") }}'
-
-            console.log(id);
-
-
-            document.getElementById('editProductForm').action = editUrl.replace(':id', id);
-            document.getElementById('edit_id').value = id;
-            document.getElementById('edit_name').value = name;
-            document.getElementById('edit_description').value = description;
-            document.getElementById('edit_slug').value = slug;
-            document.getElementById('edit_price').value = price;
-            document.getElementById('edit_status').value = status;
-
-            let categorySelect = document.getElementById('edit_category_id');
-            for (let option of categorySelect.options) {
-                if (option.value == categoryId) {
-                    option.selected = true;
-                }
-            }
-
-            // Tampilkan cover lama di preview
-            document.getElementById('edit_cover_preview').src = cover ? cover : 'https://via.placeholder.com/100';
-        }
     </script>
 @endpush

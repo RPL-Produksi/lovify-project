@@ -53,7 +53,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-link" type="button" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-link text-primary text-decoration-none" type="button"
+                            data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Tambah</button>
                     </div>
                 </form>
@@ -140,8 +141,8 @@
                     text: "Data yang dihapus tidak bisa dikembalikan!",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
+                    confirmButtonColor: "#3D0A05",
+                    cancelButtonColor: "#3D0A05",
                     confirmButtonText: "Ya, hapus!",
                     cancelButtonText: "Batal"
                 }).then((result) => {
@@ -155,8 +156,13 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                Swal.fire("Deleted!", "Kategori berhasil dihapus.",
-                                    "success");
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Kategori berhasil dihapus.",
+                                    icon: "success",
+                                    confirmButtonText: "OK",
+                                    confirmButtonColor: "#3D0A05"
+                                });
                                 loadKategori();
                             },
                             error: function(xhr) {
@@ -180,17 +186,4 @@
             });
         });
     </script>
-
-    @if (session('success'))
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Berhasil!",
-                    text: "{{ session('success') }}",
-                    icon: "success",
-                    confirmButtonText: "OK"
-                });
-            });
-        </script>
-    @endif
 @endpush

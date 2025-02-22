@@ -11,7 +11,10 @@ class SuperadminKelolaClientController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $client = User::where('role', 'client')->get();
-        return view('pages.superadmin.client.index', compact('user','client'));
+        return view('pages.superadmin.client.index', compact('user'));
+    }
+
+    public function getData() {
+        return response()->json(User::where('role', 'client')->get());
     }
 }

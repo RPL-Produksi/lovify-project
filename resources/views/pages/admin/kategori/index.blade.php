@@ -117,7 +117,7 @@
                         response.forEach((item, index) => {
                             rows += `<tr>
                         <td>${index + 1}</td>
-                        <td><img src="${item.image}" width="70" height="50" style="object-fit: cover;"></td>
+                        <td><img src="${item.image}" width="55" height="35" style="object-fit: cover;"></td>
                         <td>${item.name}</td>
                         <td>
                             <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}"> 
@@ -156,8 +156,8 @@
                     text: "Data yang dihapus tidak bisa dikembalikan!",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
+                    confirmButtonColor: "#3D0A05",
+                    cancelButtonColor: "#3D0A05",
                     confirmButtonText: "Ya, hapus!",
                     cancelButtonText: "Batal"
                 }).then((result) => {
@@ -171,8 +171,13 @@
                                 _token: '{{ csrf_token() }}'
                             },
                             success: function(response) {
-                                Swal.fire("Deleted!", "Kategori berhasil dihapus.",
-                                    "success");
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Kategori berhasil dihapus.",
+                                    icon: "success",
+                                    confirmButtonText: "OK",
+                                    confirmButtonColor: "#3D0A05"
+                                });
                                 loadKategori();
                             },
                             error: function(xhr) {
@@ -196,17 +201,4 @@
             });
         });
     </script>
-
-    @if (session('success'))
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                Swal.fire({
-                    title: "Berhasil!",
-                    text: "{{ session('success') }}",
-                    icon: "success",
-                    confirmButtonText: "OK"
-                });
-            });
-        </script>
-    @endif
 @endpush

@@ -17,7 +17,8 @@
                             <div class="flex justify-between mt-6">
                                 <div>
                                     <h2 class="text-redlue font-bold text-2xl">{{ $product->name }}</h2>
-                                    <h2 class="text-redlue font-medium">Category : {{ $product->vendor->category->name }}</h2>
+                                    <h2 class="text-redlue font-medium">Category : {{ $product->vendor->category->name }}
+                                    </h2>
                                 </div>
                                 <h2 class="text-redlue font-bold text-2xl">
                                     Rp{{ number_format($product->price, 0, ',', '.') }}
@@ -60,20 +61,24 @@
                         </div>
 
                         <!-- Modal -->
-                        <div x-show="open" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div x-show="open" x-cloak
+                            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                             <div class="bg-white rounded-lg shadow-lg w-96 p-6">
                                 <h2 class="text-md font-bold mb-4 text-rose-950">Enter your marry date</h2>
-                                <form id="payment-form" action="{{ route('payment.store', $order->id) }}" method="POST">
+                                <form id="payment-form">
                                     @csrf
+                                    <input type="hidden" id="snap-token">
+                                    <input type="hidden" id="order-id" value="{{ $order->id }}">
                                     <div class="mb-4">
                                         <label for="payment_type" class="text-rose-950">Payment Type</label>
-                                        <select class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950" name="payment_type" required>
+                                        <select id="payment_type"
+                                            class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950"
+                                            required>
                                             <option value="down_payment">Down Payment</option>
                                             <option value="remaining_payment">Remaining Payment</option>
                                             <option value="full_payment">Full Payment</option>
                                         </select>
                                     </div>
-
                                     <div class="flex justify-end space-x-2">
                                         <button type="button" @click="open = false"
                                             class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100">
@@ -85,6 +90,7 @@
                                         </button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -98,46 +104,53 @@
 @endsection
 
 @push('js')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    {{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
 
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('payment-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Hindari submit form default
+    <script>
+        let csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
 
-                let formData = new FormData(this);
-                let orderId = "{{ $order->id }}"; // Ambil ID order dari Blade
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-                fetch(`/payment/${orderId}`, {
+            let orderId = document.getElementById('order-id').value;
+            let paymentType = document.getElementById('payment_type').value;
+
+            fetch(`/transactions/${orderId}/pay`, {
                     method: 'POST',
-                    body: formData,
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    }
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        payment_type: paymentType
+                    })
                 })
+
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
                         window.snap.pay(data.data.snap_token, {
                             onSuccess: function(result) {
-                                alert('Payment Success!');
+                                alert('Payment Success');
                                 location.reload();
                             },
                             onPending: function(result) {
-                                alert('Waiting for payment!');
+                                alert('Waiting for Payment');
                             },
                             onError: function(result) {
-                                alert('Payment failed!');
+                                alert('Payment Failed');
                             }
                         });
                     } else {
                         alert(data.message);
                     }
                 })
-                .catch(error => console.error('Error:', error));
-            });
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
-    </script> --}}
+    </script>
 @endpush

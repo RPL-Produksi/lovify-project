@@ -130,7 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/detail/{id}', [ClientOrderShowController::class, 'detail'])->name('client.order.detail');
     Route::post('/order/store/{id}', [ClientOrderController::class, 'storeOrder'])->name('client.order.store');
 
-    Route::post('/payment/{id}', [ClientTransactionController::class, 'storePayment'])->name('payment.store');
+    Route::post('/transactions/{id}/pay', [ClientTransactionController::class, 'storePayment']);
 });
 
 // Route::get('/mail', function () {

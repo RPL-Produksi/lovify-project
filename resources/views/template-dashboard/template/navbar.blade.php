@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa-regular fa-bars"></i>
+        <i class="fa-regular fa-bars" style="color: #3D0A05 !important"></i>
     </button>
 
     <h5 class="d-none d-md-block text-rose">Lovify | Wedding</h5>

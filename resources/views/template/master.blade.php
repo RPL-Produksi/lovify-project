@@ -36,6 +36,23 @@
         </script>
     @endif
 
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: "Error!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "OK",
+                customClass: {
+                    popup: "rounded-lg shadow-lg",
+                    title: "text-lg font-bold text-rose-950",
+                    confirmButton: "bg-rose-950 text-white px-4 py-2 rounded-md hover:bg-rose-950",
+                },
+                buttonsStyling: false
+            });
+        </script>
+    @endif
+
     @if ($errors->any())
         <script>
             let errorMessages = `{!! implode('<br>', $errors->all()) !!}`;

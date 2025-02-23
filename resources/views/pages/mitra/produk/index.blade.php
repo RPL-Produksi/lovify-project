@@ -201,28 +201,28 @@
             loadKategori();
 
             $(document).on('click', '.edit-btn', function() {
-    let id = $(this).data('id');
-    console.log("Edit button clicked, ID:", id); // Debugging
+                let id = $(this).data('id');
+                console.log("Edit button clicked, ID:", id); // Debugging
 
-    let cover = $(this).data('cover');
-    let name = $(this).data('name');
-    let description = $(this).data('description');
-    let price = $(this).data('price');
-    let status = $(this).data('status');
+                let cover = $(this).data('cover');
+                let name = $(this).data('name');
+                let description = $(this).data('description');
+                let price = $(this).data('price');
+                let status = $(this).data('status');
 
-    $('#edit_id').val(id);
-    $('#edit_name').val(name);
-    $('#edit_description').val(description);
-    $('#edit_price').val(price);
-    $('#edit_status').val(status);
-    $('#edit_cover_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
+                $('#edit_id').val(id);
+                $('#edit_name').val(name);
+                $('#edit_description').val(description);
+                $('#edit_price').val(price);
+                $('#edit_status').val(status);
+                $('#edit_cover_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
 
-    let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
-    $('#editProductForm').attr('action', updateUrl);
-    console.log("Update URL:", updateUrl); // Debugging
+                let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
+                $('#editProductForm').attr('action', updateUrl);
+                console.log("Update URL:", updateUrl); 
 
-    $('#editProductModal').modal('show');
-});
+                $('#editProductModal').modal('show');
+            });
 
             $(document).on('click', '.btn-delete', function() {
                 let id = $(this).data('id');
@@ -239,7 +239,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('mitra.delete.produk', ':id') }}'.replace(':id', id),
+                            url: '{{ route('mitra.delete.produk', ':id') }}'.replace(':id',
+                                id),
                             method: 'POST',
                             data: {
                                 _method: 'DELETE',
@@ -256,7 +257,8 @@
                                 loadKategori();
                             },
                             error: function(xhr) {
-                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus kategori.", "error");
+                                Swal.fire("Error!", xhr.responseJSON.message ||
+                                    "Gagal menghapus kategori.", "error");
                             }
                         });
                     }

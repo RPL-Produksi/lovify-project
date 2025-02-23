@@ -18,7 +18,7 @@ class ClientPlanningShowController extends Controller
 
     public function detail($id) {
         $user = Auth::user();
-        $planning = Planning::findOrFail( $id );
+        $planning = Planning::with('products.vendor.category')->findOrFail($id);
         return view('pages.client.planning.detail', compact('user', 'planning'));
     }
 

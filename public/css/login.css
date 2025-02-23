@@ -1,11 +1,11 @@
 .login-section {
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
     position: relative;
 }
 
 .col-a {
-    height: 100vh;
+    min-height: 100vh;
     background-image: url(../asset/image/bg-login.png);
     background-size: cover; /* Ensure image covers the entire div */
     background-position: center; /* Center the image */

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminLocationController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Views\Clients\ClientDetailPacketController;
 use App\Http\Controllers\Views\Clients\ClientDetailProductController;
 use App\Http\Controllers\Views\AuthController as ViewAuthController;
 use App\Http\Controllers\Views\Clients\ClientHomeController;
+use App\Http\Controllers\Views\Clients\ClientOrderShowController;
 use App\Http\Controllers\Views\Clients\ClientPlanningShowController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
 use App\Http\Controllers\Views\Clients\ClientVendorsController;
@@ -108,7 +110,8 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
 
 // client route
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('store/plannig', [ClientPlanningController::class, 'storePlanning'])->name('client.store.planning');
+    Route::post('store/planning', [ClientPlanningController::class, 'storePlanningSecond'])->name('client.store.planning');
+    Route::post('update/planning/{id}', [ClientPlanningController::class, 'storePlanning'])->name('client.update.planning');
     Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
     Route::post('/profile/change', [PersonalController::class, 'changeProfile'])->name('profile.change');
     Route::get('/profile', [ClientProfileController::class, 'profile'])->name('profile');
@@ -119,6 +122,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/planning/category', [ClientPlanningShowController::class, 'category'])->name('planning.category');
 
     Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
+    Route::delete('/planning/delete/{id}', [ClientPlanningController::class, 'deletePlanning'])->name('client.delete.planning');
+
+    Route::get('/order/{planning}', [ClientOrderShowController::class, 'index'])->name('client.order');
+    Route::post('/order/store/{id}', [ClientOrderController::class, 'storeOrder'])->name('client.order.store');
 });
 
 // Route::get('/mail', function () {

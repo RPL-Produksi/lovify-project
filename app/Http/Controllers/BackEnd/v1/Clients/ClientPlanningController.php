@@ -52,8 +52,8 @@ class ClientPlanningController extends Controller
                     ], 404);
                 }
 
-                // return redirect()->back()->with('error', 'Planning not found');
-                return true;
+                return redirect()->back()->with('error', 'Planning not found');
+                // return true;
             }
 
             $planning->update($request->only('title', 'description'));
@@ -86,6 +86,60 @@ class ClientPlanningController extends Controller
         // return true;
     }
 
+    public function storePlanningSecond(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'planning_id' => ['nullable', 'exists:plannings,id'],
+            'title' => ['required_if:planning_id,null', 'string'],
+            'description' => ['required_if:planning_id,null', 'string', 'nullable'],
+            'product_ids' => ['nullable', 'array'],
+            'product_ids.*' => ['nullable', 'exists:products,id', 'min:1'],
+        ]);
+    
+        if ($validator->fails()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors(),
+                ], 400);
+            }
+    
+            return redirect()->back()->with('error', $validator->errors());
+        }
+    
+        $data = $request->only('title', 'description');
+        $data['client_id'] = $request->user()->id;
+    
+        $planning = Planning::updateOrCreate(
+            ['id' => $request->planning_id],
+            $data
+        );
+    
+        $existingProducts = $planning->products()->with('vendor.category')->get();
+        $existingCategories = $existingProducts->pluck('vendor.category.id')->toArray();
+        $newProducts = Product::whereIn('id', $request->product_ids ?? [])->with('vendor.category')->get();
+        
+        $newProductCategories = $newProducts->pluck('vendor.category.id')->toArray();
+    
+        $productsToKeep = $existingProducts->filter(function ($product) use ($newProductCategories) {
+            return !in_array($product->vendor->category->id, $newProductCategories);
+        })->pluck('id')->toArray();
+    
+        $mergedProductIds = array_merge($productsToKeep, $request->product_ids ?? []);
+    
+        $planning->products()->sync($mergedProductIds);
+    
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => $request->planning_id ? 'Planning updated successfully' : 'Planning created successfully',
+            ], $request->planning_id ? 200 : 201);
+        }
+    
+        return redirect()->route('planning')->with('success', $request->planning_id ? 'Planning updated successfully' : 'Planning created successfully');
+    }
+
+
     public function deletePlanning(Request $request, $id)
     {
         $planning = Planning::find($id);
@@ -97,8 +151,8 @@ class ClientPlanningController extends Controller
                 ], 404);
             }
 
-            // return redirect()->back()->with('error', 'Planning not found');
-            return true;
+            return redirect()->back()->with('error', 'Planning not found');
+            // return true;
         }
 
         if ($request->user()->id != $planning->client_id) {
@@ -109,8 +163,8 @@ class ClientPlanningController extends Controller
                 ], 403);
             }
 
-            // return redirect()->back()->with('error', 'You are not authorized to delete this planning');
-            return true;
+            return redirect()->back()->with('error', 'You are not authorized to delete this planning');
+            // return true;
         }
 
         $planning->delete();
@@ -121,8 +175,8 @@ class ClientPlanningController extends Controller
             ], 200);
         }
 
-        // return redirect()->back()->with('success', 'Planning deleted successfully');
-        return true;
+        return redirect()->back()->with('success', 'Planning deleted successfully');
+        // return true;
     }
 
     public function getPlannings(Request $request)

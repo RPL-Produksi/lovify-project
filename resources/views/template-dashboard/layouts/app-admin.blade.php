@@ -22,7 +22,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content" style="background-color: #f7f0f0">
                 @include('template-dashboard.template.navbar')
-                <div class="container-fluid" style="min-height: 100vh; background-color: #f7f0f0;">
+                <div class="container-fluid pb-10" style="min-height: 100vh; background-color: #f7f0f0;">
                     @yield('content')
                 </div>
             </div>

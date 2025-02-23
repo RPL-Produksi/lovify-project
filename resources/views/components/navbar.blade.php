@@ -92,51 +92,38 @@
                                 class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
                                 style="height: 1px;"></span>
                         </a>
-                        <a href="{{ route('planning') }}" class="font-light relative overflow-hidden group">
-                            My Orders
-                            <span
-                                class="absolute left-0 bottom-0 w-0 bg-white transition-all duration-300 group-hover:w-full"
-                                style="height: 1px;"></span>
-                        </a>
                     </div>
-                    @if (Route::is('client.detail.product'))
-                        <div class="hidden md:flex space-x-6">
-                            <a href="{{ route('login') }}" class="font-light text-white rounded-3xl px-7 py-3 login-btn"
-                                style="background-color: #3D0A05">Book Now</a>
-                        </div>
-                    @else
-                        <div class="hidden md:flex space-x-6 relative group">
-                            <div class="flex">
-                                <div class="flex items-center mr-3">
-                                    <p>Hello, {{ $user->username }}<i class="fa-solid fa-caret-down ml-2"></i></p>
-                                </div>
 
-                                <a class="relative overflow-hidden group inline-block">
-                                    @if (is_null($user->avatar))
-                                        <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
-                                            class="rounded-full w-14" alt="">
-                                    @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover" alt="">
-                                    @endif
-                                </a>
+                    <div class="hidden md:flex space-x-6 relative group">
+                        <div class="flex">
+                            <div class="flex items-center mr-3">
+                                <p>Hello, {{ $user->username }}<i class="fa-solid fa-caret-down ml-2"></i></p>
                             </div>
-                            <div
-                                class="absolute left-16 top-full mt-6 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible transform -translate-x-1/2">
-                                <a href="{{ route('profile') }}"
-                                    class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
-                                        class="fa-solid fa-user mr-2"></i>Profile</a>
-                                <hr>
-                                <form action="{{ route('be.logout') }}" method="POST">
-                                    @csrf
-                                    <button href="#"
-                                        class="w-full text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-b-lg"><i
-                                            class="fa-solid fa-right-from-bracket mr-2"></i>Logout</button>
-                                </form>
-                            </div>
+
+                            <a class="relative overflow-hidden group inline-block">
+                                @if (is_null($user->avatar))
+                                    <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
+                                        class="rounded-full w-14" alt="">
+                                @else
+                                    <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover"
+                                        alt="">
+                                @endif
+                            </a>
                         </div>
-                    @endif
-
-
+                        <div
+                            class="absolute left-16 top-full mt-6 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible transform -translate-x-1/2">
+                            <a href="{{ route('profile') }}"
+                                class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
+                                    class="fa-solid fa-user mr-2"></i>Profile</a>
+                            <hr>
+                            <form action="{{ route('be.logout') }}" method="POST">
+                                @csrf
+                                <button href="#"
+                                    class="w-full text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-b-lg"><i
+                                        class="fa-solid fa-right-from-bracket mr-2"></i>Logout</button>
+                            </form>
+                        </div>
+                    </div>
 
                     <div class="md:hidden">
                         <button class="text-rose-950 hover:text-white focus:outline-none menu-button" id="menu-button">
@@ -146,7 +133,8 @@
                                         <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}"
                                             class="rounded-full w-12" alt="">
                                     @else
-                                        <img src="{{ $user->avatar }}" class="rounded-full w-11 h-11 object-cover" alt="">
+                                        <img src="{{ $user->avatar }}" class="rounded-full w-11 h-11 object-cover"
+                                            alt="">
                                     @endif
                                 </a>
                             </div>

@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'My Planning')
+@section('title', 'My Order')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/master.css') }}">
@@ -9,34 +9,33 @@
 
 
     <div class="planning-section px-40 py-32 min-h-screen" style="background-color: #f7f0f0">
-        <div class="flex gap-3 mt-5">
-            <a href="{{ route('planning.store') }}" class="bg-rose text-white py-2 px-4 text-lg rounded-lg"><i
-                    class="fa-solid fa-plus"></i></a>
-            <h2 class="text-redlue font-bold text-3xl">My Planning</h2>
-        </div>
-        @foreach ($planning as $item)
-            <div class="card border-2 rounded-lg border-rose px-5 py-7 mt-4">
-                <div class="grid grid-cols-3">
-                    <div class="col-span-2">
-                        <h4 class="text-rs text-2xl font-bold">{{ $item->title }}</h4>
-                        <p class="mt-3 text-rs">{{ $item->description }}</p>
-                    </div>
-                    <div class="flex justify-end gap-2 items-center">
-                        <a href="{{ route('planning.detail', $item->id) }}"
-                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Detail</a>
-                        <a href="{{ route('client.order', $item->id) }}"
-                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Order</a>
-                        <form id="delete-avatar-form" action="{{ route('client.delete.planning', $item->id) }}"
-                            method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="bg-rose text-white py-2 px-4 text-xl rounded-lg"
-                                onclick="confirmDelete()">Hapus</button>
-                        </form>
+        @if ($order->isNotEmpty())
+            @foreach ($order as $item)
+                <div class="card border-2 rounded-lg border-rose shadow-2xl px-5 py-7 mt-4">
+                    <div class="grid grid-cols-3">
+                        <div class="col-span-2">
+                            <h4 class="text-rs text-2xl font-bold">{{ $item->title }}</h4>
+                            <p class="mt-3 text-rs">{{ $item->description }}</p>
+                        </div>
+                        <div class="flex justify-end gap-2 items-center">
+                            <a href="{{ route('planning.detail', $item->id) }}"
+                                class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Detail</a>
+                            <form id="delete-avatar-form" action="{{ route('client.delete.planning', $item->id) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="bg-rose text-white py-2 px-4 text-xl rounded-lg"
+                                    onclick="confirmDelete()">Hapus</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            @endforeach
+        @else
+            <div class="col-span-4 text-center mt-80">
+                <p class="text-redlue">Belum ada order.</p>
             </div>
-        @endforeach
+        @endif
     </div>
 
     @include('components.footer')

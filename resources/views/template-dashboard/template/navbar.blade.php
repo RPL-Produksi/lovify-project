@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa-regular fa-bars"></i>
+        <i class="fa-regular fa-bars" style="color: #3D0A05 !important"></i>
     </button>
 
     <h5 class="d-none d-md-block text-rose">Lovify | Wedding</h5>
@@ -10,12 +10,12 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hi, {{ $user->username }}</span>
                 <img src="{{ $user->avatar ?? asset('avatars/default.png') }}"
                     class="img-profile rounded-circle font-weight-bold"></img>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{{ route('profile') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
@@ -42,10 +42,10 @@
             </div>
             <div class="modal-body">Pilih "Keluar" di bawah jika Anda siap mengakhiri sesi Anda saat ini.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                <button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
                 <form id="logoutForm" action="{{ route('be.logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">
+                    <button type="submit" class="btn btn-primary">
                         <span class="btn-text">Keluar</span>
                         <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                     </button>

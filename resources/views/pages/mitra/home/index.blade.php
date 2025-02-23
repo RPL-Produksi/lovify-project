@@ -7,9 +7,9 @@
 
 @section('content')
 
-@if (session('message'))
+@if (session('success'))
 <div class="alert alert-success mb-3 border-left-success">
-    {{ session('message') }}
+    {{ session('success') }}
 </div>
 @endif
     <div class="card p-3 border-left-rose">

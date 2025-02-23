@@ -11,7 +11,7 @@
             <div class="xl:col-span-2 col-a hidden md:block">
 
             </div>
-            <div class="xl:col-span-3 col-b shadow-2xl" style="height: 100vh; background-color: #f7f0f0;">
+            <div class="xl:col-span-3 col-b shadow-2xl md:pb-0 pb-16" style="background-color: #f7f0f0;">
                 <div class="xl:px-48 px-7">
                     <div class="flex xl:justify-end">
                         <a href="{{ route('client.home') }}">
@@ -32,13 +32,13 @@
                                 </div>
                             @endif
                             <div>
-                                <label for="" class="text-redlue text-xl font-medium">Username/email</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-user"></i> Username/email</label>
                                 <input type="text" name="login"
                                     class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5"
                                     placeholder="Enter your email">
                             </div>
                             <div class="mt-5">
-                                <label for="" class="text-redlue text-xl font-medium">Password</label>
+                                <label for="" class="text-redlue text-xl font-medium"><i class="fa-regular fa-lock"></i> Password</label>
                                 <input type="password" name="password"
                                     class="w-full bg-transparent border mt-2 focus:outline-none rounded-md py-4 border-rose-950 placeholder-rose-950 px-5"
                                     placeholder="Enter your password">

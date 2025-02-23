@@ -5,7 +5,9 @@ use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminLocationController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
+use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
 use App\Http\Controllers\BackEnd\v1\ProductController;
 use App\Http\Controllers\BackEnd\v1\Superadmins\AdminController;
@@ -102,7 +104,7 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
     Route::get('/products', [MitraKelolaProdukController::class, 'index'])->name('mitra.kelola.produk');
     Route::get('/vendors', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');
     Route::post('/products/{id?}', [MitraProductController::class, 'storeProduct'])->name('mitra.store.produk');
-    Route::post('/vendors', [MitraCreateVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
+    Route::post('/vendors', [MitraVendorController::class, 'storeVendor'])->name('mitra.store.vendor');
 
     Route::delete('/products/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
     Route::get('/data', [MitraKelolaProdukController::class, 'getData'])->name('mitra.kelola.produk.data');
@@ -125,7 +127,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/planning/delete/{id}', [ClientPlanningController::class, 'deletePlanning'])->name('client.delete.planning');
 
     Route::get('/order/{planning}', [ClientOrderShowController::class, 'index'])->name('client.order');
+    Route::get('/order/detail/{id}', [ClientOrderShowController::class, 'detail'])->name('client.order.detail');
     Route::post('/order/store/{id}', [ClientOrderController::class, 'storeOrder'])->name('client.order.store');
+
+    Route::post('/payment/{id}', [ClientTransactionController::class, 'storePayment'])->name('payment.store');
 });
 
 // Route::get('/mail', function () {

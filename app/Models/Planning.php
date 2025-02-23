@@ -29,4 +29,9 @@ class Planning extends Model
     {
         return $this->belongsToMany(Product::class, 'product_planning', 'planning_id', 'product_id');
     }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'planning_id');
+    }
 }

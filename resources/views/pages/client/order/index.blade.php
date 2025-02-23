@@ -14,19 +14,12 @@
                 <div class="card border-2 rounded-lg border-rose shadow-2xl px-5 py-7 mt-4">
                     <div class="grid grid-cols-3">
                         <div class="col-span-2">
-                            <h4 class="text-rs text-2xl font-bold">{{ $item->title }}</h4>
-                            <p class="mt-3 text-rs">{{ $item->description }}</p>
+                            <h4 class="text-rs text-2xl font-bold">{{ $item->planning->title }}</h4>
+                            <p class="mt-3 text-rs">{{ $item->marry_date }}</p>
                         </div>
                         <div class="flex justify-end gap-2 items-center">
-                            <a href="{{ route('planning.detail', $item->id) }}"
-                                class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Detail</a>
-                            <form id="delete-avatar-form" action="{{ route('client.delete.planning', $item->id) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="bg-rose text-white py-2 px-4 text-xl rounded-lg"
-                                    onclick="confirmDelete()">Hapus</button>
-                            </form>
+                            <a href="{{ route('client.order.detail', $item->id) }}"
+                                class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Detail Order</a>
                         </div>
                     </div>
                 </div>

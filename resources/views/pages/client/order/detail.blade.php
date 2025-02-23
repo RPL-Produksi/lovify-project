@@ -1,0 +1,143 @@
+@extends('template.master')
+@section('title', 'Detail Order')
+@section('content')
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    @include('components.navbar_rose')
+
+    <div class="cart-section px-40 py-32">
+        <div class="grid grid-cols-9 gap-5">
+            <div class="col-span-5">
+                <div>
+                    <h2 class="text-redlue font-bold text-2xl">Order {{ $order->planning->title }}</h2>
+                    <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
+                        @foreach ($order->planning->products as $product)
+                            <div class="flex justify-between mt-6">
+                                <div>
+                                    <h2 class="text-redlue font-bold text-2xl">{{ $product->name }}</h2>
+                                    <h2 class="text-redlue font-medium">Category : {{ $product->vendor->category->name }}</h2>
+                                </div>
+                                <h2 class="text-redlue font-bold text-2xl">
+                                    Rp{{ number_format($product->price, 0, ',', '.') }}
+                                </h2>
+                            </div>
+                            <hr class="border-rose-950 mt-7">
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-4">
+                <h2 class="text-redlue font-bold text-2xl">Payment Summary</h2>
+                <div class="border-rose w-100 pt-8 pb-20 px-7 shadow-2xl mt-3">
+                    @foreach ($order->planning->products as $product)
+                        <div class="mt-5">
+                            <div class="flex justify-between">
+                                <h2 class="font-medium text-xl text-gray-700">{{ $product->name }}</h2>
+                                <h2 class="text-redlue font-bold text-2xl">
+                                    Rp{{ number_format($product->price, 0, ',', '.') }}</h2>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="mt-5">
+                        <div class="flex justify-between">
+                            <h2 class="font-medium text-xl text-gray-700">Total Amount</h2>
+                            <h2 class="text-redlue font-bold text-2xl">
+                                Rp{{ number_format($order->planning->products->sum('price'), 0, ',', '.') }}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Modal dengan Alpine.js -->
+                    <div x-data="{ open: false }">
+                        <div class="mt-7">
+                            <button @click="open = true"
+                                class="bg-rose rounded-lg text-center text-white text-lg font-medium py-3 block w-full">
+                                Pay Now
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div x-show="open" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                                <h2 class="text-md font-bold mb-4 text-rose-950">Enter your marry date</h2>
+                                <form id="payment-form" action="{{ route('payment.store', $order->id) }}" method="POST">
+                                    @csrf
+                                    <div class="mb-4">
+                                        <label for="payment_type" class="text-rose-950">Payment Type</label>
+                                        <select class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950" name="payment_type" required>
+                                            <option value="down_payment">Down Payment</option>
+                                            <option value="remaining_payment">Remaining Payment</option>
+                                            <option value="full_payment">Full Payment</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="flex justify-end space-x-2">
+                                        <button type="button" @click="open = false"
+                                            class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100">
+                                            Cancel
+                                        </button>
+                                        <button type="submit"
+                                            class="px-4 py-2 bg-rose-950 text-white rounded-lg hover:bg-rose-950">
+                                            Pay Now
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @include('components.footer')
+@endsection
+
+@push('js')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    {{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script> --}}
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('payment-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Hindari submit form default
+
+                let formData = new FormData(this);
+                let orderId = "{{ $order->id }}"; // Ambil ID order dari Blade
+
+                fetch(`/payment/${orderId}`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.snap.pay(data.data.snap_token, {
+                            onSuccess: function(result) {
+                                alert('Payment Success!');
+                                location.reload();
+                            },
+                            onPending: function(result) {
+                                alert('Waiting for payment!');
+                            },
+                            onError: function(result) {
+                                alert('Payment failed!');
+                            }
+                        });
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script> --}}
+@endpush

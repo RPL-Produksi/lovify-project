@@ -15,4 +15,10 @@ class ClientOrderShowController extends Controller
         $order = Order::where('planning_id', $planning->id)->get();
         return view('pages.client.order.index', compact('user', 'order'));
     }
+
+    public function detail($id) {
+        $user = Auth::user();
+        $order = Order::with('planning.products.vendor.category')->findOrFail($id);
+        return view('pages.client.order.detail', compact('user', 'order'));
+    }
 }

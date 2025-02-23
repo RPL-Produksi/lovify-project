@@ -66,44 +66,57 @@
                             </h2>
                         </div>
                     </div>
-                    <!-- Parent container dengan Alpine.js -->
-                    <div x-data="{ open: false }">
-
-                        <!-- Tombol Order Now -->
+                    @if ($planning->order)
                         <div class="mt-5">
                             <div class="mt-7">
-                                <button @click="open = true"
-                                    class="bg-rose rounded-lg text-center text-white text-lg font-medium py-3 block w-full">
-                                    Order Now
+                                <button
+                                    class="bg-white rounded-lg text-center text-rose-950 border-2 border-rose-950 text-lg font-medium py-3 block w-full cursor-not-allowed"
+                                    disabled>
+                                    Sudah Dipesan
                                 </button>
                             </div>
                         </div>
+                    @else
+                        <div x-data="{ open: false }">
+                            <!-- Tombol Order Now -->
+                            <div class="mt-5">
+                                <div class="mt-7">
+                                    <button @click="open = true"
+                                        class="bg-rose rounded-lg text-center text-white text-lg font-medium py-3 block w-full">
+                                        Order Now
+                                    </button>
+                                </div>
+                            </div>
 
-                        <!-- Modal -->
-                        <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                            <div class="bg-white rounded-lg shadow-lg w-96 p-6">
-                                <h2 class="text-md font-bold mb-4 text-rose-950">Enter your marry date</h2>
-                                <form action="{{ route('client.order.store', $planning->id) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="product_ids[]" value="{{ $product->id }}">
-                                    <div class="mb-4">
-                                        <label for="marry_date" class="text-rose-950">Marry Date</label>
-                                        <input class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950" type="date" name="marry_date">
-                                    </div>
-                                    <div class="flex justify-end space-x-2">
-                                        <button type="button" @click="open = false"
-                                            class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100">
-                                            Cancel
-                                        </button>
-                                        <button type="submit"
-                                            class="px-4 py-2 bg-rose-950 text-white rounded-lg hover:bg-rose-950">
-                                            Book Now
-                                        </button>
-                                    </div>
-                                </form>
+                            <!-- Modal -->
+                            <div x-show="open"
+                                class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+                                    <h2 class="text-md font-bold mb-4 text-rose-950">Enter your marry date</h2>
+                                    <form action="{{ route('client.order.store', $planning->id) }}" method="POST">
+                                        @csrf
+                                        <div class="mb-4">
+                                            <label for="marry_date" class="text-rose-950">Marry Date</label>
+                                            <input
+                                                class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950"
+                                                type="date" name="marry_date">
+                                        </div>
+                                        <div class="flex justify-end space-x-2">
+                                            <button type="button" @click="open = false"
+                                                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100">
+                                                Cancel
+                                            </button>
+                                            <button type="submit"
+                                                class="px-4 py-2 bg-rose-950 text-white rounded-lg hover:bg-rose-950">
+                                                Book Now
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
 
                 </div>
             </div>

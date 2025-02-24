@@ -23,15 +23,15 @@
                     </div>
                     <div class="flex justify-end gap-2 items-center">
                         <a href="{{ route('planning.detail', $item->id) }}"
-                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Detail</a>
+                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg"><i class="fa-regular fa-eye"></i></a>
                         <a href="{{ route('client.order', $item->id) }}"
-                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg">Order</a>
+                            class="bg-rose text-white py-2 px-4 text-xl rounded-lg"><i class="fa-regular fa-cart-shopping"></i></a>
                         <form id="delete-avatar-form" action="{{ route('client.delete.planning', $item->id) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="button" class="bg-rose text-white py-2 px-4 text-xl rounded-lg"
-                                onclick="confirmDelete()">Hapus</button>
+                                onclick="confirmDelete()"><i class="fa-regular fa-trash"></i></button>
                         </form>
                     </div>
                 </div>

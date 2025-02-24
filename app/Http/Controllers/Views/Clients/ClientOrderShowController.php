@@ -17,8 +17,10 @@ class ClientOrderShowController extends Controller
     }
 
     public function detail($id) {
-        $user = Auth::user();
-        $order = Order::with('planning.products.vendor.category')->findOrFail($id);
+        $order = Order::find($id);
+        $order->with('planning.products.vendor.category');
+
+        $user = Auth::user( );
         return view('pages.client.order.detail', compact('user', 'order'));
     }
 }

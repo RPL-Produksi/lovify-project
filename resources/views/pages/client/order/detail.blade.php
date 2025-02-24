@@ -44,9 +44,15 @@
                     @endforeach
                     <div class="mt-5">
                         <div class="flex justify-between">
-                            <h2 class="font-medium text-xl text-gray-700">Total Amount</h2>
+                            <h2 class="font-medium text-xl text-gray-700">Down Payment</h2>
                             <h2 class="text-redlue font-bold text-2xl">
-                                Rp{{ number_format($order->planning->products->sum('price'), 0, ',', '.') }}
+                                Rp{{ number_format($order->down_payment, 0, ',', '.') }}
+                            </h2>
+                        </div>
+                        <div class="flex justify-between">
+                            <h2 class="font-medium text-xl text-gray-700">Full Payment</h2>
+                            <h2 class="text-redlue font-bold text-2xl">
+                                Rp{{ number_format($order->total_price, 0, ',', '.') }}
                             </h2>
                         </div>
                     </div>
@@ -110,22 +116,21 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <script>
-        let csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-
         document.getElementById('payment-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             let orderId = document.getElementById('order-id').value;
             let paymentType = document.getElementById('payment_type').value;
 
-            fetch(`/transactions/${orderId}/pay`, {
+            fetch(`http://127.0.0.1:8000/transactions/${orderId}/pay`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken
+                        'Accept': 'application/json',
                     },
                     body: JSON.stringify({
-                        payment_type: paymentType
+                        payment_type: paymentType,
+                        _token: '{{ csrf_token() }}'
                     })
                 })
 

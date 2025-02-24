@@ -18,7 +18,7 @@ class ClientOrderShowController extends Controller
         return view('pages.client.order.index', compact('user', 'order'));
     }
 
-    public function detail($id): View
+    public function detail($id)
     {
         $order = Order::find($id);
         $order->with('planning.products.vendor.category');

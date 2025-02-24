@@ -18,16 +18,11 @@ class ClientOrderShowController extends Controller
         return view('pages.client.order.index', compact('user', 'order'));
     }
 
-    public function detail($id)
-    {
-        $user = Auth::user();
-        $order = Order::with('planning.products.vendor.category')->findOrFail($id);
+    public function detail($id) {
+        $order = Order::find($id);
+        $order->with('planning.products.vendor.category');
 
-        $isPaid = Payment::where('order_id', $order->id)
-            ->whereIn('payment_type', ['full_payment', 'remaining_payment'])
-            ->where('status', 'completed')
-            ->exists();
-
-        return view('pages.client.order.detail', compact('user', 'order', 'isPaid'));
+        $user = Auth::user( );
+        return view('pages.client.order.detail', compact('user', 'order'));
     }
 }

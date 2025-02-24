@@ -17,7 +17,8 @@
                             <div class="flex justify-between mt-6">
                                 <div>
                                     <h2 class="text-redlue font-bold text-2xl">{{ $product->name }}</h2>
-                                    <h2 class="text-redlue font-medium">Category : {{ $product->vendor->category->name }}
+                                    <h2 class="text-redlue font-medium">Category :
+                                        {{ $product->vendor->category->name }}
                                     </h2>
                                 </div>
                                 <h2 class="text-redlue font-bold text-2xl">

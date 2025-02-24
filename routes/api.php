@@ -17,13 +17,13 @@ use App\Http\Controllers\BackEnd\v1\ProductController;
 use App\Http\Controllers\BackEnd\v1\VendorController;
 use Illuminate\Support\Facades\Validator;
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
-    Route::get('/', 'getUser');
-    Route::post('/', 'changeProfile');
-    Route::post('/password', 'changePassword');
-});
 
 Route::prefix('v1')->group(function () {
+    Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
+        Route::get('/', 'getUser');
+        Route::post('/', 'changeProfile');
+        Route::post('/password', 'changePassword');
+    });
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         Route::post('/register', 'register');
         Route::post('/login', 'login');

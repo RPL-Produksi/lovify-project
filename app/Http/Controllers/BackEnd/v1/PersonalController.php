@@ -112,7 +112,6 @@ class PersonalController extends Controller
         return redirect()->back()->with('success', 'Avatar deleted successfully.');
     }
 
-
     public function changePassword(Request $request)
     {
         $user = $request->user();

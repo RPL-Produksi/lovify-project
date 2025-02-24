@@ -52,7 +52,10 @@ class PersonalController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $data = $request->all();
+        $data = $data = array_filter($request->all(), function ($value) {
+            return !is_null($value);
+        });
+
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());

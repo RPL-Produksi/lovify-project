@@ -56,6 +56,14 @@ class PersonalController extends Controller
             return !is_null($value);
         });
 
+        if ($data['email'] != $user->email) {
+            $data['email_verified'] = false;
+        }
+
+        if ($data['phone_number'] != $user->phone_number) {
+            $data['phone_verified'] = false;
+        }
+
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());

@@ -13,7 +13,7 @@ class ClientOrderProgresController extends Controller
     public function orderProgres(Order $order) {
         $user = Auth::user();
         $progres = OrderProgress::where('order_id', $order->id)
-            ->with('order.planning.products.vendor.category') // Pastikan ini benar
+            ->with('order.planning.products.vendor.category')
             ->get();
     
         return view('pages.client.order.progres.index', compact('user', 'progres'));

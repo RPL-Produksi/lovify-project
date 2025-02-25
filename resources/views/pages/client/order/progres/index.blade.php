@@ -9,28 +9,30 @@
     @endpush
     @include('components.navbar_rose')
 
-    <div class="cart-section px-40 py-32">
+    <div class="cart-section md:px-40 py-32 px-4">
         <div>
             <h2 class="text-redlue font-bold text-2xl">Order Progress</h2>
             <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
                 @foreach ($progres as $item)
-                <div class="flex justify-between mt-6">
-                    <div>
-                        <h2 class="text-redlue font-bold text-2xl">
-                            {{ optional($item->order?->planning?->products->first())->name ?? 'Produk tidak ditemukan' }}
+                    <div class="flex justify-between mt-6">
+                        <div>
+                            @php
+                                $products = $item->order?->planning?->products ?? collect();
+                            @endphp
 
-                        </h2>
-                        <h2 class="text-redlue font-medium">
-                            {{ optional($item->order?->planning?->products->first()?->vendor?->category)->name ?? 'Kategori tidak ditemukan' }}
+                            <h2 class="text-redlue font-bold text-2xl">
+                                {{ $products->pluck('name')->implode(', ') ?: 'Produk tidak ditemukan' }}
+                            </h2>
+                            <h2 class="text-redlue font-medium">
+                                {{ optional($products->first()?->vendor?->category)->name ?? 'Kategori tidak ditemukan' }}
+                            </h2>
+                        </div>
+                        <h2 class="text-redlue font-bold text-2xl">
+                            {{ $item->status }}
                         </h2>
                     </div>
-                    <h2 class="text-redlue font-bold text-2xl">
-                        {{ $item->status }}
-                    </h2>
-                </div>
-                <hr class="border-rose-950 mt-7">
-            @endforeach
-            
+                    <hr class="border-rose-950 mt-7">
+                @endforeach
             </div>
         </div>
     </div>

@@ -62,16 +62,16 @@ Route::prefix('v1')->group(function () {
     // Client
     Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
         Route::group(['prefix' => 'plannings', 'controller' => ClientPlanningController::class], function () {
-            Route::post('/', 'getPlannings');
+            Route::get('/', 'getPlannings');
             Route::post('/{id?}', 'storePlanning');
             Route::delete('/{id}', 'deletePlanning');
         });
         Route::group(['prefix' => 'orders', 'middleware' => ['can:email_verified, can:phone_verified'], 'controller' => ClientOrderController::class], function () {
-            Route::post('/', 'getOrders');
+            Route::get('/', 'getOrders');
             Route::post('/{id}', 'storeOrder');
         });
         Route::group(['prefix' => 'transactions', 'controller' => ClientTransactionController::class], function () {
-            Route::post('/', 'getTransactions');
+            Route::get('/', 'getTransactions');
             Route::post('/{id}', 'storePayment');
         });
     });

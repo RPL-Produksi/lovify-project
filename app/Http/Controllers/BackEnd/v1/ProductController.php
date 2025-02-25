@@ -73,7 +73,7 @@ class ProductController extends Controller
         }
 
         if ($vendorId && $user->role == 'client') {
-            $products->where('vendor_id', $id);
+            $products->where('vendor_id', $vendorId);
         }
 
         if ($categoryQuery != null) {

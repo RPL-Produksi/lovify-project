@@ -20,6 +20,7 @@ use App\Http\Controllers\Views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
 use App\Http\Controllers\Views\Clients\ClientDetailProductController;
 use App\Http\Controllers\Views\AuthController as ViewAuthController;
+use App\Http\Controllers\Views\Clients\ClientOrderProgresController;
 use App\Http\Controllers\Views\Clients\ClientOrderShowController;
 use App\Http\Controllers\Views\Clients\ClientPlanningShowController;
 use App\Http\Controllers\Views\Clients\ClientProfileController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaAdminController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaClientController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaMitraController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -110,6 +112,7 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
 // client route
 Route::group(['middleware' => 'auth'], function () {
     Route::post('store/planning', [ClientPlanningController::class, 'storePlanningSecond'])->name('client.store.planning');
+    Route::post('update/planning', [ClientPlanningController::class, 'storePlanning'])->name('client.update.planning');
     Route::post('update/planning/{id}', [ClientPlanningController::class, 'storePlanning'])->name('client.update.planning');
     Route::get('/detail/product/{id}', [ClientDetailProductController::class, 'index'])->name('client.detail.product');
     Route::post('/profile/change', [PersonalController::class, 'changeProfile'])->name('profile.change');
@@ -117,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/profile/avatar', [PersonalController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
     Route::get('/planning', [ClientPlanningShowController::class, 'index'])->name('planning');
     Route::get('/planning/detail/{id}', [ClientPlanningShowController::class, 'detail'])->name('planning.detail');
-    Route::get('/planning/tambah', [ClientPlanningShowController::class, 'store'])->name('planning.store');
+    Route::get('/planning/store/{id?}', [ClientPlanningShowController::class, 'store'])->name('planning.store');
     Route::get('/planning/category', [ClientPlanningShowController::class, 'category'])->name('planning.category');
 
     Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
@@ -126,6 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/{planning}', [ClientOrderShowController::class, 'index'])->name('client.order');
     Route::get('/order/detail/{id}', [ClientOrderShowController::class, 'detail'])->name('client.order.detail');
     Route::post('/order/store/{id}', [ClientOrderController::class, 'storeOrder'])->name('client.order.store');
+    Route::get('/progres/{order}', [ClientOrderProgresController::class, 'orderProgres'])->name('client.order.progres');
 
     Route::post('/transactions/{id}/pay', [ClientTransactionController::class, 'storePayment']);
 });

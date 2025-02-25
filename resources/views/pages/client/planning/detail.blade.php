@@ -1,14 +1,16 @@
 @extends('template.master')
 @section('title', 'Detail Planning')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    @endpush
     @include('components.navbar_rose')
 
-    <div class="cart-section px-40 py-32">
-        <div class="grid grid-cols-9 gap-5">
+    <div class="cart-section md:px-40 px-4 py-32">
+        <div class="md:grid md:grid-cols-9 gap-5">
             <div class="col-span-5">
                 <div>
                     @if ($planning->order)
@@ -22,7 +24,7 @@
                                     class="fa-solid fa-plus"></i></a> Planning {{ $planning->title }}
                         </h2>
                     @endif
-                    <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
+                    <div class="border-rose pt-8 pb-20 px-7 shadow-xl mt-3">
                         <div>
                             @if ($planning->products->isNotEmpty())
                                 @foreach ($planning->products as $product)
@@ -40,18 +42,19 @@
                                     <hr class="border-rose-950 mt-7">
                                 @endforeach
                             @else
-                            <div class="flex justify-center">
-                                <h1 class="mt-9 text-rose-950">Belum ada produk, silahkan booking produk terlebih dahulu</h1>
-                            </div>
+                                <div class="flex justify-center">
+                                    <h1 class="mt-9 text-rose-950">Belum ada produk, silahkan booking produk terlebih dahulu
+                                    </h1>
+                                </div>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-span-4">
+            <div class="col-span-4 md:mt-0 mt-10">
                 <h2 class="text-redlue font-bold text-2xl">Payment Summary</h2>
-                <div class="border-rose w-100 pt-8 pb-20 px-7 shadow-2xl mt-3">
+                <div class="border-rose w-100 pt-8 pb-20 px-7 shadow-xl mt-3">
                     <div>
                         <div class="flex justify-between">
                             <h2 class="font-medium text-xl" style="color: #917270">Planning</h2>
@@ -68,6 +71,9 @@
                             </div>
                         </div>
                     @endforeach
+                    @if ($planning->products->isNotEmpty())
+                        <hr class="border-rose-950 mt-7">
+                    @endif
                     <div class="mt-5">
                         <div class="flex justify-between">
                             <h2 class="font-medium text-xl" style="color: #917270">Total Amount</h2>

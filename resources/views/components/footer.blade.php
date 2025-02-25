@@ -90,7 +90,7 @@
                     <form action="">
                         @csrf
                         <div class="w-full mt-5">
-                            <input type="text" class="w-full border border-white bg-transparent py-4 px-5 rounded-2xl placeholder-white" placeholder="E-mail">
+                            <input type="text" class="w-full border border-white bg-transparent py-4 px-5 rounded-2xl placeholder-white" readonly placeholder="Coming Soon">
                         </div>
                     </form>
                 </div>

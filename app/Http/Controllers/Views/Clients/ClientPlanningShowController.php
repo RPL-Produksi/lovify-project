@@ -22,9 +22,10 @@ class ClientPlanningShowController extends Controller
         return view('pages.client.planning.detail', compact('user', 'planning'));
     }
 
-    public function store() {
+    public function store($id = null) {
         $user = Auth::user();
-        return view('pages.client.planning.store', compact('user'));
+        $planning = Planning::find($id);
+        return view('pages.client.planning.store', compact('user', 'planning'));
     }
 
     public function category() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Views\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderProgress;
 use App\Models\Payment;
 use App\Models\Planning;
 use Illuminate\Http\Request;

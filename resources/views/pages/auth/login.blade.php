@@ -11,7 +11,7 @@
             <div class="xl:col-span-2 col-a hidden md:block">
 
             </div>
-            <div class="xl:col-span-3 col-b shadow-2xl md:pb-0 pb-16" style="background-color: #f7f0f0;">
+            <div class="xl:col-span-3 col-b shadow-2xl md:pb-0 pb-20" style="background-color: #f7f0f0;">
                 <div class="xl:px-48 px-7">
                     <div class="flex xl:justify-end">
                         <a href="{{ route('client.home') }}">

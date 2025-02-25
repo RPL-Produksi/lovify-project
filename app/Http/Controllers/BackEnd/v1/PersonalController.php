@@ -52,21 +52,21 @@ class PersonalController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $data = $data = array_filter($request->all(), function ($value) {
+        $data = array_filter($request->all(), function ($value) {
             return !is_null($value);
         });
 
-        if ($data['email'] != $user->email) {
+        if (isset($data['email']) && $data['email'] != $user->email) {
             $data['email_verified'] = false;
         }
 
-        if ($data['phone_number'] != $user->phone_number) {
+        if (isset($data['phone_number']) && $data['phone_number'] != $user->phone_number) {
             $data['phone_verified'] = false;
         }
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $storedFile = $file->storeAs('avatars/' . $request->username, $file->hashName());
+            $storedFile = $file->storeAs('avatars/' . ($request->username ?? $user->username), $file->hashName());
             $filePath = Storage::url($storedFile);
             $data['avatar'] = $filePath;
         } else {
@@ -81,7 +81,7 @@ class PersonalController extends Controller
             'phone_number' => $user->phone_number,
             'email_verified' => $user->email_verified,
             'phone_verified' => $user->phone_verified,
-            'avatar' => $user->avatar == null ? asset('avatars/default.png') : $user->avatar,
+            'avatar' => $user->avatar ?? asset('avatars/default.png'),
             'role' => $user->role
         ];
 
@@ -95,6 +95,7 @@ class PersonalController extends Controller
 
         return redirect()->back()->with('success', 'Profile changes successfully');
     }
+
 
     public function deleteAvatar(Request $request)
     {

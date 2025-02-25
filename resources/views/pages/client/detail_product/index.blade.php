@@ -1,18 +1,21 @@
 @extends('template.master')
 @section('title', 'Detail Paket')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/detail-packet.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/detail-packet.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @endpush
     @include('components.navbar')
 
     <div x-data="{ open: false }">
         <section class="hero-section relative">
             <div class="flex justify-center pt-72" style="height: 100vh">
                 <div>
-                    <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up" data-aos-duration="1000">
+                    <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up"
+                        data-aos-duration="1000">
                         {{ $product->name }}</h1>
                     <h6 class="text-center text-white mt-6 text-2xl" data-aos="fade-up" data-aos-duration="1500">
                         {{ $product->description }}
@@ -23,7 +26,7 @@
                             Book Now
                         </button>
                     </div>
-                    <div class="flex justify-center mt-20">
+                    <div class="justify-center hidden md:flex mt-20">
                         <div class="w-[2px] h-56 bg-white rounded-xl" data-aos="fade-up" data-aos-duration="2000"></div>
                     </div>
                 </div>
@@ -31,10 +34,11 @@
         </section>
 
         <section class="detail-packet-section pt-20 pb-28">
-            <div class="px-96">
-                <div class="px-44">
+            <div class="md:px-96 px-4">
+                <div class="md:px-44">
                     <div>
-                        <h5 class="text-redlue text-center text-xl font-semibold" data-aos="fade-up" data-aos-duration="1000">
+                        <h5 class="text-redlue text-center text-xl font-semibold" data-aos="fade-up"
+                            data-aos-duration="1000">
                             {{ $product->name }}</h5>
                     </div>
                     <div class="mt-7">
@@ -47,38 +51,39 @@
                     </div>
                 </div>
             </div>
-    
-            <div class="px-40 mt-14">
-                <div class="grid grid-cols-3 gap-5">
+
+            <div class="md:px-40 px-4 mt-14">
+                <div class="md:grid grid-cols-3 gap-5 hidden">
                     <div>
-                        <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""
-                            style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                        <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
+                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                     </div>
-                    <div class="mt-12">
-                        <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt=""
-                            style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="md:mt-12 mt-5">
+                        <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="md:h-[600px]"
+                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                     </div>
-                    <div>
-                        <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt=""
-                            style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="md:mt-0 mt-5">
+                        <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="md:h-[600px]"
+                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                     </div>
                 </div>
-    
-                <div class="grid grid-cols-3 mt-36">
+
+                <div class="md:grid grid-cols-3 mt-36">
                     <div>
                         <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""
-                                style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
+                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
                     </div>
-                    <div class="col-span-2 pl-20">
+                    <div class="col-span-2 md:pl-20 mt-5 md:mt-0">
                         <div>
                             <h5 class="text-redlue text-xl font-semibold" data-aos="fade-up" data-aos-duration="1000">Detail
                                 {{ $product->name }}
                             </h5>
                         </div>
                         <div class="mt-7">
-                            <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up" data-aos-duration="1000">The Product
+                            <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up" data-aos-duration="1000">The
+                                Product
                                 is
                                 <br>Equipped with
                             </h2>
@@ -96,36 +101,37 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="mt-36">
                     <h2 class="text-redlue text-4xl font-bold text-center" data-aos="fade-up" data-aos-duration="1000">Our
                         Galleries</h2>
-                    <div class="grid grid-cols-3 gap-5 mt-10">
+                    <div class="md:grid grid-cols-3 gap-5 mt-10">
                         <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""
-                                style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
+                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
-                        <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt=""
-                                style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="mt-5 md:mt-0">
+                            <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="md:h-[600px]"
+                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
-                        <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt=""
-                                style="height: 600px; object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="mt-5 md:mt-0">
+                            <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="md:h-[600px]"
+                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    
-    
+
+
         <section class="hero-bottom relative">
             <div class="flex justify-center items-center" style="height: 65vh">
                 <div>
                     <h6 class="text-center text-white mt-6 text-2xl" data-aos="fade-up" data-aos-duration="1500">
                         Simplified The Preparation of Your Special Day
                     </h6>
-                    <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up" data-aos-duration="1000">
+                    <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up"
+                        data-aos-duration="1000">
                         Book {{ $product->name }}</h1>
                     <div class="flex justify-center mt-3">
                         <button type="button" @click="open = true" class="text-white rounded-3xl px-7 py-3 book-btn"
@@ -135,7 +141,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Modal -->
             <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div class="bg-white rounded-lg shadow-lg w-96 p-6">
@@ -144,7 +150,7 @@
                         @csrf
                         <input type="hidden" name="product_ids[]" value="{{ $product->id }}">
                         <div class="mb-4">
-                            <select name="planning_id" id="planning_id"
+                            <select name="planning_id" id="planning_id" required
                                 class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950">
                                 <option value="" disabled selected>Pilih planning</option>
                                 @foreach ($planning as $item)
@@ -169,7 +175,7 @@
             </div>
         </section>
     </div>
-    
+
 
     @include('components.footer')
 @endsection

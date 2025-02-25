@@ -1,14 +1,16 @@
 @extends('template.master')
 @section('title', 'My Order')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    @endpush
     @include('components.navbar_rose')
 
 
-    <div class="planning-section px-40 py-32 min-h-screen" style="background-color: #f7f0f0">
+    <div class="planning-section md:px-40 px-4 py-32 min-h-screen" style="background-color: #f7f0f0">
         @if ($order->isNotEmpty())
             @foreach ($order as $item)
                 <div class="card border-2 rounded-lg border-rose shadow-2xl px-5 py-7 mt-4">

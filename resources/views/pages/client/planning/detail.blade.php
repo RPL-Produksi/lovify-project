@@ -11,29 +11,39 @@
         <div class="grid grid-cols-9 gap-5">
             <div class="col-span-5">
                 <div>
-                    <h2 class="text-redlue font-bold text-2xl"> <a href="{{ route('planning.category') }}"
-                            class="bg-rose text-white py-1 px-3 mr-1 text-lg rounded-lg"><i
-                                class="fa-solid fa-plus"></i></a> Planning {{ $planning->title }}</h2>
+                    @if ($planning->order)
+                        <h2 class="text-redlue font-bold text-2xl">
+                            Planning {{ $planning->title }}
+                        </h2>
+                    @else
+                        <h2 class="text-redlue font-bold text-2xl">
+                            <a href="{{ route('planning.category') }}"
+                                class="bg-rose text-white py-1 px-3 mr-1 text-lg rounded-lg"><i
+                                    class="fa-solid fa-plus"></i></a> Planning {{ $planning->title }}
+                        </h2>
+                    @endif
                     <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
                         <div>
-                            <div>
+                            @if ($planning->products->isNotEmpty())
+                                @foreach ($planning->products as $product)
+                                    <div class="flex justify-between mt-6">
+                                        <div>
+                                            <h2 class="text-redlue font-bold text-2xl">{{ $product->name }}</h2>
+                                            <h2 class="text-redlue font-medium">Category :
+                                                {{ $product->vendor->category->name }}</h2>
+                                        </div>
+                                        <h2 class="text-redlue font-bold text-2xl">
+                                            Rp{{ number_format($product->price, 0, ',', '.') }}
+                                        </h2>
 
-                            </div>
-
-                            @foreach ($planning->products as $product)
-                                <div class="flex justify-between mt-6">
-                                    <div>
-                                        <h2 class="text-redlue font-bold text-2xl">{{ $product->name }}</h2>
-                                        <h2 class="text-redlue font-medium">Category :
-                                            {{ $product->vendor->category->name }}</h2>
                                     </div>
-                                    <h2 class="text-redlue font-bold text-2xl">
-                                        Rp{{ number_format($product->price, 0, ',', '.') }}
-                                    </h2>
-
-                                </div>
-                                <hr class="border-rose-950 mt-7">
-                            @endforeach
+                                    <hr class="border-rose-950 mt-7">
+                                @endforeach
+                            @else
+                            <div class="flex justify-center">
+                                <h1 class="mt-9 text-rose-950">Belum ada produk, silahkan booking produk terlebih dahulu</h1>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -99,7 +109,7 @@
                                             <label for="marry_date" class="text-rose-950">Marry Date</label>
                                             <input
                                                 class="w-full px-4 py-2 border text-rose-950 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-950"
-                                                type="date" name="marry_date">
+                                                type="date" name="marry_date" required>
                                         </div>
                                         <div class="flex justify-end space-x-2">
                                             <button type="button" @click="open = false"

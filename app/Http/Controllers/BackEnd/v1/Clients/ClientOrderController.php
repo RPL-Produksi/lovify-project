@@ -18,8 +18,9 @@ class ClientOrderController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
+            return back()->withErrors($validator)->withInput();
         }
+        
 
         $planning = Planning::find($id);
 
@@ -107,8 +108,8 @@ class ClientOrderController extends Controller
             ], 201);
         }
 
-        // return redirect()->back()->with('success', 'Order created');
-        return true;
+        return redirect()->back()->with('success', 'Order created');
+        // return true;
     }
 
     public function getOrders(Request $request)

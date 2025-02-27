@@ -32,4 +32,14 @@ class ClientOrderShowController extends Controller
         $user = Auth::user();
         return view('pages.client.order.detail', compact('user', 'order', 'isPaid'));
     }
+
+    public function history()
+    {
+        $user = Auth::user();
+        $orders = Order::whereHas('planning', function ($query) use ($user) {
+            $query->where('client_id', $user->id);
+        })->get();
+
+        return view('pages.client.order.history.index', compact('orders', 'user'));
+    }
 }

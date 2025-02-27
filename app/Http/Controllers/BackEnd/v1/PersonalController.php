@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackEnd\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -123,11 +124,39 @@ class PersonalController extends Controller
 
     public function changePassword(Request $request)
     {
-        $user = $request->user();
-        $validator = Validator::make($request->all(), [
-            'old_password' => ['required', 'string'],
+        $currentUser = $request->user();
+
+        $user = $request->user_id ? User::find($request->user_id) : $currentUser;
+
+        if (!$user) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User not found.'
+                ], 404);
+            }
+            return redirect()->back()->withErrors(['user_id' => 'User not found.']);
+        }
+
+        if ($request->user_id && $currentUser->role !== 'superadmin') {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Unauthorized.'
+                ], 403);
+            }
+            return redirect()->back()->withErrors(['error' => 'Unauthorized.']);
+        }
+
+        $rules = [
             'new_password' => ['required', 'string', 'min:8', 'confirmed']
-        ]);
+        ];
+
+        if (!$request->user_id || $request->user_id == $currentUser->id) {
+            $rules['old_password'] = ['required', 'string'];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             if ($request->wantsJson()) {
@@ -136,19 +165,19 @@ class PersonalController extends Controller
                     'message' => $validator->errors()
                 ], 400);
             }
-
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        if (!Hash::check($request->old_password, $user->password)) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Old Password is incorrect.'
-                ], 400);
+        if (!$request->user_id || $request->user_id == $currentUser->id) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Old Password is incorrect.'
+                    ], 400);
+                }
+                return redirect()->back()->withErrors(['old_password' => 'Old Password is incorrect.']);
             }
-
-            return redirect()->back()->withErrors(['old_password' => 'Old Password is incorrect.']);
         }
 
         $user->update([
@@ -158,10 +187,14 @@ class PersonalController extends Controller
         if ($request->wantsJson()) {
             return response()->json([
                 'status' => 'success',
-                'message' => 'Password Change Successfully.'
+                'message' => 'Password changed successfully.'
             ], 200);
         }
 
-        return redirect()->back();
+        if ($currentUser->role == 'client') {
+            return redirect()->route('client.home')->with('success', 'Password changed successfully.');
+        }
+
+        return redirect()->back()->with('success', 'Password changed successfully.');
     }
 }

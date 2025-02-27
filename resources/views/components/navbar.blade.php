@@ -114,7 +114,13 @@
                             class="absolute left-16 top-full mt-6 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 group-hover:opacity-100 group-hover:visible transform -translate-x-1/2">
                             <a href="{{ route('profile') }}"
                                 class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
-                                    class="fa-solid fa-user mr-2"></i>Profile</a>
+                                    class="fa-solid fa-user mr-2"></i>My Profile</a>
+                            <a href="{{ route('client.change.password') }}"
+                                class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
+                                    class="fa-solid fa-key mr-2"></i>Change Password</a>
+                            <a href="{{ route('client.history') }}"
+                                class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
+                                    class="fa-solid fa-clock-rotate-left mr-2"></i>Wedding History</a>
                             <hr>
                             <form action="{{ route('be.logout') }}" method="POST">
                                 @csrf
@@ -151,7 +157,13 @@
                 <hr class="my-5">
                 <a href="{{ route('profile') }}"
                     class="block text-center text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
-                        class="fa-solid fa-user mr-2"></i>Profile</a>
+                        class="fa-solid fa-user mr-2"></i>My Profile</a>
+                <a href="{{ route('client.change.password') }}"
+                    class="block text-center text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
+                        class="fa-solid fa-key mr-2"></i>Change Password</a>
+                <a href="{{ route('client.change.password') }}"
+                    class="block text-center text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
+                        class="fa-solid fa-clock-rotate-left mr-2"></i>Wedding History</a>
                 <form action="{{ route('be.logout') }}" method="POST">
                     @csrf
                     <button href="#"

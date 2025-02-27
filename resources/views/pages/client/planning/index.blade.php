@@ -12,11 +12,30 @@
 
     <div class="planning-section md:px-40 px-4 py-32 min-h-screen" style="background-color: #f7f0f0">
         @if ($planning->isNotEmpty())
-            <div class="flex gap-3 mt-5" data-aos="fade-up" data-aos-duration="1000">
-                <a href="{{ route('planning.store') }}" class="bg-rose text-white py-2 px-4 text-lg rounded-lg"><i
-                        class="fa-solid fa-plus"></i></a>
-                <h2 class="text-redlue font-bold text-3xl">My Planning</h2>
+            <div class="flex justify-between items-center mt-5" data-aos="fade-up" data-aos-duration="1000">
+                <div class="flex gap-3">
+                    <a href="{{ route('planning.store') }}" class="bg-rose text-white py-2 px-4 text-lg rounded-lg">
+                        <i class="fa-solid fa-plus"></i>
+                    </a>
+                    <h2 class="text-redlue font-bold text-3xl">My Planning</h2>
+                </div>
+            
+                @if ($planning->contains(fn ($item) => $item->order))
+                <div class="flex gap-2">
+                    <a href="{{ route('planning', ['filter' => 'all']) }}"
+                        class="py-2 px-4 text-md rounded-lg {{ request('filter') == 'all' || !request('filter') ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
+                        Semua Planning
+                    </a>
+                    <a href="{{ route('planning', ['filter' => 'ordered']) }}"
+                        class="py-2 px-4 text-md rounded-lg {{ request('filter') == 'ordered' ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
+                        Planning dengan Order
+                    </a>
+                </div>
+            @endif
+            
             </div>
+            
+            
             @foreach ($planning as $item)
                 <div class="card border-2 rounded-lg border-rose px-5 py-7 mt-4" data-aos="fade-up"
                     data-aos-duration="1500">

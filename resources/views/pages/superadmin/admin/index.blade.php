@@ -20,19 +20,21 @@
                 <p class="alert alert-danger border-left-danger">{{ $errors->first() }}</p>
             @endif
         </div>
-        <table class="table table-bordered" id="kategoriTable">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>Nama</td>
-                    <td>Username</td>
-                    <td>Email</td>
-                    <td>Nomor Telepon</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-responsive-xl">
+            <table class="table table-bordered" id="kategoriTable">
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>Nama</td>
+                        <td>Username</td>
+                        <td>Email</td>
+                        <td>Nomor Telepon</td>
+                        <td>Aksi</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel"
@@ -159,13 +161,16 @@
                         <td>${item.username}</td>
                         <td>${item.email}</td>
                         <td>${item.phone_number}</td>
-                        <td>
+                        <td class="d-flex d-xl-block">
                             <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-fullname="${item.fullname}" data-username="${item.username}" data-email="${item.email}" data-phone_number="${item.phone_number}">
                                 <i class="fa-solid fa-pen-to-square" data-target="#editAdminModal" data-toggle="modal" ></i>
                             </button>
-                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
+                            <button class="btn ml-xl-0 ml-1 text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
+                            <a class="btn text-white ml-xl-0 ml-1" href="/user/change/password/${item.id}" style="background-color: #3D0A05">
+                                <i class="fa-solid fa-key"></i>
+                            </a>
                         </td>
                     </tr>`;
                         });

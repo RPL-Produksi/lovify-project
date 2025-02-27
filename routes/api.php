@@ -83,3 +83,5 @@ Route::fallback(function () {
         'status' => 'no path found',
     ], 404);
 });
+
+Route::post('/transactions/notification', [ClientTransactionController::class, 'notification']);

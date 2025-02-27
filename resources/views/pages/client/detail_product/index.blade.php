@@ -17,10 +17,10 @@
                     <h1 class="text-center text-white template-h1 font-semibold" data-aos="fade-up"
                         data-aos-duration="1000">
                         {{ $product->name }}</h1>
-                    <h6 class="text-center text-white mt-6 text-2xl" data-aos="fade-up" data-aos-duration="1500">
+                    <h6 class="text-center text-white md:mt-6 text-2xl" data-aos="fade-up" data-aos-duration="1500">
                         {{ $product->description }}
                     </h6>
-                    <div class="hidden justify-center mt-7 md:flex space-x-6">
+                    <div class="justify-center mt-7 flex space-x-6">
                         <button type="button" @click="open = true"
                             class="font-light text-white rounded-3xl px-7 py-3 login-btn" style="background-color: #3D0A05">
                             Book Now

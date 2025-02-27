@@ -47,7 +47,8 @@
             <a href="{{ route('aboutUs') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">About</a>
             <a href="{{ route('article') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">Articles</a>
             <div class="space-x-6 mt-5">
-                <a href="{{ route('login') }}" class="font-light text-white rounded-3xl md:px-7 md:py-3 px-16 py-2 login-btn"
+                <a href="{{ route('login') }}"
+                    class="font-light text-white rounded-3xl md:px-7 md:py-3 px-16 py-2 login-btn"
                     style="background-color: #3D0A05">Login</a>
             </div>
         </div>
@@ -95,7 +96,8 @@
 
                         <a class="relative overflow-hidden group inline-block">
                             @if (is_null($user->avatar))
-                                <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14" alt="">
+                                <img src="{{ asset('asset/image/ix_user-profile-filled.png') }}" class="rounded-full w-14"
+                                    alt="">
                             @else
                                 <img src="{{ $user->avatar }}" class="rounded-full w-14 h-14 object-cover" alt="">
                             @endif
@@ -106,6 +108,12 @@
                         <a href="{{ route('profile') }}"
                             class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
                                 class="fa-solid fa-user mr-2"></i>Profile</a>
+                        <a href="{{ route('client.change.password') }}"
+                            class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
+                                class="fa-solid fa-key mr-2"></i>Change Password</a>
+                        <a href="{{ route('client.history') }}"
+                            class="block text-start text-rose-950 px-4 py-2 hover:bg-gray-200 hover:rounded-t-lg"><i
+                                class="fa-solid fa-clock-rotate-left mr-2"></i>Wedding History</a>
                         <hr>
                         <form action="{{ route('be.logout') }}" method="POST">
                             @csrf
@@ -138,9 +146,14 @@
                 class="block px-4 py-2 hover:bg-rose-950 hover:text-white text-redlue">Article</a>
             <a href="{{ route('planning') }}" class="block px-4 py-2 hover:bg-rose-950 hover:text-white">My Plannings</a>
             <hr class="my-5">
-            <a href="{{ route('profile') }}"
+            <a href="{{ route('profile') }}" class="block text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
+                    class="fa-solid fa-user mr-2"></i>My Profile</a>
+            <a href="{{ route('client.change.password') }}"
                 class="block text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
-                    class="fa-solid fa-user mr-2"></i>Profile</a>
+                    class="fa-solid fa-key mr-2"></i>Change Password</a>
+            <a href="{{ route('client.history') }}"
+                class="block text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i
+                    class="fa-solid fa-clock-rotate-left mr-2"></i>Wedding History</a>
             <form action="{{ route('be.logout') }}" method="POST">
                 @csrf
                 <button href="#" class="w-full text-rose-950 px-4 py-2 hover:bg-rose-950 hover:text-white"><i

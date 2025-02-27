@@ -23,6 +23,10 @@ class AuthController extends Controller
         return view('pages.auth.register');
     }
 
+    public function changePassword() {
+        return view('pages.auth.change-password');
+    }
+
     public function verify(Request $request)
     {
         $id = $request->query('id');

@@ -16,6 +16,7 @@ use App\Http\Controllers\BackEnd\v1\Superadmins\MitraController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admin\AdminKelolaLokasiController;
+use App\Http\Controllers\Views\AuthController;
 use App\Http\Controllers\Views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
 use App\Http\Controllers\Views\Clients\ClientDetailProductController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Views\LandingController;
 use App\Http\Controllers\Views\Mitra\MitraCreateVendorController;
 use App\Http\Controllers\Views\Mitra\MitraDashboardController;
 use App\Http\Controllers\Views\Mitra\MitraKelolaProdukController;
+use App\Http\Controllers\Views\PersonalShowController;
 use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaAdminController;
 use App\Http\Controllers\Views\Superadmin\SuperadminKelolaClientController;
@@ -51,6 +53,10 @@ Route::prefix('auth')->group(function () {
         Route::post('/resend-verification', 'resend')->name('be.resend');
     });
 });
+
+Route::get('/user/profile', [PersonalShowController::class, 'profile'])->name('user.profile');
+Route::get('/user/change/password', [PersonalShowController::class, 'changePassword'])->name('user.change.password');
+Route::get('/user/change/password/{id}', [PersonalShowController::class, 'changePasswordUser'])->name('user.change.password.choose');
 
 // Umum route
 Route::get('/', [LandingController::class, 'landing'])->name('client.home');
@@ -125,6 +131,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/vendors/{categoryId}', [ClientVendorsController::class, 'index'])->name('vendors');
     Route::delete('/planning/delete/{id}', [ClientPlanningController::class, 'deletePlanning'])->name('client.delete.planning');
+
+    Route::get('/change/password', [AuthController::class, 'changePassword'])->name('client.change.password');
+    Route::post('/update/password', [PersonalController::class, 'changePassword'])->name('client.update.password');
+    
+    Route::get('/history', [ClientOrderShowController::class, 'history'])->name('client.history');
 
     Route::get('/order/{planning}', [ClientOrderShowController::class, 'index'])->name('client.order');
     Route::get('/order/detail/{id}', [ClientOrderShowController::class, 'detail'])->name('client.order.detail');

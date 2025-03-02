@@ -21,7 +21,7 @@
         <div class="md:grid grid-cols-4 gap-7">
             @if ($products->isNotEmpty())
                 @foreach ($products as $item)
-                    <div class="border-rose py-8 px-6 shadow-2xl md:mt-0 mt-5">
+                    <div class="border-rose py-8 px-6 shadow-2xl md:mt-0 mt-5" data-aos="fade-up" data-aos-duration="1000">
                         <div class="mb-4">
                             <img src="{{ asset($item->cover) }}" alt="" class="w-full h-48 object-cover">
                         </div>

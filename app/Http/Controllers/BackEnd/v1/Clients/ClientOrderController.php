@@ -108,7 +108,7 @@ class ClientOrderController extends Controller
             ], 201);
         }
 
-        return redirect()->back()->with('success', 'Order created');
+        return redirect()->back()->with('success', 'Order created, please check order menu');
         // return true;
     }
 

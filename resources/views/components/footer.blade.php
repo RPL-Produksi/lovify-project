@@ -37,10 +37,9 @@
                         <div>
                             <h6 class="text-white font-bold">NAVIGATIONS</h6>
                             <ul class="mt-5">
-                                <li><a href="" class="text-white font-thin">Home</a></li>
-                                <li class="mt-1"><a href="" class="text-white font-thin">Packets</a></li>
-                                <li class="mt-1"><a href="" class="text-white font-thin">Vendors</a></li>
-                                <li class="mt-1"><a href="" class="text-white font-thin">About Us</a></li>
+                                <li><a href="{{ route('client.home') }}" class="text-white font-thin">Home</a></li>
+                                <li class="mt-1"><a href="{{ route('article') }}" class="text-white font-thin">Article</a></li>
+                                <li class="mt-1"><a href="{{ route('aboutUs') }}" class="text-white font-thin">About Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -48,14 +47,16 @@
                         <div>
                             <h6 class="text-white font-bold">ABOUT US</h6>
                             <ul class="mt-5">
-                                <li><a href="" class="text-white font-thin">Gallery</a></li>
-                                <li class="mt-1"><a href="" class="text-white font-thin">Contacts</a></li>
+                                <li><a href="{{ route('aboutUs') }}" class="text-white font-thin">Gallery</a></li>
+                                <li class="mt-1"><a href="{{ route('aboutUs') }}" class="text-white font-thin">Contacts</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="xl:flex md:justify-end hidden" data-aos="fade-up" data-aos-duration="1000">
                         <div class="xl:pl-6 md:pl-16 xl:mt-0 md:mt-10">
-                            <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
+                            <a href="{{ route('client.home') }}">
+                                <img src="{{ asset('asset/image/name_icon1.png') }}" alt="" style="width: 250px">
+                            </a>
                         </div>
                     </div>
                     <div class="mt-20 xl:mt-20 md:mt-10 md:pl-16 2xl:pl-36 flex md:hidden xl:flex" data-aos="fade-up" data-aos-duration="1000">

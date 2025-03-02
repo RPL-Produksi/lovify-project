@@ -12,7 +12,7 @@
 
     <div class="planning-section md:px-40 px-4 py-32 min-h-screen" style="background-color: #f7f0f0">
         @if ($planning->isNotEmpty())
-            <div class="flex justify-between items-center mt-5" data-aos="fade-up" data-aos-duration="1000">
+            <div class="md:flex justify-between items-center mt-5" data-aos="fade-up" data-aos-duration="1000">
                 <div class="flex gap-3">
                     <a href="{{ route('planning.store') }}" class="bg-rose text-white py-2 px-4 text-lg rounded-lg">
                         <i class="fa-solid fa-plus"></i>
@@ -21,13 +21,13 @@
                 </div>
             
                 @if ($planning->contains(fn ($item) => $item->order))
-                <div class="flex gap-2">
+                <div class="md:flex gap-2">
                     <a href="{{ route('planning', ['filter' => 'all']) }}"
-                        class="py-2 px-4 text-md rounded-lg {{ request('filter') == 'all' || !request('filter') ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
+                        class="py-2 px-4 text-md block rounded-lg mt-3 md:mt-0 {{ request('filter') == 'all' || !request('filter') ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
                         Semua Planning
                     </a>
                     <a href="{{ route('planning', ['filter' => 'ordered']) }}"
-                        class="py-2 px-4 text-md rounded-lg {{ request('filter') == 'ordered' ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
+                        class="py-2 px-4 text-md rounded-lg block mt-3 md:mt-0 {{ request('filter') == 'ordered' ? 'bg-rose text-white' : 'bg-gray-200 text-gray-800' }}">
                         Planning dengan Order
                     </a>
                 </div>

@@ -92,7 +92,7 @@ Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], fu
 });
 
 // admin route
-Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
+Route::group(['prefix' => 'admins', 'middleware' => ['`can:admin']], function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.home');
     Route::group(['controller' => AdminKelolaLokasiController::class, 'prefix' => 'lokasi'], function () {
         Route::get('/', 'index')->name('admin.kelola.lokasi');

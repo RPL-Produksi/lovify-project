@@ -106,10 +106,6 @@
                             <label for="edit_description">Deskripsi</label>
                             <textarea class="form-control" id="edit_description" name="description" required></textarea>
                         </div>
-                        <div class="form-group" hidden>
-                            <label for="edit_slug">Slug</label>
-                            <input type="text" class="form-control" id="edit_slug" name="slug" required>
-                        </div>
                         <div class="form-group">
                             <label for="edit_price">Harga</label>
                             <input type="number" class="form-control" id="edit_price" name="price" required>

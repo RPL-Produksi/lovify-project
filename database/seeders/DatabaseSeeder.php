@@ -11,6 +11,7 @@ use App\Models\Vendor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -79,26 +80,27 @@ class DatabaseSeeder extends Seeder
             ->take(6) // Membatasi hasil hanya 6
             ->get();
 
-        // $locations = ['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta', 'Semarang', 'Malang'];
-        // foreach ($locations as $location) {
-        //     Location::create([
-        //         'name' => $location,
-        //     ]);
-        // }
+        $locations = ['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta', 'Semarang', 'Malang'];
+        foreach ($locations as $location) {
+            Location::create([
+                'name' => $location,
+                'slug' => Str::slug($location),
+            ]);
+        }
 
-        // foreach ($mitras as $mitra) {
-        //     $category = Category::where('name', $categories[rand(0, 5)])->first();
-        //     $location = Location::where('name', $locations[rand(0, 5)])->first();
-        //     Vendor::create([
-        //         'name' => $mitra->fullname,
-        //         'email' => $mitra->email,
-        //         'phone_number' => $mitra->phone_number,
-        //         'profile' => null,
-        //         'mitra_id' => $mitra->id,
-        //         'category_id' => $category->id,
-        //         'location_id' => $location->id,
-        //     ]);
-        // }
+        foreach ($mitras as $mitra) {
+            $category = Category::where('name', $categories[rand(0, 5)])->first();
+            $location = Location::where('name', $locations[rand(0, 5)])->first();
+            Vendor::create([
+                'name' => $mitra->fullname,
+                'email' => $mitra->email,
+                'phone_number' => $mitra->phone_number,
+                'profile' => null,
+                'mitra_id' => $mitra->id,
+                'category_id' => $category->id,
+                'location_id' => $location->id,
+            ]);
+        }
 
         $vendors = Vendor::orderBy('created_at', 'asc')->take(6)->get();
         for ($i = 1; $i <= 5; $i++) {

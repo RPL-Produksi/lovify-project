@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
@@ -57,6 +58,10 @@ Route::prefix('v1')->group(function () {
         Route::group(['prefix' => 'vendors', 'controller' => MitraVendorController::class], function () {
             Route::post('/{id?}', 'storeVendor');
             Route::delete('/{id}', 'deleteVendor');
+        });
+        Route::group(['prefix' => 'orders', 'controller' => MitraOrderController::class], function () {
+            Route::get('/', 'orderList');
+            Route::post('/{id}', 'updateProductProgress');
         });
     });
     // Client

@@ -215,7 +215,7 @@
 
                 let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
                 $('#editProductForm').attr('action', updateUrl);
-                console.log("Update URL:", updateUrl); 
+                console.log("Update URL:", updateUrl);
 
                 $('#editProductModal').modal('show');
             });

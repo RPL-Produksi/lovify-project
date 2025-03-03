@@ -81,7 +81,7 @@
             @endforeach
         @else
             <div class="md:mt-56 mt-28">
-                <div class="border-rose py-20 rounded-lg md:px-0 px-4 shadow-xl">
+                <div class="border-rose py-20 rounded-lg  shadow-xl">
                     <div class="flex justify-center items-center">
                         <h1 class="text-redlue font-bold text-2xl text-center">Belum ada planning, silahkan buat planning
                             terlebih dahulu</h1>

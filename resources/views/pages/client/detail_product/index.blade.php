@@ -7,6 +7,23 @@
         <link rel="stylesheet" href="{{ asset('css/master.css') }}">
         <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+        <style>
+            .hero-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('{{ asset($product->cover) }}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                opacity: 0.4;
+                z-index: -1;
+            }
+        </style>
     @endpush
     @include('components.navbar')
 
@@ -53,26 +70,13 @@
             </div>
 
             <div class="md:px-40 px-4 mt-14">
-                <div class="md:grid grid-cols-3 gap-5 hidden">
-                    <div>
-                        <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
-                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
-                    </div>
-                    <div class="md:mt-12 mt-5">
-                        <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="md:h-[600px]"
-                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
-                    </div>
-                    <div class="md:mt-0 mt-5">
-                        <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="md:h-[600px]"
-                            style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
-                    </div>
-                </div>
+                
 
                 <div class="md:grid grid-cols-3 mt-36">
                     <div>
                         <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
-                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ $product->cover }}" alt=""
+                                class="md:h-[600px] md:w-[600px]" style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
                     </div>
                     <div class="col-span-2 md:pl-20 mt-5 md:mt-0">
@@ -107,16 +111,18 @@
                         Galleries</h2>
                     <div class="md:grid grid-cols-3 gap-5 mt-10">
                         <div>
-                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt="" class="md:h-[600px]"
-                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ asset('asset/image/decoration_placeholder3.jpg') }}" alt=""
+                                class="md:h-[600px]" style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
                         </div>
                         <div class="mt-5 md:mt-0">
-                            <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="" class="md:h-[600px]"
-                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt=""
+                                class="md:h-[600px]" style="object-fit: cover;" data-aos="fade-up"
+                                data-aos-duration="1000">
                         </div>
                         <div class="mt-5 md:mt-0">
-                            <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt="" class="md:h-[600px]"
-                                style="object-fit: cover;" data-aos="fade-up" data-aos-duration="1000">
+                            <img src="{{ asset('asset/image/decoration_placeholder1.jpg') }}" alt=""
+                                class="md:h-[600px]" style="object-fit: cover;" data-aos="fade-up"
+                                data-aos-duration="1000">
                         </div>
                     </div>
                 </div>

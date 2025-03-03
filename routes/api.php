@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackEnd\v1\Admins\AdminVendorController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::prefix('v1')->group(function () {
         Route::group(['prefix' => 'locations', 'controller' => AdminLocationController::class], function () {
             Route::post('/', 'storeLocation');
             Route::delete('/{id}', 'deleteLocation');
+        });
+        Route::group(['prefix' => 'vendors', 'controller' => AdminVendorController::class], function () {
+            Route::post('/{id}', 'verifyVendor');
         });
     });
     // Mitra

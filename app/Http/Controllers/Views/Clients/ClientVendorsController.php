@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ClientVendorsController extends Controller
 {
-    public function index($categoryId) 
+    public function index($categoryId)
     {
         // dd($categoryId);
         $user  = Auth::user();
-        $products = Product::whereHas('vendor', function ($query) use ($categoryId) {
+        $products = Product::where('status', 'active')->whereHas('vendor', function ($query) use ($categoryId) {
             $query->where('category_id', $categoryId);
         })->get();
 

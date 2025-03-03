@@ -24,7 +24,7 @@ class MitraProductController extends Controller
 
             return redirect()->back()->with('error', 'You are not authorized to create product');
         }
-        
+
         $rule = [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
@@ -39,7 +39,7 @@ class MitraProductController extends Controller
             $rule['cover'] = ['nullable', 'mimes:jpeg,png,jpg', 'max:2048'];
         }
         $validator = Validator::make($request->all(), $rule);
-        
+
         if ($validator->fails()) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -65,18 +65,17 @@ class MitraProductController extends Controller
         $data = $request->all();
         $data['slug'] = $this->makeSlug($request->name);
         $data['vendor_id'] = $vendor->id;
-        
+
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $path = $file->storeAs('products/' . $data['slug'], $file->hashName());
             $filePath = Storage::url($path);
             $data['cover'] = $filePath;
         }
-        
+
         if ($id != null) {
             $product = Product::find($id);
             if ($product != null && $product->vendor_id != $request->user()->vendor->id) {
-                dd($request->all());
                 if ($request->wantsJson()) {
                     return response()->json([
                         'status' => 'error',
@@ -93,18 +92,18 @@ class MitraProductController extends Controller
             if ($request->hasFile('attachments')) {
                 $attachments = $request->attachments;
                 $attachmentPaths = [];
-    
+
                 $folderPath = 'products/' . $product->slug;
                 foreach ($attachments as $attachment) {
                     $path = $attachment->storeAs($folderPath, $attachment->hashName());
                     $filePath = Storage::url($path);
                     $attachmentPaths[] = ['image_path' => $filePath];
                 }
-    
+
                 $product->attachments()->createMany($attachmentPaths);
             }
         }
-        
+
         if ($request->wantsJson()) {
             $response = [
                 'id' => $product->id,

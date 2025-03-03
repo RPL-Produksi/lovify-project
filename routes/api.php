@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BackEnd\v1\Admins\AdminVendorController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
@@ -47,6 +49,9 @@ Route::prefix('v1')->group(function () {
             Route::post('/', 'storeLocation');
             Route::delete('/{id}', 'deleteLocation');
         });
+        Route::group(['prefix' => 'vendors', 'controller' => AdminVendorController::class], function () {
+            Route::post('/{id}', 'verifyVendor');
+        });
     });
     // Mitra
     Route::group(['prefix' => 'mitras', 'middleware' => ['auth:sanctum', 'can:mitra']], function () {
@@ -57,6 +62,10 @@ Route::prefix('v1')->group(function () {
         Route::group(['prefix' => 'vendors', 'controller' => MitraVendorController::class], function () {
             Route::post('/{id?}', 'storeVendor');
             Route::delete('/{id}', 'deleteVendor');
+        });
+        Route::group(['prefix' => 'orders', 'controller' => MitraOrderController::class], function () {
+            Route::get('/', 'orderList');
+            Route::post('/{id}', 'updateProductProgress');
         });
     });
     // Client

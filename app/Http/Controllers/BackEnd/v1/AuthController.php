@@ -158,7 +158,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success','Logged Out Successfully');
     }
-    
+
     public function resend(Request $request)
     {
         $user = $request->user();
@@ -166,7 +166,7 @@ class AuthController extends Controller
         $status = '';
         $message = '';
         $httpCode = 200;
-    
+
         if ($type == 'email') {
             if ($user->email_verified) {
                 $status = 'error';
@@ -195,7 +195,7 @@ class AuthController extends Controller
                 $message = 'Phone Number already verified.';
                 $httpCode = 400;
             }
-            
+
             if (now()->greaterThan($user->phone_token_expire)) {
                 $user->update([
                     'phone_verification_token' => Str::random(64),
@@ -231,5 +231,5 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->with(['status' => $status, 'message' => $message]);
-    }    
+    }
 }

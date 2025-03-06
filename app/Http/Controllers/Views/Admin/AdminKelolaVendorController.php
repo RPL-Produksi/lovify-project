@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Views\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Location;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminKelolaLokasiController extends Controller
+class AdminKelolaVendorController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $user = Auth::user();
-        $location = Location::all();
-        return view('pages.admin.lokasi.index', compact('location', 'user'));
+        $vendor = Vendor::all();
+        return view('pages.admin.vendor.index', compact('vendor', 'user'));
     }
 
     public function getData(Request $request)
@@ -24,14 +22,16 @@ class AdminKelolaLokasiController extends Controller
         $search = $request->input('search')['value'] ?? '';
         $order = $request->input('order')[0] ?? null;
 
-        $data = Location::query();
+        $data = Vendor::query();
 
         if (!empty($search)) {
-            $data->where('name', 'LIKE', "%$search%");
+            $data->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%")
+                ->orWhere('phone_number', 'LIKE', "%$search%");
         }
 
         if ($order) {
-            $columns = ['id', 'name'];
+            $columns = ['id', 'name', 'email', 'phone_number', 'is_verified'];
             $orderBy = $columns[$order['column']] ?? 'name';
             $orderDir = $order['dir'] ?? 'asc';
 
@@ -40,7 +40,7 @@ class AdminKelolaLokasiController extends Controller
             $data->orderBy('name', 'asc');
         }
 
-        $count = Location::count();
+        $count = Vendor::count();
         $countFiltered = $data->count();
 
         $data = $data->skip($start)->take($length)->get();
@@ -51,5 +51,12 @@ class AdminKelolaLokasiController extends Controller
             "recordsFiltered" => $countFiltered,
             "data" => $data
         ]);
+    }
+
+    public function delete($id) {
+        $vendor = Vendor::find($id);
+
+        $vendor->delete();
+        return redirect()->back()->with('success', 'Vendor berhasil dihapus');
     }
 }

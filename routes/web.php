@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackEnd\v1\AuthController as BackendAuthController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminCategoryController;
 use App\Http\Controllers\BackEnd\v1\Admins\AdminLocationController;
+use App\Http\Controllers\BackEnd\v1\Admins\AdminVendorController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\BackEnd\v1\Superadmins\MitraController;
 use App\Http\Controllers\Views\Admin\AdminDashboardController;
 use App\Http\Controllers\Views\Admin\AdminKelolaKategoriController;
 use App\Http\Controllers\Views\Admin\AdminKelolaLokasiController;
+use App\Http\Controllers\Views\Admin\AdminKelolaVendorController;
 use App\Http\Controllers\Views\AuthController;
 use App\Http\Controllers\Views\Clients\ClientAboutUsController;
 use App\Http\Controllers\Views\Clients\ClientArticleController;
@@ -94,6 +96,7 @@ Route::group(['prefix' => 'superadmins', 'middleware' => ['can:superadmin']], fu
 // admin route
 Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.home');
+    Route::post('/vendor/verify/{id}', [AdminVendorController::class, 'verifyVendor'])->name('admin.verify.vendor');
     Route::group(['controller' => AdminKelolaLokasiController::class, 'prefix' => 'lokasi'], function () {
         Route::get('/', 'index')->name('admin.kelola.lokasi');
         Route::get('/data', 'getData')->name('admin.kelola.lokasi.data');
@@ -106,6 +109,11 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
         Route::post('/store', 'storeLocation')->name('admin.lokasi.store');
         Route::post('/update/{id}', 'storeLocation')->name('admin.lokasi.update');
         Route::delete('/delete/{id}', 'deleteLocation')->name('admin.lokasi.delete');
+    });
+    Route::group(['controller' => AdminKelolaVendorController::class, 'prefix' => 'vendor'], function () {
+        Route::get('/', 'index')->name('admin.kelola.vendor');
+        Route::get('/data', 'getData')->name('admin.kelola.vendor.data');
+        Route::delete('/delete/{id}', 'delete')->name('admin.kelola.vendor.delete');
     });
     Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
         Route::post('/', 'storeCategory')->name('be.category.store');

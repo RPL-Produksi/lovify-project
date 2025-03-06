@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="card p-3">
+    <div class="card p-3 mb-5">
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Lokasi</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
@@ -96,58 +96,47 @@
 
     <script>
         $(document).ready(function() {
-            function loadKategori() {
-                $.ajax({
-                    url: '{{ route('admin.kelola.lokasi.data') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let rows = '';
-                        response.forEach((item, index) => {
-                            rows += `<tr>
-                        <td>${index + 1}</td>
-                        <td>${item.name}</td>
-                        <td>
-                            <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-name="${item.name}" data-image="${item.image}">
-                                <i class="fa-solid fa-pen-to-square" data-target="#editLokasi" data-toggle="modal" ></i>
-                            </button>
-                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>`;
-                        });
-                        if ($.fn.DataTable.isDataTable('#kategoriTable')) {
-                            $('#kategoriTable').DataTable().destroy();
+            let table = $('#kategoriTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('admin.kelola.lokasi.data') }}',
+                columns: [
+                    { data: null, searchable: false, orderable: false, render: function(data, type, row, meta) {
+                            return meta.row + 1;
                         }
-
-                        $('#kategoriTable tbody').html(rows);
-
-                        $('#kategoriTable').DataTable({
-                            paging: true,
-                            searching: true,
-                            ordering: true,
-                            pageLength: 10
-                        });
-
+                    },
+                    { data: 'name', name: 'name' },
+                    {
+                        data: 'id',
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn text-white edit-btn" 
+                                    style="background-color: #3D0A05"
+                                    data-id="${data}" data-name="${row.name}"
+                                    data-toggle="modal" data-target="#editLokasi">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="btn text-white btn-delete" data-id="${data}" style="background-color: #3D0A05">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>`;
+                        }
                     }
-                });
-            }
-
-            loadKategori();
-
+                ]
+            });
+    
             $(document).on('click', '.edit-btn', function() {
                 let id = $(this).data('id');
                 let name = $(this).data('name');
-
+    
                 $('#edit_id').val(id);
                 $('#edit_name').val(name);
-
-                $('#edditLokasi').modal('show');
+    
+                $('#editLokasi').modal('show');
             });
-
+    
             $(document).on('click', '.btn-delete', function() {
                 let id = $(this).data('id');
-
+    
                 Swal.fire({
                     title: "Yakin ingin menghapus?",
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -160,8 +149,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('admin.lokasi.delete', ':id') }}'.replace(':id',
-                                id),
+                            url: '{{ route('admin.lokasi.delete', ':id') }}'.replace(':id', id),
                             method: 'POST',
                             data: {
                                 _method: 'DELETE',
@@ -170,16 +158,15 @@
                             success: function(response) {
                                 Swal.fire({
                                     title: "Deleted!",
-                                    text: "Kategori berhasil dihapus.",
+                                    text: "Lokasi berhasil dihapus.",
                                     icon: "success",
                                     confirmButtonText: "OK",
                                     confirmButtonColor: "#3D0A05"
                                 });
-                                loadKategori();
+                                table.ajax.reload();
                             },
                             error: function(xhr) {
-                                Swal.fire("Error!", xhr.responseJSON.message ||
-                                    "Gagal menghapus kategori.", "error");
+                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus lokasi.", "error");
                             }
                         });
                     }
@@ -187,15 +174,5 @@
             });
         });
     </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#kategoriTable').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                pageLength: 10
-            });
-        });
-    </script>
+    
 @endpush

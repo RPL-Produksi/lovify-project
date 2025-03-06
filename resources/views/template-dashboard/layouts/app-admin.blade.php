@@ -40,7 +40,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 Swal.fire({
                     title: "<span style='color: #3D0A05;'>Berhasil!</span>",
-                    html: "<span style='color: #000;'>{{ session('success') }}</span>", 
+                    html: "<span style='color: #000;'>{{ session('success') }}</span>",
                     icon: "success",
                     confirmButtonText: "OK",
                     confirmButtonColor: "#3D0A05"
@@ -48,6 +48,21 @@
             });
         </script>
     @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "<span style='color: #3D0A05;'>Failed!</span>",
+                    html: "<span style='color: #000;'>{{ session('error') }}</span>",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#3D0A05"
+                });
+            });
+        </script>
+    @endif
+
     @stack('js')
 </body>
 

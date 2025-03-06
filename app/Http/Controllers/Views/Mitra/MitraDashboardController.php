@@ -17,9 +17,6 @@ class MitraDashboardController extends Controller
             return redirect()->route('mitra.tambah.vendor.show');
         }
 
-        
-        $kategori = Category::all();
-
         if ($user->vendor) {
             $produk = $user->vendor->products;
             $totalProduk = $produk->count();
@@ -28,6 +25,6 @@ class MitraDashboardController extends Controller
             $totalProduk = 0;
         }
 
-        return view('pages.mitra.home.index', compact('produk', 'user', 'kategori', 'totalProduk'));
+        return view('pages.mitra.home.index', compact('produk', 'user', 'totalProduk'));
     }
 }

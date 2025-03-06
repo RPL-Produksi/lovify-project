@@ -10,13 +10,46 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminKelolaKategoriController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = Auth::user();
         $kategori = Category::all();
         return view('pages.admin.kategori.index', compact('kategori', 'user'));
     }
 
-    public function getData() {
-        return response()->json(Category::all());
+    public function getData(Request $request)
+    {
+        $length = intval($request->input('length', 10));
+        $start = intval($request->input('start', 0));
+        $search = $request->input('search')['value'] ?? '';
+        $order = $request->input('order')[0] ?? null;
+
+        $data = Category::query();
+
+        if (!empty($search)) {
+            $data->where('name', 'LIKE', "%$search%");
+        }
+
+        if ($order) {
+            $columns = ['id', 'image', 'name'];
+            $orderBy = $columns[$order['column']] ?? 'name';
+            $orderDir = $order['dir'] ?? 'asc';
+
+            $data->orderBy($orderBy, $orderDir);
+        } else {
+            $data->orderBy('name', 'asc');
+        }
+
+        $count = Category::count();
+        $countFiltered = $data->count();
+
+        $data = $data->skip($start)->take($length)->get();
+
+        return response()->json([
+            "draw" => intval($request->input('draw', 1)),
+            "recordsTotal" => $count,
+            "recordsFiltered" => $countFiltered,
+            "data" => $data
+        ]);
     }
 }

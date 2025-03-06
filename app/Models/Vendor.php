@@ -17,6 +17,7 @@ class Vendor extends Model
         'mitra_id',
         'category_id',
         'location_id',
+        'is_verified'
     ];
 
     protected $hidden = [

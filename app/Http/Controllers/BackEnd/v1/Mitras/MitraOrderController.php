@@ -51,7 +51,7 @@ class MitraOrderController extends Controller
             return redirect()->back()->with('error', 'Order Progress not found');
         }
 
-        if ($orderProgress->order->product->vendor_id != $mitra->vendor->id) {
+        if ($orderProgress->product->vendor_id != $mitra->vendor->id) {
             if ($request->wantsJson()) {
                 return response()->json([
                     'status' => 'error',

@@ -34,4 +34,9 @@ class Planning extends Model
     {
         return $this->hasOne(Order::class, 'planning_id');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(User::class, 'client_id', 'id');
+    }
 }

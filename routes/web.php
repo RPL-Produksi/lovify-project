@@ -7,6 +7,7 @@ use App\Http\Controllers\BackEnd\v1\Admins\AdminVendorController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientOrderController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientPlanningController;
 use App\Http\Controllers\BackEnd\v1\Clients\ClientTransactionController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraOrderController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraProductController;
 use App\Http\Controllers\BackEnd\v1\Mitras\MitraVendorController;
 use App\Http\Controllers\BackEnd\v1\PersonalController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Views\Clients\ClientVendorsController;
 use App\Http\Controllers\Views\LandingController;
 use App\Http\Controllers\Views\Mitra\MitraCreateVendorController;
 use App\Http\Controllers\Views\Mitra\MitraDashboardController;
+use App\Http\Controllers\Views\Mitra\MitraKelolaPesananController;
 use App\Http\Controllers\Views\Mitra\MitraKelolaProdukController;
 use App\Http\Controllers\Views\PersonalShowController;
 use App\Http\Controllers\Views\Superadmin\SuperadminDashboardController;
@@ -131,6 +133,11 @@ Route::group(['prefix' => 'mitras', 'middleware' => ['can:mitra']], function () 
         Route::post('/{id?}', [MitraProductController::class, 'storeProduct'])->name('mitra.store.produk');
         Route::delete('/{id}', [MitraProductController::class, 'deleteProduct'])->name('mitra.delete.produk');
         Route::get('/data', [MitraKelolaProdukController::class, 'getData'])->name('mitra.kelola.produk.data');
+    });
+    Route::prefix('pesanans')->group( function () {
+        Route::get('/', [MitraKelolaPesananController::class, 'index'])->name('mitra.kelola.pesanan');
+        Route::get('/data', [MitraKelolaPesananController::class, 'getData'])->name('mitra.kelola.pesanan.data');
+        Route::post('/update/product/progress/{id}', [MitraOrderController::class, 'updateProductProgress'])->name('mitra.update.product.progress');
     });
     Route::prefix('vendors')->group(function () {
         Route::get('/', [MitraCreateVendorController::class, 'index'])->name('mitra.tambah.vendor.show');

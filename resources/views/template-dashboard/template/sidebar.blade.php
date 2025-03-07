@@ -22,8 +22,8 @@
                 <span>Produk</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="" class="nav-link text-primary">
+        <li class="nav-item {{ request()->routeIs('mitra.kelola.pesanan') ? 'active' : '' }}">
+            <a href="{{ route('mitra.kelola.pesanan') }}" class="nav-link text-primary">
                 <i class="fa-regular fa-cart-shopping text-primary"></i>
                 <span>Pesanan</span>
             </a>

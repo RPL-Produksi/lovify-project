@@ -13,22 +13,22 @@
         <div>
             <h2 class="text-redlue font-bold text-2xl">Order Progress</h2>
             <div class="border-rose pt-8 pb-20 px-7 shadow-2xl mt-3">
-                @foreach ($progres as $item)
-                    <div class="flex justify-between mt-6">
+                @foreach ($progres->groupBy('product_id') as $productId => $items)
+                    @php
+                        $firstItem = $items->first();
+                        $product = $firstItem->product;
+                    @endphp
+                    <div class="flex justify-between mt-6 bg-white border-rose p-5 rounded-lg">
                         <div>
-                            @php
-                                $products = $item->order?->planning?->products ?? collect();
-                            @endphp
-
                             <h2 class="text-redlue font-bold text-2xl">
-                                {{ $products->pluck('name')->implode(', ') ?: 'Produk tidak ditemukan' }}
+                                {{ $product->name }}
                             </h2>
                             <h2 class="text-redlue font-medium">
-                                {{ optional($products->first()?->vendor?->category)->name ?? 'Kategori tidak ditemukan' }}
+                                {{ optional($product->vendor?->category)->name ?? 'Kategori tidak ditemukan' }}
                             </h2>
                         </div>
                         <h2 class="text-redlue font-bold text-2xl">
-                            {{ $item->status }}
+                            {{ $firstItem->status }}
                         </h2>
                     </div>
                     <hr class="border-rose-950 mt-7">

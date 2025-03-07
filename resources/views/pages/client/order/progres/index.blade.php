@@ -18,7 +18,7 @@
                         $firstItem = $items->first();
                         $product = $firstItem->product;
                     @endphp
-                    <div class="flex justify-between mt-6 bg-white border-rose p-5 rounded-lg">
+                    <div class="flex justify-between mt-6 border-rose p-5">
                         <div>
                             <h2 class="text-redlue font-bold text-2xl">
                                 {{ $product->name }}

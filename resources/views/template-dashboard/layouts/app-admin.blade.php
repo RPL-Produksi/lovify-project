@@ -22,7 +22,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content" style="background-color: #f7f0f0">
                 @include('template-dashboard.template.navbar')
-                <div class="container-fluid" style="min-height: 100vh; background-color: #f7f0f0;">
+                <div class="container-fluid pb-10" style="min-height: 100vh; background-color: #f7f0f0;">
                     @yield('content')
                 </div>
             </div>
@@ -40,7 +40,7 @@
             document.addEventListener("DOMContentLoaded", function() {
                 Swal.fire({
                     title: "<span style='color: #3D0A05;'>Berhasil!</span>",
-                    html: "<span style='color: #000;'>{{ session('success') }}</span>", 
+                    html: "<span style='color: #000;'>{{ session('success') }}</span>",
                     icon: "success",
                     confirmButtonText: "OK",
                     confirmButtonColor: "#3D0A05"
@@ -48,6 +48,21 @@
             });
         </script>
     @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "<span style='color: #3D0A05;'>Failed!</span>",
+                    html: "<span style='color: #000;'>{{ session('error') }}</span>",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#3D0A05"
+                });
+            });
+        </script>
+    @endif
+
     @stack('js')
 </body>
 

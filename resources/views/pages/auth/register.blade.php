@@ -11,7 +11,9 @@
             <div class="xl:col-span-3 col-b shadow-2xl pb-20" style="background-color: #f7f0f0;">
                 <div class="xl:px-48 px-7 pb-16 xl:pb-0">
                     <div class="">
-                        <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        <a href="{{ route('client.home') }}">
+                            <img src="{{ asset('asset/image/Lovify-NoBg.png') }}" alt="">
+                        </a>
                     </div>
                     <div>
                         <h1 class="text-redlue text-6xl font-bold">Welcome</h1>

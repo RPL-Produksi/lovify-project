@@ -11,6 +11,7 @@ use App\Models\Vendor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -83,6 +84,7 @@ class DatabaseSeeder extends Seeder
         foreach ($locations as $location) {
             Location::create([
                 'name' => $location,
+                'slug' => Str::slug($location),
             ]);
         }
 

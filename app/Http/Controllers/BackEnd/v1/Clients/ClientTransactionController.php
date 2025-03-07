@@ -29,6 +29,17 @@ class ClientTransactionController extends Controller
             'payment_type' => ['required', 'in:down_payment,remaining_payment,full_payment'],
         ]);
 
+        if ($validator->fails()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $validator->errors(),
+                ], 400);
+            }
+
+            return redirect()->back()->with('error', $validator->errors());
+        }
+
         $order = Order::find($id);
 
         if (!$order) {
@@ -88,6 +99,15 @@ class ClientTransactionController extends Controller
             ], 400);
 
             return redirect()->back()->with('error', 'You can only pay the remaining amount');
+        }
+
+        if ($request->payment_type == 'remaining_payment' && !$hasDp) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You must pay the down payment first',
+            ], 400);
+
+            return redirect()->back()->with('error', 'You must pay the down payment first');
         }
 
         $amount = match ($request->payment_type) {

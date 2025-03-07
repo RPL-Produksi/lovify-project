@@ -51,6 +51,7 @@ class AdminLocationController extends Controller
         }
 
         $data = $request->only('name');
+        $data['slug'] = Str::slug($data['name']);
         $location = Location::create($data);
 
         if ($request->wantsJson()) {

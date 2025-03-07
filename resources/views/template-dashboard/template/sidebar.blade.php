@@ -18,8 +18,14 @@
         </li>
         <li class="nav-item {{ request()->routeIs('mitra.kelola.produk') ? 'active' : '' }}">
             <a href="{{ route('mitra.kelola.produk') }}" class="nav-link text-primary">
+                <i class="fa-regular fa-box-open text-primary"></i>
+                <span>Produk</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link text-primary">
                 <i class="fa-regular fa-cart-shopping text-primary"></i>
-                <span>Kelola Produk</span>
+                <span>Pesanan</span>
             </a>
         </li>
     @endif
@@ -35,13 +41,19 @@
         <li class="nav-item {{ request()->routeIs('admin.kelola.kategori') ? 'active' : '' }}">
             <a href="{{ route('admin.kelola.kategori') }}" class="nav-link text-primary">
                 <i class="fa-regular fa-icons text-primary"></i>
-                <span>Kelola Kategori</span>
+                <span>Kategori</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('admin.kelola.lokasi') ? 'active' : '' }}">
             <a href="{{ route('admin.kelola.lokasi') }}" class="nav-link text-primary">
                 <i class="fa-regular fa-map text-primary"></i>
-                <span>Kelola Lokasi</span>
+                <span>Lokasi</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('admin.kelola.vendor') ? 'active' : '' }}">
+            <a href="{{ route('admin.kelola.vendor') }}" class="nav-link text-primary">
+                <i class="fa-regular fa-shop text-primary"></i>
+                <span>Vendor</span>
             </a>
         </li>
     @endif
@@ -57,19 +69,19 @@
         <li class="nav-item {{ request()->routeIs('superadmin.kelola.admin') ? 'active' : '' }}">
             <a href="{{ route('superadmin.kelola.admin') }}" class="nav-link text-primary">
                 <i class="fa-light fa-users text-primary"></i>
-                <span>Kelola Admin</span>
+                <span>Admin</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('superadmin.kelola.mitra') ? 'active' : '' }}">
             <a href="{{ route('superadmin.kelola.mitra') }}" class="nav-link text-primary">
                 <i class="fa-light fa-users text-primary"></i>
-                <span>Kelola Mitra</span>
+                <span>Mitra</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('superadmin.kelola.client') ? 'active' : '' }}">
             <a href="{{ route('superadmin.kelola.client') }}" class="nav-link text-primary">
                 <i class="fa-light fa-users text-primary"></i>
-                <span>Kelola Client</span>
+                <span>Client</span>
             </a>
         </li>
     @endif

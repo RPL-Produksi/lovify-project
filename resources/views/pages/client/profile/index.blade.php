@@ -1,10 +1,12 @@
 @extends('template.master')
 @section('title', 'Profile')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    @endpush
     @include('components.navbar_rose')
 
     <div class="profile-section py-28 flex md:px-0 px-4 items-center justify-center" style="background-color: #f7f0f0">
@@ -26,7 +28,8 @@
                     </a>
                 </div>
                 <div class="flex justify-center mt-5 md:mt-0">
-                    <form id="delete-avatar-form" class="w-full" action="{{ route('profile.deleteAvatar') }}" method="POST">
+                    <form id="delete-avatar-form" class="w-full" action="{{ route('profile.deleteAvatar') }}"
+                        method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="button"

@@ -1,40 +1,41 @@
 @extends('template.master')
 @section('title', 'Article')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/about-us.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detail-packet.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @push('css')
+        <link rel="stylesheet" href="{{ asset('css/about-us.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/detail-packet.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+    @endpush
     @include('components.navbar_rose')
 
     <section class="about-us-section relative" style="background-color: #f7f0f0">
         <div class="xl:px-40 px-4 pt-24 pb-40">
             <div>
                 <img src="{{ asset('asset/image/decoration_placeholder4.jpg') }}" data-aos="fade-up"
-                    data-aos-duration="1500" class="w-full object-cover" style="height: 630px" alt="">
+                    data-aos-duration="1500" class="w-full object-cover md:h-[630px]" alt="">
             </div>
             <div class="mt-7">
-                <h1 class="text-redlue font-bold xl:text-5xl text-2xl" data-aos="fade-up"
-                data-aos-duration="1500">New Wedding Trend : Intimate Outdoor Wedding <br>Theme</h1>
+                <h1 class="text-redlue font-bold xl:text-5xl text-2xl" data-aos="fade-up" data-aos-duration="1500">New
+                    Wedding Trend : Intimate Outdoor Wedding <br>Theme</h1>
             </div>
 
             <div class="xl:flex xl:gap-36 mt-8">
                 <div>
-                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
-                    data-aos-duration="1500"><i class="fa-solid fa-user"></i> Admin</h6>
+                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up" data-aos-duration="1500"><i
+                            class="fa-solid fa-user"></i> Admin</h6>
                 </div>
                 <div class="xl:mt-0 mt-3">
-                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up"
-                    data-aos-duration="1500"><i class="fa-solid fa-calendar-days"></i> Mon, January 20,
+                    <h6 class="text-redlue font-semibold text-xl" data-aos="fade-up" data-aos-duration="1500"><i
+                            class="fa-solid fa-calendar-days"></i> Mon, January 20,
                         2025</h6>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-3 mt-10 gap-16">
-                <div class="xl:col-span-2" data-aos="fade-up"
-                data-aos-duration="1500">
+                <div class="xl:col-span-2" data-aos="fade-up" data-aos-duration="1500">
                     <p class="text-redlue font-normal text-xl text-justify">Lorem ipsum dolor, sit amet consectetur
                         adipisicing elit. Eaque ex iusto optio quis, eligendi accusantium voluptas, iure sint consequatur
                         nihil harum sed nobis? Nam dolorum hic eum blanditiis minus, a asperiores, numquam deserunt
@@ -92,18 +93,18 @@
                 </div>
                 <div>
                     <div>
-                        <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up"
-                        data-aos-duration="1500">Top Articles</h2>
+                        <h2 class="text-redlue text-4xl font-bold" data-aos="fade-up" data-aos-duration="1500">Top Articles
+                        </h2>
                     </div>
 
                     <div class="mt-4">
                         <div class="shadow-xl px-2 py-3 border-redlue bg-transparent" data-aos="fade-up"
-                        data-aos-duration="1500">
+                            data-aos-duration="1500">
                             <div>
                                 <img src="{{ asset('asset/image/decoration_placeholder2.jpg') }}" alt="">
                             </div>
                             <div class="mt-2">
-                                <h3 class="text-3xl text-redlue font-semibold">New : Blue by Yung Kai Being The Trend of
+                                <h3 class="md:text-3xl text-lg text-redlue font-semibold">New : Blue by Yung Kai Being The Trend of
                                     Wedding Music</h3>
                             </div>
                             <div class="mt-3 flex justify-between">
@@ -120,12 +121,12 @@
 
                     <div class="mt-4">
                         <div class="shadow-xl px-2 py-3 border-redlue bg-transparent" data-aos="fade-up"
-                        data-aos-duration="1500">
+                            data-aos-duration="1500">
                             <div>
                                 <img src="{{ asset('asset/image/decoration_placeholder5.jpg') }}" alt="">
                             </div>
                             <div class="mt-2">
-                                <h3 class="text-3xl text-redlue font-semibold">New : Blue by Yung Kai Being The Trend of
+                                <h3 class="md:text-3xl text-lg text-redlue font-semibold">New : Blue by Yung Kai Being The Trend of
                                     Wedding Music</h3>
                             </div>
                             <div class="mt-3 flex justify-between">

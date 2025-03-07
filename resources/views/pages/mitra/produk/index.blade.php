@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="card p-3">
+    <div class="card p-3 mb-5">
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Produk</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
@@ -106,10 +106,6 @@
                             <label for="edit_description">Deskripsi</label>
                             <textarea class="form-control" id="edit_description" name="description" required></textarea>
                         </div>
-                        <div class="form-group" hidden>
-                            <label for="edit_slug">Slug</label>
-                            <input type="text" class="form-control" id="edit_slug" name="slug" required>
-                        </div>
                         <div class="form-group">
                             <label for="edit_price">Harga</label>
                             <input type="number" class="form-control" id="edit_price" name="price" required>
@@ -156,77 +152,85 @@
 
     <script>
         $(document).ready(function() {
-            function loadKategori() {
-                $.ajax({
+            let table = $('#kategoriTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
                     url: '{{ route('mitra.kelola.produk.data') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let rows = '';
-                        response.produk.forEach((item, index) => {
-                            rows += `<tr>
-                                <td>${index + 1}</td>
-                                <td><img src="${item.cover}" width="55" height="35" style="object-fit: cover;"></td>
-                                <td>${item.name}</td>
-                                <td>${item.description}</td>
-                                <td>${item.price}</td>
-                                <td>${item.status}</td>
-                                <td>
-                                    <button class="btn text-white edit-btn" style="background-color: #3D0A05"
-                                        data-id="${item.id}" data-cover="${item.cover}" data-name="${item.name}"
-                                        data-description="${item.description}" data-price="${item.price}" data-status="${item.status}">
-                                        <i class="fa-solid fa-pen-to-square" data-target="#editProductModal" data-toggle="modal"></i>
-                                    </button>
-                                    <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>`;
-                        });
-                        if ($.fn.DataTable.isDataTable('#kategoriTable')) {
-                            $('#kategoriTable').DataTable().destroy();
-                        }
-
-                        $('#kategoriTable tbody').html(rows);
-
-                        $('#kategoriTable').DataTable({
-                            paging: true,
-                            searching: true,
-                            ordering: true,
-                            pageLength: 10
-                        });
+                    data: function(d) {
+                        d.status = $('#filterStatus').val();
                     }
-                });
-            }
-
-            loadKategori();
-
+                },
+                columns: [
+                    { data: null, searchable: false, orderable: false, render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    { 
+                        data: 'cover', 
+                        name: 'cover',
+                        render: function(data) {
+                            return `<img src="${data || 'https://via.placeholder.com/100'}" width="55" height="35" style="object-fit: cover;">`;
+                        }
+                    },
+                    { data: 'name', name: 'name' },
+                    { data: 'description', name: 'description' },
+                    { data: 'price', name: 'price' },
+                    { data: 'status', name: 'status' },
+                    {
+                        data: 'id',
+                        render: function(data, type, row) {
+                            return `
+                                <button class="btn text-white edit-btn" style="background-color: #3D0A05"
+                                    data-id="${data}" data-cover="${row.cover}" data-name="${row.name}"
+                                    data-description="${row.description}" data-price="${row.price}" 
+                                    data-status="${row.status}" data-toggle="modal" data-target="#editProductModal">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="btn text-white btn-delete" data-id="${data}" style="background-color: #3D0A05">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>`;
+                        }
+                    }
+                ]
+            });
+    
+            $('#kategoriTable_filter').prepend(`
+                <select id="filterStatus" class="form-control ml-2">
+                    <option value="">Semua Status</option>
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                </select>
+            `);
+    
+            $('#filterStatus').change(function() {
+                table.ajax.reload();
+            });
+    
             $(document).on('click', '.edit-btn', function() {
-    let id = $(this).data('id');
-    console.log("Edit button clicked, ID:", id); // Debugging
-
-    let cover = $(this).data('cover');
-    let name = $(this).data('name');
-    let description = $(this).data('description');
-    let price = $(this).data('price');
-    let status = $(this).data('status');
-
-    $('#edit_id').val(id);
-    $('#edit_name').val(name);
-    $('#edit_description').val(description);
-    $('#edit_price').val(price);
-    $('#edit_status').val(status);
-    $('#edit_cover_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
-
-    let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
-    $('#editProductForm').attr('action', updateUrl);
-    console.log("Update URL:", updateUrl); // Debugging
-
-    $('#editProductModal').modal('show');
-});
-
+                let id = $(this).data('id');
+                let cover = $(this).data('cover');
+                let name = $(this).data('name');
+                let description = $(this).data('description');
+                let price = $(this).data('price');
+                let status = $(this).data('status');
+    
+                $('#edit_id').val(id);
+                $('#edit_name').val(name);
+                $('#edit_description').val(description);
+                $('#edit_price').val(price);
+                $('#edit_status').val(status);
+                $('#edit_cover_preview').attr('src', cover ? cover : 'https://via.placeholder.com/100');
+    
+                let updateUrl = '{{ route('mitra.store.produk', ':id') }}'.replace(':id', id);
+                $('#editProductForm').attr('action', updateUrl);
+    
+                $('#editProductModal').modal('show');
+            });
+    
             $(document).on('click', '.btn-delete', function() {
                 let id = $(this).data('id');
-
+    
                 Swal.fire({
                     title: "Yakin ingin menghapus?",
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -253,10 +257,10 @@
                                     confirmButtonText: "OK",
                                     confirmButtonColor: "#3D0A05"
                                 });
-                                loadKategori();
+                                table.ajax.reload();
                             },
                             error: function(xhr) {
-                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus kategori.", "error");
+                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus produk.", "error");
                             }
                         });
                     }
@@ -264,15 +268,5 @@
             });
         });
     </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#kategoriTable').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                pageLength: 10
-            });
-        });
-    </script>
+    
 @endpush

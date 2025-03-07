@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="card p-3">
+    <div class="card p-3 mb-5">
         <div class="d-flex justify-content-between">
             <h3 class="text-rose">Kelola Mitra</h3>
             <button type="button" class="btn text-white" style="background-color: #3D0A05" data-toggle="modal"
@@ -20,19 +20,21 @@
                 <p class="alert alert-danger border-left-danger">{{ $errors->first() }}</p>
             @endif
         </div>
-        <table class="table table-bordered" id="kategoriTable">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>Nama</td>
-                    <td>Username</td>
-                    <td>Email</td>
-                    <td>Nomor Telepon</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-responsive-xl">
+            <table class="table table-bordered" id="kategoriTable">
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>Nama</td>
+                        <td>Username</td>
+                        <td>Email</td>
+                        <td>Nomor Telepon</td>
+                        <td>Aksi</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
     <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel"
@@ -138,69 +140,69 @@
 
     <script>
         $(document).ready(function() {
-            function loadKategori() {
-                $.ajax({
+            let table = $('#kategoriTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
                     url: '{{ route('superadmin.kelola.mitra.data') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let rows = '';
-                        response.forEach((item, index) => {
-                            rows += `<tr>
-                        <td>${index + 1}</td>
-                        <td>${item.fullname}</td>
-                        <td>${item.username}</td>
-                        <td>${item.email}</td>
-                        <td>${item.phone_number}</td>
-                        <td>
-                            <button class="btn text-white edit-btn" style="background-color: #3D0A05" data-id="${item.id}" data-fullname="${item.fullname}" data-username="${item.username}" data-email="${item.email}" data-phone_number="${item.phone_number}">
-                                <i class="fa-solid fa-pen-to-square" data-target="#editAdminModal" data-toggle="modal" ></i>
-                            </button>
-                            <button class="btn text-white btn-delete" data-id="${item.id}" style="background-color: #3D0A05">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>`;
-                        });
-                        if ($.fn.DataTable.isDataTable('#kategoriTable')) {
-                            $('#kategoriTable').DataTable().destroy();
+                    type: 'GET',
+                },
+                columns: [
+                    { data: null, searchable: false, orderable: false, render: function(data, type, row, meta) {
+                            return meta.row + 1;
                         }
-
-                        $('#kategoriTable tbody').html(rows);
-
-                        $('#kategoriTable').DataTable({
-                            paging: true,
-                            searching: true,
-                            ordering: true,
-                            pageLength: 10
-                        });
+                    },
+                    { data: 'fullname', name: 'fullname' },
+                    { data: 'username', name: 'username' },
+                    { data: 'email', name: 'email' },
+                    { data: 'phone_number', name: 'phone_number' },
+                    { 
+                        data: 'id',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return `
+                                <td class="d-flex d-xl-block">
+                                    <button class="btn text-white edit-btn" data-target="#editAdminModal" data-toggle="modal"  style="background-color: #3D0A05" 
+                                        data-id="${row.id}" data-fullname="${row.fullname}" data-username="${row.username}" data-email="${row.email}" data-phone_number="${row.phone_number}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="btn ml-xl-0 ml-1 text-white btn-delete" data-id="${row.id}" style="background-color: #3D0A05">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <a class="btn text-white ml-xl-0 ml-1" href="/user/change/password/${row.id}" style="background-color: #3D0A05">
+                                        <i class="fa-solid fa-key"></i>
+                                    </a>
+                                </td>
+                            `;
+                        }
                     }
-                });
-            }
-
-            loadKategori();
-
+                ]
+            });
+    
             $(document).on('click', '.edit-btn', function() {
                 let id = $(this).data('id');
                 let fullname = $(this).data('fullname');
                 let username = $(this).data('username');
                 let email = $(this).data('email');
                 let phone_number = $(this).data('phone_number');
-
+    
                 $('#edit_id').val(id);
                 $('#edit_fullname').val(fullname);
                 $('#edit_username').val(username);
                 $('#edit_email').val(email);
                 $('#edit_phone_number').val(phone_number);
-
+    
                 let updateUrl = '{{ route('superadmin.update.admin', ':id') }}'.replace(':id', id);
                 $('#editAdminForm').attr('action', updateUrl);
-
+    
                 $('#editAdminModal').modal('show');
             });
-
+    
             $(document).on('click', '.btn-delete', function() {
                 let id = $(this).data('id');
-
+    
                 Swal.fire({
                     title: "Yakin ingin menghapus?",
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -213,9 +215,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ route('superadmin.delete.admin', ':id') }}'.replace(
-                                ':id',
-                                id),
+                            url: '{{ route('superadmin.delete.admin', ':id') }}'.replace(':id', id),
                             method: 'POST',
                             data: {
                                 _method: 'DELETE',
@@ -229,11 +229,10 @@
                                     confirmButtonText: "OK",
                                     confirmButtonColor: "#3D0A05"
                                 });
-                                loadKategori();
+                                table.ajax.reload();
                             },
                             error: function(xhr) {
-                                Swal.fire("Error!", xhr.responseJSON.message ||
-                                    "Gagal menghapus kategori.", "error");
+                                Swal.fire("Error!", xhr.responseJSON.message || "Gagal menghapus mitra.", "error");
                             }
                         });
                     }
@@ -241,15 +240,5 @@
             });
         });
     </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#kategoriTable').DataTable({
-                paging: true,
-                searching: true,
-                ordering: true,
-                pageLength: 10
-            });
-        });
-    </script>
+    
 @endpush

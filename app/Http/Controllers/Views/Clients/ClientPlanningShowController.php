@@ -10,26 +10,41 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientPlanningShowController extends Controller
 {
-    public function index() {
+    public function index(Request $request)
+    {
         $user = Auth::user();
-        $planning = Planning::where("client_id", $user->id)->get();
+        $filter = $request->query('filter');
+
+        $planningQuery = Planning::where("client_id", $user->id);
+
+        if ($filter === 'ordered') {
+            $planningQuery->whereHas('order');
+        }
+
+        $planning = $planningQuery->get();
+
         return view('pages.client.planning.index', compact('user', 'planning'));
     }
 
-    public function detail($id) {
+
+    public function detail($id)
+    {
         $user = Auth::user();
-        $planning = Planning::findOrFail( $id );
+        $planning = Planning::with('products.vendor.category')->findOrFail($id);
         return view('pages.client.planning.detail', compact('user', 'planning'));
     }
 
-    public function store() {
+    public function store($id = null)
+    {
         $user = Auth::user();
-        return view('pages.client.planning.store', compact('user'));
+        $planning = Planning::find($id);
+        return view('pages.client.planning.store', compact('user', 'planning'));
     }
 
-    public function category() {
+    public function category()
+    {
         $user = Auth::user();
         $category = Category::all();
-        return view('pages.client.planning.category', compact('user','category'));
+        return view('pages.client.planning.category', compact('user', 'category'));
     }
 }

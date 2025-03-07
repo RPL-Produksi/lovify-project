@@ -1,6 +1,5 @@
 @extends('template.master')
 @section('title', 'Home')
-
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">

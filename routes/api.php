@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BackEnd\v1\Admins\AdminVendorController;
+use App\Http\Controllers\BackEnd\v1\Mitras\MitraOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackEnd\v1\AuthController;
@@ -17,13 +19,13 @@ use App\Http\Controllers\BackEnd\v1\ProductController;
 use App\Http\Controllers\BackEnd\v1\VendorController;
 use Illuminate\Support\Facades\Validator;
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
-    Route::get('/', 'getUser');
-    Route::post('/', 'changeProfile');
-    Route::post('/password', 'changePassword');
-});
 
 Route::prefix('v1')->group(function () {
+    Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'], 'controller' => PersonalController::class], function () {
+        Route::get('/', 'getUser');
+        Route::post('/', 'changeProfile');
+        Route::post('/password', 'changePassword');
+    });
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         Route::post('/register', 'register');
         Route::post('/login', 'login');
@@ -47,6 +49,9 @@ Route::prefix('v1')->group(function () {
             Route::post('/', 'storeLocation');
             Route::delete('/{id}', 'deleteLocation');
         });
+        Route::group(['prefix' => 'vendors', 'controller' => AdminVendorController::class], function () {
+            Route::post('/{id}', 'verifyVendor');
+        });
     });
     // Mitra
     Route::group(['prefix' => 'mitras', 'middleware' => ['auth:sanctum', 'can:mitra']], function () {
@@ -58,20 +63,24 @@ Route::prefix('v1')->group(function () {
             Route::post('/{id?}', 'storeVendor');
             Route::delete('/{id}', 'deleteVendor');
         });
+        Route::group(['prefix' => 'orders', 'controller' => MitraOrderController::class], function () {
+            Route::get('/', 'orderList');
+            Route::post('/{id}', 'updateProductProgress');
+        });
     });
     // Client
     Route::group(['prefix' => 'clients', 'middleware' => ['auth:sanctum', 'can:client']], function () {
         Route::group(['prefix' => 'plannings', 'controller' => ClientPlanningController::class], function () {
-            Route::post('/', 'getPlannings');
+            Route::get('/', 'getPlannings');
             Route::post('/{id?}', 'storePlanning');
             Route::delete('/{id}', 'deletePlanning');
         });
         Route::group(['prefix' => 'orders', 'middleware' => ['can:email_verified, can:phone_verified'], 'controller' => ClientOrderController::class], function () {
-            Route::post('/', 'getOrders');
+            Route::get('/', 'getOrders');
             Route::post('/{id}', 'storeOrder');
         });
         Route::group(['prefix' => 'transactions', 'controller' => ClientTransactionController::class], function () {
-            Route::post('/', 'getTransactions');
+            Route::get('/', 'getTransactions');
             Route::post('/{id}', 'storePayment');
         });
     });
@@ -83,3 +92,5 @@ Route::fallback(function () {
         'status' => 'no path found',
     ], 404);
 });
+
+Route::post('/transactions/notification', [ClientTransactionController::class, 'notification']);

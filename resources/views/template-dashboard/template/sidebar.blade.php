@@ -18,8 +18,14 @@
         </li>
         <li class="nav-item {{ request()->routeIs('mitra.kelola.produk') ? 'active' : '' }}">
             <a href="{{ route('mitra.kelola.produk') }}" class="nav-link text-primary">
-                <i class="fa-regular fa-cart-shopping text-primary"></i>
+                <i class="fa-regular fa-box-open text-primary"></i>
                 <span>Produk</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link text-primary">
+                <i class="fa-regular fa-cart-shopping text-primary"></i>
+                <span>Pesanan</span>
             </a>
         </li>
     @endif

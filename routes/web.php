@@ -85,7 +85,7 @@ Route::group(['prefix' => 'admins', 'middleware' => ['can:admin']], function () 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.home');
     Route::get('/categories', [AdminKelolaKategoriController::class, 'index'])->name('admin.kelola.kategori');
     Route::get('/categories/data', [AdminKelolaKategoriController::class, 'getData'])->name('admin.kelola.kategori.data');
-    Route::group(['prefix' => 'categories', 'controller' => AdminCategoryController::class], function () {
+    Route::group(['prefix' => 'categorie      s', 'controller' => AdminCategoryController::class], function () {
         Route::post('/', 'storeCategory')->name('be.category.store');
         Route::post('/{id}', 'storeCategory')->name('be.category.update');
         Route::delete('/{id}', 'deleteCategory')->name('be.category.delete');
